@@ -1,0 +1,121 @@
+/* ==========================================================================
+     Vertical Rhythm & Modular Scale Mixins
+   ========================================================================== */
+/**
+* Calcuations based on https://github.com/sevenupcan/gridlover-mixin
+*
+* Notes:
+*  - All values are calculated and returned as em & rem to maintain the scale when text is resized in the browser.
+*  - Both margin values provided need to be false or a 0+ integer in order to maintain the vertical rhythm
+*
+* @param  {number} $font-scale    [The multiplier for the font size scale factor, zero equates to the default font size.]
+* @param  {number} $margin-top    [The multiplier for the top margin where 1 is the rhythm line height]
+* @param  {number} $margin-bottom [The multiplier for the bottom margin where 1 is the rhythm line height]
+*/
+@mixin rhythm($font-scale, $margin-top: false, $margin-bottom: false) {
+  $new-font-size: round(
+    $rhythm-font-size * pow($rhythm-scale-factor, $font-scale)
+  );
+  $new-line-height: ceil(
+      ($new-font-size / ($rhythm-line-height * $rhythm-font-size))
+    ) * round($rhythm-line-height * $rhythm-font-size);
+
+  @if $font-scale == 0 {
+    font-size: 1rem;
+    line-height: $rhythm-line-height + 0em;
+  } @else {
+    font-size: ($new-font-size / $rhythm-font-size) + 0rem;
+    line-height: ($new-line-height / $new-font-size) + 0em;
+  }
+
+  @if $margin-top != false {
+    margin-top: (
+        $rhythm-font-size * ($rhythm-line-height * $margin-top) / $new-font-size
+      ) +
+      0em;
+  }
+
+  @if $margin-bottom != false {
+    margin-bottom: (
+        $rhythm-font-size *
+          ($rhythm-line-height * $margin-bottom) /
+          $new-font-size
+      ) +
+      0em;
+  }
+}
+
+/**
+* Vertical Rhythm needs to be recalculated at the mobile breakpoint to account for the change in font size, scale, and
+* line height at that size. In order to reduce duplication of the primary mixin above, we're defining the shared rhythm
+* values in these .rhythm-desktop and .rhythm-mobile mixins and both call the same mixin to do the calculations.
+*/
+@mixin rhythm-desktop($font-scale, $margin-top: false, $margin-bottom: false) {
+  $rhythm-font-size: $global-font-size !global;
+  $rhythm-scale-factor: $global-scale-factor !global;
+  $rhythm-line-height: $global-line-height !global;
+
+  @include rhythm($font-scale, $margin-top, $margin-bottom);
+}
+
+@mixin rhythm-mobile($font-scale, $margin-top: false, $margin-bottom: false) {
+  $rhythm-font-size: $global-font-size-mobile !global;
+  $rhythm-scale-factor: $global-scale-factor-mobile !global;
+  $rhythm-line-height: $global-line-height-mobile !global;
+
+  @include rhythm($font-scale, $margin-top, $margin-bottom);
+}
+
+/* ==========================================================================
+     Media Queries
+   ========================================================================== */
+/**
+* Provides the vendor prefixes required for styling a text field placeholder text
+*
+* @param $color [hexadecimal string] : This is the hexadecimal color code
+*
+* @example scss - Usage
+* @include media-mobile {
+*    display: none;
+* }
+*/
+
+$mobile-width: 576px;
+$tablet-width: 768px;
+$desktop-width: 992px;
+
+@mixin media-small-mobile {
+  @media (max-width: #{$mobile-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin media-mobile {
+  @media (max-width: #{$tablet-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin media-tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin media-desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+@mixin media-devices-not-mobile {
+  @media (min-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+@mixin media-devices-not-desktop {
+  @media (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}

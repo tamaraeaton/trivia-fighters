@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Trivia Fighter Styles
+   ========================================================================== */
+
+/**
+ * Coding rules : https://github.com/necolas/idiomatic-css
+ *
+ * This styles.scss file is intentionally left lean and is only used to import base
+ * variables, mixins, and prefixing in other stylesheets.
+ */
+
+/**
+ * Folder Structure
+ * -----------------
+ * abstract/
+ *    Variables, Mixins, and other reference-only abstractions that do not relate
+ *    to the structure and styling of the site.
+ *
+ * base/
+ *    Base rules are the defaults. They are almost exclusively single element
+ *    selectors but it could include attribute selectors, pseudo-class
+ *    selectors, child selectors or sibling selectors. Essentially, a base
+ *    style says that wherever this element is on the page, it should look
+ *    like _this_.
+ *
+ */
+@charset "utf-8";
+
+/* Abstract
+   ========================================================================== */
+@import "./abstract/variables.scss";
+@import "./abstract/functions.scss";
+@import "./abstract/mixins.scss";
+
+/* Vendor
+   ========================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap");
+
+/* Base
+   ========================================================================== */
+@import "./base/vertical-rhythm";
+@import "./base/a11y";
+@import "./base/base";
+@import "./base/buttons";
+@import "./base/typography";

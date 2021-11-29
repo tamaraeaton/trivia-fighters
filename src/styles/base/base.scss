@@ -1,0 +1,32 @@
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+body,
+html {
+  color: $c-white;
+  font-family: $ff-primary;
+  font-size: $global-font-size;
+  font-weight: $fw-regular;
+  line-height: $global-line-height;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: radial-gradient(circle, $c-primary 0%, $c-primary-dark 100%);
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  max-width: 100%;
+}
+
+main {
+  margin: 0 auto;
+  max-width: 910px;
+  min-height: 600px;
+  padding: $global-spacing-half;
+  width: 100%;
+}

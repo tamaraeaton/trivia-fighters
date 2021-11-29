@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Global functions
+   ========================================================================== */
+
+/**
+ * Exponent calculation
+ *
+ * SCSS does not yet have a comparable function to pow() in LESS so we're creating one here for use below. Feel free to
+ * remove if support has been added and implemented in your cdoebase.
+ *
+ * @param  {number} $base     [The base number]
+ * @param  {number} $exponent [The exponent (or index, or power)]
+ * @return {number}           [The result of the exponential calculation]
+ * @see {@link https://css-tricks.com/snippets/sass/power-function/}
+ */
+
+@function pow($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  } @else if $exponent < 0 {
+    @for $i from 1 through -$exponent {
+      $value: $value / $number;
+    }
+  }
+
+  @return $value;
+}
+
+/**
+ * Function that calculates the margin same as the rhythm mixin does, but returns a number without defining
+ * the values directly. Useful for one-off modifications of margins
+ *
+ * @param  {number} $font-scale [The multiplier for the font size scale factor, zero equates to the default font size.]
+ * @param  {number} $margin     [The multiplier for the margin where 1 is the rhythm line height]
+ * @return {number}             [The calculated margin]
+ */
+
+@function rhythm-margin($font-scale, $margin: 0) {
+  $new-font-size: round(
+    $rhythm-font-size * pow($rhythm-scale-factor, $font-scale)
+  );
+
+  @return ($rhythm-font-size * ($rhythm-line-height * $margin) / $new-font-size) +
+    0em;
+}
+
+@function rhythm-desktop-margin($font-scale, $margin) {
+  $rhythm-font-size: $global-font-size !global;
+  $rhythm-scale-factor: $global-scale-factor !global;
+  $rhythm-line-height: $global-line-height !global;
+
+  @return rhythm-margin($font-scale, $margin);
+}
+
+@function rhythm-mobile-margin($font-scale, $margin) {
+  $rhythm-font-size: $global-font-size-mobile !global;
+  $rhythm-scale-factor: $global-scale-factor-mobile !global;
+  $rhythm-line-height: $global-line-height-mobile !global;
+
+  @return rhythm-margin($font-scale, $margin);
+}

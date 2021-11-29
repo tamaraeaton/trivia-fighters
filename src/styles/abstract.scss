@@ -1,0 +1,12 @@
+/* ==========================================================================
+   Trivia Fighter Abstract Definitions
+   ========================================================================== */
+
+/**
+ * Separating the abstract imports and variables to a separate file for easier
+ * import into React components.
+ */
+
+@import "./abstract/variables.scss";
+@import "./abstract/functions.scss";
+@import "./abstract/mixins.scss";

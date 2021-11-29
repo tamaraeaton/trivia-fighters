@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Vertical Rhythm
+   ========================================================================== */
+/**
+  * Establishing a typographic system with modular scale & vertical rhythm.
+  *
+  * Margin calculations below came from https://www.gridlover.net/try using a
+  * Font Size of 18px, Line Height of 1.22 (22px), and Scale Factor of 1.125 all
+  * set in the variables in ./abstract/variables.scss.
+  */
+main {
+  blockquote,
+  .blockquote {
+    @include rhythm-desktop(0, 1, 1);
+  }
+
+  h1,
+  .headline1 {
+    @include rhythm-desktop(9, 1, 1);
+
+    &--large {
+      @include rhythm-desktop(14, 1, 1);
+      text-transform: uppercase;
+    }
+  }
+
+  .headline1 {
+    @include rhythm-desktop(9, 1, 1);
+  }
+
+  h2,
+  .headline2 {
+    @include rhythm-desktop(6, 1, 0);
+  }
+
+  h3,
+  .headline3 {
+    @include rhythm-desktop(4, 1, 0);
+  }
+
+  h4,
+  .headline4 {
+    @include rhythm-desktop(2, 1, 0);
+  }
+
+  h5,
+  .headline5 {
+    @include rhythm-desktop(1, 1, 0);
+  }
+
+  h6,
+  .headline6 {
+    @include rhythm-desktop(-1, 1, 0);
+  }
+
+  dl,
+  dl dd,
+  p,
+  ul,
+  ol,
+  pre,
+  table {
+    @include rhythm-desktop(0, 0, 1);
+  }
+
+  li {
+    @include rhythm-desktop(0, 0, 0.5);
+  }
+
+  dl dt,
+  ul ul,
+  ol ol,
+  ul ol,
+  ol ul {
+    @include rhythm-desktop(0, 0, 0);
+  }
+
+  hr {
+    @include rhythm-desktop(0, 1, 1);
+  }
+
+  /* Let's make sure all's aligned
+   ========================================================================== */
+  b,
+  i,
+  strong,
+  em,
+  small,
+  code {
+    line-height: 0;
+  }
+
+  sub,
+  sup {
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  sup {
+    top: -0.5em;
+  }
+
+  sub {
+    bottom: -0.25em;
+  }
+}

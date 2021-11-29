@@ -1,0 +1,23 @@
+/* ==========================================================================
+   Button Styles
+   ========================================================================== */
+
+.btn {
+  @include rhythm-desktop(0, 0, 0);
+
+  background: linear-gradient(0deg, #5532ff 0%, #02f3fe 100%);
+  border-color: #038dc1;
+  border-radius: $global-border-radius;
+  box-shadow: 0 0 0 0.25em $c-selected, 0 5px 9px 0 rgba(42, 42, 42, 0.5);
+  color: $c-white;
+  display: inline-block;
+  font-weight: $fw-bold;
+  margin: 1rem 4px;
+  min-width: 300px;
+  padding: 10px;
+  text-decoration: none;
+
+  img {
+    filter: brightness(300%);
+  }
+}

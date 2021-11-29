@@ -1,0 +1,50 @@
+/* ==========================================================================
+   Sitewide Variables
+   ========================================================================== */
+
+/* Style Specific Variables
+   ========================================================================== */
+
+/* COLORS */
+$c-primary: #000e5d;
+$c-primary-dark: #010024;
+
+$c-selected: #00c6f3;
+$c-success: #1cff00;
+
+$c-text-bg: rgba(255, 255, 255, 0.15);
+$c-white: #fff;
+
+/* FONTS */
+$ff-primary: "Lato", sans-serif;
+$ff-headline: Impact, sans-serif;
+
+$fw-regular: 400;
+$fw-bold: 900;
+
+/* Size Specific Variables
+   ========================================================================== */
+/**
+  * BASE SIZING
+  *
+  * This default font size determines the relative size of special content in components and should be derived from
+  * the default paragraph font size
+  */
+$global-font-size: 18px;
+$global-line-height: 1.22; /* 22 */
+$global-scale-factor: 1.125;
+
+/* These are set to rem so it is relative to the global font size that changes depending on breakpoint */
+$global-spacing: (30 / ($global-font-size/1px)) + 0rem;
+$global-spacing-double: ($global-spacing * 2);
+$global-spacing-half: ($global-spacing / 2);
+
+$global-font-size-mobile: 18px;
+$global-line-height-mobile: 1.22; /* 22 */
+$global-scale-factor-mobile: 1.125;
+
+/* Style/Animation Variables
+   ========================================================================== */
+$global-border-radius: 8px;
+$animate-duration: 0.8s;
+$animate-transition: all 0.5s ease-in-out;

@@ -1,0 +1,10 @@
+.Game {
+  position: relative;
+
+  .round {
+    left: 50%;
+    position: absolute;
+    top: 0.5rem;
+    transform: translateX(-50%);
+  }
+}
