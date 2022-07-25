@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Trivia Fighter App",
+  "name": "React Apprenticeship Final Project - Trivia Fighter",
   "icons": [
     {
       "src": "favicon.ico",
