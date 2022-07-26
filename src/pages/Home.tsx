@@ -3,7 +3,7 @@ import Button from 'components/Button/Button';
 import React from 'react';
 
 const Home: React.FunctionComponent = () => {
-  const { currentRound, incrementRound } = useGameRound();
+  const [currentRound, { incrementRound }] = useGameRound();
 
   return (
     <div>

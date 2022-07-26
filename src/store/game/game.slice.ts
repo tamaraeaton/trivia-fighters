@@ -4,7 +4,7 @@ export interface GameState {
   round: number;
 }
 
-const initialState: GameState = {
+export const initialState: GameState = {
   round: 1,
 };
 

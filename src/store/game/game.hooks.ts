@@ -3,7 +3,9 @@ import { useAppSelector, useAppDispatch } from 'store/hooks';
 import { gameRoundSelector } from 'store/game/game.selectors';
 import { setRound } from 'store/game/game.slice';
 
-export const useGameRound = () => {
+export type UseGameRoundResult = [number, { incrementRound: () => void }];
+
+export const useGameRound = (): UseGameRoundResult => {
   const currentRound = useAppSelector(gameRoundSelector);
   const dispatch = useAppDispatch();
 
@@ -11,8 +13,5 @@ export const useGameRound = () => {
     dispatch(setRound(currentRound + 1));
   }, [currentRound, dispatch]);
 
-  return {
-    currentRound,
-    incrementRound,
-  };
+  return [currentRound, { incrementRound }];
 };
