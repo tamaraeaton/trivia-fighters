@@ -20,4 +20,8 @@
   img {
     filter: brightness(300%);
   }
+
+  &--correct {
+    background: $c-success;
+  }
 }

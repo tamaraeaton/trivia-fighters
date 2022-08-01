@@ -8,3 +8,6 @@ describe('Button Component', () => {
     expect(screen.getByRole('button')).toHaveTextContent('Test Contents');
   });
 });
+
+// nine tests for each variable design
+// snapshots in Jest (exact html that would render)
