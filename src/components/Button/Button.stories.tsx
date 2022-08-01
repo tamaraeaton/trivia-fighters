@@ -24,3 +24,5 @@ export const Seth = () => <Button classType="btn--seth">Seth Button</Button>;
 
 // expectation to see 9 buttons in storybook
 // think about how to pass in sizing and icons
+
+// need to add hover/focus and disabled (selected?)

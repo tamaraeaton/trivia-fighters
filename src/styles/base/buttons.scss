@@ -21,15 +21,15 @@
     filter: brightness(300%);
   }
 
-  // &--selected {
-  //   background: $c-selected;
-  //   border: 3px solid #2000ac;
-  // }
+  // selected is the default button - how would I show not selected
+  // the hover/focus is on the a11y - how do I get it to show on the button
 
   // &--disabled {
   //   border: 3px solid #ababab;
   //   background: linear-gradient(0deg, #9f9f9f 0%, #d7d7d7 100%);
   // }
+
+  // attack buttons look like the default - need to pass title and swords as props
 
   &--correct {
     border: 3px solid #00a747;
@@ -37,8 +37,8 @@
   }
 
   &--incorrect {
-    border: 1px solid #ffffff;
-    background-color: rgba(255, 255, 255, 0.15);
+    border: 3px solid #a90000;
+    background: linear-gradient(180deg, #ff0000 0%, #960000 100%);
   }
 
   &--easy {
@@ -56,7 +56,3 @@
     background: linear-gradient(180deg, #ff0000 0%, #6b0000 100%);
   }
 }
-
-// focus/hover included in a11y need to add on default button
-// selected disabled - need to add on default button
-// attack buttons
