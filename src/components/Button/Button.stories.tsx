@@ -1,28 +1,87 @@
 import Button from 'components/Button/Button';
+import { Story } from '@storybook/react';
+import { ReactComponent as CorrectIcon } from '../../assets/images/correct.svg';
+import { ReactComponent as IncorrectIcon } from '../../assets/images/incorrect.svg';
 
 export default {
   title: 'Button',
   component: Button,
 };
+interface ButtonStoryProps {
+  selected: boolean;
+  disabled: boolean;
+}
 
-export const Primary = () => <Button>Primary Button</Button>;
-export const Correct = () => (
-  <Button classType="btn--correct">Correct Button</Button>
+export const Sizes = () => (
+  <>
+    <Button size="s">Small Button</Button>
+    <Button size="m">Medium Button</Button>
+    <Button size="l">Large Button</Button>
+
+    <Button size="xl">Extra Large Button</Button>
+  </>
 );
 
-export const Incorrect = () => (
-  <Button classType="btn--incorrect">Incorrect Button</Button>
+export const Primary: Story<ButtonStoryProps> = (props) => (
+  <Button selected={props.selected} disabled={props.disabled}>
+    Primary Button
+  </Button>
 );
 
-export const Easy = () => <Button classType="btn--easy">Easy Button</Button>;
+Primary.args = { selected: false, disabled: true };
 
-export const Medium = () => (
-  <Button classType="btn--medium">Medium Button</Button>
+export const Correct: Story<ButtonStoryProps> = (props) => (
+  <Button
+    classType="btn--correct"
+    selected={props.selected}
+    disabled={props.disabled}
+    icon={<CorrectIcon />}
+  >
+    Correct Button
+  </Button>
+);
+Correct.args = { selected: false, disabled: true };
+
+export const Incorrect: Story<ButtonStoryProps> = (props) => (
+  <Button
+    classType="btn--incorrect"
+    selected={props.selected}
+    disabled={props.disabled}
+  >
+    <IncorrectIcon />
+    Incorrect Button
+  </Button>
 );
 
-export const Seth = () => <Button classType="btn--seth">Seth Button</Button>;
+export const Easy: Story<ButtonStoryProps> = (props) => (
+  <Button
+    classType="btn--easy"
+    selected={props.selected}
+    disabled={props.disabled}
+  >
+    Easy Button
+  </Button>
+);
+Easy.args = { selected: false, disabled: true };
 
-// expectation to see 9 buttons in storybook
-// think about how to pass in sizing and icons
+export const Medium: Story<ButtonStoryProps> = (props) => (
+  <Button
+    classType="btn--medium"
+    selected={props.selected}
+    disabled={props.disabled}
+  >
+    Medium Button
+  </Button>
+);
+Medium.args = { selected: false, disabled: true };
 
-// need to add hover/focus and disabled (selected?)
+export const Seth: Story<ButtonStoryProps> = (props) => (
+  <Button
+    classType="btn--seth"
+    selected={props.selected}
+    disabled={props.disabled}
+  >
+    Seth Button
+  </Button>
+);
+Seth.args = { selected: false, disabled: true };

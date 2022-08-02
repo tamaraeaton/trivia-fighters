@@ -1,18 +1,34 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react';
-interface ButtonProps {
+export interface ButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  classType?: string;
-  // hover: boolean;
+  classType?:
+    | 'btn--correct'
+    | 'btn--easy'
+    | 'btn--incorrect'
+    | 'btn--seth'
+    | 'btn--medium';
+  selected?: boolean;
+  disabled?: boolean;
+  size?: 's' | 'm' | 'l' | 'xl';
+  icon?: JSX.Element;
 }
 
 const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
   children,
   onClick,
   classType,
-  // hover,
+  selected,
+  disabled,
+  size,
+  icon,
 }) => {
   return (
-    <button className={`btn ${classType}`} onClick={onClick}>
+    <button
+      className={`btn ${classType} ${selected ? 'btn-selected' : ''} ${size}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {icon}
       {children}
     </button>
   );
