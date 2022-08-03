@@ -19,10 +19,20 @@ export const SwordButton: Story<IconButtonProps> = (props) => (
 );
 SwordButton.args = { count: 1 };
 
-export const ShieldButton: Story<IconButtonProps> = (props) => (
+export const BlockButton: Story<IconButtonProps> = (props) => (
   <IconButton
-    icon={<img src={ShieldIcon} alt="shield" width="16px" height="16px" />}
+    icon={<img src={ShieldIcon} alt="shield" width="20px" height="20px" />}
+    size="s"
   >
-    Shield Button
+    Block
+  </IconButton>
+);
+
+export const AttackButton: Story<IconButtonProps> = (props) => (
+  <IconButton
+    icon={<img src={SwordIcon} alt="sword" width="20px" height="20px" />}
+    size="s"
+  >
+    Attack
   </IconButton>
 );

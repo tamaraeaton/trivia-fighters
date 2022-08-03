@@ -1,14 +1,13 @@
-import { useGameRound } from 'store/game/game.hooks';
 import Button from 'components/Button/Button';
 import React from 'react';
 
 const Home: React.FunctionComponent = () => {
-  const [currentRound, { incrementRound }] = useGameRound();
-
   return (
     <div>
-      <h1>Round: {currentRound}</h1>
-      <Button onClick={incrementRound}>Increment Round</Button>
+      <h1 className="headline1">TRIVIA FIGHTERS</h1>
+      <Button classType="btn--easy">Easy</Button>
+      <Button classType="btn--medium">Medium</Button>
+      <Button classType="btn--seth">Seth</Button>
     </div>
   );
 };

@@ -16,15 +16,15 @@ describe('Home Page', () => {
     useGameRoundSpy.mockRestore();
   });
 
-  it('should render the current round', () => {
-    render(<Home />);
-    expect(screen.getByRole('heading')).toHaveTextContent('Round: 2');
-  });
+  // it('should render the current round', () => {
+  //   render(<Home />);
+  //   expect(screen.getByRole('heading')).toHaveTextContent('Round: 2');
+  // });
 
-  it('should call incrementRound when the button is clicked', () => {
-    render(<Home />);
-    fireEvent.click(screen.getByRole('button'));
+  // it('should call incrementRound when the button is clicked', () => {
+  //   render(<Home />);
+  //   fireEvent.click(screen.getByRole('button'));
 
-    expect(incrementRoundSpy).toHaveBeenCalled();
-  });
+  //   expect(incrementRoundSpy).toHaveBeenCalled();
+  // });
 });
