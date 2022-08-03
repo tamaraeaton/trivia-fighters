@@ -1,4 +1,4 @@
-import Round from '../components/Game/Round';
+import Round from '../components/Round/Round';
 
 const Game: React.FunctionComponent = () => <Round />;
 
