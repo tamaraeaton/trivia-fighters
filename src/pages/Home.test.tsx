@@ -6,15 +6,15 @@ describe('Home Page', () => {
   let useGameRoundSpy: jest.SpyInstance;
   let incrementRoundSpy: jest.Mock;
 
-  beforeEach(() => {
-    incrementRoundSpy = jest.fn();
-    useGameRoundSpy = jest.spyOn(GameHooks, 'useGameRound');
-    useGameRoundSpy.mockReturnValue([2, { incrementRound: incrementRoundSpy }]);
-  });
+  // beforeEach(() => {
+  //   incrementRoundSpy = jest.fn();
+  //   useGameRoundSpy = jest.spyOn(GameHooks, 'useGameRound');
+  //   useGameRoundSpy.mockReturnValue([2, { incrementRound: incrementRoundSpy }]);
+  // });
 
-  afterEach(() => {
-    useGameRoundSpy.mockRestore();
-  });
+  // afterEach(() => {
+  //   useGameRoundSpy.mockRestore();
+  // });
 
   // it('should render the current round', () => {
   //   render(<Home />);

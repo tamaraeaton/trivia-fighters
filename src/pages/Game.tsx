@@ -1,3 +1,5 @@
-const Game: React.FunctionComponent = () => <h1>Game</h1>;
+import Round from '../components/Game/Round';
+
+const Game: React.FunctionComponent = () => <Round />;
 
 export default Game;
