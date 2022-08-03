@@ -37,7 +37,7 @@ export const Correct: Story<ButtonStoryProps> = (props) => (
     disabled={props.disabled}
     icon={<CorrectIcon />}
   >
-    Correct Button
+    Correct
   </Button>
 );
 Correct.args = { selected: false, disabled: true };
@@ -49,7 +49,7 @@ export const Incorrect: Story<ButtonStoryProps> = (props) => (
     disabled={props.disabled}
   >
     <IncorrectIcon />
-    Incorrect Button
+    Incorrect
   </Button>
 );
 
@@ -59,7 +59,7 @@ export const Easy: Story<ButtonStoryProps> = (props) => (
     selected={props.selected}
     disabled={props.disabled}
   >
-    Easy Button
+    Easy
   </Button>
 );
 Easy.args = { selected: false, disabled: true };
@@ -70,7 +70,7 @@ export const Medium: Story<ButtonStoryProps> = (props) => (
     selected={props.selected}
     disabled={props.disabled}
   >
-    Medium Button
+    Medium
   </Button>
 );
 Medium.args = { selected: false, disabled: true };
@@ -81,7 +81,7 @@ export const Seth: Story<ButtonStoryProps> = (props) => (
     selected={props.selected}
     disabled={props.disabled}
   >
-    Seth Button
+    Seth
   </Button>
 );
 Seth.args = { selected: false, disabled: true };

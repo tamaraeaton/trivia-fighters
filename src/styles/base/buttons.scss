@@ -2,7 +2,7 @@
    Button Styles
    ========================================================================== */
 
-// what does this do
+//TODO: what does this do
 .btn {
   @include rhythm-desktop(0, 0, 0);
   box-sizing: border-box;
@@ -21,7 +21,7 @@
   min-width: 300px;
   padding: 10px;
   text-decoration: none;
-  // what does this do first div within this .btn
+  //TODO: what does this do first div within this .btn
   & > div {
     display: flex;
     gap: 0;
@@ -79,10 +79,6 @@
       background: linear-gradient(180deg, #ff0000 0%, #960000 100%);
       box-shadow: 0 0 0 0.25em #ea2200, 0 5px 9px 0 rgba(42, 42, 42, 0.5);
     }
-
-    // &::before {
-    //   background-image: url('data:image/svg+xml;utf-8,');
-    // }
   }
 
   &--medium {

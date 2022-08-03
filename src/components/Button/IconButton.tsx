@@ -18,7 +18,13 @@ const IconButton: FunctionComponent<PropsWithChildren<IconButtonProps>> = ({
 
   return (
     <Button {...buttonProps}>
-      {!!count && icon && <div>{spacing.map((space) => icon)}</div>}
+      {!!count && icon && (
+        <div data-testid={'icon'}>
+          {spacing.map((_space, index) => (
+            <div key={`icon-${index}`}>{icon}</div>
+          ))}
+        </div>
+      )}
       {children}
     </Button>
   );
