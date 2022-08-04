@@ -1,16 +1,16 @@
 import { Story } from '@storybook/react';
 import HealthBar from './HealthBar';
+import { HealthBarProps } from './HealthBar';
 
 export default {
   title: 'HealthBar',
   component: HealthBar,
 };
 
-interface ButtonStoryProps {
-  isReversed: boolean;
-  maxHealth: number;
-  currentHealth: number;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
+export const HealthBarFull: Story<HealthBarProps> = () => (
+  <HealthBar isReversed={false} maxHealth={150} currentHealth={100} />
+);
 
-// export const HealthBarFull: Story<ButtonStoryProps> = () => <HealthBar />;
+export const HealthBarLow: Story<HealthBarProps> = () => (
+  <HealthBar isReversed={true} maxHealth={150} currentHealth={60} />
+);

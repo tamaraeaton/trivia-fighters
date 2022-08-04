@@ -1,7 +1,12 @@
 .container {
+  display: flex;
+  flex-direction: column;
+}
+/* TODO: 50% width works for storybook, but looks horrible on local host */
+.healthbarContainer {
   position: relative;
   height: 30px;
-  width: 100%;
+  width: 50%;
   background-color: #e0e0de;
   border-radius: 50px;
   margin: 50px;
@@ -15,7 +20,6 @@
 
 .filler {
   height: 100%;
-  background-color: green;
   border-radius: inherit;
 }
 
@@ -29,6 +33,7 @@
   left: -40px;
   top: 50%;
   transform: translateY(-50%);
+  padding-top: 5px;
 }
 
 .healthAndScoreReversed {
@@ -36,4 +41,9 @@
   flex-direction: row-reverse;
   align-items: end;
   left: 40px;
+  padding-top: 10px;
+}
+
+.screenReader {
+  color: red;
 }

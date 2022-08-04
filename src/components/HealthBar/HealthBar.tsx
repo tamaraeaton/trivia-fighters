@@ -1,36 +1,39 @@
-import { isAbsolute } from 'node:path';
-import { relative } from 'node:path/win32';
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import HealthFull from '../../assets/images/health-full.svg';
 import HealthLow from '../../assets/images/health-low.svg';
 import './HealthBar.css';
 
-interface HealthBarProps {
+export interface HealthBarProps {
   isReversed: boolean;
   maxHealth: number;
   currentHealth: number;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  testID?: string;
 }
 
 const HealthBar: FunctionComponent<HealthBarProps> = ({
   isReversed,
   maxHealth,
   currentHealth,
-  onClick,
+  testID,
 }) => {
   const healthPercentage = Math.round((currentHealth / maxHealth) * 100);
 
   return (
     <>
-      <div className="container">
+      <div className="healthbarContainer">
         <div
+          test-id={testID}
           className={`${isReversed ? 'fillerReversed' : undefined} filler`}
           style={{
             width: `${healthPercentage}%`,
-            backgroundColor: healthPercentage < 50 ? 'red' : 'green',
+            background:
+              healthPercentage < 50
+                ? 'linear-gradient(60deg, #ff0000 0%, #960000 100%)'
+                : 'linear-gradient(60deg, #007c4d 0%, #00f658 100%)',
           }}
         ></div>
         <div
+          test-id={testID}
           className={`${
             isReversed ? 'healthAndScoreReversed' : undefined
           } healthAndScore`}
@@ -42,6 +45,10 @@ const HealthBar: FunctionComponent<HealthBarProps> = ({
           )}
 
           <span className="label">{`${healthPercentage}/100`}</span>
+
+          {/*TODO: <p className="screenReader">
+            Health is {healthPercentage}%, {currentHealth} of {maxHealth}.
+          </p> */}
         </div>
       </div>
     </>
@@ -49,8 +56,3 @@ const HealthBar: FunctionComponent<HealthBarProps> = ({
 };
 
 export default HealthBar;
-
-//TODO: screen reader only container
-/* 
-“Health is XX%, [currentHealth] of [maxHealth]”
- */
