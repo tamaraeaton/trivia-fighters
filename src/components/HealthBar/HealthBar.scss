@@ -1,8 +1,8 @@
-/* TODO: 50% width works for storybook, but looks horrible on local host */
 .healthbarContainer {
+  display: flex;
   position: relative;
   height: 30px;
-  width: 50%;
+  width: 100%;
   background-color: #e0e0de;
   border-radius: 50px;
   margin: 50px;
@@ -20,7 +20,7 @@
 }
 
 .fillerReversed {
-  float: right;
+  justify-content: end;
 }
 
 .healthAndScore {
@@ -38,8 +38,4 @@
   align-items: end;
   left: 40px;
   padding-top: 10px;
-}
-
-.screenReader {
-  color: red;
 }

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import HealthFull from '../../assets/images/health-full.svg';
 import HealthLow from '../../assets/images/health-low.svg';
-import './HealthBar.css';
+import './HealthBar.scss';
 
 export interface HealthBarProps {
   isReversed: boolean;
