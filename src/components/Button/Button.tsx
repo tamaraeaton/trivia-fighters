@@ -11,6 +11,7 @@ export interface ButtonProps {
   disabled?: boolean;
   size?: 's' | 'm' | 'l' | 'xl';
   icon?: JSX.Element;
+  testID?: string;
 }
 
 const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
@@ -21,12 +22,16 @@ const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
   disabled,
   size,
   icon,
+  testID,
 }) => {
   return (
     <button
-      className={`btn ${classType} ${selected ? 'btn-selected' : ''} ${size}`}
+      className={`btn${classType ? ' ' + classType : ''}${
+        selected ? ' btn-selected' : ''
+      }${size ? ' ' + size : ''}`}
       onClick={onClick}
       disabled={disabled}
+      data-testid={testID}
     >
       {icon}
       {children}
