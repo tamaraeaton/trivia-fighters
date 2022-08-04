@@ -1,5 +1,7 @@
+import './Round.css';
+
 const Round = () => {
-  return <h1>ROUND 1</h1>;
+  return <h1 className="roundCountDisplay">ROUND 1</h1>;
 };
 
 export default Round;

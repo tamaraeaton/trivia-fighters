@@ -1,21 +1,9 @@
+import { isAbsolute } from 'node:path';
+import { relative } from 'node:path/win32';
 import React, { FunctionComponent } from 'react';
 import HealthFull from '../../assets/images/health-full.svg';
 import HealthLow from '../../assets/images/health-low.svg';
-
-const containerStyles = {
-  // display: 'flex',
-  height: 30,
-  width: '100%',
-  backgroundColor: '#e0e0de',
-  borderRadius: 50,
-  margin: 50,
-};
-
-const labelStyles = {
-  padding: 5,
-  color: 'white',
-  fontWeight: 'bold',
-};
+import './HealthBar.css';
 
 interface HealthBarProps {
   isReversed: boolean;
@@ -32,39 +20,28 @@ const HealthBar: FunctionComponent<HealthBarProps> = ({
 }) => {
   const healthPercentage = Math.round((currentHealth / maxHealth) * 100);
 
-  const fillerStyles = {
-    // display: 'flex',
-    height: '100%',
-    width: `${healthPercentage}%`,
-    backgroundColor: 'green',
-    borderRadius: 'inherit',
-
-    // transform: 'translate(120px, 50%)',
-    // transform: 'rotateY(180deg)',
-    // justifyContent: 'left',
-    // alignItems: 'left',
-    // alignText: 'right',
-    // float: 'right',
-  };
-
-  if (healthPercentage < 50) {
-    fillerStyles.backgroundColor = 'red';
-  }
-
-  // if(isReversed === true) {
-
-  // }
-
   return (
     <>
-      <div style={containerStyles}>
-        <div style={fillerStyles}>
+      <div className="container">
+        <div
+          className={`${isReversed ? 'fillerReversed' : undefined} filler`}
+          style={{
+            width: `${healthPercentage}%`,
+            backgroundColor: healthPercentage < 50 ? 'red' : 'green',
+          }}
+        ></div>
+        <div
+          className={`${
+            isReversed ? 'healthAndScoreReversed' : undefined
+          } healthAndScore`}
+        >
           {healthPercentage < 50 ? (
             <img src={HealthLow} />
           ) : (
             <img src={HealthFull} />
           )}
-          <span style={labelStyles}>{`${healthPercentage}/100`}</span>
+
+          <span className="label">{`${healthPercentage}/100`}</span>
         </div>
       </div>
     </>
@@ -72,3 +49,8 @@ const HealthBar: FunctionComponent<HealthBarProps> = ({
 };
 
 export default HealthBar;
+
+//TODO: screen reader only container
+/* 
+“Health is XX%, [currentHealth] of [maxHealth]”
+ */
