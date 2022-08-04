@@ -1,0 +1,13 @@
+.containerStyles {
+  height: 30px;
+  width: 350px;
+  background-color: #e0e0de;
+  border-radius: 50px;
+  margin: 50px;
+}
+
+.labelStyles {
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+}
