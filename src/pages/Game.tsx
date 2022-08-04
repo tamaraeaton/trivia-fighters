@@ -5,14 +5,14 @@ const Game: React.FunctionComponent = () => {
   return (
     <div style={{ display: 'flex' }}>
       <HealthBar
-        testID="healthFull"
+        testID="playerHealthBar"
         isReversed={false}
-        maxHealth={150}
+        maxHealth={100}
         currentHealth={100}
       />
       <Round />
       <HealthBar
-        testID="healthLow"
+        testID="opponentHealthBar"
         isReversed={true}
         maxHealth={150}
         currentHealth={60}

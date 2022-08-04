@@ -1,7 +1,3 @@
-.container {
-  display: flex;
-  flex-direction: column;
-}
 /* TODO: 50% width works for storybook, but looks horrible on local host */
 .healthbarContainer {
   position: relative;

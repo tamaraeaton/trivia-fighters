@@ -19,39 +19,46 @@ const HealthBar: FunctionComponent<HealthBarProps> = ({
   const healthPercentage = Math.round((currentHealth / maxHealth) * 100);
 
   return (
-    <>
-      <div className="healthbarContainer">
-        <div
-          test-id={testID}
-          className={`${isReversed ? 'fillerReversed' : undefined} filler`}
-          style={{
-            width: `${healthPercentage}%`,
-            background:
-              healthPercentage < 50
-                ? 'linear-gradient(60deg, #ff0000 0%, #960000 100%)'
-                : 'linear-gradient(60deg, #007c4d 0%, #00f658 100%)',
-          }}
-        ></div>
-        <div
-          test-id={testID}
-          className={`${
-            isReversed ? 'healthAndScoreReversed' : undefined
-          } healthAndScore`}
-        >
-          {healthPercentage < 50 ? (
-            <img src={HealthLow} />
-          ) : (
-            <img src={HealthFull} />
-          )}
+    <div data-testid={testID} className="healthbarContainer">
+      <div
+        data-testid="healthBarFill"
+        className={`${isReversed ? 'fillerReversed' : undefined} filler`}
+        style={{
+          width: `${healthPercentage}%`,
+          background:
+            healthPercentage < 50
+              ? 'linear-gradient(60deg, #ff0000 0%, #960000 100%)'
+              : 'linear-gradient(60deg, #007c4d 0%, #00f658 100%)',
+        }}
+      />
+      <div
+        className={`${
+          isReversed ? 'healthAndScoreReversed' : undefined
+        } healthAndScore`}
+      >
+        {healthPercentage < 50 ? (
+          <img
+            data-testid="healthLowIcon"
+            src={HealthLow}
+            alt="health low icon"
+          />
+        ) : (
+          <img
+            data-testid="healthFullIcon"
+            src={HealthFull}
+            alt="health full icon"
+          />
+        )}
 
-          <span className="label">{`${healthPercentage}/100`}</span>
-
-          {/*TODO: <p className="screenReader">
-            Health is {healthPercentage}%, {currentHealth} of {maxHealth}.
-          </p> */}
-        </div>
+        <span
+          data-testid="healthBarLabel"
+          className="label"
+        >{`${currentHealth}/${maxHealth}`}</span>
       </div>
-    </>
+      <p className="sr-only sr-only-focusable">
+        Health is {healthPercentage}%, {currentHealth} of {maxHealth}.
+      </p>
+    </div>
   );
 };
 
