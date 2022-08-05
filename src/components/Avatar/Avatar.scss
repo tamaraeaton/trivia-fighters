@@ -1,5 +1,5 @@
 .avatarContainer {
-  width: 30%;
+  width: 100%;
   position: relative;
 }
 
@@ -11,22 +11,22 @@
 
 .avatarShadow {
   position: absolute;
-  top: 110px;
-  left: 75px;
+  top: 180px;
+  left: 135px;
   width: 200px;
 }
 
 .avatarShadowBase {
   position: absolute;
-  top: 140px;
-  left: 90px;
-  width: 130px;
+  top: 220px;
+  left: 160px;
+  width: 150px;
 }
 
 .avatarName {
   position: absolute;
-  top: 160px;
-  left: 100px;
+  top: 240px;
+  left: 180px;
   justify-content: flex-end;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.15);
