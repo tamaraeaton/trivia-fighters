@@ -3,6 +3,7 @@ import Round from '../components/Round/Round';
 import Avatar from '../components/Avatar/Avatar';
 import FoxKnight from '../assets/images/fox-knight.svg';
 import Shadow from '../assets/images/shadow-gradient.svg';
+import ShadowBase from '../assets/images/shadow.svg';
 
 const Game: React.FunctionComponent = () => {
   return (
@@ -22,9 +23,14 @@ const Game: React.FunctionComponent = () => {
           currentHealth={60}
         />
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Avatar alt="dragon" name="You" character={FoxKnight} shadow={Shadow} />
-      </div>
+
+      <Avatar
+        alt="dragon"
+        name="You"
+        character={FoxKnight}
+        shadowBase={ShadowBase}
+        shadow={Shadow}
+      />
     </>
   );
 };

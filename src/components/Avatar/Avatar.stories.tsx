@@ -2,6 +2,7 @@ import { Story } from '@storybook/react';
 import Avatar, { AvatarProps } from './Avatar';
 import FoxKnight from '../../assets/images/fox-knight.svg';
 import Shadow from '../../assets/images/shadow-gradient.svg';
+import ShadowBase from '../../assets/images/shadow.svg';
 
 export default {
   title: 'Avatar',
@@ -9,5 +10,11 @@ export default {
 };
 
 export const AvatarImage: Story<AvatarProps> = () => (
-  <Avatar alt="dragon" name="You" character={FoxKnight} shadow={Shadow} />
+  <Avatar
+    alt="dragon"
+    name="You"
+    character={FoxKnight}
+    shadow={Shadow}
+    shadowBase={ShadowBase}
+  />
 );

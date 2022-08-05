@@ -1,16 +1,36 @@
 .avatarContainer {
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  justify-content: center;
+  width: 30%;
+  position: relative;
 }
 
-// .avatarImage {
-//   justify-content: center;
-// }
+.avatarImage {
+  position: absolute;
+  transform: translate(50%);
+  z-index: 1;
+}
+
+.avatarShadow {
+  position: absolute;
+  top: 110px;
+  left: 75px;
+  width: 200px;
+}
+
+.avatarShadowBase {
+  position: absolute;
+  top: 140px;
+  left: 90px;
+  width: 130px;
+}
 
 .avatarName {
+  position: absolute;
+  top: 160px;
+  left: 100px;
+  justify-content: flex-end;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.15);
   width: 100px;
+  border-radius: 3px;
+  padding: 0.3rem;
 }
