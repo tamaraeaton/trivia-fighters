@@ -1,0 +1,16 @@
+.avatarContainer {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  justify-content: center;
+}
+
+// .avatarImage {
+//   justify-content: center;
+// }
+
+.avatarName {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.15);
+  width: 100px;
+}
