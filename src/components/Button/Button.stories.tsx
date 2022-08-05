@@ -7,6 +7,7 @@ export default {
   title: 'Button',
   component: Button,
 };
+
 interface ButtonStoryProps {
   selected: boolean;
   disabled: boolean;
@@ -27,7 +28,6 @@ export const Primary: Story<ButtonStoryProps> = (props) => (
     Primary Button
   </Button>
 );
-
 Primary.args = { selected: false, disabled: true };
 
 export const Correct: Story<ButtonStoryProps> = (props) => (

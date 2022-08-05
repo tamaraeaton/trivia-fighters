@@ -2,14 +2,12 @@ import { FunctionComponent, PropsWithChildren } from 'react';
 import Button, { ButtonProps } from './Button';
 
 export interface IconButtonProps extends ButtonProps {
-  alt?: string;
   count?: 1 | 2 | 3;
 }
 
 const IconButton: FunctionComponent<PropsWithChildren<IconButtonProps>> = ({
   children,
   icon,
-  alt = '',
   count = 1,
   ...buttonProps
 }) => {
