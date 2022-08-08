@@ -1,5 +1,5 @@
 import { ComponentStory } from '@storybook/react';
-import Action, { ActionProps } from './Action';
+import Action from './Action';
 
 export default {
   title: 'Action',

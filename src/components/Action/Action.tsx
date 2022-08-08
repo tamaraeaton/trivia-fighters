@@ -23,6 +23,7 @@ const Action: FunctionComponent<ActionProps> = ({
     <div>
       {isAttack && <p className="attackValue">{attackValue}</p>}
       <img
+        data-testid="attackBlock"
         src={iconSource}
         className={`${isReversed ? 'iconReversed' : undefined}`}
       />
