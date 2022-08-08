@@ -11,8 +11,7 @@ const IconButton: FunctionComponent<PropsWithChildren<IconButtonProps>> = ({
   count = 1,
   ...buttonProps
 }) => {
-  const spacing: number[] = new Array(count - 1).fill(0);
-  // spacing.push(10);
+  const spacing: number[] = new Array(count).fill(0);
 
   return (
     <Button {...buttonProps}>
