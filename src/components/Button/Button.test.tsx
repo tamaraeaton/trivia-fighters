@@ -29,7 +29,7 @@ describe('Button Component', () => {
     );
   });
 
-  it('checking disabled', () => {
+  it('should render if disabled', () => {
     const wrapper = render(<Button disabled={true}>Test</Button>);
     const button = wrapper.getByText('Test');
     expect(button).toBeDisabled();

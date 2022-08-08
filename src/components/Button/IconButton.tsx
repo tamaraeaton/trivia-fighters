@@ -12,7 +12,7 @@ const IconButton: FunctionComponent<PropsWithChildren<IconButtonProps>> = ({
   ...buttonProps
 }) => {
   const spacing: number[] = new Array(count - 1).fill(0);
-  spacing.push(10);
+  // spacing.push(10);
 
   return (
     <Button {...buttonProps}>

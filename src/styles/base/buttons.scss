@@ -2,7 +2,7 @@
    Button Styles
    ========================================================================== */
 
-//TODO: what does this do
+// this is for the primary button, there isn't a class for it
 .btn {
   @include rhythm-desktop(0, 0, 0);
   box-sizing: border-box;
@@ -21,7 +21,7 @@
   min-width: 300px;
   padding: 10px;
   text-decoration: none;
-  //TODO: what does this do first div within this .btn
+  // this is for the swords
   & > div {
     display: flex;
     gap: 0;
