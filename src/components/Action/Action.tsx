@@ -21,11 +21,16 @@ const Action: FunctionComponent<ActionProps> = ({
   const iconSource = isAttack ? SwordIcon : ShieldIcon;
   return (
     <div>
-      {isAttack && <p className="attackValue">{attackValue}</p>}
+      {isAttack && (
+        <p data-testid="attackvalue" className="attackValue">
+          {attackValue}
+        </p>
+      )}
       <img
         data-testid="attackBlock"
         src={iconSource}
         className={`${isReversed ? 'iconReversed' : undefined}`}
+        alt="attack icon"
       />
     </div>
   );

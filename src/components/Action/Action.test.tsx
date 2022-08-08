@@ -1,13 +1,41 @@
 import { render, screen } from '@testing-library/react';
 import Action from './Action';
-import SwordIcon from '../../assets/images/sword.svg';
-import ShieldIcon from '../../assets/images/shield.svg';
 
 describe('Action Component', () => {
   it('should render sword icon', () => {
     render(
+      <Action isReversed={false} actionState="attack" attackValue={3}></Action>
+    );
+    expect(screen.getByTestId('attackBlock')).toHaveAttribute(
+      'src',
+      'sword.svg'
+    );
+  });
+
+  it('sword should render reversed if reversed is true', () => {
+    render(
+      <Action isReversed={true} actionState="attack" attackValue={5}></Action>
+    );
+    expect(screen.getByTestId('attackBlock')).toHaveAttribute(
+      'class',
+      'iconReversed'
+    );
+  });
+
+  it('should shound not render reversed if reversed is false', () => {
+    render(
       <Action isReversed={false} actionState="attack" attackValue={5}></Action>
     );
-    // expect(screen.getByTestId('attackBlock')).toHave(SwordIcon);
+    expect(screen.getByTestId('attackBlock')).not.toHaveAttribute(
+      'class',
+      'iconReversed'
+    );
+  });
+
+  it('should render 5 if attack value is 5', () => {
+    render(
+      <Action isReversed={false} actionState="attack" attackValue={5}></Action>
+    );
+    expect(screen.getByTestId('attackvalue')).toHaveTextContent('5');
   });
 });
