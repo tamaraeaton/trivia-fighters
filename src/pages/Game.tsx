@@ -1,3 +1,4 @@
+import './Game.scss';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -10,7 +11,7 @@ import ShadowBase from '../assets/images/shadow.svg';
 const Game: React.FunctionComponent = () => {
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <div className="healthBarContainer">
         <HealthBar
           testID="playerHealthBar"
           isReversed={false}
