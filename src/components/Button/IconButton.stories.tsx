@@ -30,7 +30,7 @@ AttackButton.args = {
 export const BlockButton = Template.bind({});
 BlockButton.args = {
   children: 'Block',
-  icon: <img src={ShieldIcon} alt="sword" width="16px" height="16px" />,
+  icon: <img src={ShieldIcon} alt="shield" width="16px" height="16px" />,
   size: 'm',
   count: 1,
 };
