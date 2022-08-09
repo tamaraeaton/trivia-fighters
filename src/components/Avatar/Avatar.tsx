@@ -21,9 +21,16 @@ const Avatar: FunctionComponent<AvatarProps> = ({
       <div data-testid="avatar" className="avatarContainer">
         <img className="avatarShadow" src={shadow} alt={alt}></img>
         <img className="avatarShadowBase" src={shadowBase} alt={alt}></img>
-        <img className="avatarImage" src={character} alt={alt}></img>
+        <img
+          data-testid="avatarImage"
+          className="avatarImage"
+          src={character}
+          alt={alt}
+        ></img>
       </div>
-      <p className="avatarName">{name}</p>
+      <p className="avatarName" data-testid="avatarName">
+        {name}
+      </p>
     </div>
   );
 };

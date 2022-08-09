@@ -3,12 +3,18 @@ import Action from './Action';
 
 describe('Action Component', () => {
   it('should render sword icon', () => {
-    render(
-      <Action isReversed={false} actionState="attack" attackValue={3}></Action>
-    );
+    render(<Action isReversed={false} actionState="attack" attackValue={3} />);
     expect(screen.getByTestId('attackBlock')).toHaveAttribute(
       'src',
       'sword.svg'
+    );
+  });
+
+  it('should render shield icon', () => {
+    render(<Action isReversed={false} actionState="block" />);
+    expect(screen.getByTestId('attackBlock')).toHaveAttribute(
+      'src',
+      'shield.svg'
     );
   });
 
