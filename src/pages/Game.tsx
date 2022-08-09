@@ -27,21 +27,26 @@ const Game: React.FunctionComponent = () => {
         />
       </div>
       <div className="avatarContainer">
-        <Avatar
-          alt="dragon"
-          name="You"
-          character={FoxKnight}
-          shadowBase={ShadowBase}
-          shadow={Shadow}
-        />
-        <Action isReversed={true} actionState={'attack'} attackValue={10} />
-        <Avatar
-          alt="wizardpig"
-          name="Opponent"
-          character={WizardPig}
-          shadowBase={ShadowBase}
-          shadow={Shadow}
-        />
+        <div className="avatarActionGroup1">
+          <Avatar
+            alt="dragon"
+            name="You"
+            character={FoxKnight}
+            shadowBase={ShadowBase}
+            shadow={Shadow}
+          />
+          <Action isReversed={false} actionState={'attack'} attackValue={10} />
+        </div>
+        <div className="avatarActionGroup2">
+          <Action isReversed={true} actionState={'attack'} attackValue={10} />
+          <Avatar
+            alt="wizardpig"
+            name="Opponent"
+            character={WizardPig}
+            shadowBase={ShadowBase}
+            shadow={Shadow}
+          />
+        </div>
       </div>
     </>
   );

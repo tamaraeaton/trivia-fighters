@@ -1,9 +1,17 @@
 .healthBarContainer {
   display: flex;
+  // width: 100%;
 }
 
 .avatarContainer {
   display: flex;
   justify-content: space-between;
-  // justify-items: flex-end;
+}
+
+.avatarActionGroup1 {
+  // width: 400px;
+  height: 280px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
