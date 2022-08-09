@@ -2,22 +2,121 @@
    Button Styles
    ========================================================================== */
 
+// this is for the primary button, there isn't a class for it
 .btn {
   @include rhythm-desktop(0, 0, 0);
-
+  box-sizing: border-box;
   background: linear-gradient(0deg, #5532ff 0%, #02f3fe 100%);
+  border: 3px solid;
   border-color: #038dc1;
   border-radius: $global-border-radius;
   box-shadow: 0 0 0 0.25em $c-selected, 0 5px 9px 0 rgba(42, 42, 42, 0.5);
   color: $c-white;
-  display: inline-block;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
   font-weight: $fw-bold;
   margin: 1rem 4px;
   min-width: 300px;
   padding: 10px;
   text-decoration: none;
+  // this is for the swords
+  & > div {
+    display: flex;
+    gap: 0;
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 0.25em $c-selected, 0 0 30px 0 #00c6f3;
+  }
+
+  &:disabled {
+    border-color: #ababab;
+    background: linear-gradient(0deg, #9f9f9f 0%, #d7d7d7 100%);
+    box-shadow: 0 0 0 0.25em #d7d7d7, 0 5px 9px 0 rgba(42, 42, 42, 0.5);
+  }
+
+  &-selected {
+    border-color: #2000ac;
+    background: linear-gradient(0deg, #000767 0%, #0056db 100%);
+    box-shadow: 0 0 0 0.25em #1861e2, 0 5px 9px 0 rgba(42, 42, 42, 0.5);
+  }
 
   img {
     filter: brightness(300%);
+  }
+
+  &--correct,
+  &--easy {
+    border-color: #00a747;
+    background: linear-gradient(0deg, #007c4d 0%, #00f658 100%);
+    box-shadow: 0 0 0 0.25em #00ea73, 0 5px 9px 0 rgba(42, 42, 42, 0.5);
+
+    &:hover {
+      box-shadow: 0 0 0 0.25em #00ea73, 0 0 30px 0 #00ea73;
+    }
+
+    &:disabled {
+      border-color: #00a747;
+      background: linear-gradient(0deg, #007c4d 0%, #00f658 100%);
+      box-shadow: 0 0 0 0.25em #00ea73, 0 5px 9px 0 rgba(42, 42, 42, 0.5);
+    }
+  }
+
+  &--incorrect,
+  &--seth {
+    border-color: #a90000;
+    background: linear-gradient(180deg, #ff0000 0%, #960000 100%);
+    box-shadow: 0 0 0 0.25em #ea2200, 0 5px 9px 0 rgba(42, 42, 42, 0.5);
+
+    &:hover {
+      box-shadow: 0 0 0 0.25em #ea2200, 0 0 30px 0 #ea2200;
+    }
+
+    &:disabled {
+      border-color: #a90000;
+      background: linear-gradient(180deg, #ff0000 0%, #960000 100%);
+      box-shadow: 0 0 0 0.25em #ea2200, 0 5px 9px 0 rgba(42, 42, 42, 0.5);
+    }
+  }
+
+  &--medium {
+    border-color: #be3b01;
+    background: linear-gradient(180deg, #ff9b00 0%, #ae2f00 100%);
+    box-shadow: 0 0 0 0.25em #ef7819, 0 5px 9px 0 rgba(42, 42, 42, 0.5);
+
+    &:hover {
+      box-shadow: 0 0 0 0.25em #ef7819, 0 0 30px 0 #ef7819;
+    }
+
+    &:disabled {
+      border-color: #be3b01;
+      background: linear-gradient(180deg, #ff9b00 0%, #ae2f00 100%);
+      box-shadow: 0 0 0 0.25em #ef7819, 0 5px 9px 0 rgba(42, 42, 42, 0.5);
+    }
+  }
+  // play again and next
+  &.s {
+    height: 52px;
+    min-width: 190px;
+  }
+
+  // attack level(primary)
+  &.m {
+    height: 40px;
+    min-width: 300px;
+  }
+
+  // answers, correct/incorrect
+  &.l {
+    height: 40px;
+    min-width: 370px;
+  }
+
+  // landing page
+  &.xl {
+    height: 73px;
+    min-width: 353px;
   }
 }
