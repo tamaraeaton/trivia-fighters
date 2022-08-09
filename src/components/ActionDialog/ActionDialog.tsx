@@ -6,7 +6,7 @@ import ShieldIcon from '../../assets/images/shield.svg';
 
 const ActionDialog = () => {
   return (
-    <div className="actionDialog">
+    <div className="actionDialogWrapper">
       <IconButton
         children="Attack"
         icon={<img src={SwordIcon} alt="sword" width="20px" height="20px" />}
