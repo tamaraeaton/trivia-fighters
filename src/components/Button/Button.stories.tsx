@@ -17,7 +17,6 @@ export const Sizes = () => (
     <Button size="s">Small Button</Button>
     <Button size="m">Medium Button</Button>
     <Button size="l">Large Button</Button>
-
     <Button size="xl">Extra Large Button</Button>
   </>
 );
