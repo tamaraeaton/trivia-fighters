@@ -1,5 +1,5 @@
 import Button from 'components/Button/Button';
-import { Story } from '@storybook/react';
+import { ComponentStory } from '@storybook/react';
 import { ReactComponent as CorrectIcon } from '../../assets/images/correct.svg';
 import { ReactComponent as IncorrectIcon } from '../../assets/images/incorrect.svg';
 
@@ -7,10 +7,10 @@ export default {
   title: 'Button',
   component: Button,
 };
-interface ButtonStoryProps {
-  selected: boolean;
-  disabled: boolean;
-}
+
+const Template: ComponentStory<typeof Button> = ({ children, ...args }) => (
+  <Button {...args}>{children}</Button>
+);
 
 export const Sizes = () => (
   <>
@@ -22,66 +22,50 @@ export const Sizes = () => (
   </>
 );
 
-export const Primary: Story<ButtonStoryProps> = (props) => (
-  <Button selected={props.selected} disabled={props.disabled}>
-    Primary Button
-  </Button>
-);
+export const Primary = Template.bind({});
+Primary.args = {
+  children: 'Primary',
+  selected: false,
+  disabled: false,
+};
 
-Primary.args = { selected: false, disabled: true };
+export const Correct = Template.bind({});
+Correct.args = {
+  children: 'Correct',
+  classType: 'btn--correct',
+  selected: false,
+  disabled: false,
+  icon: <CorrectIcon />,
+};
 
-export const Correct: Story<ButtonStoryProps> = (props) => (
-  <Button
-    classType="btn--correct"
-    selected={props.selected}
-    disabled={props.disabled}
-    icon={<CorrectIcon />}
-  >
-    Correct
-  </Button>
-);
-Correct.args = { selected: false, disabled: true };
+export const Incorrect = Template.bind({});
+Incorrect.args = {
+  children: 'Incorrect',
+  classType: 'btn--incorrect',
+  selected: false,
+  disabled: false,
+};
 
-export const Incorrect: Story<ButtonStoryProps> = (props) => (
-  <Button
-    classType="btn--incorrect"
-    selected={props.selected}
-    disabled={props.disabled}
-  >
-    <IncorrectIcon />
-    Incorrect
-  </Button>
-);
+export const Easy = Template.bind({});
+Easy.args = {
+  children: 'Easy',
+  classType: 'btn--easy',
+  selected: false,
+  disabled: false,
+};
 
-export const Easy: Story<ButtonStoryProps> = (props) => (
-  <Button
-    classType="btn--easy"
-    selected={props.selected}
-    disabled={props.disabled}
-  >
-    Easy
-  </Button>
-);
-Easy.args = { selected: false, disabled: true };
+export const Medium = Template.bind({});
+Medium.args = {
+  children: 'Medium',
+  classType: 'btn--medium',
+  selected: false,
+  disabled: false,
+};
 
-export const Medium: Story<ButtonStoryProps> = (props) => (
-  <Button
-    classType="btn--medium"
-    selected={props.selected}
-    disabled={props.disabled}
-  >
-    Medium
-  </Button>
-);
-Medium.args = { selected: false, disabled: true };
-
-export const Seth: Story<ButtonStoryProps> = (props) => (
-  <Button
-    classType="btn--seth"
-    selected={props.selected}
-    disabled={props.disabled}
-  >
-    Seth
-  </Button>
-);
-Seth.args = { selected: false, disabled: true };
+export const Seth = Template.bind({});
+Seth.args = {
+  children: 'Seth',
+  classType: 'btn--seth',
+  selected: false,
+  disabled: false,
+};
