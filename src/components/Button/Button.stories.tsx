@@ -43,6 +43,7 @@ Incorrect.args = {
   classType: 'btn--incorrect',
   selected: false,
   disabled: false,
+  icon: <IncorrectIcon />,
 };
 
 export const Easy = Template.bind({});
