@@ -26,8 +26,9 @@ const Game: React.FunctionComponent = () => {
           currentHealth={60}
         />
       </div>
-      <div className="avatarContainer">
-        <div className="avatarActionGroup1">
+      <div className="avatarContainerWrapper">
+        <div className="avatarActionGroup">
+          <Action isReversed={false} actionState={'attack'} attackValue={10} />
           <Avatar
             alt="dragon"
             name="You"
@@ -35,9 +36,8 @@ const Game: React.FunctionComponent = () => {
             shadowBase={ShadowBase}
             shadow={Shadow}
           />
-          <Action isReversed={false} actionState={'attack'} attackValue={10} />
         </div>
-        <div className="avatarActionGroup2">
+        <div className="avatarActionGroup group2">
           <Action isReversed={true} actionState={'attack'} attackValue={10} />
           <Avatar
             alt="wizardpig"

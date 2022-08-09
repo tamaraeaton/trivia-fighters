@@ -1,17 +1,19 @@
 .healthBarContainer {
   display: flex;
-  // width: 100%;
 }
 
-.avatarContainer {
+.avatarContainerWrapper {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
-.avatarActionGroup1 {
-  // width: 400px;
-  height: 280px;
+.avatarActionGroup {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.group2 {
+  align-items: flex-start;
 }
