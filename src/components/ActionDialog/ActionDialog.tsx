@@ -4,9 +4,9 @@ import IconButton from '../Button/IconButton';
 import SwordIcon from '../../assets/images/sword.svg';
 import ShieldIcon from '../../assets/images/shield.svg';
 
-const ActionDialog = () => {
+const ActionDialog: FunctionComponent = () => {
   return (
-    <div className="actionDialogWrapper">
+    <div className="actionDialogWrapper" data-testid="actionDialog">
       <IconButton
         children="Attack"
         icon={<img src={SwordIcon} alt="sword" width="20px" height="20px" />}

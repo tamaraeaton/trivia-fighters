@@ -10,9 +10,13 @@ const Dialog: FunctionComponent<PropsWithChildren<DialogProps>> = ({
   message,
 }) => {
   return (
-    <div className="dialogWrapper">
-      <div className="dialogMessage">{message}</div>
-      <div className="dialogContainer">{children}</div>
+    <div className="dialogWrapper" data-testid="dialogWrapper">
+      <div className="dialogMessage" data-testid="dialogMessage">
+        {message}
+      </div>
+      <div className="dialogContainer" data-testid="dialogContainer">
+        {children}
+      </div>
     </div>
   );
 };
