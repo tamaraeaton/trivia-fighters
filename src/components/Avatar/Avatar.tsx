@@ -19,14 +19,14 @@ const Avatar: FunctionComponent<AvatarProps> = ({
   return (
     <div className="wrapper">
       <div data-testid="avatar" className="avatarContainer">
-        <img className="avatarShadow" src={shadow} alt={alt}></img>
-        <img className="avatarShadowBase" src={shadowBase} alt={alt}></img>
+        <img className="avatarShadow" src={shadow} alt={alt} />
+        <img className="avatarShadowBase" src={shadowBase} alt={alt} />
         <img
           data-testid="avatarImage"
           className="avatarImage"
           src={character}
           alt={alt}
-        ></img>
+        />
       </div>
       <p className="avatarName" data-testid="avatarName">
         {name}
