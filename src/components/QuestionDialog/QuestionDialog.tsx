@@ -1,4 +1,5 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, PropsWithChildren } from 'react';
+import './QuestionDialog.scss';
 import Button from '../Button/Button';
 
 interface QuestionDialogProps {
@@ -7,14 +8,29 @@ interface QuestionDialogProps {
   options: string[];
 }
 
-const QuestionDialog: FunctionComponent<QuestionDialogProps> = ({
-  question,
-  answer,
-  options,
-}) => {
+const QuestionDialog: FunctionComponent<
+  PropsWithChildren<QuestionDialogProps>
+> = ({ question, answer, options }) => {
+  const handleClick = () => {
+    console.log(options);
+    alert('this is clicked');
+  };
   return (
     <div>
-      <Button />
+      <p id="question">{question}</p>
+      <div className="questionDialogAnswerWrapper">
+        {options.map((option) => {
+          return (
+            <Button
+              selected={false}
+              disabled={false}
+              onClick={() => handleClick()}
+            >
+              {option}
+            </Button>
+          );
+        })}
+      </div>
     </div>
   );
 };

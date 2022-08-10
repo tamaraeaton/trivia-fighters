@@ -6,9 +6,10 @@
   border: 1px solid #ffffff;
   border-radius: 1px;
   background-color: rgba(255, 255, 255, 0.15);
-  height: 200px;
-  width: 100%;
+  max-width: 700px;
+  max-height: 350px;
 }
+
 .dialogMessage {
   color: #ffffff;
   font-family: Lato;

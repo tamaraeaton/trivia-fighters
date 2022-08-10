@@ -1,4 +1,4 @@
-import IconButton, { IconButtonProps } from './IconButton';
+import IconButton from './IconButton';
 import { ComponentStory } from '@storybook/react';
 import SwordIcon from '../../assets/images/sword.svg';
 import ShieldIcon from '../../assets/images/shield.svg';

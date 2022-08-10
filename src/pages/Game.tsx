@@ -8,7 +8,6 @@ import WizardPig from '../assets/images/wizard-pig.svg';
 import Shadow from '../assets/images/shadow-gradient.svg';
 import ShadowBase from '../assets/images/shadow.svg';
 import Dialog from 'components/Dialog/Dialog';
-import ActionDialog from 'components/ActionDialog/ActionDialog';
 import AttackDialog from 'components/AttackDialog/AttackDialog';
 
 const Game: React.FunctionComponent = () => {
@@ -52,7 +51,6 @@ const Game: React.FunctionComponent = () => {
         </div>
       </div>
       <Dialog message="Choose An Attack">
-        {/* <ActionDialog /> */}
         <AttackDialog />
       </Dialog>
     </>

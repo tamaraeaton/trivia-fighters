@@ -1,7 +1,12 @@
 .attackDialogWrapper {
   height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
+  button {
+    &:first-child {
+      margin-right: 2rem;
+    }
+  }
 }
