@@ -22,20 +22,14 @@ describe('Action Component', () => {
     render(
       <Action isReversed={true} actionState="attack" attackValue={5}></Action>
     );
-    expect(screen.getByTestId('attackBlock')).toHaveAttribute(
-      'class',
-      'iconReversed'
-    );
+    expect(screen.getByTestId('attackBlock')).toHaveClass('iconReversed');
   });
 
-  it('should shound not render reversed if reversed is false', () => {
+  it('should should not render reversed if reversed is false', () => {
     render(
       <Action isReversed={false} actionState="attack" attackValue={5}></Action>
     );
-    expect(screen.getByTestId('attackBlock')).not.toHaveAttribute(
-      'class',
-      'iconReversed'
-    );
+    expect(screen.getByTestId('attackBlock')).not.toHaveClass('iconReversed');
   });
 
   it('should render 5 if attack value is 5', () => {
