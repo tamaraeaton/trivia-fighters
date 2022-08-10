@@ -1,19 +1,20 @@
 import Button from 'components/Button/Button';
 import React from 'react';
+import './Home.scss';
 
 const Home: React.FunctionComponent = () => {
   return (
-    <div>
+    <div className="homePageContainer">
       <h1 className="headline1" data-testid="headline">
         TRIVIA FIGHTERS
       </h1>
-      <Button classType="btn--easy" testID="easy">
+      <Button classType="btn--easy" size="xxl" testID="easy">
         Easy
       </Button>
-      <Button classType="btn--medium" testID="medium">
+      <Button classType="btn--medium" size="xxl" testID="medium">
         Medium
       </Button>
-      <Button classType="btn--seth" testID="seth">
+      <Button classType="btn--seth" size="xxl" testID="seth">
         Seth
       </Button>
     </div>

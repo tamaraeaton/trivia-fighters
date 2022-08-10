@@ -14,22 +14,26 @@ const Template: ComponentStory<typeof Button> = ({ children, ...args }) => (
 
 export const Sizes = () => (
   <>
-    <Button size="s">Small Button</Button>
-    <Button size="m">Medium Button</Button>
-    <Button size="l">Large Button</Button>
-    <Button size="xl">Extra Large Button</Button>
+    <Button size="xs">Next</Button>
+    <Button size="s">Play Again</Button>
+    <Button size="m">Option Answer</Button>
+    <Button size="l">Light Attack</Button>
+    <Button size="xl">Attack/Block</Button>
+    <Button size="xxl">Easy/Med/Seth</Button>
   </>
 );
 
 export const Primary = Template.bind({});
 Primary.args = {
-  children: 'Primary',
+  size: 'xs',
+  children: 'Next',
   selected: false,
   disabled: false,
 };
 
 export const Correct = Template.bind({});
 Correct.args = {
+  size: 'm',
   children: 'Correct',
   classType: 'btn--correct',
   selected: false,
@@ -39,14 +43,17 @@ Correct.args = {
 
 export const Incorrect = Template.bind({});
 Incorrect.args = {
+  size: 'm',
   children: 'Incorrect',
   classType: 'btn--incorrect',
   selected: false,
   disabled: false,
+  icon: <IncorrectIcon />,
 };
 
 export const Easy = Template.bind({});
 Easy.args = {
+  size: 'xxl',
   children: 'Easy',
   classType: 'btn--easy',
   selected: false,
@@ -55,6 +62,7 @@ Easy.args = {
 
 export const Medium = Template.bind({});
 Medium.args = {
+  size: 'xxl',
   children: 'Medium',
   classType: 'btn--medium',
   selected: false,
@@ -63,6 +71,7 @@ Medium.args = {
 
 export const Seth = Template.bind({});
 Seth.args = {
+  size: 'xxl',
   children: 'Seth',
   classType: 'btn--seth',
   selected: false,

@@ -16,7 +16,7 @@ export const SwordButton = Template.bind({});
 SwordButton.args = {
   children: 'Heavy Attack',
   icon: <img src={SwordIcon} alt="sword" width="16px" height="16px" />,
-  size: 'm',
+  size: 'l',
   count: 3,
 };
 
@@ -24,13 +24,13 @@ export const AttackButton = Template.bind({});
 AttackButton.args = {
   children: 'Attack',
   icon: <img src={SwordIcon} alt="sword" width="20px" height="20px" />,
-  size: 's',
+  size: 'xl',
 };
 
 export const BlockButton = Template.bind({});
 BlockButton.args = {
   children: 'Block',
   icon: <img src={ShieldIcon} alt="sword" width="16px" height="16px" />,
-  size: 'm',
+  size: 'xl',
   count: 1,
 };
