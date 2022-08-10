@@ -9,9 +9,14 @@ export default {
 const Template: ComponentStory<typeof Action> = (args) => <Action {...args} />;
 
 export const AttackAction = Template.bind({});
-
 AttackAction.args = {
   isReversed: false,
   actionState: 'attack',
   attackValue: 5,
+};
+
+export const BlockAction = Template.bind({});
+BlockAction.args = {
+  isReversed: false,
+  actionState: 'block',
 };

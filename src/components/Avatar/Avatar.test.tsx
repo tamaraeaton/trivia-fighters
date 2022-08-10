@@ -5,10 +5,10 @@ import Shadow from '../../assets/images/shadow-gradient.svg';
 import ShadowBase from '../../assets/images/shadow.svg';
 
 describe('Avatar Component', () => {
-  it('should render avatar image', () => {
+  it("should render avatar image of fox-knight with content of 'You'", () => {
     render(
       <Avatar
-        alt="dragon"
+        alt="foxknight"
         name="You"
         character={FoxKnight}
         shadow={Shadow}
@@ -16,5 +16,10 @@ describe('Avatar Component', () => {
       />
     );
     expect(screen.getByTestId('avatar')).toBeDefined();
+    expect(screen.getByTestId('avatarImage')).toHaveAttribute(
+      'src',
+      'fox-knight.svg'
+    );
+    expect(screen.getByTestId('avatarName')).toHaveTextContent('You');
   });
 });
