@@ -41,7 +41,7 @@ const Game: React.FunctionComponent = () => {
           <Action isReversed={true} actionState={'attack'} attackValue={10} />
           <Avatar
             alt="wizardpig"
-            name="Opponent"
+            name="Medium"
             character={WizardPig}
             shadowBase={ShadowBase}
             shadow={Shadow}
