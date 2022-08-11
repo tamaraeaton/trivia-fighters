@@ -9,8 +9,15 @@ import Shadow from '../assets/images/shadow-gradient.svg';
 import ShadowBase from '../assets/images/shadow.svg';
 import Dialog from 'components/Dialog/Dialog';
 import AttackDialog from 'components/AttackDialog/AttackDialog';
+import { useAppSelector } from '../store/hooks';
+import { dialogStageSelector } from '../store/game/game.selectors';
 
 const Game: React.FunctionComponent = () => {
+  const dialogStage = useAppSelector(dialogStageSelector);
+
+  // useEffect looking at dialogStage
+  // if it detects a difficulty function then useNavigate back to home page
+
   return (
     <>
       <div className="healthBarContainer">
