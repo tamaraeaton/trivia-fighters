@@ -6,7 +6,7 @@ import './Action.scss';
 export interface ActionProps {
   isReversed: boolean;
   actionState: 'none' | 'block' | 'attack';
-  attackValue: number;
+  attackValue?: number;
 }
 
 const Action: FunctionComponent<ActionProps> = ({
