@@ -1,10 +1,14 @@
 import { RootState } from 'store/index';
 import { createSelector } from '@reduxjs/toolkit';
-import { DialogStage, Difficulty, Action } from '../game/game.slice';
+import {
+  DialogStageType,
+  DifficultyType,
+  ActionType,
+} from '../game/game.slice';
 
 export const gameSelector = (state: RootState) => state.game;
 
-// createSelector is maybe overkill here, but providing as an example
+// keeping example for round selecter
 export const gameRoundSelector = createSelector(
   gameSelector,
   (gameState): number => gameState.round
@@ -12,19 +16,20 @@ export const gameRoundSelector = createSelector(
 
 export const dialogStageSelector = createSelector(
   gameSelector,
-  (gameState): DialogStage => gameState.dialogStage
+  (gameState): DialogStageType => gameState.dialogStage
 );
 
 export const actionSelector = createSelector(
   gameSelector,
-  (gameState): Action => gameState.action
+  (gameState): ActionType => gameState.action
 );
+// this needs to show action state on game page when user clicks the difficulty from landing page
 export const difficultySelector = createSelector(
   gameSelector,
-  (gameState): Difficulty => gameState.difficulty
+  (gameState): DifficultyType => gameState.difficulty
 );
 
-export const wasCorrectSelector = createSelector(
+export const isCorrectSelector = createSelector(
   gameSelector,
-  (gameState): boolean => gameState.isCorrect
+  (gameState): boolean => gameState.isAnswered
 );

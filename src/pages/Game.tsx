@@ -9,15 +9,37 @@ import Shadow from '../assets/images/shadow-gradient.svg';
 import ShadowBase from '../assets/images/shadow.svg';
 import Dialog from 'components/Dialog/Dialog';
 import AttackDialog from 'components/AttackDialog/AttackDialog';
+import ActionDialog from 'components/ActionDialog/ActionDialog';
+import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import { useAppSelector } from '../store/hooks';
 import { dialogStageSelector } from '../store/game/game.selectors';
+import { useNavigate } from 'react-router-dom';
 
 const Game: React.FunctionComponent = () => {
   const dialogStage = useAppSelector(dialogStageSelector);
+  const navigate = useNavigate();
 
   // useEffect looking at dialogStage
   // if it detects a difficulty function then useNavigate back to home page
-
+  const getDialog = () => {
+    switch (dialogStage) {
+      case 'action':
+        return <ActionDialog />;
+      case 'attacking':
+        return <AttackDialog />;
+      case 'difficulty':
+        navigate('');
+        break;
+      default:
+        return (
+          <QuestionDialog
+            question="How many moons are there?"
+            answer="Depends on the Planet"
+            options={['One', 'Four', 'None', 'Depends on the planet']}
+          />
+        );
+    }
+  };
   return (
     <>
       <div className="healthBarContainer">
@@ -57,9 +79,7 @@ const Game: React.FunctionComponent = () => {
           />
         </div>
       </div>
-      <Dialog message="Choose An Attack">
-        <AttackDialog />
-      </Dialog>
+      <Dialog message="Choose An Attack">{getDialog()}</Dialog>
     </>
   );
 };
