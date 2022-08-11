@@ -14,32 +14,20 @@ import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import { useAppSelector } from '../store/hooks';
 import { dialogStageSelector } from '../store/game/game.selectors';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { difficultySelector } from 'store/game/game.selectors';
 
 const Game: React.FunctionComponent = () => {
   const dialogStage = useAppSelector(dialogStageSelector);
   const navigate = useNavigate();
+  const difficulty = useAppSelector(difficultySelector);
 
-  // useEffect looking at dialogStage
-  // if it detects a difficulty function then useNavigate back to home page
-  const getDialog = () => {
-    switch (dialogStage) {
-      case 'action':
-        return <ActionDialog />;
-      case 'attacking':
-        return <AttackDialog />;
-      case 'difficulty':
-        navigate('');
-        break;
-      default:
-        return (
-          <QuestionDialog
-            question="How many moons are there?"
-            answer="Depends on the Planet"
-            options={['One', 'Four', 'None', 'Depends on the planet']}
-          />
-        );
+  useEffect(() => {
+    if (!difficulty) {
+      navigate('/');
     }
-  };
+  });
+
   return (
     <>
       <div className="healthBarContainer">
@@ -79,7 +67,9 @@ const Game: React.FunctionComponent = () => {
           />
         </div>
       </div>
-      <Dialog message="Choose An Attack">{getDialog()}</Dialog>
+      <Dialog message="Choose An Attack">
+        <ActionDialog />
+      </Dialog>
     </>
   );
 };

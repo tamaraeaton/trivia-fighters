@@ -9,7 +9,7 @@ export interface GameState {
 
 // these are being used in selectors as well, so we defined this as a type
 // it is here to reuse in multiple places like here and in the multiple selector
-export type DifficultyType = 'easy' | 'medium' | 'hard';
+export type DifficultyType = 'easy' | 'medium' | 'seth' | undefined;
 export type DialogStageType =
   | 'difficulty'
   | 'action'
@@ -23,7 +23,7 @@ export const initialState: GameState = {
   dialogStage: 'difficulty',
   action: 'none',
   isAnswered: true,
-  difficulty: 'easy',
+  difficulty: undefined,
 };
 
 export const gameSlice = createSlice({
@@ -41,10 +41,10 @@ export const gameSlice = createSlice({
     attackStrength: (state, action: PayloadAction<DifficultyType>) => {
       state.dialogStage = 'answering';
     },
-    // block: (state, action) => {
-    //   state.dialogStage == 'answering';
-    //   state.action = 'block';
-    // },
+    block: (state, action) => {
+      state.dialogStage === 'answering';
+      state.action = 'block';
+    },
     answered: (state, action: PayloadAction<String>) => {
       state.dialogStage = 'answered';
     },
@@ -74,7 +74,7 @@ export const {
   setRound,
   attack,
   attackStrength,
-  // block,
+  block,
   answered,
   answeredVerify,
   difficulty,
