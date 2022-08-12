@@ -42,7 +42,7 @@ export const gameSlice = createSlice({
       state.dialogStage = 'answering';
     },
     block: (state, action) => {
-      state.dialogStage === 'answering';
+      state.dialogStage = 'answering';
       state.action = 'block';
     },
     answered: (state, action: PayloadAction<String>) => {

@@ -28,6 +28,24 @@ const Game: React.FunctionComponent = () => {
     }
   });
 
+  const dialogStages = () => {
+    if (dialogStage === 'action') {
+      return <ActionDialog />;
+    } else if (dialogStage === 'attacking') {
+      return <AttackDialog />;
+    } else if (dialogStage === 'answering') {
+      return (
+        <QuestionDialog
+          question="How many moons are there?"
+          answer="Depends on the Planet"
+          options={['One', 'Four', 'None', 'Depends on the planet']}
+        />
+      );
+    }
+  };
+
+  // need to add answered dialogStage that includes the QuestionDialog and a Next Button
+
   return (
     <>
       <div className="healthBarContainer">
@@ -67,9 +85,7 @@ const Game: React.FunctionComponent = () => {
           />
         </div>
       </div>
-      <Dialog message="Choose An Attack">
-        <ActionDialog />
-      </Dialog>
+      <Dialog message="Choose An Attack">{dialogStages()}</Dialog>
     </>
   );
 };
