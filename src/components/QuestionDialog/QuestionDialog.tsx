@@ -1,6 +1,8 @@
-import { FunctionComponent, PropsWithChildren } from 'react';
+import { FunctionComponent, PropsWithChildren, useState } from 'react';
 import './QuestionDialog.scss';
 import Button from '../Button/Button';
+import { ReactComponent as CorrectIcon } from '../../assets/images/correct.svg';
+import { ReactComponent as IncorrectIcon } from '../../assets/images/incorrect.svg';
 
 interface QuestionDialogProps {
   question: string;
@@ -8,13 +10,21 @@ interface QuestionDialogProps {
   options: string[];
 }
 
+//  need to use redux here for answeredVerify and answering?
+// is it OK to useState here?
+
 const QuestionDialog: FunctionComponent<
   PropsWithChildren<QuestionDialogProps>
 > = ({ question, answer, options }) => {
-  const handleClick = () => {
-    console.log(options);
-    alert('this is clicked');
+  const [questionAnswered, setQuestionAnswered] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleClick = (option: string) => {
+    console.log(option === answer);
+    setQuestionAnswered(true);
+    setSelectedOption(option);
   };
+
   return (
     <div>
       <p id="question">{question}</p>
@@ -22,9 +32,27 @@ const QuestionDialog: FunctionComponent<
         {options.map((option) => {
           return (
             <Button
+              classType={
+                questionAnswered && option === answer
+                  ? 'btn--correct'
+                  : questionAnswered &&
+                    option === selectedOption &&
+                    option !== answer
+                  ? 'btn--incorrect'
+                  : undefined
+              }
+              icon={
+                questionAnswered && option === answer ? (
+                  <CorrectIcon />
+                ) : questionAnswered &&
+                  option === selectedOption &&
+                  option !== answer ? (
+                  <IncorrectIcon />
+                ) : undefined
+              }
               selected={false}
-              disabled={false}
-              onClick={() => handleClick()}
+              disabled={questionAnswered ? true : false}
+              onClick={() => handleClick(option)}
             >
               {option}
             </Button>

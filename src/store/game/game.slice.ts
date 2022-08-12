@@ -7,8 +7,6 @@ export interface GameState {
   difficulty: DifficultyType;
 }
 
-// these are being used in selectors as well, so we defined this as a type
-// it is here to reuse in multiple places like here and in the multiple selector
 export type DifficultyType = 'easy' | 'medium' | 'seth' | undefined;
 export type DialogStageType =
   | 'difficulty'
@@ -33,7 +31,7 @@ export const gameSlice = createSlice({
     setRound: (state, action: PayloadAction<number>) => {
       state.round = action.payload;
     },
-    // these actions update dialog stage, I created a dialog stage in game.selector and imported it into Game to use
+
     attack: (state, action) => {
       state.dialogStage = 'attacking';
       state.action = 'attack';

@@ -17,8 +17,11 @@ const Action: FunctionComponent<ActionProps> = ({
   if (actionState === 'none') {
     return null;
   }
+
   const isAttack = actionState === 'attack';
-  const iconSource = isAttack ? SwordIcon : ShieldIcon;
+  const isBlock = actionState === 'block';
+  const iconSource = isAttack ? SwordIcon : isBlock ? ShieldIcon : undefined;
+
   return (
     <div>
       {isAttack && (
@@ -26,12 +29,14 @@ const Action: FunctionComponent<ActionProps> = ({
           {attackValue}
         </p>
       )}
-      <img
-        data-testid="attackBlock"
-        src={iconSource}
-        className={`${isReversed ? 'iconReversed' : undefined}`}
-        alt="attack icon"
-      />
+      {iconSource && (
+        <img
+          data-testid="attackBlock"
+          src={iconSource}
+          className={`${isReversed ? 'iconReversed' : undefined}`}
+          alt="attack icon"
+        />
+      )}
     </div>
   );
 };

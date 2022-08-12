@@ -5,8 +5,6 @@ import Action from '../components/Action/Action';
 import Avatar from '../components/Avatar/Avatar';
 import FoxKnight from '../assets/images/fox-knight.svg';
 import WizardPig from '../assets/images/wizard-pig.svg';
-import Shadow from '../assets/images/shadow-gradient.svg';
-import ShadowBase from '../assets/images/shadow.svg';
 import Dialog from 'components/Dialog/Dialog';
 import AttackDialog from 'components/AttackDialog/AttackDialog';
 import ActionDialog from 'components/ActionDialog/ActionDialog';
@@ -15,13 +13,14 @@ import { useAppSelector } from '../store/hooks';
 import { dialogStageSelector } from '../store/game/game.selectors';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { difficultySelector } from 'store/game/game.selectors';
+import { difficultySelector, actionSelector } from 'store/game/game.selectors';
 import Button from '../components/Button/Button';
 
 const Game: React.FunctionComponent = () => {
   const dialogStage = useAppSelector(dialogStageSelector);
   const navigate = useNavigate();
   const difficulty = useAppSelector(difficultySelector);
+  const action = useAppSelector(actionSelector);
 
   useEffect(() => {
     if (!difficulty) {
@@ -38,7 +37,7 @@ const Game: React.FunctionComponent = () => {
       return (
         <QuestionDialog
           question="How many moons are there?"
-          answer="Depends on the Planet"
+          answer="Depends on the planet"
           options={['One', 'Four', 'None', 'Depends on the planet']}
         />
       );
@@ -64,24 +63,16 @@ const Game: React.FunctionComponent = () => {
       </div>
       <div className="avatarContainerWrapper">
         <div className="avatarActionGroup">
-          <Action isReversed={false} actionState={'attack'} attackValue={10} />
-          <Avatar
-            alt="dragon"
-            name="You"
-            character={FoxKnight}
-            shadowBase={ShadowBase}
-            shadow={Shadow}
-          />
+          <Action isReversed={false} actionState={action} attackValue={10} />
+
+          <Avatar name="You" character={FoxKnight} />
         </div>
         <div className="avatarActionGroup group2">
-          <Action isReversed={true} actionState={'attack'} attackValue={10} />
-          <Avatar
-            alt="wizardpig"
-            name="Opponent"
-            character={WizardPig}
-            shadowBase={ShadowBase}
-            shadow={Shadow}
-          />
+          <Action isReversed={true} actionState="attack" attackValue={10} />
+          {/* add difficulty prop, bring in OPPONENTS */}
+          {/* OPONENET[difficulty] */}
+          {/* character.image */}
+          <Avatar name="Opponent" character={WizardPig} />
         </div>
       </div>
       {dialogStage === 'answered' && <Button />}

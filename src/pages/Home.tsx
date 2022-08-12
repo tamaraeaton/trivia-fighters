@@ -1,13 +1,11 @@
 import Button from 'components/Button/Button';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { difficultySelector } from 'store/game/game.selectors';
-import { useAppSelector, useAppDispatch } from 'store/hooks';
-import { difficulty as difficultyAction } from '../store/game/game.slice';
+import { useAppDispatch } from 'store/hooks';
+import { difficulty } from '../store/game/game.slice';
 
 const Home: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  const difficulty = useAppSelector(difficultySelector);
   const dispatch = useAppDispatch();
 
   return (
@@ -19,7 +17,7 @@ const Home: React.FunctionComponent = () => {
         classType="btn--easy"
         testID="easy"
         onClick={() => {
-          dispatch(difficultyAction('easy'));
+          dispatch(difficulty('easy'));
           navigate('game');
         }}
       >
@@ -29,7 +27,7 @@ const Home: React.FunctionComponent = () => {
         classType="btn--medium"
         testID="medium"
         onClick={() => {
-          dispatch(difficultyAction('medium'));
+          dispatch(difficulty('medium'));
           navigate('game');
         }}
       >
@@ -39,7 +37,7 @@ const Home: React.FunctionComponent = () => {
         classType="btn--seth"
         testID="seth"
         onClick={() => {
-          dispatch(difficultyAction('seth'));
+          dispatch(difficulty('seth'));
           navigate('game');
         }}
       >
