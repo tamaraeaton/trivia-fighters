@@ -1,0 +1,19 @@
+.healthBarContainer {
+  display: flex;
+}
+
+.avatarContainerWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.avatarActionGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.group2 {
+  align-items: flex-start;
+}

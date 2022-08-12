@@ -1,0 +1,41 @@
+.healthbarContainer {
+  display: flex;
+  position: relative;
+  height: 30px;
+  width: 100%;
+  background-color: #e0e0de;
+  border-radius: 50px;
+  margin: 50px;
+}
+
+.label {
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.filler {
+  height: 100%;
+  border-radius: inherit;
+}
+
+.fillerReversed {
+  justify-content: end;
+}
+
+.healthAndScore {
+  position: absolute;
+  width: 100%;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-top: 5px;
+}
+
+.healthAndScoreReversed {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: end;
+  left: 40px;
+  padding-top: 10px;
+}

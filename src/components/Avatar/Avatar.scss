@@ -1,0 +1,45 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18.5px;
+  align-items: center;
+  overflow: visible;
+  height: 300px;
+  justify-content: flex-end;
+}
+
+.avatarContainer {
+  overflow: visible;
+  position: relative;
+  width: 250px;
+}
+
+.avatarShadow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.avatarShadowBase {
+  position: absolute;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  width: 180px;
+  left: 50%;
+  z-index: 0;
+}
+
+.avatarImage {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+}
+
+.avatarName {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.15);
+  width: 100px;
+  border-radius: 3px;
+  padding: 0.3rem;
+  margin: 0;
+}
