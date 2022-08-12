@@ -16,6 +16,7 @@ import { dialogStageSelector } from '../store/game/game.selectors';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { difficultySelector } from 'store/game/game.selectors';
+import Button from '../components/Button/Button';
 
 const Game: React.FunctionComponent = () => {
   const dialogStage = useAppSelector(dialogStageSelector);
@@ -33,7 +34,7 @@ const Game: React.FunctionComponent = () => {
       return <ActionDialog />;
     } else if (dialogStage === 'attacking') {
       return <AttackDialog />;
-    } else if (dialogStage === 'answering') {
+    } else if (dialogStage === 'answering' || dialogStage === 'answered') {
       return (
         <QuestionDialog
           question="How many moons are there?"
@@ -43,8 +44,6 @@ const Game: React.FunctionComponent = () => {
       );
     }
   };
-
-  // need to add answered dialogStage that includes the QuestionDialog and a Next Button
 
   return (
     <>
@@ -85,6 +84,8 @@ const Game: React.FunctionComponent = () => {
           />
         </div>
       </div>
+      {dialogStage === 'answered' && <Button />}
+      {/* need to make the message conditional */}
       <Dialog message="Choose An Attack">{dialogStages()}</Dialog>
     </>
   );
