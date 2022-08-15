@@ -4,7 +4,7 @@ import './AttackDialog.scss';
 
 const AttackDialog = () => {
   return (
-    <div className="attackDialogWrapper">
+    <div className="attackDialogWrapper" data-testid="attackDialog">
       <IconButton
         children="Light Attack +1"
         icon={<img src={SwordIcon} alt="shield" width="20px" height="20px" />}

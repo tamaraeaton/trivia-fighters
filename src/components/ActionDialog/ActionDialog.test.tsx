@@ -5,5 +5,6 @@ describe('', () => {
   it('should render an action dialog', () => {
     render(<ActionDialog></ActionDialog>);
     expect(screen.getByTestId('actionDialog')).toBeDefined();
+    expect(screen.getByTestId('attack')).toBeDefined();
   });
 });

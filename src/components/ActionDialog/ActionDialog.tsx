@@ -8,6 +8,7 @@ const ActionDialog: FunctionComponent = () => {
   return (
     <div className="actionDialogWrapper" data-testid="actionDialog">
       <IconButton
+        testID="attack"
         children="Attack"
         icon={<img src={SwordIcon} alt="sword" width="20px" height="20px" />}
         size="s"

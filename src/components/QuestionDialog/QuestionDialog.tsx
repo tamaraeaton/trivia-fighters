@@ -25,7 +25,7 @@ const QuestionDialog: FunctionComponent<
   return (
     <div>
       <p id="question">{question}</p>
-      <div className="questionDialogAnswerWrapper">
+      <div className="questionDialogAnswerWrapper" data-testid="questionDialog">
         {options.map((option) => {
           return (
             <Button

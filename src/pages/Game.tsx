@@ -9,8 +9,6 @@ import Shadow from '../assets/images/shadow-gradient.svg';
 import ShadowBase from '../assets/images/shadow.svg';
 import Dialog from 'components/Dialog/Dialog';
 import AttackDialog from 'components/AttackDialog/AttackDialog';
-import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
-import ActionDialog from 'components/ActionDialog/ActionDialog';
 
 const Game: React.FunctionComponent = () => {
   return (
@@ -53,13 +51,7 @@ const Game: React.FunctionComponent = () => {
         </div>
       </div>
       <Dialog message="Choose An Attack">
-        {/* <ActionDialog /> */}
-        {/* <AttackDialog /> */}
-        <QuestionDialog
-          question="How many moons are there?"
-          answer="Depends on the planet"
-          options={['One', 'Four', 'None', 'Depends on the planet']}
-        />
+        <AttackDialog />
       </Dialog>
     </>
   );
