@@ -5,6 +5,8 @@ import Action from '../components/Action/Action';
 import Avatar from '../components/Avatar/Avatar';
 import FoxKnight from '../assets/images/fox-knight.svg';
 import WizardPig from '../assets/images/wizard-pig.svg';
+import BarbarianBunny from '../assets/images/barbarian-bunny.svg';
+import DragonSeth from '../assets/images/dragon-seth.svg';
 import Dialog from 'components/Dialog/Dialog';
 import AttackDialog from 'components/AttackDialog/AttackDialog';
 import ActionDialog from 'components/ActionDialog/ActionDialog';
@@ -27,6 +29,16 @@ const Game: React.FunctionComponent = () => {
       navigate('/');
     }
   });
+
+  const avatarDifficulty = () => {
+    if (difficulty === 'easy') {
+      return <Avatar name="Wizard Pig" character={WizardPig} />;
+    } else if (difficulty === 'medium') {
+      return <Avatar name="Barbarian Bunny" character={BarbarianBunny} />;
+    } else if (difficulty === 'seth') {
+      return <Avatar name="Dragon Seth" character={DragonSeth} />;
+    }
+  };
 
   const dialogStages = () => {
     if (dialogStage === 'action') {
@@ -69,9 +81,9 @@ const Game: React.FunctionComponent = () => {
         </div>
         <div className="avatarActionGroup group2">
           <Action isReversed={true} actionState="attack" attackValue={10} />
-
+          {avatarDifficulty()}
           {/* character.image and name(?) */}
-          <Avatar name="Opponent" character={WizardPig} />
+          {/* <Avatar name="Opponent" character={WizardPig} /> */}
         </div>
       </div>
       {dialogStage === 'answered' && <Button />}
