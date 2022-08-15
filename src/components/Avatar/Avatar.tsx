@@ -1,31 +1,28 @@
 import { FunctionComponent } from 'react';
 import './Avatar.scss';
-
+import Shadow from '../../assets/images/shadow-gradient.svg';
+import ShadowBase from '../../assets/images/shadow.svg';
 export interface AvatarProps {
   name: string;
   character: string;
-  alt: string;
-  shadow: string;
-  shadowBase: string;
 }
 
-const Avatar: FunctionComponent<AvatarProps> = ({
-  name,
-  character,
-  alt,
-  shadow,
-  shadowBase,
-}) => {
+const Avatar: FunctionComponent<AvatarProps> = ({ name, character }) => {
   return (
     <div className="wrapper">
       <div data-testid="avatar" className="avatarContainer">
-        <img className="avatarShadow" src={shadow} alt={alt} />
-        <img className="avatarShadowBase" src={shadowBase} alt={alt} />
+        <img
+          className="avatarShadow"
+          data-testid="shadowAlt"
+          src={Shadow}
+          alt=""
+        />
+        <img className="avatarShadowBase" src={ShadowBase} alt="" />
         <img
           data-testid="avatarImage"
           className="avatarImage"
           src={character}
-          alt={alt}
+          alt={name}
         />
       </div>
       <p className="avatarName" data-testid="avatarName">

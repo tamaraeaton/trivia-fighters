@@ -14,6 +14,6 @@ const Template: ComponentStory<typeof QuestionDialog> = ({
 export const Answer1 = Template.bind({});
 Answer1.args = {
   question: 'How many moons are there?',
-  answer: 'Depends on the Planet',
+  answer: 'Depends on the planet',
   options: ['One', 'Four', 'None', 'Depends on the planet'],
 };

@@ -1,4 +1,4 @@
-import './Round.css';
+import './Round.scss';
 
 const Round = () => {
   return (

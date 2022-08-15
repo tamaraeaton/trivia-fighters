@@ -23,7 +23,7 @@ export const actionSelector = createSelector(
   gameSelector,
   (gameState): ActionType => gameState.action
 );
-// this needs to show action state on game page when user clicks the difficulty from landing page
+
 export const difficultySelector = createSelector(
   gameSelector,
   (gameState): DifficultyType => gameState.difficulty
