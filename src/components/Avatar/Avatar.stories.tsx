@@ -23,7 +23,7 @@ export const FoxKnightImage: Story<AvatarProps> = () => (
 export const WizardPigImage: Story<AvatarProps> = () => (
   <Avatar
     alt="wizardpig"
-    name="Opponent"
+    name="Medium"
     character={WizardPig}
     shadow={Shadow}
     shadowBase={ShadowBase}

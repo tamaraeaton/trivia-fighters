@@ -9,7 +9,7 @@ export interface ButtonProps {
     | 'btn--medium';
   selected?: boolean;
   disabled?: boolean;
-  size?: 's' | 'm' | 'l' | 'xl';
+  size?: 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
   icon?: JSX.Element;
   testID?: string;
 }
