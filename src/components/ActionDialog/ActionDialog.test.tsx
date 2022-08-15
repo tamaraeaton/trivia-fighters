@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
+import { renderWithProviders } from 'testHelpers';
 import ActionDialog from './ActionDialog';
 
 describe('', () => {
   it('should render an action dialog', () => {
-    render(<ActionDialog></ActionDialog>);
+    renderWithProviders(<ActionDialog></ActionDialog>);
     expect(screen.getByTestId('actionDialog')).toBeDefined();
   });
 });

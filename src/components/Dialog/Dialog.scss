@@ -1,5 +1,4 @@
 .dialogWrapper {
-  margin-top: 0 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,6 +7,7 @@
 }
 
 .dialogContainer {
+  display: flex;
   border: 1px solid #ffffff;
   border-radius: 1px;
   background-color: rgba(255, 255, 255, 0.15);
@@ -25,4 +25,8 @@
   line-height: 30px;
   align-self: center;
   margin-bottom: 1rem;
+}
+
+.nextButtonDiv {
+  align-self: center;
 }

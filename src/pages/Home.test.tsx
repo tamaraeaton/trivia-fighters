@@ -1,5 +1,6 @@
 import { screen, render } from '@testing-library/react';
 import Home from 'pages/Home';
+import { renderWithProviders } from 'testHelpers';
 // import * as GameHooks from 'store/game/game.hooks';
 
 describe('Home Page', () => {
@@ -30,22 +31,22 @@ describe('Home Page', () => {
   // });
 
   it('should say Trivia Fighters', () => {
-    render(<Home />);
+    renderWithProviders(<Home />);
     expect(screen.getByTestId('headline')).toHaveTextContent('TRIVIA FIGHTERS');
   });
 
   it('button has context Easy', () => {
-    render(<Home />);
+    renderWithProviders(<Home />);
     expect(screen.getByTestId('easy')).toHaveTextContent('Easy');
   });
 
   it('button has context Medium', () => {
-    render(<Home />);
+    renderWithProviders(<Home />);
     expect(screen.getByTestId('medium')).toHaveTextContent('Medium');
   });
 
   it('button has context Seth', () => {
-    render(<Home />);
+    renderWithProviders(<Home />);
     expect(screen.getByTestId('seth')).toHaveTextContent('Seth');
   });
 });

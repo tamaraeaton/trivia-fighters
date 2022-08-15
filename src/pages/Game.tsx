@@ -11,24 +11,42 @@ import Dialog from 'components/Dialog/Dialog';
 import AttackDialog from 'components/AttackDialog/AttackDialog';
 import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
-import { useAppSelector } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { dialogStageSelector } from '../store/game/game.selectors';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { difficultySelector, actionSelector } from 'store/game/game.selectors';
-import Button from '../components/Button/Button';
+import { answered } from 'store/game/game.slice';
 
 const Game: React.FunctionComponent = () => {
   const dialogStage = useAppSelector(dialogStageSelector);
   const navigate = useNavigate();
   const difficulty = useAppSelector(difficultySelector);
   const action = useAppSelector(actionSelector);
+  const dispatch = useAppDispatch();
+
+  const [actionMessage, setActionMessage] = useState('Choose an action');
+  const [correctIncorrect, setCorrectIncorrect] = useState(false);
+
+  useEffect(() => {
+    if (dialogStage === 'attacking') {
+      setActionMessage('Choose an attack');
+    } else if (dialogStage === 'action') {
+      setActionMessage('Choose an action');
+    } else if (dialogStage === 'answered') {
+      setActionMessage(correctIncorrect ? 'Correct!' : 'Incorrect!');
+    } else if (dialogStage === 'answering') {
+      setActionMessage('should show difficulty');
+    } else {
+      setActionMessage('');
+    }
+  }, [dialogStage]);
 
   useEffect(() => {
     if (!difficulty) {
       navigate('/');
     }
-  });
+  }, []);
 
   const avatarDifficulty = () => {
     if (difficulty === 'easy') {
@@ -51,6 +69,10 @@ const Game: React.FunctionComponent = () => {
           question="How many moons are there?"
           answer="Depends on the planet"
           options={['One', 'Four', 'None', 'Depends on the planet']}
+          onAnswer={(isItCorrect: boolean) => {
+            dispatch(answered());
+            setCorrectIncorrect(isItCorrect);
+          }}
         />
       );
     }
@@ -82,14 +104,14 @@ const Game: React.FunctionComponent = () => {
         <div className="avatarActionGroup group2">
           <Action isReversed={true} actionState="attack" attackValue={10} />
           {avatarDifficulty()}
-          {/* character.image and name(?) */}
-          {/* <Avatar name="Opponent" character={WizardPig} /> */}
         </div>
       </div>
-      {dialogStage === 'answered' && <Button />}
-      {/* add Correct! and Incorrect! */}
-      {/* need to make the message conditional */}
-      <Dialog message="Choose An Attack">{dialogStages()}</Dialog>
+      <Dialog
+        message={actionMessage}
+        showNextButton={dialogStage === 'answered'}
+      >
+        {dialogStages()}
+      </Dialog>
     </>
   );
 };

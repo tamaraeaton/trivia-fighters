@@ -31,7 +31,6 @@ export const gameSlice = createSlice({
     setRound: (state, action: PayloadAction<number>) => {
       state.round = action.payload;
     },
-
     attack: (state, action) => {
       state.dialogStage = 'attacking';
       state.action = 'attack';
@@ -43,7 +42,7 @@ export const gameSlice = createSlice({
       state.dialogStage = 'answering';
       state.action = 'block';
     },
-    answered: (state, action: PayloadAction<String>) => {
+    answered: (state) => {
       state.dialogStage = 'answered';
     },
     answeredVerify: (state, action: PayloadAction<Boolean>) => {

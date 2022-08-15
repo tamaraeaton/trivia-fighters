@@ -8,6 +8,7 @@ interface QuestionDialogProps {
   question: string;
   answer: string;
   options: string[];
+  onAnswer: (isItCorrect: boolean) => void;
 }
 
 //  need to use redux here for answeredVerify and answering?
@@ -15,14 +16,13 @@ interface QuestionDialogProps {
 
 const QuestionDialog: FunctionComponent<
   PropsWithChildren<QuestionDialogProps>
-> = ({ question, answer, options }) => {
-  const [questionAnswered, setQuestionAnswered] = useState(false);
+> = ({ question, answer, options, onAnswer }) => {
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleClick = (option: string) => {
-    console.log(option === answer);
-    setQuestionAnswered(true);
+    // console.log(option === answer);
     setSelectedOption(option);
+    onAnswer(option === answer);
   };
 
   return (
@@ -33,26 +33,22 @@ const QuestionDialog: FunctionComponent<
           return (
             <Button
               classType={
-                questionAnswered && option === answer
+                selectedOption && option === answer
                   ? 'btn--correct'
-                  : questionAnswered &&
-                    option === selectedOption &&
-                    option !== answer
+                  : selectedOption === option
                   ? 'btn--incorrect'
                   : undefined
               }
               size="m"
               icon={
-                questionAnswered && option === answer ? (
+                selectedOption && option === answer ? (
                   <CorrectIcon />
-                ) : questionAnswered &&
-                  option === selectedOption &&
-                  option !== answer ? (
+                ) : selectedOption === option ? (
                   <IncorrectIcon />
                 ) : undefined
               }
               selected={false}
-              disabled={questionAnswered ? true : false}
+              disabled={!!selectedOption}
               onClick={() => handleClick(option)}
             >
               {option}
