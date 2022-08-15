@@ -7,6 +7,7 @@ import FoxKnight from '../assets/images/fox-knight.svg';
 import WizardPig from '../assets/images/wizard-pig.svg';
 import Dialog from 'components/Dialog/Dialog';
 import AttackDialog from 'components/AttackDialog/AttackDialog';
+<<<<<<< HEAD
 import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import { useAppSelector } from '../store/hooks';
@@ -15,6 +16,10 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { difficultySelector, actionSelector } from 'store/game/game.selectors';
 import Button from '../components/Button/Button';
+=======
+import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
+import ActionDialog from 'components/ActionDialog/ActionDialog';
+>>>>>>> a17bfd8d2bf4649f5518df0a6c82943c6d8831f9
 
 const Game: React.FunctionComponent = () => {
   const dialogStage = useAppSelector(dialogStageSelector);
