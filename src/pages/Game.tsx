@@ -69,13 +69,13 @@ const Game: React.FunctionComponent = () => {
         </div>
         <div className="avatarActionGroup group2">
           <Action isReversed={true} actionState="attack" attackValue={10} />
-          {/* add difficulty prop, bring in OPPONENTS */}
-          {/* OPONENET[difficulty] */}
-          {/* character.image */}
+
+          {/* character.image and name(?) */}
           <Avatar name="Opponent" character={WizardPig} />
         </div>
       </div>
       {dialogStage === 'answered' && <Button />}
+      {/* add Correct! and Incorrect! */}
       {/* need to make the message conditional */}
       <Dialog message="Choose An Attack">{dialogStages()}</Dialog>
     </>
