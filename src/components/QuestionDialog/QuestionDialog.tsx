@@ -29,6 +29,7 @@ const QuestionDialog: FunctionComponent<
         {options.map((option) => {
           return (
             <Button
+              key={option}
               classType={
                 questionAnswered && option === answer
                   ? 'btn--correct'
