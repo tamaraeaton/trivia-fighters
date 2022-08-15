@@ -47,6 +47,7 @@ const QuestionDialog: FunctionComponent<
                   <IncorrectIcon />
                 ) : undefined
               }
+              size="m"
               selected={false}
               disabled={questionAnswered ? true : false}
               onClick={() => handleClick(option)}

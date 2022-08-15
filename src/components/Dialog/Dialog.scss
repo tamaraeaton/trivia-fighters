@@ -1,15 +1,19 @@
 .dialogWrapper {
   margin-top: 50px;
-  width: 400px;
-  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: auto;
 }
 
 .dialogContainer {
   border: 1px solid #ffffff;
   border-radius: 1px;
   background-color: rgba(255, 255, 255, 0.15);
-  max-width: 700px;
-  max-height: 350px;
+  min-width: 1000px;
+  height: 219px;
+  align-self: center;
 }
 
 .dialogMessage {
@@ -18,5 +22,6 @@
   font-size: 25px;
   letter-spacing: -0.89px;
   line-height: 30px;
-  text-align: center;
+  align-self: center;
+  margin-bottom: 1rem;
 }

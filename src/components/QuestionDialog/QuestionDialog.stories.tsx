@@ -1,5 +1,6 @@
 import { ComponentStory } from '@storybook/react';
 import QuestionDialog from './QuestionDialog';
+import Dialog from 'components/Dialog/Dialog';
 
 export default {
   title: 'QuestionDialog',
@@ -9,7 +10,11 @@ export default {
 const Template: ComponentStory<typeof QuestionDialog> = ({
   children,
   ...args
-}) => <QuestionDialog {...args}>{children}</QuestionDialog>;
+}) => (
+  <Dialog message="Easy">
+    <QuestionDialog {...args}>{children}</QuestionDialog>
+  </Dialog>
+);
 
 export const Answer1 = Template.bind({});
 Answer1.args = {
