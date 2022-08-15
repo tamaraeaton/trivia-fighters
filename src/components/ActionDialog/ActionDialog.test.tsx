@@ -6,5 +6,6 @@ describe('', () => {
   it('should render an action dialog', () => {
     renderWithProviders(<ActionDialog></ActionDialog>);
     expect(screen.getByTestId('actionDialog')).toBeDefined();
+    expect(screen.getByTestId('attack')).toBeDefined();
   });
 });

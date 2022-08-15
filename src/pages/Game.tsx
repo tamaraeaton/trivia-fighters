@@ -50,11 +50,32 @@ const Game: React.FunctionComponent = () => {
 
   const avatarDifficulty = () => {
     if (difficulty === 'easy') {
-      return <Avatar name="Wizard Pig" character={WizardPig} />;
+      return (
+        <Avatar
+          name="Wizard Pig"
+          character={WizardPig}
+          alt="wizardpig"
+          testID="wizardPigAvatar"
+        />
+      );
     } else if (difficulty === 'medium') {
-      return <Avatar name="Barbarian Bunny" character={BarbarianBunny} />;
+      return (
+        <Avatar
+          name="Barbarian Bunny"
+          character={BarbarianBunny}
+          alt="barbarianbunny"
+          testID="barbarianBunnyAvatar"
+        />
+      );
     } else if (difficulty === 'seth') {
-      return <Avatar name="Dragon Seth" character={DragonSeth} />;
+      return (
+        <Avatar
+          name="Dragon Seth"
+          character={DragonSeth}
+          alt="dragonseth"
+          testID="dragonSeth"
+        />
+      );
     }
   };
 
@@ -99,7 +120,12 @@ const Game: React.FunctionComponent = () => {
         <div className="avatarActionGroup">
           <Action isReversed={false} actionState={action} attackValue={10} />
 
-          <Avatar name="You" character={FoxKnight} />
+          <Avatar
+            name="You"
+            character={FoxKnight}
+            alt="foxknight"
+            testID="foxKnight"
+          />
         </div>
         <div className="avatarActionGroup group2">
           <Action isReversed={true} actionState="attack" attackValue={10} />
