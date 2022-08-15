@@ -7,6 +7,7 @@ export interface AvatarProps {
   alt: string;
   shadow: string;
   shadowBase: string;
+  testID: string;
 }
 
 const Avatar: FunctionComponent<AvatarProps> = ({
@@ -15,10 +16,11 @@ const Avatar: FunctionComponent<AvatarProps> = ({
   alt,
   shadow,
   shadowBase,
+  testID,
 }) => {
   return (
     <div className="wrapper">
-      <div data-testid="avatar" className="avatarContainer">
+      <div data-testid={testID} className="avatarContainer">
         <img
           className="avatarShadow"
           data-testid="shadowAlt"

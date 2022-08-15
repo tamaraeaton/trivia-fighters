@@ -8,6 +8,7 @@ describe('Avatar Component', () => {
   it("should render avatar image of fox-knight with content of 'You'", () => {
     render(
       <Avatar
+        testID="avatar"
         alt="foxknight"
         name="You"
         character={FoxKnight}

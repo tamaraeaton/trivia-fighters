@@ -11,5 +11,8 @@ describe('', () => {
       ></QuestionDialog>
     );
     expect(screen.getByTestId('questionDialog')).toBeDefined();
+    expect(screen.getByTestId('questionDialog')).toHaveClass(
+      'questionDialogAnswerWrapper'
+    );
   });
 });

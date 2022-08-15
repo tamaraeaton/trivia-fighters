@@ -32,6 +32,7 @@ const Game: React.FunctionComponent = () => {
         <div className="avatarActionGroup">
           <Action isReversed={false} actionState={'attack'} attackValue={10} />
           <Avatar
+            testID="myAvatar"
             alt="dragon"
             name="You"
             character={FoxKnight}
@@ -42,6 +43,7 @@ const Game: React.FunctionComponent = () => {
         <div className="avatarActionGroup group2">
           <Action isReversed={true} actionState={'attack'} attackValue={10} />
           <Avatar
+            testID="opponentAvatar"
             alt="wizardpig"
             name="Medium"
             character={WizardPig}
