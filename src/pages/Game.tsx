@@ -69,6 +69,8 @@ const Game: React.FunctionComponent = () => {
         </div>
         <div className="avatarActionGroup group2">
           <Action isReversed={true} actionState="attack" attackValue={10} />
+          {/* add difficulty prop, bring in OPPONENTS */}
+          {/* OPONENET[difficulty] */}
           {/* character.image */}
           <Avatar name="Opponent" character={WizardPig} />
         </div>

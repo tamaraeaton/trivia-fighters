@@ -24,6 +24,7 @@ export const actionSelector = createSelector(
   (gameState): ActionType => gameState.action
 );
 
+// not on requirements, is there anything else I should be using
 export const difficultySelector = createSelector(
   gameSelector,
   (gameState): DifficultyType => gameState.difficulty
