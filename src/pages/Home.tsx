@@ -16,6 +16,7 @@ const Home: React.FunctionComponent = () => {
       </h1>
       <Button
         classType="btn--easy"
+        size="xxl"
         testID="easy"
         onClick={() => {
           dispatch(difficulty('easy'));
@@ -26,6 +27,7 @@ const Home: React.FunctionComponent = () => {
       </Button>
       <Button
         classType="btn--medium"
+        size="xxl"
         testID="medium"
         onClick={() => {
           dispatch(difficulty('medium'));
@@ -36,6 +38,7 @@ const Home: React.FunctionComponent = () => {
       </Button>
       <Button
         classType="btn--seth"
+        size="xxl"
         testID="seth"
         onClick={() => {
           dispatch(difficulty('seth'));

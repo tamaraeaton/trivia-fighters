@@ -41,6 +41,7 @@ const QuestionDialog: FunctionComponent<
                   ? 'btn--incorrect'
                   : undefined
               }
+              size="m"
               icon={
                 questionAnswered && option === answer ? (
                   <CorrectIcon />
