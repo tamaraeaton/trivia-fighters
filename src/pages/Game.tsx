@@ -12,7 +12,10 @@ import AttackDialog from 'components/AttackDialog/AttackDialog';
 import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { dialogStageSelector } from '../store/game/game.selectors';
+import {
+  attackStrengthSelector,
+  dialogStageSelector,
+} from '../store/game/game.selectors';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { difficultySelector, actionSelector } from 'store/game/game.selectors';
@@ -24,6 +27,7 @@ const Game: React.FunctionComponent = () => {
   const difficulty = useAppSelector(difficultySelector);
   const action = useAppSelector(actionSelector);
   const dispatch = useAppDispatch();
+  const attackStrength = useAppSelector(attackStrengthSelector);
 
   const [actionMessage, setActionMessage] = useState('Choose an action');
   const [correctIncorrect, setCorrectIncorrect] = useState(false);
@@ -36,7 +40,15 @@ const Game: React.FunctionComponent = () => {
     } else if (dialogStage === 'answered') {
       setActionMessage(correctIncorrect ? 'Correct!' : 'Incorrect!');
     } else if (dialogStage === 'answering') {
-      setActionMessage('should show difficulty');
+      setActionMessage(
+        attackStrength === 'light'
+          ? 'Light'
+          : attackStrength === 'medium'
+          ? 'Medium'
+          : attackStrength === 'heavy'
+          ? 'Heavy'
+          : ''
+      );
     } else {
       setActionMessage('');
     }

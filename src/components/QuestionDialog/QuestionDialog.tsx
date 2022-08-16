@@ -11,16 +11,12 @@ interface QuestionDialogProps {
   onAnswer: (isItCorrect: boolean) => void;
 }
 
-//  need to use redux here for answeredVerify and answering?
-// is it OK to useState here?
-
 const QuestionDialog: FunctionComponent<
   PropsWithChildren<QuestionDialogProps>
 > = ({ question, answer, options, onAnswer }) => {
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleClick = (option: string) => {
-    // console.log(option === answer);
     setSelectedOption(option);
     onAnswer(option === answer);
   };

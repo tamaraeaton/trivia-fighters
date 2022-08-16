@@ -4,6 +4,7 @@ import {
   DialogStageType,
   DifficultyType,
   ActionType,
+  AttackStrengthType,
 } from '../game/game.slice';
 
 export const gameSelector = (state: RootState) => state.game;
@@ -24,7 +25,6 @@ export const actionSelector = createSelector(
   (gameState): ActionType => gameState.action
 );
 
-// not on requirements, is there anything else I should be using
 export const difficultySelector = createSelector(
   gameSelector,
   (gameState): DifficultyType => gameState.difficulty
@@ -33,4 +33,9 @@ export const difficultySelector = createSelector(
 export const isCorrectSelector = createSelector(
   gameSelector,
   (gameState): boolean => gameState.isAnswered
+);
+
+export const attackStrengthSelector = createSelector(
+  gameSelector,
+  (gameState): AttackStrengthType => gameState.attackStrength
 );

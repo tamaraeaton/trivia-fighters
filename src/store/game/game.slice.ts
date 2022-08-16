@@ -5,6 +5,7 @@ export interface GameState {
   action: ActionType;
   isAnswered: boolean;
   difficulty: DifficultyType;
+  attackStrength: AttackStrengthType;
 }
 
 export type DifficultyType = 'easy' | 'medium' | 'seth' | undefined;
@@ -15,6 +16,7 @@ export type DialogStageType =
   | 'answering'
   | 'answered';
 export type ActionType = 'none' | 'attack' | 'block';
+export type AttackStrengthType = 'light' | 'medium' | 'heavy' | undefined;
 
 export const initialState: GameState = {
   round: 1,
@@ -22,6 +24,7 @@ export const initialState: GameState = {
   action: 'none',
   isAnswered: true,
   difficulty: undefined,
+  attackStrength: undefined,
 };
 
 export const gameSlice = createSlice({
@@ -35,7 +38,7 @@ export const gameSlice = createSlice({
       state.dialogStage = 'attacking';
       state.action = 'attack';
     },
-    attackStrength: (state, action: PayloadAction<DifficultyType>) => {
+    attackStrength: (state, action: PayloadAction<AttackStrengthType>) => {
       state.dialogStage = 'answering';
     },
     block: (state, action) => {
