@@ -4,8 +4,6 @@ import './AttackDialog.scss';
 import { useAppDispatch } from 'store/hooks';
 import { attackStrength } from '../../store/game/game.slice';
 
-// onClick button and it will show question dialog with the message of 'Light' 'Medium' 'Heavy'
-
 const AttackDialog = () => {
   const dispatch = useAppDispatch();
 
@@ -17,21 +15,21 @@ const AttackDialog = () => {
         icon={<img src={SwordIcon} alt="shield" width="20px" height="20px" />}
         size="m"
         count={1}
-        onClick={() => dispatch(attackStrength())}
+        onClick={() => dispatch(attackStrength('light'))}
       />
       <IconButton
         children="Medium Attack +3"
         icon={<img src={SwordIcon} alt="shield" width="20px" height="20px" />}
         size="m"
         count={2}
-        onClick={() => dispatch(attackStrength())}
+        onClick={() => dispatch(attackStrength('medium'))}
       />
       <IconButton
         children="Heavy Attack +5"
         icon={<img src={SwordIcon} alt="shield" width="20px" height="20px" />}
         size="m"
         count={3}
-        onClick={() => dispatch(attackStrength())}
+        onClick={() => dispatch(attackStrength('heavy'))}
       />
     </div>
   );

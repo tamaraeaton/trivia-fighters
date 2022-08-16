@@ -34,14 +34,15 @@ export const gameSlice = createSlice({
     setRound: (state, action: PayloadAction<number>) => {
       state.round = action.payload;
     },
-    attack: (state, action) => {
+    attack: (state) => {
       state.dialogStage = 'attacking';
       state.action = 'attack';
     },
     attackStrength: (state, action: PayloadAction<AttackStrengthType>) => {
       state.dialogStage = 'answering';
+      state.attackStrength = action.payload;
     },
-    block: (state, action) => {
+    block: (state) => {
       state.dialogStage = 'answering';
       state.action = 'block';
     },

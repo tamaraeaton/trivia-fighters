@@ -1,4 +1,5 @@
 import './Game.scss';
+import { useGameRound } from 'store/game/game.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -20,6 +21,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { difficultySelector, actionSelector } from 'store/game/game.selectors';
 import { answered } from 'store/game/game.slice';
+import Button from '../components/Button/Button';
 
 const Game: React.FunctionComponent = () => {
   const dialogStage = useAppSelector(dialogStageSelector);
@@ -31,6 +33,8 @@ const Game: React.FunctionComponent = () => {
 
   const [actionMessage, setActionMessage] = useState('Choose an action');
   const [correctIncorrect, setCorrectIncorrect] = useState(false);
+  const [currentRound, { incrementRound }] = useGameRound();
+  const attackString = useAppSelector(attackStrengthSelector);
 
   useEffect(() => {
     if (dialogStage === 'attacking') {
@@ -40,15 +44,13 @@ const Game: React.FunctionComponent = () => {
     } else if (dialogStage === 'answered') {
       setActionMessage(correctIncorrect ? 'Correct!' : 'Incorrect!');
     } else if (dialogStage === 'answering') {
-      setActionMessage(
-        attackStrength === 'light'
-          ? 'Light'
-          : attackStrength === 'medium'
-          ? 'Medium'
-          : attackStrength === 'heavy'
-          ? 'Heavy'
-          : ''
-      );
+      if (attackStrength === 'light') {
+        setActionMessage('Light Attack');
+      } else if (attackStrength === 'medium') {
+        setActionMessage('Medium Attack');
+      } else {
+        setActionMessage('Heavy Attack');
+      }
     } else {
       setActionMessage('');
     }
@@ -139,17 +141,24 @@ const Game: React.FunctionComponent = () => {
             testID="foxKnight"
           />
         </div>
+        <div className="nextButtonWrapper">
+          <div className="dialogMessage" data-testid="dialogMessage">
+            {actionMessage}
+          </div>
+          {dialogStage === 'answered' && (
+            <div className="nextButtonDiv">
+              <Button size="xs" onClick={incrementRound}>
+                Next
+              </Button>
+            </div>
+          )}
+        </div>
         <div className="avatarActionGroup group2">
           <Action isReversed={true} actionState="attack" attackValue={10} />
           {avatarDifficulty()}
         </div>
       </div>
-      <Dialog
-        message={actionMessage}
-        showNextButton={dialogStage === 'answered'}
-      >
-        {dialogStages()}
-      </Dialog>
+      <Dialog>{dialogStages()}</Dialog>
     </>
   );
 };

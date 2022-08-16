@@ -16,13 +16,13 @@ const ActionDialog: FunctionComponent = () => {
         children="Attack"
         icon={<img src={SwordIcon} alt="sword" width="20px" height="20px" />}
         size="s"
-        onClick={() => dispatch(attack(attack))}
+        onClick={() => dispatch(attack())}
       />
       <IconButton
         children="Block"
         icon={<img src={ShieldIcon} alt="shield" width="20px" height="20px" />}
         size="s"
-        onClick={() => dispatch(block(block))}
+        onClick={() => dispatch(block())}
       />
     </div>
   );
