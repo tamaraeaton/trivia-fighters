@@ -19,6 +19,7 @@ const ActionDialog: FunctionComponent = () => {
         onClick={() => dispatch(attack())}
       />
       <IconButton
+        testID="block"
         children="Block"
         icon={<img src={ShieldIcon} alt="shield" width="20px" height="20px" />}
         size="s"

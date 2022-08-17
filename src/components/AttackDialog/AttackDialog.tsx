@@ -18,6 +18,7 @@ const AttackDialog = () => {
         onClick={() => dispatch(attackStrength('light'))}
       />
       <IconButton
+        testID="mediumAttack"
         children="Medium Attack +3"
         icon={<img src={SwordIcon} alt="shield" width="20px" height="20px" />}
         size="m"
@@ -25,6 +26,7 @@ const AttackDialog = () => {
         onClick={() => dispatch(attackStrength('medium'))}
       />
       <IconButton
+        testID="heavyAttack"
         children="Heavy Attack +5"
         icon={<img src={SwordIcon} alt="shield" width="20px" height="20px" />}
         size="m"
