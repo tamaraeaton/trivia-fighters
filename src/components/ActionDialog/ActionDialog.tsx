@@ -9,15 +9,17 @@ const ActionDialog: FunctionComponent = () => {
     <div className="actionDialogWrapper" data-testid="actionDialog">
       <IconButton
         testID="attack"
-        children="Attack"
         icon={<img src={SwordIcon} alt="sword" width="20px" height="20px" />}
         size="s"
-      />
+      >
+        Attack
+      </IconButton>
       <IconButton
-        children="Block"
         icon={<img src={ShieldIcon} alt="shield" width="20px" height="20px" />}
         size="s"
-      />
+      >
+        Block
+      </IconButton>
     </div>
   );
 };
