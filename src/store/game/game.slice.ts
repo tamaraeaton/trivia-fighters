@@ -1,39 +1,39 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface GameState {
   round: number;
+  difficulty?: DifficultyType;
   dialogStage: DialogStageType;
   action: ActionType;
-  isAnswered: boolean;
-  difficulty: DifficultyType;
-  attackStrength: AttackStrengthType;
+  attackStrength?: AttackPowerType;
   question: QuestionType;
+  selectedOption?: string;
 }
 
 export type DifficultyType = 'easy' | 'medium' | 'seth' | undefined;
+
 export type DialogStageType =
   | 'difficulty'
   | 'action'
   | 'attacking'
   | 'answering'
   | 'answered';
+
 export type ActionType = 'none' | 'attack' | 'block';
-export type AttackStrengthType = 'light' | 'medium' | 'heavy' | undefined;
+
+export type AttackPowerType = 'light' | 'medium' | 'heavy' | undefined;
+
 export type QuestionType = {
-  status: 'idle' | 'loading';
+  status?: 'idle' | 'loading';
   text: string;
   answer: string;
   choices: string[];
 };
-export type AttackPowerType = 'light' | 'medium' | 'heavy' | undefined;
 
 export const initialState: GameState = {
   round: 1,
   dialogStage: 'difficulty',
   action: 'none',
-  isAnswered: true,
-  difficulty: undefined,
-  attackStrength: undefined,
-  question: { status: 'idle', text: '', answer: '', choices: [] },
+  question: { text: '', answer: '', choices: [] },
 };
 
 export const gameSlice = createSlice({
@@ -47,35 +47,37 @@ export const gameSlice = createSlice({
       state.dialogStage = 'attacking';
       state.action = 'attack';
     },
-    attackStrength: (state, action: PayloadAction<AttackStrengthType>) => {
+    attackStrength: (state, action: PayloadAction<AttackPowerType>) => {
       state.dialogStage = 'answering';
-      // when redux attackStrength is triggered make an API request to API for the question with the appropriate difficulty
-      // update the question in redux (choices s/b randomized and all previous state changes remain the same)
       state.attackStrength = action.payload;
     },
-    attackPower: (state, action: PayloadAction<AttackPowerType>) => {
-      // update attackPower with appropriate difficulty when attackStringth action is triggered
+    question: (state, action: PayloadAction<QuestionType>) => {
+      state.question = action.payload;
     },
     block: (state) => {
       state.dialogStage = 'answering';
       state.action = 'block';
     },
-    answered: (state) => {
-      // when this action is triggered it will check to see if it matches the correct answer
-      // if correct (dialogStage to attacking)
-      // if incorrect (dialogStage to action and action to none)
+    answered: (state, action: PayloadAction<string>) => {
+      const option = action.payload;
       state.dialogStage = 'answered';
+      state.selectedOption = option;
     },
-    answeredVerify: (state, action: PayloadAction<Boolean>) => {
-      if (state.dialogStage === 'attacking' && state.isAnswered) {
+    // reset selected option
+    // state.selectedOption = undefined
+    // where do this live (closing answerVerify for opening the next action)
+    answeredVerify: (state) => {
+      const answer = state.question.answer;
+      const isCorrect = answer === state.selectedOption;
+      if (state.dialogStage === 'attacking' && isCorrect) {
         state.dialogStage = 'answering';
       }
-      if (state.action === 'block' && state.isAnswered) {
+      if (state.action === 'block' && isCorrect) {
         state.dialogStage = 'action';
         state.action = 'none';
       }
       if (
-        (!state.isAnswered && state.dialogStage === 'attacking') ||
+        (!isCorrect && state.dialogStage === 'attacking') ||
         state.action === 'block'
       ) {
         state.action = 'none';
@@ -93,9 +95,10 @@ export const {
   attack,
   attackStrength,
   block,
-  answered,
   answeredVerify,
   difficulty,
+  question,
+  answered,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

@@ -16,11 +16,12 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
   attackStrengthSelector,
   dialogStageSelector,
+  questionSelector,
 } from '../store/game/game.selectors';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { difficultySelector, actionSelector } from 'store/game/game.selectors';
-import { answered } from 'store/game/game.slice';
+import { answered, answeredVerify } from 'store/game/game.slice';
 import Button from '../components/Button/Button';
 
 const Game: React.FunctionComponent = () => {
@@ -30,11 +31,11 @@ const Game: React.FunctionComponent = () => {
   const action = useAppSelector(actionSelector);
   const dispatch = useAppDispatch();
   const attackStrength = useAppSelector(attackStrengthSelector);
+  const question = useAppSelector(questionSelector);
 
   const [actionMessage, setActionMessage] = useState('Choose an action');
   const [correctIncorrect, setCorrectIncorrect] = useState(false);
-  const [currentRound, { incrementRound }] = useGameRound();
-  const attackString = useAppSelector(attackStrengthSelector);
+  const [, { incrementRound }] = useGameRound();
 
   useEffect(() => {
     if (dialogStage === 'attacking') {
@@ -42,7 +43,8 @@ const Game: React.FunctionComponent = () => {
     } else if (dialogStage === 'action') {
       setActionMessage('Choose an action');
     } else if (dialogStage === 'answered') {
-      setActionMessage(correctIncorrect ? 'Correct!' : 'Incorrect!');
+      // correct and incorrect message setting here
+      setActionMessage(answeredVerify() ? 'Correct!' : 'Incorrect!');
     } else if (dialogStage === 'answering') {
       if (attackStrength === 'light') {
         setActionMessage('Light Attack');
@@ -54,13 +56,13 @@ const Game: React.FunctionComponent = () => {
     } else {
       setActionMessage('');
     }
-  }, [dialogStage]);
+  }, [attackStrength, correctIncorrect, dialogStage]);
 
   useEffect(() => {
     if (!difficulty) {
       navigate('/');
     }
-  }, []);
+  }, [difficulty, navigate]);
 
   const avatarDifficulty = () => {
     if (difficulty === 'easy') {
@@ -101,11 +103,12 @@ const Game: React.FunctionComponent = () => {
     } else if (dialogStage === 'answering' || dialogStage === 'answered') {
       return (
         <QuestionDialog
-          question="How many moons are there?"
-          answer="Depends on the planet"
-          options={['One', 'Four', 'None', 'Depends on the planet']}
-          onAnswer={(isItCorrect: boolean) => {
-            dispatch(answered());
+          question={question.text}
+          answer={question.answer}
+          options={question.choices}
+          onAnswer={(isItCorrect: boolean, option) => {
+            dispatch(answered(option));
+            // TODO: could use redux for this
             setCorrectIncorrect(isItCorrect);
           }}
         />

@@ -23,3 +23,5 @@ describe('Game Page', () => {
     expect(screen.getByTestId('myAvatar')).toBeInTheDocument();
   });
 });
+
+// add tests here

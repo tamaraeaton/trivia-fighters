@@ -7,7 +7,7 @@ interface QuestionDialogProps {
   question: string;
   answer: string;
   options: string[];
-  onAnswer: (isItCorrect: boolean) => void;
+  onAnswer: (isItCorrect: boolean, option: string) => void;
 }
 
 const QuestionDialog: FunctionComponent<
@@ -17,7 +17,7 @@ const QuestionDialog: FunctionComponent<
 
   const handleClick = (option: string) => {
     setSelectedOption(option);
-    onAnswer(option === answer);
+    onAnswer(option === answer, option);
   };
 
   return (
