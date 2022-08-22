@@ -17,11 +17,13 @@ import {
   attackStrengthSelector,
   dialogStageSelector,
   questionSelector,
+  difficultySelector,
+  actionSelector,
+  isCorrectSelector,
 } from '../store/game/game.selectors';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { difficultySelector, actionSelector } from 'store/game/game.selectors';
-import { answered, answeredVerify } from 'store/game/game.slice';
+import { answered } from 'store/game/game.slice';
 import Button from '../components/Button/Button';
 
 const Game: React.FunctionComponent = () => {
@@ -32,10 +34,11 @@ const Game: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const attackStrength = useAppSelector(attackStrengthSelector);
   const question = useAppSelector(questionSelector);
-
+  const isCorrect = useAppSelector(isCorrectSelector);
   const [actionMessage, setActionMessage] = useState('Choose an action');
-  const [correctIncorrect, setCorrectIncorrect] = useState(false);
   const [, { incrementRound }] = useGameRound();
+
+  console.log(isCorrect);
 
   useEffect(() => {
     if (dialogStage === 'attacking') {
@@ -43,8 +46,9 @@ const Game: React.FunctionComponent = () => {
     } else if (dialogStage === 'action') {
       setActionMessage('Choose an action');
     } else if (dialogStage === 'answered') {
-      // correct and incorrect message setting here
-      setActionMessage(answeredVerify() ? 'Correct!' : 'Incorrect!');
+      setActionMessage(
+        isCorrect === undefined ? '' : isCorrect ? 'Correct' : 'Incorrect'
+      );
     } else if (dialogStage === 'answering') {
       if (attackStrength === 'light') {
         setActionMessage('Light Attack');
@@ -56,7 +60,7 @@ const Game: React.FunctionComponent = () => {
     } else {
       setActionMessage('');
     }
-  }, [attackStrength, correctIncorrect, dialogStage]);
+  }, [attackStrength, isCorrect, dialogStage]);
 
   useEffect(() => {
     if (!difficulty) {
@@ -106,10 +110,8 @@ const Game: React.FunctionComponent = () => {
           question={question.text}
           answer={question.answer}
           options={question.choices}
-          onAnswer={(isItCorrect: boolean, option) => {
+          onAnswer={(option) => {
             dispatch(answered(option));
-            // TODO: could use redux for this
-            setCorrectIncorrect(isItCorrect);
           }}
         />
       );

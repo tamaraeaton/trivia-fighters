@@ -40,3 +40,10 @@ export const questionSelector = createSelector(
   gameSelector,
   (gameState): QuestionType => gameState.question
 );
+
+export const isCorrectSelector = createSelector(
+  gameSelector,
+  (gameState): boolean | undefined => gameState.isCorrect
+);
+
+// selectors are for getting state

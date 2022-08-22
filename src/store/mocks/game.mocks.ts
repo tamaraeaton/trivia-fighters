@@ -7,6 +7,7 @@ export const MOCK_GAME_STATE: GameState = {
   difficulty: 'easy',
   attackStrength: undefined,
   question: { text: '', answer: '', choices: [] },
+  isCorrect: false,
 };
 
 // USED FOR TESTING

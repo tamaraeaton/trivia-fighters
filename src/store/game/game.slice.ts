@@ -7,6 +7,7 @@ export interface GameState {
   attackStrength?: AttackPowerType;
   question: QuestionType;
   selectedOption?: string;
+  isCorrect?: boolean;
 }
 
 export type DifficultyType = 'easy' | 'medium' | 'seth' | undefined;
@@ -58,30 +59,51 @@ export const gameSlice = createSlice({
       state.dialogStage = 'answering';
       state.action = 'block';
     },
+    // I am using this to reveal the answer, it changes the color on the buttons and displays incorrect or correct
+    // later it will update the points that will be displayed
     answered: (state, action: PayloadAction<string>) => {
       const option = action.payload;
       state.dialogStage = 'answered';
       state.selectedOption = option;
+      const answer = state.question.answer;
+      state.isCorrect = answer === option;
+      console.log('answer', answer);
+      console.log('option', option);
     },
     // reset selected option
     // state.selectedOption = undefined
-    // where do this live (closing answerVerify for opening the next action)
-    answeredVerify: (state) => {
+    // where do this live (closing answerVerify or for opening the next action)
+    // this does the calculation, subtracts from health bar and resets game for the next question
+    // clicking the Next button
+    answeredVerify: (state, action) => {
       const answer = state.question.answer;
-      const isCorrect = answer === state.selectedOption;
-      if (state.dialogStage === 'attacking' && isCorrect) {
+
+      const isAnswerCorrect = answer === state.selectedOption;
+      console.log('selectedOption', state.selectedOption);
+
+      // need to use this isCorrect on the Game.tsx to determine if
+      // the message says 'Correct' or 'Incorrect'
+
+      if (isAnswerCorrect && state.dialogStage === 'attacking') {
         state.dialogStage = 'answering';
+        // state.isCorrect = true;
+        // how do I use this in Game.tsx?
       }
-      if (state.action === 'block' && isCorrect) {
+      if (isAnswerCorrect && state.action === 'block') {
         state.dialogStage = 'action';
         state.action = 'none';
+        // state.isCorrect = true;
       }
       if (
-        (!isCorrect && state.dialogStage === 'attacking') ||
+        (!isAnswerCorrect && state.dialogStage === 'attacking') ||
         state.action === 'block'
       ) {
         state.action = 'none';
+        // state.isCorrect = false;
       }
+      state.isCorrect = undefined;
+      // a guess after trying tons of other stuff
+      // state.action.includes('true');
     },
     difficulty: (state, action: PayloadAction<DifficultyType>) => {
       state.difficulty = action.payload;
