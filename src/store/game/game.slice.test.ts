@@ -6,9 +6,9 @@ describe('Game Slice reducer', () => {
     expect(gameReducer(undefined, { type: undefined })).toEqual(initialState);
   });
 
-  it('setRound should set the current round ', () => {
-    expect(gameReducer(MOCK_GAME_STATE, setRound(4))).toEqual({
-      round: 4,
-    });
-  });
+  // it('setRound should set the current round', () => {
+  //   expect(gameReducer(MOCK_GAME_STATE, setRound(4))).toEqual({
+  //     round: 4,
+  //   });
+  // });
 });

@@ -20,6 +20,6 @@ describe('Game Page', () => {
 
   it('avatar should render', () => {
     renderWithProviders(<Game />);
-    expect(screen.getByTestId('myAvatar')).toBeInTheDocument();
+    expect(screen.getByTestId('foxKnight')).toBeInTheDocument();
   });
 });

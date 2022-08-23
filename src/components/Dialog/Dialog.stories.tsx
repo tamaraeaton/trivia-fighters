@@ -6,8 +6,6 @@ export default {
   component: Dialog,
 };
 
-const Template: ComponentStory<typeof Dialog> = () => (
-  <Dialog message="Choose An Action" />
-);
+const Template: ComponentStory<typeof Dialog> = () => <Dialog />;
 
 export const DialogBox = Template.bind({});

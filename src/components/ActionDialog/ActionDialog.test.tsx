@@ -10,13 +10,13 @@ describe('Action Dialog Tests', () => {
     expect(screen.getByTestId('block')).toBeDefined();
   });
   it('should update state when Attack button is clicked', () => {
-    const { store } = renderWithProviders(<ActionDialog></ActionDialog>);
+    const { store } = renderWithProviders(<ActionDialog />);
     expect(store.getState().game.dialogStage).toBe('difficulty');
     fireEvent.click(screen.getByTestId('attack'));
     expect(store.getState().game.dialogStage).toBe('attacking');
   });
   it('should update state when Block button is clicked', () => {
-    const { store } = renderWithProviders(<ActionDialog></ActionDialog>);
+    const { store } = renderWithProviders(<ActionDialog />);
     expect(store.getState().game.dialogStage).toBe('difficulty');
     fireEvent.click(screen.getByTestId('block'));
     expect(store.getState().game.dialogStage).toBe('answering');

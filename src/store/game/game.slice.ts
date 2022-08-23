@@ -35,7 +35,6 @@ export const gameSlice = createSlice({
       state.round = action.payload;
     },
     attack: (state) => {
-      console.log('ridiculous');
       state.dialogStage = 'attacking';
       state.action = 'attack';
     },

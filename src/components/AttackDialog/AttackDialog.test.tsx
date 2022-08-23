@@ -10,13 +10,13 @@ describe('Attack Dialog Tests', () => {
       'Light Attack +1'
     );
   });
-  it('should update attackStrength light when attack button is clicked', () => {
+  it('should update attackStrength to light when attack button is clicked', () => {
     const { store } = renderWithProviders(<AttackDialog />);
     expect(store.getState().game.attackStrength).not.toBeDefined();
     fireEvent.click(screen.getByTestId('lightAttack'));
     expect(store.getState().game.attackStrength).toBe('light');
   });
-  it('should update attackStrength medium when attack button is clicked', () => {
+  it('should update attackStrength to medium when attack button is clicked', () => {
     const { store } = renderWithProviders(<AttackDialog />);
     expect(store.getState().game.attackStrength).not.toBeDefined();
     fireEvent.click(screen.getByTestId('mediumAttack'));
