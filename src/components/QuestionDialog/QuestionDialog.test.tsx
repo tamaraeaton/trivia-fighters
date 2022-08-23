@@ -8,7 +8,7 @@ describe('Question Dialog Tests', () => {
         question="How many moons are there?"
         answer="Depends on the planet"
         options={['One', 'Four', 'None', 'Depends on the planet']}
-      ></QuestionDialog>
+      />
     );
     expect(screen.getByTestId('questionDialog')).toBeDefined();
     expect(screen.getByTestId('questionDialog')).toHaveClass(
