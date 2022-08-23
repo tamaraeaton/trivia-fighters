@@ -1,5 +1,4 @@
 import './Game.scss';
-import { useGameRound } from 'store/game/game.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -30,11 +29,8 @@ const Game: React.FunctionComponent = () => {
   const action = useAppSelector(actionSelector);
   const dispatch = useAppDispatch();
   const attackStrength = useAppSelector(attackStrengthSelector);
-
   const [actionMessage, setActionMessage] = useState('Choose an action');
   const [correctIncorrect, setCorrectIncorrect] = useState(false);
-  const [currentRound, { incrementRound }] = useGameRound();
-  const attackString = useAppSelector(attackStrengthSelector);
 
   useEffect(() => {
     if (dialogStage === 'attacking') {
@@ -54,13 +50,13 @@ const Game: React.FunctionComponent = () => {
     } else {
       setActionMessage('');
     }
-  }, [dialogStage]);
+  }, [dialogStage, attackStrength, correctIncorrect]);
 
   useEffect(() => {
     if (!difficulty) {
       navigate('/');
     }
-  }, []);
+  }, [difficulty, navigate]);
 
   const avatarDifficulty = () => {
     if (difficulty === 'easy') {
@@ -147,9 +143,7 @@ const Game: React.FunctionComponent = () => {
           </div>
           {dialogStage === 'answered' && (
             <div className="nextButtonDiv">
-              <Button size="xs" onClick={incrementRound}>
-                Next
-              </Button>
+              <Button size="xs">Next</Button>
             </div>
           )}
         </div>
