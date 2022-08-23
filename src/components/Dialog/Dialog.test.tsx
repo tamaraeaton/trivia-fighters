@@ -6,11 +6,4 @@ describe('Dialog box tests', () => {
     render(<Dialog>test</Dialog>);
     expect(screen.getByTestId('dialogWrapper')).toBeDefined();
   });
-
-  it('should render a dialog box with message', () => {
-    render(<Dialog>test</Dialog>);
-    expect(screen.getByTestId('dialogMessage')).toHaveTextContent(
-      'Choose An Action'
-    );
-  });
 });

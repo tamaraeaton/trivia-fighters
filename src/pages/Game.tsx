@@ -1,3 +1,4 @@
+import { useEffect, useMemo } from 'react';
 import './Game.scss';
 import { useGameRound } from 'store/game/game.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
@@ -22,7 +23,7 @@ import {
   isCorrectSelector,
 } from '../store/game/game.selectors';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+
 import { answered } from 'store/game/game.slice';
 import Button from '../components/Button/Button';
 
@@ -35,32 +36,36 @@ const Game: React.FunctionComponent = () => {
   const attackStrength = useAppSelector(attackStrengthSelector);
   const question = useAppSelector(questionSelector);
   const isCorrect = useAppSelector(isCorrectSelector);
-  const [actionMessage, setActionMessage] = useState('Choose an action');
+
   const [, { incrementRound }] = useGameRound();
 
-  console.log(isCorrect);
-
-  useEffect(() => {
+  const actionMessage = useMemo(() => {
     if (dialogStage === 'attacking') {
-      setActionMessage('Choose an attack');
-    } else if (dialogStage === 'action') {
-      setActionMessage('Choose an action');
-    } else if (dialogStage === 'answered') {
-      setActionMessage(
-        isCorrect === undefined ? '' : isCorrect ? 'Correct' : 'Incorrect'
-      );
-    } else if (dialogStage === 'answering') {
-      if (attackStrength === 'light') {
-        setActionMessage('Light Attack');
-      } else if (attackStrength === 'medium') {
-        setActionMessage('Medium Attack');
-      } else {
-        setActionMessage('Heavy Attack');
-      }
-    } else {
-      setActionMessage('');
+      return 'Choose an attack';
     }
-  }, [attackStrength, isCorrect, dialogStage]);
+    if (dialogStage === 'action') {
+      return 'Choose an action';
+    }
+    if (dialogStage === 'answered') {
+      return isCorrect === undefined ? '' : isCorrect ? 'Correct' : 'Incorrect';
+    }
+    if (dialogStage === 'answering') {
+      if (action === 'block') {
+        return 'Blocking';
+      }
+      if (attackStrength === 'light') {
+        return 'Light Attack';
+      }
+      if (attackStrength === 'medium') {
+        return 'Medium Attack';
+      }
+      return 'Heavy Attack';
+    }
+    return '';
+  }, [attackStrength, isCorrect, dialogStage, action]);
+
+  console.log('actionMessage', actionMessage);
+  console.log('dialogStage', dialogStage);
 
   useEffect(() => {
     if (!difficulty) {
