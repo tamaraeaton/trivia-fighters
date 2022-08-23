@@ -1,22 +1,18 @@
-import { Story } from '@storybook/react';
+import { ComponentMeta, Story } from '@storybook/react';
+import { Provider } from 'react-redux';
 import Avatar, { AvatarProps } from './Avatar';
-import FoxKnight from '../../assets/images/fox-knight.svg';
-import WizardPig from '../../assets/images/wizard-pig.svg';
+import { store } from 'store';
 
 export default {
   title: 'Avatar',
   component: Avatar,
-};
+  decorators: [(story) => <Provider store={store}>{story()}</Provider>],
+} as ComponentMeta<typeof Avatar>;
 
 export const FoxKnightImage: Story<AvatarProps> = () => (
-  <Avatar testID="dragon" alt="dragon" name="You" character={FoxKnight} />
+  <Avatar testID="dragon" alt="dragon" name="You" />
 );
 
 export const WizardPigImage: Story<AvatarProps> = () => (
-  <Avatar
-    testID="wizardpig"
-    alt="wizardpig"
-    name="Medium"
-    character={WizardPig}
-  />
+  <Avatar testID="wizardpig" alt="wizardpig" name="Wizard Pig" />
 );

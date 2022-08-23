@@ -1,41 +1,32 @@
 import { useEffect, useMemo } from 'react';
 import './Game.scss';
-import { useGameRound } from 'store/game/game.hooks';
+import {
+  useGameActions,
+  useGameRound,
+  useGameSelectors,
+} from 'store/game/game.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
 import Avatar from '../components/Avatar/Avatar';
-import FoxKnight from '../assets/images/fox-knight.svg';
-import WizardPig from '../assets/images/wizard-pig.svg';
-import BarbarianBunny from '../assets/images/barbarian-bunny.svg';
-import DragonSeth from '../assets/images/dragon-seth.svg';
 import Dialog from 'components/Dialog/Dialog';
 import AttackDialog from 'components/AttackDialog/AttackDialog';
 import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import {
-  attackStrengthSelector,
-  dialogStageSelector,
-  questionSelector,
-  difficultySelector,
-  actionSelector,
-  isCorrectSelector,
-} from '../store/game/game.selectors';
 import { useNavigate } from 'react-router-dom';
-
-import { answered } from 'store/game/game.slice';
 import Button from '../components/Button/Button';
 
 const Game: React.FunctionComponent = () => {
-  const dialogStage = useAppSelector(dialogStageSelector);
   const navigate = useNavigate();
-  const difficulty = useAppSelector(difficultySelector);
-  const action = useAppSelector(actionSelector);
-  const dispatch = useAppDispatch();
-  const attackStrength = useAppSelector(attackStrengthSelector);
-  const question = useAppSelector(questionSelector);
-  const isCorrect = useAppSelector(isCorrectSelector);
+  const { setAnswered } = useGameActions();
+  const {
+    dialogStage,
+    action,
+    difficulty,
+    attackStrength,
+    question,
+    isCorrect,
+  } = useGameSelectors();
 
   const [, { incrementRound }] = useGameRound();
 
@@ -64,9 +55,6 @@ const Game: React.FunctionComponent = () => {
     return '';
   }, [attackStrength, isCorrect, dialogStage, action]);
 
-  console.log('actionMessage', actionMessage);
-  console.log('dialogStage', dialogStage);
-
   useEffect(() => {
     if (!difficulty) {
       navigate('/');
@@ -76,31 +64,18 @@ const Game: React.FunctionComponent = () => {
   const avatarDifficulty = () => {
     if (difficulty === 'easy') {
       return (
-        <Avatar
-          name="Wizard Pig"
-          character={WizardPig}
-          alt="wizardpig"
-          testID="wizardPigAvatar"
-        />
+        <Avatar name="Wizard Pig" alt="wizardpig" testID="wizardPigAvatar" />
       );
     } else if (difficulty === 'medium') {
       return (
         <Avatar
           name="Barbarian Bunny"
-          character={BarbarianBunny}
           alt="barbarianbunny"
           testID="barbarianBunnyAvatar"
         />
       );
     } else if (difficulty === 'seth') {
-      return (
-        <Avatar
-          name="Dragon Seth"
-          character={DragonSeth}
-          alt="dragonseth"
-          testID="dragonSeth"
-        />
-      );
+      return <Avatar name="Dragon Seth" alt="dragonseth" testID="dragonSeth" />;
     }
   };
 
@@ -116,7 +91,7 @@ const Game: React.FunctionComponent = () => {
           options={question.choices}
           answer={question.answer}
           onAnswer={(theOptionOnTheButton) => {
-            dispatch(answered(theOptionOnTheButton));
+            setAnswered(theOptionOnTheButton);
           }}
         />
       );
@@ -144,12 +119,7 @@ const Game: React.FunctionComponent = () => {
         <div className="avatarActionGroup">
           <Action isReversed={false} actionState={action} attackValue={10} />
 
-          <Avatar
-            name="You"
-            character={FoxKnight}
-            alt="foxknight"
-            testID="foxKnight"
-          />
+          <Avatar name="You" alt="foxknight" testID="foxKnight" />
         </div>
         <div className="nextButtonWrapper">
           <div className="dialogMessage" data-testid="dialogMessage">
