@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import QuestionDialog from './QuestionDialog';
 
-describe('', () => {
+describe('Question Dialog Tests', () => {
   it('should render an action dialog', () => {
     render(
       <QuestionDialog

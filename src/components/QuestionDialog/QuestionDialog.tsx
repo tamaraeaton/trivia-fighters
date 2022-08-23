@@ -17,7 +17,6 @@ const QuestionDialog: FunctionComponent<
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleClick = (option: string) => {
-    console.log(option === answer);
     setQuestionAnswered(true);
     setSelectedOption(option);
   };
