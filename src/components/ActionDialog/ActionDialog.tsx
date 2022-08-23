@@ -13,18 +13,17 @@ const ActionDialog: FunctionComponent = () => {
     <div className="actionDialogWrapper" data-testid="actionDialog">
       <IconButton
         testID="attack"
-        children="Attack"
         icon={<img src={SwordIcon} alt="sword" width="20px" height="20px" />}
         size="s"
-        onClick={() => dispatch(attack())}
-      />
+      >
+        Attack
+      </IconButton>
       <IconButton
-        testID="block"
-        children="Block"
         icon={<img src={ShieldIcon} alt="shield" width="20px" height="20px" />}
         size="s"
-        onClick={() => dispatch(block())}
-      />
+      >
+        Block
+      </IconButton>
     </div>
   );
 };

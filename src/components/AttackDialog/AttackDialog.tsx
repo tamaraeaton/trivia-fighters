@@ -11,28 +11,26 @@ const AttackDialog = () => {
     <div className="attackDialogWrapper" data-testid="attackDialog">
       <IconButton
         testID="lightAttack"
-        children="Light Attack +1"
         icon={<img src={SwordIcon} alt="shield" width="20px" height="20px" />}
         size="m"
         count={1}
-        onClick={() => dispatch(attackStrength('light'))}
-      />
+      >
+        Light Attack +1
+      </IconButton>
       <IconButton
-        testID="mediumAttack"
-        children="Medium Attack +3"
         icon={<img src={SwordIcon} alt="shield" width="20px" height="20px" />}
         size="m"
         count={2}
-        onClick={() => dispatch(attackStrength('medium'))}
-      />
+      >
+        Medium Attack +3
+      </IconButton>
       <IconButton
-        testID="heavyAttack"
-        children="Heavy Attack +5"
         icon={<img src={SwordIcon} alt="shield" width="20px" height="20px" />}
         size="m"
         count={3}
-        onClick={() => dispatch(attackStrength('heavy'))}
-      />
+      >
+        Heavy Attack +5
+      </IconButton>
     </div>
   );
 };
