@@ -77,33 +77,25 @@ export const gameSlice = createSlice({
     // clicking the Next button
     answeredVerify: (state, action) => {
       const answer = state.question.answer;
-
       const isAnswerCorrect = answer === state.selectedOption;
       console.log('selectedOption', state.selectedOption);
 
       // need to use this isCorrect on the Game.tsx to determine if
       // the message says 'Correct' or 'Incorrect'
-
       if (isAnswerCorrect && state.dialogStage === 'attacking') {
         state.dialogStage = 'answering';
-        // state.isCorrect = true;
-        // how do I use this in Game.tsx?
       }
       if (isAnswerCorrect && state.action === 'block') {
         state.dialogStage = 'action';
         state.action = 'none';
-        // state.isCorrect = true;
       }
       if (
         (!isAnswerCorrect && state.dialogStage === 'attacking') ||
         state.action === 'block'
       ) {
         state.action = 'none';
-        // state.isCorrect = false;
       }
       state.isCorrect = undefined;
-      // a guess after trying tons of other stuff
-      // state.action.includes('true');
     },
     difficulty: (state, action: PayloadAction<DifficultyType>) => {
       state.difficulty = action.payload;

@@ -3,21 +3,22 @@ import './QuestionDialog.scss';
 import Button from '../Button/Button';
 import CorrectIcon from '../../assets/images/correct.svg';
 import IncorrectIcon from '../../assets/images/incorrect.svg';
+
 interface QuestionDialogProps {
   question: string;
   answer: string;
   options: string[];
-  onAnswer: (isItCorrect: boolean, option: string) => void;
+  onAnswer: (option: string) => void;
 }
 
 const QuestionDialog: FunctionComponent<
   PropsWithChildren<QuestionDialogProps>
-> = ({ question, answer, options, onAnswer }) => {
+> = ({ question, answer, onAnswer, options }) => {
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleClick = (option: string) => {
     setSelectedOption(option);
-    onAnswer(option === answer, option);
+    onAnswer(option);
   };
 
   return (
@@ -30,18 +31,20 @@ const QuestionDialog: FunctionComponent<
               <Button
                 testID="button"
                 classType={
-                  selectedOption && option === answer
-                    ? 'btn--correct'
-                    : selectedOption === option
-                    ? 'btn--incorrect'
+                  selectedOption && selectedOption === option
+                    ? option === answer
+                      ? 'btn--correct'
+                      : 'btn--incorrect'
                     : undefined
                 }
                 size="m"
                 icon={
-                  selectedOption && option === answer ? (
-                    <img src={CorrectIcon} alt="correct" />
-                  ) : selectedOption === option ? (
-                    <img src={IncorrectIcon} alt="incorrect" />
+                  selectedOption && selectedOption === option ? (
+                    option === answer ? (
+                      <img src={CorrectIcon} alt="correct" />
+                    ) : (
+                      <img src={IncorrectIcon} alt="incorrect" />
+                    )
                   ) : undefined
                 }
                 selected={false}

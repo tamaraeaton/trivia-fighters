@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MOCK_GAME_STATE } from 'store/mocks/game.mocks';
 import { renderWithProviders } from 'testHelpers';
 import QuestionDialog from './QuestionDialog';
 
@@ -20,22 +21,28 @@ describe('Question Dialog tests', () => {
   });
 
   it('should render correct if answer if correct', () => {
+    const mockOnAnswer = jest.fn();
     renderWithProviders(
       <QuestionDialog
-        question="How many moons are there?"
-        answer="Depends on the planet"
-        options={['One', 'Four', 'None', 'Depends on the planet']}
-        onAnswer={jest.fn()}
+        question={MOCK_GAME_STATE.question.text}
+        answer={MOCK_GAME_STATE.question.answer}
+        options={MOCK_GAME_STATE.question.choices}
+        onAnswer={mockOnAnswer}
       ></QuestionDialog>
     );
     const selectedButton = screen.getByRole('button', {
       name: /depends on the planet/i,
     });
     userEvent.click(selectedButton);
-    const correctImage = screen.getByRole('img', { name: /correct/i });
-    expect(correctImage).toBeInTheDocument();
+    // ensuring onAnswer receives option on the button that I clicked
+    expect(mockOnAnswer).toHaveBeenLastCalledWith(
+      MOCK_GAME_STATE.question.choices[3]
+    );
+    // ensuring class name is correct
+    expect(selectedButton.className).toContain('btn--correct');
   });
 
+  // test same thing down here
   it('should render incorrect if answer is incorrect', () => {
     renderWithProviders(
       <QuestionDialog

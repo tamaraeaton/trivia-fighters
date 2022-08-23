@@ -108,10 +108,10 @@ const Game: React.FunctionComponent = () => {
       return (
         <QuestionDialog
           question={question.text}
-          answer={question.answer}
           options={question.choices}
-          onAnswer={(option) => {
-            dispatch(answered(option));
+          answer={question.answer}
+          onAnswer={(theOptionOnTheButton) => {
+            dispatch(answered(theOptionOnTheButton));
           }}
         />
       );

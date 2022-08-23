@@ -4,7 +4,11 @@ import { renderWithProviders } from 'testHelpers';
 // import * as GameHooks from 'store/game/game.hooks';
 
 describe('Home Page', () => {
-  // EXAMPLE TESTS
+  // EXAMPLE TEST
+  // this is written for use with the redux store
+  // by rendering RederWithProviders, it does not use redux store
+  // the tests are written with mock data on the mock-game-state
+
   // let useGameRoundSpy: jest.SpyInstance;
   // let incrementRoundSpy: jest.Mock;
 
