@@ -1,12 +1,8 @@
 import SwordIcon from '../../assets/images/sword.svg';
 import IconButton from 'components/Button/IconButton';
 import './AttackDialog.scss';
-import { useAppDispatch } from 'store/hooks';
-import { attackStrength } from '../../store/game/game.slice';
 
 const AttackDialog = () => {
-  const dispatch = useAppDispatch();
-
   return (
     <div className="attackDialogWrapper" data-testid="attackDialog">
       <IconButton
