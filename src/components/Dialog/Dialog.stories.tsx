@@ -1,4 +1,4 @@
-import { Story } from '@storybook/react';
+import { ComponentStory } from '@storybook/react';
 import Dialog from './Dialog';
 
 export default {
@@ -6,4 +6,8 @@ export default {
   component: Dialog,
 };
 
-export const DialogBox = () => <Dialog />;
+const Template: ComponentStory<typeof Dialog> = () => (
+  <Dialog message="Choose An Action" />
+);
+
+export const DialogBox = Template.bind({});

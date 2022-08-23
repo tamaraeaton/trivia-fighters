@@ -4,7 +4,7 @@ import ActionDialog from './ActionDialog';
 
 describe('Action Dialog Tests', () => {
   it('should render an action dialog', () => {
-    renderWithProviders(<ActionDialog></ActionDialog>);
+    renderWithProviders(<ActionDialog />);
     expect(screen.getByTestId('actionDialog')).toBeDefined();
     expect(screen.getByTestId('attack')).toBeDefined();
     expect(screen.getByTestId('block')).toBeDefined();
