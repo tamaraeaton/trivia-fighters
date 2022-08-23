@@ -31,20 +31,22 @@ const QuestionDialog: FunctionComponent<
               <Button
                 testID="button"
                 classType={
-                  selectedOption && selectedOption === option
-                    ? option === answer
-                      ? 'btn--correct'
-                      : 'btn--incorrect'
+                  selectedOption && option === answer
+                    ? 'btn--correct'
+                    : selectedOption &&
+                      option === selectedOption &&
+                      option !== answer
+                    ? 'btn--incorrect'
                     : undefined
                 }
                 size="m"
                 icon={
-                  selectedOption && selectedOption === option ? (
-                    option === answer ? (
-                      <img src={CorrectIcon} alt="correct" />
-                    ) : (
-                      <img src={IncorrectIcon} alt="incorrect" />
-                    )
+                  selectedOption && option === answer ? (
+                    <img src={CorrectIcon} alt="correct" />
+                  ) : selectedOption &&
+                    option === selectedOption &&
+                    option !== answer ? (
+                    <img src={IncorrectIcon} alt="incorrect" />
                   ) : undefined
                 }
                 selected={false}

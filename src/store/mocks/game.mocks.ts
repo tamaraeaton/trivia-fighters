@@ -15,5 +15,5 @@ export const MOCK_GAME_STATE: GameState = {
 };
 
 // USED FOR TESTING REDUCERS
-// test cases
+// test case plan (WIP):
 // test after 4th question
