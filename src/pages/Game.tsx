@@ -101,6 +101,8 @@ const Game: React.FunctionComponent = () => {
     }
   };
 
+  // attackPowerValues function here or can I get attack power from store?
+
   return (
     <>
       <div className="healthBarContainer">
@@ -120,6 +122,7 @@ const Game: React.FunctionComponent = () => {
       </div>
       <div className="avatarContainerWrapper">
         <div className="avatarActionGroup">
+          {/* attackValue will be different per attackPower light = 5, medium = 10, heavy = 15 */}
           <Action actionState={action} attackValue={10} />
 
           <Avatar name="You" testID="foxKnight" />
@@ -135,6 +138,7 @@ const Game: React.FunctionComponent = () => {
           )}
         </div>
         <div className="avatarActionGroup group2">
+          {/* attackValue will be different per attackPower light = 5, medium = 10, heavy = 15 */}
           <Action isReversed={true} actionState="attack" attackValue={10} />
           {avatarDifficulty()}
         </div>

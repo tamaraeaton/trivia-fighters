@@ -1,5 +1,7 @@
 import { configureStore, combineReducers, Middleware } from '@reduxjs/toolkit';
 import gameReducer from 'store/game/game.slice';
+import heroReducer from 'store/hero/hero.slice';
+import opponentReducer from 'store/opponent/opponent.slice';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { watchAttackStrength } from './game/game.sagas';
 
@@ -7,6 +9,8 @@ export const sagaMiddleware = createSagaMiddleware();
 
 export const rootReducer = combineReducers({
   game: gameReducer,
+  hero: heroReducer,
+  opponent: opponentReducer,
 });
 
 export const store = configureStore({

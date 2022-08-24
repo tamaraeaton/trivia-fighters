@@ -31,6 +31,7 @@ export const useGameSelectors = () => {
   const attackStrength = useAppSelector(attackStrengthSelector);
   const question = useAppSelector(questionSelector);
   const isCorrect = useAppSelector(isCorrectSelector);
+
   return {
     dialogStage,
     action,
