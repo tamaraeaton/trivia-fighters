@@ -1,6 +1,7 @@
 import Button from 'components/Button/Button';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { useAppDispatch } from 'store/hooks';
 import { difficulty } from '../store/game/game.slice';
 import './Home.scss';

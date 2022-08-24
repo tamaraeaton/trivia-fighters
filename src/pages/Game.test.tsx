@@ -21,9 +21,14 @@ describe('Game Page', () => {
 
   it('avatar should render', () => {
     renderWithProviders(<Game />, {
-      preloadedState: MOCK_APP_STATE,
+      preloadedState: {
+        game: {
+          ...MOCK_APP_STATE.game,
+          difficulty: 'medium',
+        },
+      },
     });
-    expect(screen.getByTestId('wizardPigAvatar')).toBeInTheDocument();
+    expect(screen.getAllByTestId('barbarianBunny')).toBeDefined();
   });
 
   it('should render a message for dialog box', () => {
@@ -41,4 +46,4 @@ describe('Game Page', () => {
   });
 });
 
-// add a test on isCorrect
+// add test for Is Correct

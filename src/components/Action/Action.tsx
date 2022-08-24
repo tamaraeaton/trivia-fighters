@@ -4,7 +4,7 @@ import ShieldIcon from '../../assets/images/shield.svg';
 import './Action.scss';
 
 export interface ActionProps {
-  isReversed: boolean;
+  isReversed?: boolean;
   actionState: 'none' | 'block' | 'attack';
   attackValue?: number;
 }
@@ -33,7 +33,7 @@ const Action: FunctionComponent<ActionProps> = ({
         <img
           data-testid="attackBlock"
           src={iconSource}
-          className={`${isReversed ? 'iconReversed' : undefined}`}
+          className={isReversed ? 'iconReversed' : undefined}
           alt="attack icon"
         />
       )}

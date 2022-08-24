@@ -44,44 +44,43 @@ export const gameSlice = createSlice({
     setRound: (state, action: PayloadAction<number>) => {
       state.round = action.payload;
     },
+
     attack: (state) => {
       state.dialogStage = 'attacking';
       state.action = 'attack';
     },
+
     attackStrength: (state, action: PayloadAction<AttackPowerType>) => {
       state.dialogStage = 'answering';
       state.attackStrength = action.payload;
     },
+
     question: (state, action: PayloadAction<QuestionType>) => {
       state.question = action.payload;
     },
+
     block: (state) => {
       state.dialogStage = 'answering';
       state.action = 'block';
     },
-    // I am using this to reveal the answer, it changes the color on the buttons and displays incorrect or correct
-    // later it will update the points that will be displayed
+
+<<<<<<< HEAD
+    // Create hook for this functionality
+=======
+>>>>>>> 86b735402a503b187bf038e61b03b8b6f50cff3a
     answered: (state, action: PayloadAction<string>) => {
       const option = action.payload;
       state.dialogStage = 'answered';
       state.selectedOption = option;
+
       const answer = state.question.answer;
       state.isCorrect = answer === option;
-      console.log('answer', answer);
-      console.log('option', option);
     },
-    // reset selected option
-    // state.selectedOption = undefined
-    // where do this live (closing answerVerify or for opening the next action)
-    // this does the calculation, subtracts from health bar and resets game for the next question
-    // clicking the Next button
+
     answeredVerify: (state, action) => {
       const answer = state.question.answer;
       const isAnswerCorrect = answer === state.selectedOption;
-      console.log('selectedOption', state.selectedOption);
 
-      // need to use this isCorrect on the Game.tsx to determine if
-      // the message says 'Correct' or 'Incorrect'
       if (isAnswerCorrect && state.dialogStage === 'attacking') {
         state.dialogStage = 'answering';
       }
@@ -97,6 +96,7 @@ export const gameSlice = createSlice({
       }
       state.isCorrect = undefined;
     },
+
     difficulty: (state, action: PayloadAction<DifficultyType>) => {
       state.difficulty = action.payload;
       state.dialogStage = 'action';

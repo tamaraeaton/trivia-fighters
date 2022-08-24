@@ -46,4 +46,4 @@ export const isCorrectSelector = createSelector(
   (gameState): boolean | undefined => gameState.isCorrect
 );
 
-// selectors are for getting state
+// selectors are variables to get specific pieces of state within redux store
