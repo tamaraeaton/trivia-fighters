@@ -59,34 +59,28 @@ const Game: React.FunctionComponent = () => {
   }, [difficulty, navigate]);
 
   const avatarDifficulty = () => {
-    if (difficulty === 'easy') {
-      return (
-        <Avatar
-          name="Wizard Pig"
-          character={WizardPig}
-          alt="wizardpig"
-          testID="wizardPigAvatar"
-        />
-      );
-    } else if (difficulty === 'medium') {
-      return (
-        <Avatar
-          name="Barbarian Bunny"
-          character={BarbarianBunny}
-          alt="barbarianbunny"
-          testID="barbarianBunnyAvatar"
-        />
-      );
-    } else if (difficulty === 'seth') {
-      return (
-        <Avatar
-          name="Dragon Seth"
-          character={DragonSeth}
-          alt="dragonseth"
-          testID="dragonSeth"
-        />
-      );
+    let character = WizardPig;
+    let name = 'Wizard Pig';
+
+    switch (difficulty) {
+      case 'medium':
+        character = BarbarianBunny;
+        name = 'Barbarbian Bunny';
+        break;
+      case 'seth':
+        character = DragonSeth;
+        name = 'Dragon Seth';
+        break;
     }
+
+    return (
+      <Avatar
+        name={name}
+        testID={character}
+        character={character}
+        alt={character}
+      />
+    );
   };
 
   const dialogStages = () => {
@@ -128,7 +122,7 @@ const Game: React.FunctionComponent = () => {
       </div>
       <div className="avatarContainerWrapper">
         <div className="avatarActionGroup">
-          <Action isReversed={false} actionState={action} attackValue={10} />
+          <Action actionState={action} attackValue={10} />
 
           <Avatar
             name="You"
