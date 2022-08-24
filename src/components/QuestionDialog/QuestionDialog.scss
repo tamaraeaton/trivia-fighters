@@ -1,0 +1,11 @@
+.questionDialogAnswerWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 914px;
+}
+
+#question {
+  padding-left: 3.5rem;
+  padding-bottom: 0;
+}

@@ -12,6 +12,7 @@ export default {
 
 export const FoxKnightImage: Story<AvatarProps> = () => (
   <Avatar
+    testID="dragon"
     alt="dragon"
     name="You"
     character={FoxKnight}
@@ -22,6 +23,7 @@ export const FoxKnightImage: Story<AvatarProps> = () => (
 
 export const WizardPigImage: Story<AvatarProps> = () => (
   <Avatar
+    testID="wizardpig"
     alt="wizardpig"
     name="Medium"
     character={WizardPig}
