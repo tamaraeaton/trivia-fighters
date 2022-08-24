@@ -55,6 +55,9 @@ const Game: React.FunctionComponent = () => {
     return '';
   }, [attackStrength, isCorrect, dialogStage, action]);
 
+  // console.log('actionMessage', actionMessage);
+  // console.log('dialogStage', dialogStage);
+
   useEffect(() => {
     if (!difficulty) {
       navigate('/');
