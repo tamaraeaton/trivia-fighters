@@ -64,10 +64,6 @@ export const gameSlice = createSlice({
       state.action = 'block';
     },
 
-<<<<<<< HEAD
-    // Create hook for this functionality
-=======
->>>>>>> 86b735402a503b187bf038e61b03b8b6f50cff3a
     answered: (state, action: PayloadAction<string>) => {
       const option = action.payload;
       state.dialogStage = 'answered';

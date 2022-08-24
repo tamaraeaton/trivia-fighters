@@ -5,15 +5,11 @@ import ShadowBase from '../../assets/images/shadow.svg';
 import { useGetAvatar } from 'hooks/useGetAvatar';
 export interface AvatarProps {
   name: string;
-  character: string;
   testID: string;
 }
 
-const Avatar: FunctionComponent<AvatarProps> = ({
-  name,
-  character,
-  testID,
-}) => {
+const Avatar: FunctionComponent<AvatarProps> = ({ name, testID }) => {
+  const { avatarSVG } = useGetAvatar(name);
   return (
     <div className="wrapper">
       <div className="avatarContainer">
@@ -23,7 +19,7 @@ const Avatar: FunctionComponent<AvatarProps> = ({
         <img
           data-testid={testID}
           className="avatarImage"
-          src={useGetAvatar}
+          src={avatarSVG}
           alt={name}
         />
       </div>

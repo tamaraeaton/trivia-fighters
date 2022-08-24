@@ -1,13 +1,10 @@
 import { useEffect, useMemo } from 'react';
 import './Game.scss';
-<<<<<<< HEAD
 import {
   useGameActions,
-  useGameRound,
+  // useGameRound,
   useGameSelectors,
 } from 'store/game/game.hooks';
-=======
->>>>>>> 86b735402a503b187bf038e61b03b8b6f50cff3a
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -58,12 +55,6 @@ const Game: React.FunctionComponent = () => {
     return '';
   }, [attackStrength, isCorrect, dialogStage, action]);
 
-<<<<<<< HEAD
-=======
-  // console.log('actionMessage', actionMessage);
-  // console.log('dialogStage', dialogStage);
-
->>>>>>> 86b735402a503b187bf038e61b03b8b6f50cff3a
   useEffect(() => {
     if (!difficulty) {
       navigate('/');
@@ -71,41 +62,21 @@ const Game: React.FunctionComponent = () => {
   }, [difficulty, navigate]);
 
   const avatarDifficulty = () => {
-<<<<<<< HEAD
-    if (difficulty === 'easy') {
-      return (
-        <Avatar name="Wizard Pig" alt="wizardpig" testID="wizardPigAvatar" />
-      );
-    } else if (difficulty === 'medium') {
-      return (
-        <Avatar
-          name="Barbarian Bunny"
-          alt="barbarianbunny"
-          testID="barbarianBunnyAvatar"
-        />
-      );
-    } else if (difficulty === 'seth') {
-      return <Avatar name="Dragon Seth" alt="dragonseth" testID="dragonSeth" />;
-=======
-    let character = WizardPig;
     let name = 'Wizard Pig';
     let testID = 'wizardPig';
 
     switch (difficulty) {
       case 'medium':
-        character = BarbarianBunny;
         name = 'Barbarbian Bunny';
         testID = 'barbarianBunny';
         break;
       case 'seth':
-        character = DragonSeth;
         name = 'Dragon Seth';
         testID = 'dragonSeth';
         break;
->>>>>>> 86b735402a503b187bf038e61b03b8b6f50cff3a
     }
 
-    return <Avatar name={name} testID={testID} character={character} />;
+    return <Avatar name={name} testID={testID} />;
   };
 
   const dialogStages = () => {
@@ -148,11 +119,7 @@ const Game: React.FunctionComponent = () => {
         <div className="avatarActionGroup">
           <Action actionState={action} attackValue={10} />
 
-<<<<<<< HEAD
-          <Avatar name="You" alt="foxknight" testID="foxKnight" />
-=======
-          <Avatar name="You" character={FoxKnight} testID="foxKnight" />
->>>>>>> 86b735402a503b187bf038e61b03b8b6f50cff3a
+          <Avatar name="You" testID="foxKnight" />
         </div>
         <div className="nextButtonWrapper">
           <div className="dialogMessage" data-testid="dialogMessage">
