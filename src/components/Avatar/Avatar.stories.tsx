@@ -14,5 +14,5 @@ export const FoxKnightImage: Story<AvatarProps> = () => (
 );
 
 export const WizardPigImage: Story<AvatarProps> = () => (
-  <Avatar testID="wizardpig" name="Medium" />
+  <Avatar testID="wizardpig" name="Wizard Pig" />
 );

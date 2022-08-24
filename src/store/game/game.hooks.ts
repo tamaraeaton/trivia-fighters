@@ -9,7 +9,7 @@ import {
   isCorrectSelector,
   questionSelector,
 } from 'store/game/game.selectors';
-import { answered, attackStrength, setRound } from 'store/game/game.slice';
+import { answered, setRound } from 'store/game/game.slice';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
