@@ -34,23 +34,11 @@ describe('Home Page', () => {
   //   expect(incrementRoundSpy).toHaveBeenCalled();
   // });
 
-  it('should say Trivia Fighters', () => {
+  it('should say Trivia Fighters and render content per each button', () => {
     renderWithProviders(<Home />);
     expect(screen.getByTestId('headline')).toHaveTextContent('TRIVIA FIGHTERS');
-  });
-
-  it('button has context Easy', () => {
-    renderWithProviders(<Home />);
     expect(screen.getByTestId('easy')).toHaveTextContent('Easy');
-  });
-
-  it('button has context Medium', () => {
-    renderWithProviders(<Home />);
     expect(screen.getByTestId('medium')).toHaveTextContent('Medium');
-  });
-
-  it('button has context Seth', () => {
-    renderWithProviders(<Home />);
     expect(screen.getByTestId('seth')).toHaveTextContent('Seth');
   });
 });

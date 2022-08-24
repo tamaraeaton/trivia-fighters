@@ -12,7 +12,7 @@ describe('Question Dialog tests', () => {
         answer="Depends on the planet"
         options={['One', 'Four', 'None', 'Depends on the planet']}
         onAnswer={jest.fn()}
-      ></QuestionDialog>
+      />
     );
     expect(screen.getByTestId('questionDialog')).toBeDefined();
     expect(screen.getByTestId('questionDialog')).toHaveClass(
