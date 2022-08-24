@@ -36,7 +36,7 @@ const Game: React.FunctionComponent = () => {
   const question = useAppSelector(questionSelector);
   const isCorrect = useAppSelector(isCorrectSelector);
 
-  const [, { incrementRound }] = useGameRound();
+  // const [, { incrementRound }] = useGameRound();
 
   const actionMessage = useMemo(() => {
     if (dialogStage === 'attacking') {
@@ -63,8 +63,8 @@ const Game: React.FunctionComponent = () => {
     return '';
   }, [attackStrength, isCorrect, dialogStage, action]);
 
-  console.log('actionMessage', actionMessage);
-  console.log('dialogStage', dialogStage);
+  // console.log('actionMessage', actionMessage);
+  // console.log('dialogStage', dialogStage);
 
   useEffect(() => {
     if (!difficulty) {
@@ -75,26 +75,22 @@ const Game: React.FunctionComponent = () => {
   const avatarDifficulty = () => {
     let character = WizardPig;
     let name = 'Wizard Pig';
+    let testID = 'wizardPig';
 
     switch (difficulty) {
       case 'medium':
         character = BarbarianBunny;
         name = 'Barbarbian Bunny';
+        testID = 'barbarianBunny';
         break;
       case 'seth':
         character = DragonSeth;
         name = 'Dragon Seth';
+        testID = 'dragonSeth';
         break;
     }
 
-    return (
-      <Avatar
-        name={name}
-        testID={character}
-        character={character}
-        alt={character}
-      />
-    );
+    return <Avatar name={name} testID={testID} character={character} />;
   };
 
   const dialogStages = () => {
@@ -137,12 +133,7 @@ const Game: React.FunctionComponent = () => {
         <div className="avatarActionGroup">
           <Action actionState={action} attackValue={10} />
 
-          <Avatar
-            name="You"
-            character={FoxKnight}
-            alt="foxknight"
-            testID="foxKnight"
-          />
+          <Avatar name="You" character={FoxKnight} testID="foxKnight" />
         </div>
         <div className="nextButtonWrapper">
           <div className="dialogMessage" data-testid="dialogMessage">

@@ -9,14 +9,9 @@ export default {
 };
 
 export const FoxKnightImage: Story<AvatarProps> = () => (
-  <Avatar testID="dragon" alt="dragon" name="You" character={FoxKnight} />
+  <Avatar testID="dragon" name="You" character={FoxKnight} />
 );
 
 export const WizardPigImage: Story<AvatarProps> = () => (
-  <Avatar
-    testID="wizardpig"
-    alt="wizardpig"
-    name="Medium"
-    character={WizardPig}
-  />
+  <Avatar testID="wizardpig" name="Medium" character={WizardPig} />
 );
