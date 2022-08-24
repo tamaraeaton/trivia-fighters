@@ -20,4 +20,15 @@ describe('Dialog Tests', () => {
     );
     expect(screen.getByTestId('actionDialog')).toBeDefined();
   });
+
+  it('should not render when incorrect child is used', () => {
+    render(
+      <Provider store={store}>
+        <Dialog>
+          <ActionDialog />
+        </Dialog>
+      </Provider>
+    );
+    expect(screen.queryByTestId('actionDialogg')).toBeNull();
+  });
 });
