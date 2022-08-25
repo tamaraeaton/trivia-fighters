@@ -68,7 +68,6 @@ export const gameSlice = createSlice({
       const option = action.payload;
       state.dialogStage = 'answered';
       state.selectedOption = option;
-
       const answer = state.question.answer;
       state.isCorrect = answer === option;
     },

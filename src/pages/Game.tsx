@@ -1,10 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import './Game.scss';
-import {
-  useGameActions,
-  // useGameRound,
-  useGameSelectors,
-} from 'store/game/game.hooks';
+import { useGameActions, useGameSelectors } from 'store/game/game.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -27,8 +23,6 @@ const Game: React.FunctionComponent = () => {
     question,
     isCorrect,
   } = useGameSelectors();
-
-  // const [, { incrementRound }] = useGameRound();
 
   const actionMessage = useMemo(() => {
     if (dialogStage === 'attacking') {
@@ -55,9 +49,6 @@ const Game: React.FunctionComponent = () => {
     return '';
   }, [attackStrength, isCorrect, dialogStage, action]);
 
-  // console.log('actionMessage', actionMessage);
-  // console.log('dialogStage', dialogStage);
-
   useEffect(() => {
     if (!difficulty) {
       navigate('/');
@@ -78,7 +69,6 @@ const Game: React.FunctionComponent = () => {
         testID = 'dragonSeth';
         break;
     }
-
     return <Avatar name={name} testID={testID} />;
   };
 
