@@ -2,12 +2,17 @@ import Button from 'components/Button/Button';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
-import { difficulty } from '../store/game/game.slice';
+import { difficulty, DifficultyType } from '../store/game/game.slice';
 import './Home.scss';
 
 const Home: React.FunctionComponent = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const handleClick = (difficultyStrength: DifficultyType) => {
+    dispatch(difficulty(difficultyStrength));
+    navigate('game');
+  };
 
   return (
     <div className="homePageContainer">
@@ -18,10 +23,7 @@ const Home: React.FunctionComponent = () => {
         classType="btn--easy"
         size="xxl"
         testID="easy"
-        onClick={() => {
-          dispatch(difficulty('easy'));
-          navigate('game');
-        }}
+        onClick={() => handleClick('easy')}
       >
         Easy
       </Button>
@@ -29,10 +31,7 @@ const Home: React.FunctionComponent = () => {
         classType="btn--medium"
         size="xxl"
         testID="medium"
-        onClick={() => {
-          dispatch(difficulty('medium'));
-          navigate('game');
-        }}
+        onClick={() => handleClick('medium')}
       >
         Medium
       </Button>
@@ -40,10 +39,7 @@ const Home: React.FunctionComponent = () => {
         classType="btn--seth"
         size="xxl"
         testID="seth"
-        onClick={() => {
-          dispatch(difficulty('seth'));
-          navigate('game');
-        }}
+        onClick={() => handleClick('seth')}
       >
         Seth
       </Button>
