@@ -18,7 +18,7 @@ import Button from '../components/Button/Button';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  const { setAnswered } = useGameActions();
+  const { submitAnswer } = useGameActions();
   const {
     dialogStage,
     action,
@@ -94,7 +94,7 @@ const Game: React.FunctionComponent = () => {
           options={question.choices}
           answer={question.answer}
           onAnswer={(theOptionOnTheButton) => {
-            setAnswered(theOptionOnTheButton);
+            submitAnswer(theOptionOnTheButton);
           }}
         />
       );

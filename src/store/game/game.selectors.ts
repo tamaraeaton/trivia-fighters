@@ -28,12 +28,12 @@ export const actionSelector = createSelector(
 
 export const difficultySelector = createSelector(
   gameSelector,
-  (gameState): DifficultyType => gameState.difficulty
+  (gameState): DifficultyType | undefined => gameState.difficulty
 );
 
 export const attackStrengthSelector = createSelector(
   gameSelector,
-  (gameState): AttackPowerType => gameState.attackStrength
+  (gameState): AttackPowerType | undefined => gameState.attackStrength
 );
 
 export const questionSelector = createSelector(

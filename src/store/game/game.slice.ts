@@ -10,7 +10,7 @@ export interface GameState {
   isCorrect?: boolean;
 }
 
-export type DifficultyType = 'easy' | 'medium' | 'seth' | undefined;
+export type DifficultyType = 'easy' | 'medium' | 'seth';
 
 export type DialogStageType =
   | 'difficulty'
@@ -21,7 +21,7 @@ export type DialogStageType =
 
 export type ActionType = 'none' | 'attack' | 'block';
 
-export type AttackPowerType = 'light' | 'medium' | 'heavy' | undefined;
+export type AttackPowerType = 'light' | 'medium' | 'heavy';
 
 export type QuestionType = {
   status?: 'idle' | 'loading';
