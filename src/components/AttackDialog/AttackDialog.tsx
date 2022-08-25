@@ -40,9 +40,3 @@ const AttackDialog = () => {
 };
 
 export default AttackDialog;
-function dispatch(arg0: {
-  payload: import('store/game/game.slice').AttackStrengthType;
-  type: string;
-}): void {
-  throw new Error('Function not implemented.');
-}
