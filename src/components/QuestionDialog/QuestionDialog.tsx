@@ -1,24 +1,23 @@
 import { FunctionComponent, PropsWithChildren, useState } from 'react';
 import './QuestionDialog.scss';
 import Button from '../Button/Button';
-import { ReactComponent as CorrectIcon } from '../../assets/images/correct.svg';
-import { ReactComponent as IncorrectIcon } from '../../assets/images/incorrect.svg';
-
+import CorrectIcon from '../../assets/images/correct.svg';
+import IncorrectIcon from '../../assets/images/incorrect.svg';
 interface QuestionDialogProps {
   question: string;
   answer: string;
   options: string[];
+  onAnswer: (isItCorrect: boolean) => void;
 }
 
 const QuestionDialog: FunctionComponent<
   PropsWithChildren<QuestionDialogProps>
-> = ({ question, answer, options }) => {
-  const [questionAnswered, setQuestionAnswered] = useState(false);
+> = ({ question, answer, options, onAnswer }) => {
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleClick = (option: string) => {
-    setQuestionAnswered(true);
     setSelectedOption(option);
+    onAnswer(option === answer);
   };
 
   return (
@@ -27,33 +26,31 @@ const QuestionDialog: FunctionComponent<
       <div className="questionDialogAnswerWrapper" data-testid="questionDialog">
         {options.map((option) => {
           return (
-            <Button
-              key={option}
-              classType={
-                questionAnswered && option === answer
-                  ? 'btn--correct'
-                  : questionAnswered &&
-                    option === selectedOption &&
-                    option !== answer
-                  ? 'btn--incorrect'
-                  : undefined
-              }
-              icon={
-                questionAnswered && option === answer ? (
-                  <CorrectIcon />
-                ) : questionAnswered &&
-                  option === selectedOption &&
-                  option !== answer ? (
-                  <IncorrectIcon />
-                ) : undefined
-              }
-              size="m"
-              selected={false}
-              disabled={questionAnswered ? true : false}
-              onClick={() => handleClick(option)}
-            >
-              {option}
-            </Button>
+            <div key={option}>
+              <Button
+                testID="button"
+                classType={
+                  selectedOption && option === answer
+                    ? 'btn--correct'
+                    : selectedOption === option
+                    ? 'btn--incorrect'
+                    : undefined
+                }
+                size="m"
+                icon={
+                  selectedOption && option === answer ? (
+                    <img src={CorrectIcon} alt="correct" />
+                  ) : selectedOption === option ? (
+                    <img src={IncorrectIcon} alt="incorrect" />
+                  ) : undefined
+                }
+                selected={false}
+                disabled={!!selectedOption}
+                onClick={() => handleClick(option)}
+              >
+                {option}
+              </Button>
+            </div>
           );
         })}
       </div>

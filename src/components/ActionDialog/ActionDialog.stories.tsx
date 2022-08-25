@@ -1,6 +1,8 @@
 import ActionDialog from './ActionDialog';
 import { ComponentStory } from '@storybook/react';
 import Dialog from 'components/Dialog/Dialog';
+import { Provider } from 'react-redux';
+import { store } from '../../store/index';
 
 export default {
   title: 'Action Dialog',
@@ -8,9 +10,11 @@ export default {
 };
 
 const Template: ComponentStory<typeof ActionDialog> = () => (
-  <Dialog message="Choose an action">
-    <ActionDialog />
-  </Dialog>
+  <Provider store={store}>
+    <Dialog>
+      <ActionDialog />
+    </Dialog>
+  </Provider>
 );
 
 export const ActionDialogBox = Template.bind({});

@@ -2,8 +2,6 @@ import { Story } from '@storybook/react';
 import Avatar, { AvatarProps } from './Avatar';
 import FoxKnight from '../../assets/images/fox-knight.svg';
 import WizardPig from '../../assets/images/wizard-pig.svg';
-import Shadow from '../../assets/images/shadow-gradient.svg';
-import ShadowBase from '../../assets/images/shadow.svg';
 
 export default {
   title: 'Avatar',
@@ -11,14 +9,7 @@ export default {
 };
 
 export const FoxKnightImage: Story<AvatarProps> = () => (
-  <Avatar
-    testID="dragon"
-    alt="dragon"
-    name="You"
-    character={FoxKnight}
-    shadow={Shadow}
-    shadowBase={ShadowBase}
-  />
+  <Avatar testID="dragon" alt="dragon" name="You" character={FoxKnight} />
 );
 
 export const WizardPigImage: Story<AvatarProps> = () => (
@@ -27,7 +18,5 @@ export const WizardPigImage: Story<AvatarProps> = () => (
     alt="wizardpig"
     name="Medium"
     character={WizardPig}
-    shadow={Shadow}
-    shadowBase={ShadowBase}
   />
 );

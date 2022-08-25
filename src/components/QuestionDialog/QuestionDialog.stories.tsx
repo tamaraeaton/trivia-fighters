@@ -11,7 +11,7 @@ const Template: ComponentStory<typeof QuestionDialog> = ({
   children,
   ...args
 }) => (
-  <Dialog message="Easy">
+  <Dialog>
     <QuestionDialog {...args}>{children}</QuestionDialog>
   </Dialog>
 );

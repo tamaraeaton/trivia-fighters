@@ -8,7 +8,7 @@ export default {
 };
 
 const Template: ComponentStory<typeof AttackDialog> = () => (
-  <Dialog message="Choose an attack">
+  <Dialog>
     <AttackDialog />
   </Dialog>
 );
