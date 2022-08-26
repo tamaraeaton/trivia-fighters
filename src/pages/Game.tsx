@@ -106,6 +106,7 @@ const Game: React.FunctionComponent = () => {
   return (
     <>
       <div className="healthBarContainer">
+        {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
           testID="playerHealthBar"
           isReversed={false}
@@ -113,6 +114,7 @@ const Game: React.FunctionComponent = () => {
           currentHealth={100}
         />
         <Round />
+        {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
           testID="opponentHealthBar"
           isReversed={true}
@@ -130,6 +132,7 @@ const Game: React.FunctionComponent = () => {
           />
         </div>
         <div className="actionIconAndValue">
+          {/* constant value hard-coded until additonal functionality is complete*/}
           <Action actionState={action} attackValue={10} />
         </div>
         <div className="nextButtonDialogMessageWrapper">
