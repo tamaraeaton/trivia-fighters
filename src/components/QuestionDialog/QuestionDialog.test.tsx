@@ -5,22 +5,7 @@ import { renderWithProviders } from 'testHelpers';
 import QuestionDialog from './QuestionDialog';
 
 describe('Question Dialog tests', () => {
-  it('should render questionDialog boxes', () => {
-    renderWithProviders(
-      <QuestionDialog
-        question="How many moons are there?"
-        answer="Depends on the planet"
-        options={['One', 'Four', 'None', 'Depends on the planet']}
-        onAnswer={jest.fn()}
-      />
-    );
-    expect(screen.getByTestId('questionDialog')).toBeDefined();
-    expect(screen.getByTestId('questionDialog')).toHaveClass(
-      'questionDialogAnswerWrapper'
-    );
-  });
-
-  it('should render correct if answer if correct', () => {
+  it('should render questionDialog with buttons that change accordingly per correct/incorrect answer', () => {
     const mockOnAnswer = jest.fn();
     renderWithProviders(
       <QuestionDialog
@@ -28,7 +13,12 @@ describe('Question Dialog tests', () => {
         answer={MOCK_GAME_STATE.question.answer}
         options={MOCK_GAME_STATE.question.choices}
         onAnswer={mockOnAnswer}
-      ></QuestionDialog>
+      />
+    );
+    // ensure question dialog box appears with wrapper
+    expect(screen.getByTestId('questionDialog')).toBeDefined();
+    expect(screen.getByTestId('questionDialog')).toHaveClass(
+      'questionDialogAnswerWrapper'
     );
     const selectedButton = screen.getByRole('button', {
       name: /depends on the planet/i,

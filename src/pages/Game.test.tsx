@@ -44,6 +44,15 @@ describe('Game Page', () => {
       'Choose an attack'
     );
   });
+  it('should render Correct or Incorrect depending on selected option equalling answer', () => {
+    renderWithProviders(<Game />, {
+      preloadedState: {
+        game: {
+          ...MOCK_APP_STATE.game,
+          dialogStage: 'answered',
+        },
+      },
+    });
+    expect(screen.getAllByTestId('dialogMessage')).toBeDefined();
+  });
 });
-
-// add test for Is Correct
