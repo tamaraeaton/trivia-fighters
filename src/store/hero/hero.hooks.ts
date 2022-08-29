@@ -32,7 +32,6 @@ export const useHeroActions = () => {
   const heroAttackValue = useAppSelector(heroAttackValueSelector);
 
   const applyAttackValue = () => {
-    console.log(action, isCorrect);
     if (action === 'attack') {
       if (isCorrect) {
         if (attackStrengthValue === 'light') {

@@ -9,7 +9,7 @@ export interface HeroState {
 export const initialState: HeroState = {
   maxHealth: 100,
   currentHealth: 100,
-  attackValue: 30,
+  attackValue: 0,
 };
 
 export const heroSlice = createSlice({
