@@ -16,8 +16,7 @@ import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
 import { useHeroActions, useHeroValues } from 'store/hero/hero.hooks';
-import { opponentCurrentHealthSelector } from '../store/opponent/opponent.selectors';
-import { useAppSelector } from 'store/hooks';
+import { useOpponentSelectors } from '../store/opponent/opponent.hooks';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
@@ -33,7 +32,7 @@ const Game: React.FunctionComponent = () => {
 
   const { applyAttackValue } = useHeroActions();
   const { heroAttackValue } = useHeroValues();
-  const opponentCurrentHealth = useAppSelector(opponentCurrentHealthSelector);
+  const { opponentCurrentHealth } = useOpponentSelectors();
   // const [, { incrementRound }] = useGameRound();
 
   useEffect(() => {
