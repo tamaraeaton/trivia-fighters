@@ -15,6 +15,9 @@ import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
+import { useHeroActions, useHeroValues } from 'store/hero/hero.hooks';
+import { opponentCurrentHealthSelector } from '../store/opponent/opponent.selectors';
+import { useAppSelector } from 'store/hooks';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
@@ -28,8 +31,17 @@ const Game: React.FunctionComponent = () => {
     isCorrect,
   } = useGameSelectors();
 
+  const { applyAttackValue } = useHeroActions();
+  const { heroAttackValue } = useHeroValues();
+  const opponentCurrentHealth = useAppSelector(opponentCurrentHealthSelector);
   // const [, { incrementRound }] = useGameRound();
 
+  useEffect(() => {
+    if (isCorrect === true || isCorrect === false) {
+      applyAttackValue();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCorrect]);
   const actionMessage = useMemo(() => {
     if (dialogStage === 'attacking') {
       return 'Choose an attack';
@@ -54,9 +66,6 @@ const Game: React.FunctionComponent = () => {
     }
     return '';
   }, [attackStrength, isCorrect, dialogStage, action]);
-
-  // console.log('actionMessage', actionMessage);
-  // console.log('dialogStage', dialogStage);
 
   useEffect(() => {
     if (!difficulty) {
@@ -101,8 +110,6 @@ const Game: React.FunctionComponent = () => {
     }
   };
 
-  // attackPowerValues function here or can I get attack power from store?
-
   return (
     <>
       <div className="healthBarContainer">
@@ -117,14 +124,12 @@ const Game: React.FunctionComponent = () => {
           testID="opponentHealthBar"
           isReversed={true}
           maxHealth={150}
-          currentHealth={60}
+          currentHealth={opponentCurrentHealth}
         />
       </div>
       <div className="avatarContainerWrapper">
         <div className="avatarActionGroup">
-          {/* attackValue will be different per attackPower light = 5, medium = 10, heavy = 15 */}
-          <Action actionState={action} attackValue={10} />
-
+          <Action actionState={action} attackValue={heroAttackValue} />
           <Avatar name="You" testID="foxKnight" />
         </div>
         <div className="nextButtonWrapper">
@@ -138,7 +143,6 @@ const Game: React.FunctionComponent = () => {
           )}
         </div>
         <div className="avatarActionGroup group2">
-          {/* attackValue will be different per attackPower light = 5, medium = 10, heavy = 15 */}
           <Action isReversed={true} actionState="attack" attackValue={10} />
           {avatarDifficulty()}
         </div>

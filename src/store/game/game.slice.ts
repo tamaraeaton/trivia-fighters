@@ -32,7 +32,7 @@ export type QuestionType = {
 
 export const initialState: GameState = {
   round: 1,
-  dialogStage: 'difficulty',
+  dialogStage: 'action',
   action: 'none',
   question: { text: '', answer: '', choices: [] },
 };
@@ -64,13 +64,6 @@ export const gameSlice = createSlice({
       state.action = 'block';
     },
 
-    // When the redux answered action is triggered from the Attack
-    // If current state of action is attack
-    // If the answer is correct
-    // Add 5, 10, or 15 based on attackPower to hero.attackValue
-    // If the answer is not correc
-    // Subtract hero.attackValue from opponent.currentHealth
-    // Set hero.attackValue to 0
     answered: (state, action: PayloadAction<string>) => {
       const option = action.payload;
       state.dialogStage = 'answered';

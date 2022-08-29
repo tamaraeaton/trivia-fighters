@@ -16,7 +16,6 @@ const HealthBar: FunctionComponent<HealthBarProps> = ({
   currentHealth,
   testID,
 }) => {
-  // currentHealth and maxHealth needs to come from store/selector?
   const healthPercentage = Math.round((currentHealth / maxHealth) * 100);
 
   return (

@@ -4,22 +4,22 @@ import { DifficultyType } from 'store/game/game.slice';
 
 export const opponentSelector = (state: RootState) => state.opponent;
 
-export const maxHealthSelector = createSelector(
+export const opponentMaxHealthSelector = createSelector(
   opponentSelector,
   (opponentState): number | undefined => opponentState.maxHealth
 );
 
-export const currentHealthSelector = createSelector(
+export const opponentCurrentHealthSelector = createSelector(
   opponentSelector,
-  (opponentState): number | undefined => opponentState.currentHealth
+  (opponentState): number => opponentState.currentHealth
 );
 
-export const attackValueSelector = createSelector(
+export const opponentAttackValueSelector = createSelector(
   opponentSelector,
   (opponentState): number | undefined => opponentState.attackValue
 );
 
-export const setDifficultySelector = createSelector(
+export const opponentSetDifficultySelector = createSelector(
   opponentSelector,
   (opponentState): DifficultyType => opponentState.difficulty
 );
