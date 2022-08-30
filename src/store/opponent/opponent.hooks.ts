@@ -28,9 +28,6 @@ export const useOpponentActions = () => {
   const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
 
   const applyOpponentAttackValue = () => {
-    // * If the answer is not correct
-    // * Subtract opponent.attackValue from hero.currentHealth
-    // *** Attack value will be based on difficulty, which will be done in the next Story - for this Story, use a hard-coded 5
     if (!isCorrect) {
       dispatch(decreaseHeroCurrentHealth(opponentAttackValue));
     }
