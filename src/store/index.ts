@@ -3,7 +3,8 @@ import gameReducer from 'store/game/game.slice';
 import heroReducer from 'store/hero/hero.slice';
 import opponentReducer from 'store/opponent/opponent.slice';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
-import { watchAttackStrength } from './game/game.sagas';
+import { watchAttackStrength, watchBlockAction } from './game/game.sagas';
+import { all } from 'redux-saga/effects';
 
 export const sagaMiddleware = createSagaMiddleware();
 
@@ -19,8 +20,10 @@ export const store = configureStore({
 });
 
 const runSagas = (middleware: SagaMiddleware<Middleware>) => {
-  middleware.run(watchAttackStrength);
-  // Add another saga like this - middleware.run(nextSaga)
+  function* rootSaga() {
+    yield all([watchAttackStrength(), watchBlockAction()]);
+  }
+  middleware.run(rootSaga);
 };
 runSagas(sagaMiddleware);
 

@@ -1,12 +1,17 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { takeEvery } from '@redux-saga/core/effects';
 import { call, put } from 'redux-saga/effects';
-import { fetchQuestions } from '../../APIs/fetchQuestions';
-import { attackStrength, AttackPowerType, question } from './game.slice';
+import {
+  fetchQuestionsPerDifficulty,
+  fetchRandomQuestions,
+} from '../../APIs/fetchQuestions';
+import { attackStrength, AttackPowerType, question, block } from './game.slice';
 
 // all sagas are generator functions
-export function* getQuestions(action: PayloadAction<AttackPowerType>): any {
-  const res = yield call(fetchQuestions, action.payload);
+export function* getQuestionsPerDifficulty(
+  action: PayloadAction<AttackPowerType>
+): any {
+  const res = yield call(fetchQuestionsPerDifficulty, action.payload);
   const questionRes = res.results[0];
   const choices = [
     questionRes.correct_answer,
@@ -25,7 +30,33 @@ export function* getQuestions(action: PayloadAction<AttackPowerType>): any {
   );
 }
 
-// watcher
+// attack strength watcher
 export function* watchAttackStrength() {
-  yield takeEvery(attackStrength, getQuestions);
+  yield takeEvery(attackStrength, getQuestionsPerDifficulty);
+}
+
+// This is for blocking
+export function* getRandomQuestions(): any {
+  const res = yield call(fetchRandomQuestions);
+  const questionRes = res.results[0];
+  const choices = [
+    questionRes.correct_answer,
+    ...questionRes.incorrect_answers,
+  ];
+
+  choices.sort(() => Math.random() - 0.5);
+
+  yield put(
+    question({
+      status: 'idle',
+      text: questionRes.question,
+      answer: questionRes.correct_answer,
+      choices: choices,
+    })
+  );
+}
+
+// block watcher
+export function* watchBlockAction() {
+  yield takeEvery(block.type, getRandomQuestions);
 }
