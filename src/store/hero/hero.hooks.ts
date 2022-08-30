@@ -52,10 +52,3 @@ export const useHeroActions = () => {
 
   return { applyAttackValue };
 };
-
-export const useHeroValues = () => {
-  const heroAttackValue = useAppSelector(heroAttackValueSelector);
-  return {
-    heroAttackValue,
-  };
-};

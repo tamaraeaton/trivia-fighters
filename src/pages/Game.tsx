@@ -11,7 +11,7 @@ import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
-import { useHeroActions, useHeroValues } from 'store/hero/hero.hooks';
+import { useHeroActions, useHeroSelectors } from 'store/hero/hero.hooks';
 import { useOpponentSelectors } from '../store/opponent/opponent.hooks';
 
 const Game: React.FunctionComponent = () => {
@@ -27,7 +27,7 @@ const Game: React.FunctionComponent = () => {
   } = useGameSelectors();
 
   const { applyAttackValue } = useHeroActions();
-  const { heroAttackValue } = useHeroValues();
+  const { heroAttackValue } = useHeroSelectors();
   const { opponentCurrentHealth } = useOpponentSelectors();
   // const [, { incrementRound }] = useGameRound();
 
