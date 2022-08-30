@@ -51,6 +51,7 @@ const QuestionDialog: FunctionComponent<
                 }
                 selected={false}
                 disabled={!!selectedOption}
+                aria-disabled={!!selectedOption}
                 onClick={() => handleClick(option)}
               >
                 {option}

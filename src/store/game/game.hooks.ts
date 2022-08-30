@@ -9,7 +9,7 @@ import {
   isCorrectSelector,
   questionSelector,
 } from 'store/game/game.selectors';
-import { answered, setRound } from 'store/game/game.slice';
+import { answered, answeredVerify, setRound } from 'store/game/game.slice';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
@@ -52,8 +52,16 @@ export const useGameActions = () => {
     [dispatch]
   );
 
+  const setNextRoundAnswer = useCallback(
+    (option: string) => {
+      dispatch(answeredVerify(option));
+    },
+    [dispatch]
+  );
+
   return {
     setAnswered,
+    setNextRoundAnswer,
   };
 };
 

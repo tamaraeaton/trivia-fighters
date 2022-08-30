@@ -73,9 +73,9 @@ export const gameSlice = createSlice({
       state.isCorrect = answer === option;
     },
 
-    answeredVerify: (state, action) => {
+    answeredVerify: (state, action: PayloadAction<string>) => {
       const answer = state.question.answer;
-      const isAnswerCorrect = answer === state.selectedOption;
+      const isAnswerCorrect = answer === action.payload;
 
       if (isAnswerCorrect && state.dialogStage === 'attacking') {
         state.dialogStage = 'answering';

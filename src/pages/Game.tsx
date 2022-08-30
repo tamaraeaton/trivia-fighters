@@ -1,8 +1,8 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './Game.scss';
 import {
   useGameActions,
-  // useGameRound,
+  useGameRound,
   useGameSelectors,
 } from 'store/game/game.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
@@ -20,7 +20,7 @@ import { useOpponentSelectors } from '../store/opponent/opponent.hooks';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  const { setAnswered } = useGameActions();
+  const { setAnswered, setNextRoundAnswer } = useGameActions();
   const {
     dialogStage,
     action,
@@ -31,9 +31,10 @@ const Game: React.FunctionComponent = () => {
   } = useGameSelectors();
 
   const { applyAttackValue } = useHeroActions();
-  const { heroAttackValue } = useHeroValues();
   const { opponentCurrentHealth } = useOpponentSelectors();
-  // const [, { incrementRound }] = useGameRound();
+  const { heroAttackValue } = useHeroValues();
+  const [, { incrementRound }] = useGameRound();
+  const [answerForNext, setAnswerForNext] = useState('');
 
   useEffect(() => {
     if (isCorrect === true || isCorrect === false) {
@@ -102,11 +103,19 @@ const Game: React.FunctionComponent = () => {
           options={question.choices}
           answer={question.answer}
           onAnswer={(theOptionOnTheButton) => {
+            // capturing for the answered
             setAnswered(theOptionOnTheButton);
+            //capturing for the Next button to send to answeredVerify
+            setAnswerForNext(theOptionOnTheButton);
           }}
         />
       );
     }
+  };
+
+  const nextButtonHandleClick = () => {
+    incrementRound();
+    setNextRoundAnswer(answerForNext);
   };
 
   return (
@@ -137,7 +146,9 @@ const Game: React.FunctionComponent = () => {
           </div>
           {dialogStage === 'answered' && (
             <div className="nextButtonDiv">
-              <Button size="xs">Next</Button>
+              <Button size="xs" onClick={() => nextButtonHandleClick()}>
+                Next
+              </Button>
             </div>
           )}
         </div>
