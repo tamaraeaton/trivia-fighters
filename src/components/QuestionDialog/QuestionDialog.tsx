@@ -26,26 +26,26 @@ const QuestionDialog: FunctionComponent<
       <p id="question">{question}</p>
       <div className="questionDialogAnswerWrapper" data-testid="questionDialog">
         {options.map((option) => {
+          const isCorrect = selectedOption && option === answer;
+          const isIncorrect =
+            selectedOption && option === selectedOption && option !== answer;
+
           return (
             <div key={option}>
               <Button
                 testID="button"
                 classType={
-                  selectedOption && option === answer
+                  isCorrect
                     ? 'btn--correct'
-                    : selectedOption &&
-                      option === selectedOption &&
-                      option !== answer
+                    : isIncorrect
                     ? 'btn--incorrect'
                     : undefined
                 }
                 size="m"
                 icon={
-                  selectedOption && option === answer ? (
+                  isCorrect ? (
                     <img src={CorrectIcon} alt="correct" />
-                  ) : selectedOption &&
-                    option === selectedOption &&
-                    option !== answer ? (
+                  ) : isIncorrect ? (
                     <img src={IncorrectIcon} alt="incorrect" />
                   ) : undefined
                 }
