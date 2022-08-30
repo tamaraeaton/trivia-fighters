@@ -1,11 +1,10 @@
 .attackDialogWrapper {
   height: 100%;
-  max-width: 914px;
+  max-height: 150px;
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 940px;
+  max-width: 850px;
   button {
     &:first-child {
       margin-right: 2rem;

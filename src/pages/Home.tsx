@@ -1,17 +1,16 @@
 import Button from 'components/Button/Button';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { useAppDispatch } from 'store/hooks';
-import { difficulty, DifficultyType } from '../store/game/game.slice';
+import { useGameActions } from 'store/game/game.hooks';
+import { DifficultyType } from '../store/game/game.slice';
 import './Home.scss';
 
 const Home: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const { setDifficulty } = useGameActions();
 
   const handleClick = (difficultyStrength: DifficultyType) => {
-    dispatch(difficulty(difficultyStrength));
+    setDifficulty(difficultyStrength);
     navigate('game');
   };
 

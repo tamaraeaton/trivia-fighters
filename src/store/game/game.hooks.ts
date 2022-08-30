@@ -9,7 +9,15 @@ import {
   isCorrectSelector,
   questionSelector,
 } from 'store/game/game.selectors';
-import { answered, answeredVerify, setRound } from 'store/game/game.slice';
+import {
+  answered,
+  answeredVerify,
+  difficulty,
+  DifficultyType,
+  setRound,
+  attackStrength,
+  AttackPowerType,
+} from 'store/game/game.slice';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
@@ -59,9 +67,25 @@ export const useGameActions = () => {
     [dispatch]
   );
 
+  const setDifficulty = useCallback(
+    (option: DifficultyType) => {
+      dispatch(difficulty(option));
+    },
+    [dispatch]
+  );
+
+  const setAttackStrength = useCallback(
+    (option: AttackPowerType) => {
+      dispatch(attackStrength(option));
+    },
+    [dispatch]
+  );
+
   return {
     setAnswered,
     setNextRoundAnswer,
+    setDifficulty,
+    setAttackStrength,
   };
 };
 

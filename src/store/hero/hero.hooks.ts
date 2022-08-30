@@ -9,7 +9,7 @@ import {
   maxHealthSelector,
   currentHealthSelector,
 } from './hero.selectors';
-import { attackValue } from './hero.slice';
+import { attackValue, increaseHeroCurrentHealth } from './hero.slice';
 
 import { decreaseOpponentHealth } from 'store/opponent/opponent.slice';
 
@@ -50,5 +50,11 @@ export const useHeroActions = () => {
     }
   };
 
-  return { applyHeroAttackValue };
+  const increaseHeroHealth = () => {
+    if (isCorrect && action === 'block') {
+      dispatch(increaseHeroCurrentHealth());
+    }
+  };
+
+  return { applyHeroAttackValue, increaseHeroHealth };
 };
