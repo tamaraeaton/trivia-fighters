@@ -2,11 +2,18 @@ import { GameState } from 'store/game/game.slice';
 
 export const MOCK_GAME_STATE: GameState = {
   round: 2,
-  dialogStage: 'difficulty',
+  dialogStage: 'answered',
   action: 'none',
-  isAnswered: true,
   difficulty: 'easy',
   attackStrength: undefined,
+  question: {
+    text: 'How many moons are there?',
+    answer: 'Depends on the planet',
+    choices: ['One', 'Four', 'None', 'Depends on the planet'],
+  },
+  isCorrect: false,
 };
 
-// USED FOR TESTING
+// USED FOR TESTING REDUCERS
+// test case plan (WIP):
+// test after 4th question

@@ -3,21 +3,22 @@ import './QuestionDialog.scss';
 import Button from '../Button/Button';
 import CorrectIcon from '../../assets/images/correct.svg';
 import IncorrectIcon from '../../assets/images/incorrect.svg';
+
 interface QuestionDialogProps {
   question: string;
   answer: string;
   options: string[];
-  onAnswer: (isItCorrect: boolean) => void;
+  onAnswer: (option: string) => void;
 }
 
 const QuestionDialog: FunctionComponent<
   PropsWithChildren<QuestionDialogProps>
-> = ({ question, answer, options, onAnswer }) => {
+> = ({ question, answer, onAnswer, options }) => {
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleClick = (option: string) => {
     setSelectedOption(option);
-    onAnswer(option === answer);
+    onAnswer(option);
   };
 
   return (
@@ -25,22 +26,26 @@ const QuestionDialog: FunctionComponent<
       <p id="question">{question}</p>
       <div className="questionDialogAnswerWrapper" data-testid="questionDialog">
         {options.map((option) => {
+          const isCorrect = selectedOption && option === answer;
+          const isIncorrect =
+            selectedOption && option === selectedOption && option !== answer;
+
           return (
             <div key={option}>
               <Button
                 testID="button"
                 classType={
-                  selectedOption && option === answer
+                  isCorrect
                     ? 'btn--correct'
-                    : selectedOption === option
+                    : isIncorrect
                     ? 'btn--incorrect'
                     : undefined
                 }
                 size="m"
                 icon={
-                  selectedOption && option === answer ? (
+                  isCorrect ? (
                     <img src={CorrectIcon} alt="correct" />
-                  ) : selectedOption === option ? (
+                  ) : isIncorrect ? (
                     <img src={IncorrectIcon} alt="incorrect" />
                   ) : undefined
                 }

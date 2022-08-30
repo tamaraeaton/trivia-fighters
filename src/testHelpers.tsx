@@ -9,7 +9,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
-import type { RootState } from 'store';
+import { RootState, sagaMiddleware } from 'store';
 import { rootReducer, AppStore } from 'store';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -30,6 +30,7 @@ const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
+    middleware: [sagaMiddleware],
   });
 };
 

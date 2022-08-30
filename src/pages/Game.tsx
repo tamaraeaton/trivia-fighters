@@ -1,56 +1,53 @@
+import { useEffect, useMemo } from 'react';
 import './Game.scss';
+import { useGameActions, useGameSelectors } from 'store/game/game.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
 import Avatar from '../components/Avatar/Avatar';
-import FoxKnight from '../assets/images/fox-knight.svg';
-import WizardPig from '../assets/images/wizard-pig.svg';
-import BarbarianBunny from '../assets/images/barbarian-bunny.svg';
-import DragonSeth from '../assets/images/dragon-seth.svg';
 import Dialog from 'components/Dialog/Dialog';
 import AttackDialog from 'components/AttackDialog/AttackDialog';
 import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import {
-  attackStrengthSelector,
-  dialogStageSelector,
-} from '../store/game/game.selectors';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { difficultySelector, actionSelector } from 'store/game/game.selectors';
-import { answered } from 'store/game/game.slice';
 import Button from '../components/Button/Button';
 
 const Game: React.FunctionComponent = () => {
-  const dialogStage = useAppSelector(dialogStageSelector);
   const navigate = useNavigate();
-  const difficulty = useAppSelector(difficultySelector);
-  const action = useAppSelector(actionSelector);
-  const dispatch = useAppDispatch();
-  const attackStrength = useAppSelector(attackStrengthSelector);
-  const [actionMessage, setActionMessage] = useState('Choose an action');
-  const [correctIncorrect, setCorrectIncorrect] = useState(false);
+  const { submitAnswer } = useGameActions();
+  const {
+    dialogStage,
+    action,
+    difficulty,
+    attackStrength,
+    question,
+    isCorrect,
+  } = useGameSelectors();
 
-  useEffect(() => {
+  const actionMessage = useMemo(() => {
     if (dialogStage === 'attacking') {
-      setActionMessage('Choose an attack');
-    } else if (dialogStage === 'action') {
-      setActionMessage('Choose an action');
-    } else if (dialogStage === 'answered') {
-      setActionMessage(correctIncorrect ? 'Correct!' : 'Incorrect!');
-    } else if (dialogStage === 'answering') {
-      if (attackStrength === 'light') {
-        setActionMessage('Light Attack');
-      } else if (attackStrength === 'medium') {
-        setActionMessage('Medium Attack');
-      } else {
-        setActionMessage('Heavy Attack');
-      }
-    } else {
-      setActionMessage('');
+      return 'Choose an attack';
     }
-  }, [dialogStage, attackStrength, correctIncorrect]);
+    if (dialogStage === 'action') {
+      return 'Choose an action';
+    }
+    if (dialogStage === 'answered') {
+      return isCorrect === undefined ? '' : isCorrect ? 'Correct' : 'Incorrect';
+    }
+    if (dialogStage === 'answering') {
+      if (action === 'block') {
+        return 'Blocking';
+      }
+      if (attackStrength === 'light') {
+        return 'Light Attack';
+      }
+      if (attackStrength === 'medium') {
+        return 'Medium Attack';
+      }
+      return 'Heavy Attack';
+    }
+    return '';
+  }, [attackStrength, isCorrect, dialogStage, action]);
 
   useEffect(() => {
     if (!difficulty) {
@@ -59,28 +56,20 @@ const Game: React.FunctionComponent = () => {
   }, [difficulty, navigate]);
 
   const opponentAvatarPerDifficulty = () => {
-    let character = WizardPig;
     let name = 'Wizard Pig';
+    let testID = 'wizardPig';
 
     switch (difficulty) {
       case 'medium':
-        character = BarbarianBunny;
         name = 'Barbarbian Bunny';
+        testID = 'barbarianBunny';
         break;
       case 'seth':
-        character = DragonSeth;
         name = 'Dragon Seth';
+        testID = 'dragonSeth';
         break;
     }
-
-    return (
-      <Avatar
-        name={name}
-        testID={character}
-        character={character}
-        alt={character}
-      />
-    );
+    return <Avatar name={name} testID={testID} />;
   };
 
   const dialogStages = () => {
@@ -91,12 +80,11 @@ const Game: React.FunctionComponent = () => {
     } else if (dialogStage === 'answering' || dialogStage === 'answered') {
       return (
         <QuestionDialog
-          question="How many moons are there?"
-          answer="Depends on the planet"
-          options={['One', 'Four', 'None', 'Depends on the planet']}
-          onAnswer={(isItCorrect: boolean) => {
-            dispatch(answered());
-            setCorrectIncorrect(isItCorrect);
+          question={question.text}
+          options={question.choices}
+          answer={question.answer}
+          onAnswer={(theOptionOnTheButton) => {
+            submitAnswer(theOptionOnTheButton);
           }}
         />
       );
@@ -124,12 +112,7 @@ const Game: React.FunctionComponent = () => {
       </div>
       <div className="avatarContainerWrapper">
         <div className="avatarActionGroup">
-          <Avatar
-            name="You"
-            character={FoxKnight}
-            alt="foxknight"
-            testID="foxKnight"
-          />
+          <Avatar name="You" testID="foxKnight" />
         </div>
         <div className="actionIconAndValue">
           {/* constant value hard-coded until additonal functionality is complete*/}

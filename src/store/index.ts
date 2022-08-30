@@ -1,5 +1,9 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore, combineReducers, Middleware } from '@reduxjs/toolkit';
 import gameReducer from 'store/game/game.slice';
+import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
+import { watchAttackStrength } from './game/game.sagas';
+
+export const sagaMiddleware = createSagaMiddleware();
 
 export const rootReducer = combineReducers({
   game: gameReducer,
@@ -7,7 +11,14 @@ export const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
+  middleware: [sagaMiddleware],
 });
+
+const runSagas = (middleware: SagaMiddleware<Middleware>) => {
+  middleware.run(watchAttackStrength);
+  // Add another saga like this - middleware.run(nextSaga)
+};
+runSagas(sagaMiddleware);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

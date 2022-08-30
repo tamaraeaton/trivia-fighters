@@ -4,7 +4,8 @@ import {
   DialogStageType,
   DifficultyType,
   ActionType,
-  AttackStrengthType,
+  AttackPowerType,
+  QuestionType,
 } from '../game/game.slice';
 
 export const gameSelector = (state: RootState) => state.game;
@@ -27,15 +28,22 @@ export const actionSelector = createSelector(
 
 export const difficultySelector = createSelector(
   gameSelector,
-  (gameState): DifficultyType => gameState.difficulty
-);
-
-export const isCorrectSelector = createSelector(
-  gameSelector,
-  (gameState): boolean => gameState.isAnswered
+  (gameState): DifficultyType | undefined => gameState.difficulty
 );
 
 export const attackStrengthSelector = createSelector(
   gameSelector,
-  (gameState): AttackStrengthType => gameState.attackStrength
+  (gameState): AttackPowerType | undefined => gameState.attackStrength
 );
+
+export const questionSelector = createSelector(
+  gameSelector,
+  (gameState): QuestionType => gameState.question
+);
+
+export const isCorrectSelector = createSelector(
+  gameSelector,
+  (gameState): boolean | undefined => gameState.isCorrect
+);
+
+// selectors are variables to get specific pieces of state within redux store
