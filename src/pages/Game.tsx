@@ -55,7 +55,7 @@ const Game: React.FunctionComponent = () => {
     }
   }, [difficulty, navigate]);
 
-  const avatarDifficulty = () => {
+  const opponentAvatarPerDifficulty = () => {
     let name = 'Wizard Pig';
     let testID = 'wizardPig';
 
@@ -94,6 +94,7 @@ const Game: React.FunctionComponent = () => {
   return (
     <>
       <div className="healthBarContainer">
+        {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
           testID="playerHealthBar"
           isReversed={false}
@@ -101,6 +102,7 @@ const Game: React.FunctionComponent = () => {
           currentHealth={100}
         />
         <Round />
+        {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
           testID="opponentHealthBar"
           isReversed={true}
@@ -111,10 +113,13 @@ const Game: React.FunctionComponent = () => {
       <div className="avatarContainerWrapper">
         <div className="avatarActionGroup">
           <Action actionState={action} attackValue={10} />
-
           <Avatar name="You" testID="foxKnight" />
         </div>
-        <div className="nextButtonWrapper">
+        <div className="actionIconAndValue">
+          {/* constant value hard-coded until additonal functionality is complete*/}
+          <Action actionState={action} attackValue={10} />
+        </div>
+        <div className="nextButtonDialogMessageWrapper">
           <div className="dialogMessage" data-testid="dialogMessage">
             {actionMessage}
           </div>
@@ -124,9 +129,11 @@ const Game: React.FunctionComponent = () => {
             </div>
           )}
         </div>
-        <div className="avatarActionGroup group2">
+        <div className="action">
           <Action isReversed={true} actionState="attack" attackValue={10} />
-          {avatarDifficulty()}
+        </div>
+        <div className="avatarActionGroup group2">
+          {opponentAvatarPerDifficulty()}
         </div>
       </div>
       <Dialog>{dialogStages()}</Dialog>

@@ -16,7 +16,7 @@ const AttackDialog = () => {
       <IconButton
         testID="lightAttack"
         icon={<img src={SwordIcon} alt="shield" width="20px" height="20px" />}
-        size="m"
+        size="l"
         count={1}
         onClick={() => handleClick('light')}
       >
@@ -25,7 +25,7 @@ const AttackDialog = () => {
       <IconButton
         testID="mediumAttack"
         icon={<img src={SwordIcon} alt="shield" width="20px" height="20px" />}
-        size="m"
+        size="l"
         count={2}
         onClick={() => handleClick('medium')}
       >
@@ -34,7 +34,7 @@ const AttackDialog = () => {
       <IconButton
         testID="heavyAttack"
         icon={<img src={SwordIcon} alt="shield" width="20px" height="20px" />}
-        size="m"
+        size="l"
         count={3}
         onClick={() => handleClick('heavy')}
       >
