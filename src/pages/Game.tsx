@@ -145,12 +145,10 @@ const Game: React.FunctionComponent = () => {
       </div>
       <div className="avatarContainerWrapper">
         <div className="avatarActionGroup">
-          <Action actionState={action} attackValue={heroAttackValue} />
           <Avatar name="You" testID="foxKnight" />
         </div>
         <div className="actionIconAndValue">
-          {/* constant value hard-coded until additonal functionality is complete*/}
-          <Action actionState={action} attackValue={10} />
+          <Action actionState={action} attackValue={heroAttackValue} />
         </div>
         <div className="nextButtonDialogMessageWrapper">
           <div className="dialogMessage" data-testid="dialogMessage">
@@ -164,12 +162,15 @@ const Game: React.FunctionComponent = () => {
             </div>
           )}
         </div>
-        <div className="avatarActionGroup group2">
+        <div className="actionIconAndValue">
+          {/* check action value */}
           <Action
             isReversed={true}
             actionState="attack"
             attackValue={opponentAttackValue}
-          />
+          />{' '}
+        </div>
+        <div className="avatarActionGroup group2">
           {opponentAvatarPerDifficulty()}
         </div>
       </div>
