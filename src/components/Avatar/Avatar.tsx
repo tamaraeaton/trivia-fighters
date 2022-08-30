@@ -11,7 +11,7 @@ export interface AvatarProps {
 const Avatar: FunctionComponent<AvatarProps> = ({ name, testID }) => {
   const { avatarSVG } = useGetAvatar(name);
   return (
-    <div className="wrapper">
+    <div className="avatarWrapper">
       <div className="avatarContainer">
         <img className="avatarShadow" src={Shadow} alt="" />
         <img className="avatarShadowBase" src={ShadowBase} alt="" />

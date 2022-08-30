@@ -112,7 +112,6 @@ const Game: React.FunctionComponent = () => {
       </div>
       <div className="avatarContainerWrapper">
         <div className="avatarActionGroup">
-          <Action actionState={action} attackValue={10} />
           <Avatar name="You" testID="foxKnight" />
         </div>
         <div className="actionIconAndValue">
