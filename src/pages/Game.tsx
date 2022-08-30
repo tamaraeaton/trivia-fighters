@@ -168,7 +168,7 @@ const Game: React.FunctionComponent = () => {
             isReversed={true}
             actionState="attack"
             attackValue={opponentAttackValue}
-          />{' '}
+          />
         </div>
         <div className="avatarActionGroup group2">
           {opponentAvatarPerDifficulty()}

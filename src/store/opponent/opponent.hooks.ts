@@ -5,7 +5,7 @@ import {
   opponentSetDifficultySelector,
 } from './opponent.selectors';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { isCorrectSelector } from 'store/game/game.selectors';
+import { isCorrectSelector, actionSelector } from 'store/game/game.selectors';
 import { decreaseHeroCurrentHealth } from '../hero/hero.slice';
 
 export const useOpponentSelectors = () => {
@@ -26,10 +26,12 @@ export const useOpponentActions = () => {
   const dispatch = useAppDispatch();
   const isCorrect = useAppSelector(isCorrectSelector);
   const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
+  const action = useAppSelector(actionSelector);
 
   const applyOpponentAttackValue = () => {
-    if (!isCorrect) {
+    if (!isCorrect && action === 'block') {
       dispatch(decreaseHeroCurrentHealth(opponentAttackValue));
+      // TODO: need to reset attack value to 0 after dispatch
     }
   };
   return { applyOpponentAttackValue };
