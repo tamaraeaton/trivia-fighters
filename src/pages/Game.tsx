@@ -33,7 +33,7 @@ const Game: React.FunctionComponent = () => {
     isCorrect,
   } = useGameSelectors();
 
-  const { applyHeroAttackValue } = useHeroActions();
+  const { applyHeroAttackValue, increaseHeroHealth } = useHeroActions();
   const { opponentCurrentHealth, opponentAttackValue } = useOpponentSelectors();
   const { applyOpponentAttackValue } = useOpponentActions();
   const { heroCurrentHealth, heroAttackValue } = useHeroSelectors();
@@ -122,6 +122,7 @@ const Game: React.FunctionComponent = () => {
     incrementRound();
     setNextRoundAnswer(answerForNext);
     applyOpponentAttackValue();
+    increaseHeroHealth();
   };
 
   return (
