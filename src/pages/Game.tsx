@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
 import {
   useOpponentSelectors,
-  // useOpponentActions,
+  useOpponentActions,
 } from '../store/opponent/opponent.hooks';
 import { useHeroSelectors, useHeroActions } from '../store/hero/hero.hooks';
 
@@ -35,7 +35,7 @@ const Game: React.FunctionComponent = () => {
 
   const { applyHeroAttackValue, increaseHeroHealth } = useHeroActions();
   const { opponentCurrentHealth, opponentAttackValue } = useOpponentSelectors();
-  // const { applyOpponentAttackValue } = useOpponentActions();
+  const { applyOpponentAttackValue } = useOpponentActions();
   const { heroCurrentHealth, heroAttackValue } = useHeroSelectors();
   const [, { incrementRound }] = useGameRound();
   // 2-way binding in addition to dispatch
@@ -120,7 +120,7 @@ const Game: React.FunctionComponent = () => {
   const nextButtonHandleClick = () => {
     incrementRound();
     setNextRoundAnswer(answerForNext);
-    // applyOpponentAttackValue();
+    applyOpponentAttackValue();
     increaseHeroHealth();
   };
 
