@@ -13,7 +13,7 @@ const ActionDialog: FunctionComponent = () => {
       <IconButton
         testID="attack"
         icon={<img src={SwordIcon} alt="sword" width="20px" height="20px" />}
-        size="s"
+        size="xl"
         onClick={() => dispatch(attack())}
       >
         Attack
@@ -21,7 +21,7 @@ const ActionDialog: FunctionComponent = () => {
       <IconButton
         testID="block"
         icon={<img src={ShieldIcon} alt="shield" width="20px" height="20px" />}
-        size="s"
+        size="xl"
         onClick={() => dispatch(block())}
       >
         Block

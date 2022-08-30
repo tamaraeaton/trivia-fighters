@@ -1,10 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import './Game.scss';
-import {
-  useGameActions,
-  // useGameRound,
-  useGameSelectors,
-} from 'store/game/game.hooks';
+import { useGameActions, useGameSelectors } from 'store/game/game.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -20,7 +16,7 @@ import { useOpponentSelectors } from '../store/opponent/opponent.hooks';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  const { setAnswered } = useGameActions();
+  const { submitAnswer } = useGameActions();
   const {
     dialogStage,
     action,
@@ -72,7 +68,7 @@ const Game: React.FunctionComponent = () => {
     }
   }, [difficulty, navigate]);
 
-  const avatarDifficulty = () => {
+  const opponentAvatarPerDifficulty = () => {
     let name = 'Wizard Pig';
     let testID = 'wizardPig';
 
@@ -86,7 +82,6 @@ const Game: React.FunctionComponent = () => {
         testID = 'dragonSeth';
         break;
     }
-
     return <Avatar name={name} testID={testID} />;
   };
 
@@ -102,7 +97,7 @@ const Game: React.FunctionComponent = () => {
           options={question.choices}
           answer={question.answer}
           onAnswer={(theOptionOnTheButton) => {
-            setAnswered(theOptionOnTheButton);
+            submitAnswer(theOptionOnTheButton);
           }}
         />
       );
@@ -112,6 +107,7 @@ const Game: React.FunctionComponent = () => {
   return (
     <>
       <div className="healthBarContainer">
+        {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
           testID="playerHealthBar"
           isReversed={false}
@@ -119,6 +115,7 @@ const Game: React.FunctionComponent = () => {
           currentHealth={100}
         />
         <Round />
+        {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
           testID="opponentHealthBar"
           isReversed={true}
@@ -131,7 +128,11 @@ const Game: React.FunctionComponent = () => {
           <Action actionState={action} attackValue={heroAttackValue} />
           <Avatar name="You" testID="foxKnight" />
         </div>
-        <div className="nextButtonWrapper">
+        <div className="actionIconAndValue">
+          {/* constant value hard-coded until additonal functionality is complete*/}
+          <Action actionState={action} attackValue={10} />
+        </div>
+        <div className="nextButtonDialogMessageWrapper">
           <div className="dialogMessage" data-testid="dialogMessage">
             {actionMessage}
           </div>
@@ -141,9 +142,11 @@ const Game: React.FunctionComponent = () => {
             </div>
           )}
         </div>
-        <div className="avatarActionGroup group2">
+        <div className="action">
           <Action isReversed={true} actionState="attack" attackValue={10} />
-          {avatarDifficulty()}
+        </div>
+        <div className="avatarActionGroup group2">
+          {opponentAvatarPerDifficulty()}
         </div>
       </div>
       <Dialog>{dialogStages()}</Dialog>

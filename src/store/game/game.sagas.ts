@@ -4,7 +4,7 @@ import { call, put } from 'redux-saga/effects';
 import { fetchQuestions } from '../../APIs/fetchQuestions';
 import { attackStrength, AttackPowerType, question } from './game.slice';
 
-// all sagas are generator functions
+// generator function
 export function* getQuestions(action: PayloadAction<AttackPowerType>): any {
   const res = yield call(fetchQuestions, action.payload);
   const questionRes = res.results[0];
