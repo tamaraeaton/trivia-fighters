@@ -5,17 +5,17 @@ export const heroSelector = (state: RootState) => state.hero;
 
 export const maxHealthSelector = createSelector(
   heroSelector,
-  (heroState): number | undefined => heroState.maxHealth
+  (hero): number | undefined => hero.maxHealth
 );
 
 export const currentHealthSelector = createSelector(
   heroSelector,
-  (heroState): number | undefined => heroState.currentHealth
+  (hero): number => hero.currentHealth
 );
 
 export const heroAttackValueSelector = createSelector(
   heroSelector,
-  (heroState): number | undefined => heroState.attackValue
+  (hero): number | undefined => hero.attackValue
 );
 
 // selector is for action

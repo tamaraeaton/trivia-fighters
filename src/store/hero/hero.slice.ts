@@ -24,13 +24,23 @@ export const heroSlice = createSlice({
       state.currentHealth = action.payload;
     },
 
+    decreaseHeroCurrentHealth: (state, action: PayloadAction<number>) => {
+      // when blocking and answer is not correct, subtract opponent.attackValue from hero.currentHealth
+      state.currentHealth = state.currentHealth - action.payload;
+    },
+
     attackValue: (state, action: PayloadAction<number>) => {
       state.attackValue = action.payload;
     },
   },
 });
 
-export const { maxHealth, currentHealth, attackValue } = heroSlice.actions;
+export const {
+  maxHealth,
+  currentHealth,
+  attackValue,
+  decreaseHeroCurrentHealth,
+} = heroSlice.actions;
 
 export default heroSlice.reducer;
 

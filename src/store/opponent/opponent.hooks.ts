@@ -4,7 +4,9 @@ import {
   opponentAttackValueSelector,
   opponentSetDifficultySelector,
 } from './opponent.selectors';
-import { useAppSelector } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { isCorrectSelector } from 'store/game/game.selectors';
+import { decreaseHeroCurrentHealth } from '../hero/hero.slice';
 
 export const useOpponentSelectors = () => {
   const opponentMaxHealth = useAppSelector(opponentMaxHealthSelector);
@@ -18,4 +20,20 @@ export const useOpponentSelectors = () => {
     opponentAttackValue,
     opponentSetDifficulty,
   };
+};
+
+export const useOpponentActions = () => {
+  const dispatch = useAppDispatch();
+  const isCorrect = useAppSelector(isCorrectSelector);
+  const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
+
+  const applyOpponentAttackValue = () => {
+    // * If the answer is not correct
+    // * Subtract opponent.attackValue from hero.currentHealth
+    // *** Attack value will be based on difficulty, which will be done in the next Story - for this Story, use a hard-coded 5
+    if (!isCorrect) {
+      dispatch(decreaseHeroCurrentHealth(opponentAttackValue));
+    }
+  };
+  return { applyOpponentAttackValue };
 };

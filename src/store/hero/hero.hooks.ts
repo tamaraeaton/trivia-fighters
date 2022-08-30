@@ -31,7 +31,7 @@ export const useHeroActions = () => {
   const isCorrect = useAppSelector(isCorrectSelector);
   const heroAttackValue = useAppSelector(heroAttackValueSelector);
 
-  const applyAttackValue = () => {
+  const applyHeroAttackValue = () => {
     if (action === 'attack') {
       if (isCorrect) {
         if (attackStrengthValue === 'light') {
@@ -50,12 +50,5 @@ export const useHeroActions = () => {
     }
   };
 
-  return { applyAttackValue };
-};
-
-export const useHeroValues = () => {
-  const heroAttackValue = useAppSelector(heroAttackValueSelector);
-  return {
-    heroAttackValue,
-  };
+  return { applyHeroAttackValue };
 };

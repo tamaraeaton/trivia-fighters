@@ -15,8 +15,11 @@ import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
-import { useHeroActions, useHeroValues } from 'store/hero/hero.hooks';
-import { useOpponentSelectors } from '../store/opponent/opponent.hooks';
+import {
+  useOpponentSelectors,
+  useOpponentActions,
+} from '../store/opponent/opponent.hooks';
+import { useHeroSelectors, useHeroActions } from '../store/hero/hero.hooks';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
@@ -30,15 +33,17 @@ const Game: React.FunctionComponent = () => {
     isCorrect,
   } = useGameSelectors();
 
-  const { applyAttackValue } = useHeroActions();
-  const { opponentCurrentHealth } = useOpponentSelectors();
-  const { heroAttackValue } = useHeroValues();
+  const { applyHeroAttackValue } = useHeroActions();
+  const { opponentCurrentHealth, opponentAttackValue } = useOpponentSelectors();
+  const { applyOpponentAttackValue } = useOpponentActions();
+  const { heroCurrentHealth, heroAttackValue } = useHeroSelectors();
   const [, { incrementRound }] = useGameRound();
+  // 2-way binding in addition to dispatch
   const [answerForNext, setAnswerForNext] = useState('');
 
   useEffect(() => {
     if (isCorrect === true || isCorrect === false) {
-      applyAttackValue();
+      applyHeroAttackValue();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCorrect]);
@@ -116,6 +121,7 @@ const Game: React.FunctionComponent = () => {
   const nextButtonHandleClick = () => {
     incrementRound();
     setNextRoundAnswer(answerForNext);
+    applyOpponentAttackValue();
   };
 
   return (
@@ -125,7 +131,7 @@ const Game: React.FunctionComponent = () => {
           testID="playerHealthBar"
           isReversed={false}
           maxHealth={100}
-          currentHealth={100}
+          currentHealth={heroCurrentHealth}
         />
         <Round />
         <HealthBar
@@ -153,7 +159,11 @@ const Game: React.FunctionComponent = () => {
           )}
         </div>
         <div className="avatarActionGroup group2">
-          <Action isReversed={true} actionState="attack" attackValue={10} />
+          <Action
+            isReversed={true}
+            actionState="attack"
+            attackValue={opponentAttackValue}
+          />
           {avatarDifficulty()}
         </div>
       </div>

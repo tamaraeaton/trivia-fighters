@@ -11,7 +11,8 @@ export interface OpponentState {
 export const initialState: OpponentState = {
   maxHealth: 100,
   currentHealth: 100,
-  attackValue: 0,
+  // hardcoded to 5 for now on Attacking story
+  attackValue: 5,
   difficulty: 'easy',
 };
 
@@ -32,7 +33,7 @@ export const opponentSlice = createSlice({
       state.currentHealth = Math.max(state.currentHealth - action.payload, 0);
     },
 
-    setAttackValue: (state, action: PayloadAction<number>) => {
+    attackValue: (state, action: PayloadAction<number>) => {
       state.attackValue = action.payload;
     },
 
@@ -45,7 +46,7 @@ export const opponentSlice = createSlice({
 export const {
   setMaxHealth,
   setCurrentHealth,
-  setAttackValue,
+  attackValue,
   decreaseOpponentHealth,
 } = opponentSlice.actions;
 

@@ -67,7 +67,8 @@ export const gameSlice = createSlice({
     answered: (state, action: PayloadAction<string>) => {
       const option = action.payload;
       state.dialogStage = 'answered';
-      state.selectedOption = option;
+      // not needed due to passing payload directly into answeredVerify
+      // state.selectedOption = option;
 
       const answer = state.question.answer;
       state.isCorrect = answer === option;
