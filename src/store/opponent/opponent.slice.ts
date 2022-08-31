@@ -10,9 +10,9 @@ export interface OpponentState {
 
 export const initialState: OpponentState = {
   maxHealth: 100,
-  currentHealth: 80,
+  currentHealth: 100,
   // hardcoded to 5 for now on Attacking story
-  attackValue: 10,
+  attackValue: 0,
   difficulty: 'easy',
 };
 

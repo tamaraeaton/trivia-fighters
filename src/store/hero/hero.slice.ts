@@ -8,8 +8,8 @@ export interface HeroState {
 
 export const initialState: HeroState = {
   maxHealth: 100,
-  currentHealth: 80,
-  attackValue: 5,
+  currentHealth: 100,
+  attackValue: 0,
 };
 
 export const heroSlice = createSlice({
@@ -34,7 +34,7 @@ export const heroSlice = createSlice({
     },
 
     attackValue: (state, action: PayloadAction<number>) => {
-      state.attackValue = action.payload;
+      state.attackValue = state.attackValue + action.payload;
     },
   },
 });

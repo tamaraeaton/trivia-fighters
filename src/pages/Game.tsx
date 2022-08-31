@@ -51,6 +51,7 @@ const Game: React.FunctionComponent = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCorrect]);
+
   const actionMessage = useMemo(() => {
     if (dialogStage === 'attacking') {
       return 'Choose an attack';
@@ -111,9 +112,10 @@ const Game: React.FunctionComponent = () => {
           options={question.choices}
           answer={question.answer}
           onAnswer={(theOptionOnTheButton) => {
-            // sending payload to the answered slice when option is clicked
+            // sending payload to the answered slice to use isCorrect
             setAnswered(theOptionOnTheButton);
-            // sending payload to the answeredVerify slice when Next button is clicked
+            // NOTE: applyHeroAttackValue is being used in useEffect, this will increase attack value
+            // two-way binding to set answer to use on handleClick for Next button
             setAnswerForNext(theOptionOnTheButton);
           }}
         />
@@ -126,14 +128,10 @@ const Game: React.FunctionComponent = () => {
     incrementRound();
     // two way binding
     setNextRoundAnswer(answerForNext);
-    // TODO:
+    // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
     applyOpponentAttackValue();
     // when I block and I get the anwer correct, it will increase my health
     increaseHeroHealth();
-
-    // TODO: clicking Next should bring up the action dialog
-    // how do I change the dialogStage
-    //   dispatch(dialogStage('action'))
   };
 
   return (

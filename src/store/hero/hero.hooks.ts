@@ -31,8 +31,9 @@ export const useHeroActions = () => {
   const isCorrect = useAppSelector(isCorrectSelector);
   const heroAttackValue = useAppSelector(heroAttackValueSelector);
 
+  // this is when you are on the question dialog, not clicking Next
   const applyHeroAttackValue = () => {
-    if (action === 'attack') {
+    if (action === 'attack' && isCorrect !== undefined) {
       if (isCorrect) {
         if (attackStrengthValue === 'light') {
           dispatch(attackValue(5));
