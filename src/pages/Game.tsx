@@ -15,7 +15,7 @@ import AttackDialog from 'components/AttackDialog/AttackDialog';
 import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import Button from '../components/Button/Button';
-import AriaRoundMessage from 'aria/AriaRoundMessage';
+import AriaRoundMessage from 'components/AriaScreenReader/AriaRoundMessage';
 import {
   useOpponentSelectors,
   useOpponentActions,
