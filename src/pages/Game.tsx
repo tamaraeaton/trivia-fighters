@@ -29,7 +29,6 @@ const Game: React.FunctionComponent = () => {
   const { applyAttackValue } = useHeroActions();
   const { heroAttackValue } = useHeroSelectors();
   const { opponentCurrentHealth } = useOpponentSelectors();
-  // const [, { incrementRound }] = useGameRound();
 
   useEffect(() => {
     if (isCorrect === true || isCorrect === false) {
@@ -128,7 +127,11 @@ const Game: React.FunctionComponent = () => {
           <Avatar name="You" testID="foxKnight" />
         </div>
         <div className="actionIconAndValue">
-          <Action actionState={action} attackValue={heroAttackValue} />
+          <Action
+            actionState={action}
+            attackValue={heroAttackValue}
+            testID="player"
+          />
         </div>
         <div className="nextButtonDialogMessageWrapper">
           <div className="dialogMessage" data-testid="dialogMessage">
@@ -141,7 +144,12 @@ const Game: React.FunctionComponent = () => {
           )}
         </div>
         <div className="action">
-          <Action isReversed={true} actionState="attack" attackValue={10} />
+          <Action
+            isReversed={true}
+            actionState="attack"
+            attackValue={10}
+            testID="opponent"
+          />
         </div>
         <div className="avatarActionGroup group2">
           {opponentAvatarPerDifficulty()}

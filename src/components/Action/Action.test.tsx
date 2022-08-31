@@ -2,40 +2,50 @@ import { render, screen } from '@testing-library/react';
 import Action from './Action';
 
 describe('Action Component', () => {
-  it('should render sword icon', () => {
-    render(<Action isReversed={false} actionState="attack" attackValue={3} />);
-    expect(screen.getByTestId('attackBlock')).toHaveAttribute(
+  it('player should render sword icon if attack', () => {
+    render(
+      <Action
+        isReversed={false}
+        actionState="attack"
+        attackValue={3}
+        testID="player"
+      />
+    );
+    expect(screen.getByTestId('player-icon')).toHaveAttribute(
       'src',
       'sword.svg'
     );
   });
 
-  it('should render shield icon', () => {
-    render(<Action isReversed={false} actionState="block" />);
-    expect(screen.getByTestId('attackBlock')).toHaveAttribute(
+  it('player should render shield icon if block', () => {
+    render(<Action isReversed={false} actionState="block" testID="player" />);
+    expect(screen.getByTestId('player-icon')).toHaveAttribute(
       'src',
       'shield.svg'
     );
   });
 
-  it('sword should render reversed if reversed is true', () => {
+  it('opponent sword should render reversed sword if attack', () => {
     render(
-      <Action isReversed={true} actionState="attack" attackValue={5}></Action>
+      <Action
+        isReversed={true}
+        actionState="attack"
+        attackValue={5}
+        testID="opponent"
+      ></Action>
     );
-    expect(screen.getByTestId('attackBlock')).toHaveClass('iconReversed');
+    expect(screen.getByTestId('opponent-icon')).toHaveClass('iconReversed');
   });
 
-  it('should should not render reversed if reversed is false', () => {
+  it('player should render attack value 5', () => {
     render(
-      <Action isReversed={false} actionState="attack" attackValue={5}></Action>
+      <Action
+        isReversed={false}
+        actionState="attack"
+        attackValue={5}
+        testID="player"
+      ></Action>
     );
-    expect(screen.getByTestId('attackBlock')).not.toHaveClass('iconReversed');
-  });
-
-  it('should render 5 if attack value is 5', () => {
-    render(
-      <Action isReversed={false} actionState="attack" attackValue={5}></Action>
-    );
-    expect(screen.getByTestId('attackvalue')).toHaveTextContent('5');
+    expect(screen.getByTestId('player-attackvalue')).toHaveTextContent('5');
   });
 });

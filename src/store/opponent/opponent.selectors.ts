@@ -6,7 +6,7 @@ export const opponentSelector = (state: RootState) => state.opponent;
 
 export const opponentMaxHealthSelector = createSelector(
   opponentSelector,
-  (opponentState): number | undefined => opponentState.maxHealth
+  (opponentState): number => opponentState.maxHealth
 );
 
 export const opponentCurrentHealthSelector = createSelector(
@@ -16,7 +16,7 @@ export const opponentCurrentHealthSelector = createSelector(
 
 export const opponentAttackValueSelector = createSelector(
   opponentSelector,
-  (opponentState): number | undefined => opponentState.attackValue
+  (opponentState): number => opponentState.attackValue
 );
 
 export const opponentSetDifficultySelector = createSelector(
