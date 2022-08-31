@@ -32,7 +32,7 @@ export type QuestionType = {
 
 export const initialState: GameState = {
   round: 1,
-  dialogStage: 'difficulty',
+  dialogStage: 'action',
   action: 'none',
   question: { text: '', answer: '', choices: [] },
 };

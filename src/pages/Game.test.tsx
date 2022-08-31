@@ -1,7 +1,9 @@
 import { screen } from '@testing-library/react';
 import { MOCK_APP_STATE } from 'store/mocks/app-state.mocks';
+import { MOCK_HERO_STATE } from 'store/mocks/hero.mocks';
 import { renderWithProviders } from 'testHelpers';
 import Game from './Game';
+import userEvent from '@testing-library/user-event';
 
 describe('Game Page', () => {
   it('player health bar should render', () => {
@@ -44,6 +46,7 @@ describe('Game Page', () => {
       'Choose an attack'
     );
   });
+
   it('should render Correct or Incorrect depending on selected option equalling answer', () => {
     renderWithProviders(<Game />, {
       preloadedState: {
@@ -54,5 +57,25 @@ describe('Game Page', () => {
       },
     });
     expect(screen.getAllByTestId('dialogMessage')).toBeDefined();
+  });
+
+  it('should render attack value increased', async () => {
+    renderWithProviders(<Game />, {
+      preloadedState: {
+        game: {
+          ...MOCK_APP_STATE.game,
+          action: 'attack',
+          dialogStage: 'answering',
+          attackStrength: 'light',
+          isCorrect: true,
+        },
+        hero: MOCK_HERO_STATE,
+      },
+    });
+
+    const correctAnswerButton = screen.getByText('Depends on the planet');
+    await userEvent.click(correctAnswerButton);
+    const attackValue = await screen.findAllByTestId('attackvalue');
+    expect(attackValue[0].innerHTML).toEqual('5');
   });
 });

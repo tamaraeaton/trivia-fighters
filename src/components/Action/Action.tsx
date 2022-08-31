@@ -7,12 +7,14 @@ export interface ActionProps {
   isReversed?: boolean;
   actionState: 'none' | 'block' | 'attack';
   attackValue?: number;
+  testID: string;
 }
 
 const Action: FunctionComponent<ActionProps> = ({
   isReversed,
   actionState,
   attackValue,
+  testID,
 }) => {
   if (actionState === 'none') {
     return null;
@@ -23,18 +25,18 @@ const Action: FunctionComponent<ActionProps> = ({
   const iconSource = isAttack ? SwordIcon : isBlock ? ShieldIcon : undefined;
 
   return (
-    <div>
+    <div data-testid={testID}>
       {isAttack && (
-        <p data-testid="attackvalue" className="attackValue">
+        <p data-testid={`${testID}-attackvalue`} className="attackValue">
           {attackValue}
         </p>
       )}
       {iconSource && (
         <img
-          data-testid="attackBlock"
+          data-testid={`${testID}-icon`}
           src={iconSource}
           className={isReversed ? 'iconReversed' : undefined}
-          alt="attack icon"
+          alt="attack/block icon"
         />
       )}
     </div>

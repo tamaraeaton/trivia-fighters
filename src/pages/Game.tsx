@@ -11,6 +11,8 @@ import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
+import { useHeroActions, useHeroSelectors } from 'store/hero/hero.hooks';
+import { useOpponentSelectors } from '../store/opponent/opponent.hooks';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
@@ -24,6 +26,16 @@ const Game: React.FunctionComponent = () => {
     isCorrect,
   } = useGameSelectors();
 
+  const { applyAttackValue } = useHeroActions();
+  const { heroAttackValue } = useHeroSelectors();
+  const { opponentCurrentHealth } = useOpponentSelectors();
+
+  useEffect(() => {
+    if (isCorrect === true || isCorrect === false) {
+      applyAttackValue();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCorrect]);
   const actionMessage = useMemo(() => {
     if (dialogStage === 'attacking') {
       return 'Choose an attack';
@@ -107,7 +119,7 @@ const Game: React.FunctionComponent = () => {
           testID="opponentHealthBar"
           isReversed={true}
           maxHealth={150}
-          currentHealth={60}
+          currentHealth={opponentCurrentHealth}
         />
       </div>
       <div className="avatarContainerWrapper">
@@ -115,8 +127,11 @@ const Game: React.FunctionComponent = () => {
           <Avatar name="You" testID="foxKnight" />
         </div>
         <div className="actionIconAndValue">
-          {/* constant value hard-coded until additonal functionality is complete*/}
-          <Action actionState={action} attackValue={10} />
+          <Action
+            actionState={action}
+            attackValue={heroAttackValue}
+            testID="player"
+          />
         </div>
         <div className="nextButtonDialogMessageWrapper">
           <div className="dialogMessage" data-testid="dialogMessage">
@@ -129,7 +144,12 @@ const Game: React.FunctionComponent = () => {
           )}
         </div>
         <div className="action">
-          <Action isReversed={true} actionState="attack" attackValue={10} />
+          <Action
+            isReversed={true}
+            actionState="attack"
+            attackValue={10}
+            testID="opponent"
+          />
         </div>
         <div className="avatarActionGroup group2">
           {opponentAvatarPerDifficulty()}
