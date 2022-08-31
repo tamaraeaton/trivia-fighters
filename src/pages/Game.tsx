@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import './Game.scss';
+import { useNavigate } from 'react-router-dom';
 import {
   useGameActions,
   useGameRound,
@@ -13,8 +14,8 @@ import Dialog from 'components/Dialog/Dialog';
 import AttackDialog from 'components/AttackDialog/AttackDialog';
 import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
-import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
+import AriaRoundMessage from 'aria/AriaRoundMessage';
 import {
   useOpponentSelectors,
   useOpponentActions,
@@ -33,13 +34,17 @@ const Game: React.FunctionComponent = () => {
     isCorrect,
   } = useGameSelectors();
 
+  const [currentRound] = useGameRound();
   const { applyHeroAttackValue, increaseHeroHealth } = useHeroActions();
-  const { opponentCurrentHealth, opponentAttackValue } = useOpponentSelectors();
+  const { opponentCurrentHealth, opponentMaxHealth, opponentAttackValue } =
+    useOpponentSelectors();
   const { applyOpponentAttackValue } = useOpponentActions();
-  const { heroCurrentHealth, heroAttackValue } = useHeroSelectors();
+  const { heroCurrentHealth, heroMaxHealth, heroAttackValue } =
+    useHeroSelectors();
   const [, { incrementRound }] = useGameRound();
   // 2-way binding in addition to dispatch
   const [answerForNext, setAnswerForNext] = useState('');
+  // const [isRoundComplete, setIsRoundComplete] = useState(false);
 
   useEffect(() => {
     if (isCorrect === true || isCorrect === false) {
@@ -107,9 +112,9 @@ const Game: React.FunctionComponent = () => {
           options={question.choices}
           answer={question.answer}
           onAnswer={(theOptionOnTheButton) => {
-            // capturing for the answered
+            // sending payload to the answered slice when option is clicked
             setAnswered(theOptionOnTheButton);
-            //capturing for the Next button to send to answeredVerify
+            // sending payload to the answeredVerify slice when Next button is clicked
             setAnswerForNext(theOptionOnTheButton);
           }}
         />
@@ -117,11 +122,19 @@ const Game: React.FunctionComponent = () => {
     }
   };
 
+  // clicking this will end the round, perform all calculations, and set the next round
   const nextButtonHandleClick = () => {
     incrementRound();
+    // two way binding
     setNextRoundAnswer(answerForNext);
+    // TODO:
     applyOpponentAttackValue();
+    // when I block and I get the anwer correct, it will increase my health
     increaseHeroHealth();
+
+    // TODO: clicking Next should bring up the action dialog
+    // how do I change the dialogStage
+    //   dispatch(dialogStage('action'))
   };
 
   return (
@@ -134,7 +147,7 @@ const Game: React.FunctionComponent = () => {
           maxHealth={100}
           currentHealth={heroCurrentHealth}
         />
-        <Round />
+        <Round currentRound={currentRound} />
         {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
           testID="opponentHealthBar"
@@ -175,6 +188,13 @@ const Game: React.FunctionComponent = () => {
         </div>
       </div>
       <Dialog>{dialogStages()}</Dialog>
+      <AriaRoundMessage
+        heroCurrentHealth={heroCurrentHealth}
+        heroMaxHealth={heroMaxHealth}
+        opponentCurrentHealth={opponentCurrentHealth}
+        opponentMaxHealth={opponentMaxHealth}
+        currentRound={currentRound}
+      />
     </>
   );
 };

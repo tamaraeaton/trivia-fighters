@@ -8,8 +8,8 @@ export interface HeroState {
 
 export const initialState: HeroState = {
   maxHealth: 100,
-  currentHealth: 100,
-  attackValue: 0,
+  currentHealth: 80,
+  attackValue: 5,
 };
 
 export const heroSlice = createSlice({
@@ -28,6 +28,7 @@ export const heroSlice = createSlice({
       state.currentHealth = state.currentHealth - action.payload;
     },
 
+    // when I block, if the answer is correct, I get 10 added to my current health
     increaseHeroCurrentHealth: (state, action: PayloadAction) => {
       state.currentHealth = state.currentHealth + 10;
     },

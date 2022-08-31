@@ -6,7 +6,7 @@ import {
 } from './opponent.selectors';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { isCorrectSelector, actionSelector } from 'store/game/game.selectors';
-import { decreaseHeroCurrentHealth } from '../hero/hero.slice';
+import { decreaseHeroCurrentHealth, attackValue } from '../hero/hero.slice';
 
 export const useOpponentSelectors = () => {
   const opponentMaxHealth = useAppSelector(opponentMaxHealthSelector);
@@ -31,7 +31,9 @@ export const useOpponentActions = () => {
   const applyOpponentAttackValue = () => {
     if (!isCorrect && action === 'block') {
       dispatch(decreaseHeroCurrentHealth(opponentAttackValue));
-      // TODO: need to reset attack value to 0 after dispatch
+      dispatch(attackValue(0));
+      // change dialog stage to action
+      // dispatch(answered()); ? it needs a payload.
     }
   };
   return { applyOpponentAttackValue };
