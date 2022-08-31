@@ -44,7 +44,6 @@ const Game: React.FunctionComponent = () => {
   const [, { incrementRound }] = useGameRound();
   // 2-way binding in addition to dispatch
   const [answerForNext, setAnswerForNext] = useState('');
-  // const [isRoundComplete, setIsRoundComplete] = useState(false);
 
   useEffect(() => {
     if (isCorrect === true || isCorrect === false) {
