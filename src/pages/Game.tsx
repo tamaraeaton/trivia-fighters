@@ -158,7 +158,11 @@ const Game: React.FunctionComponent = () => {
           <Avatar name="You" testID="foxKnight" />
         </div>
         <div className="actionIconAndValue">
-          <Action actionState={action} attackValue={heroAttackValue} />
+          <Action
+            actionState={action}
+            attackValue={heroAttackValue}
+            testID="player"
+          />
         </div>
         <div className="nextButtonDialogMessageWrapper">
           <div className="dialogMessage" data-testid="dialogMessage">
@@ -178,6 +182,7 @@ const Game: React.FunctionComponent = () => {
             isReversed={true}
             actionState="attack"
             attackValue={opponentAttackValue}
+            testID="opponent"
           />
         </div>
         <div className="avatarActionGroup group2">

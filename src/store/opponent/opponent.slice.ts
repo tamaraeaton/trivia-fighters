@@ -25,7 +25,7 @@ export const opponentSlice = createSlice({
     },
 
     setCurrentHealth: (state, action: PayloadAction<number>) => {
-      // Math.min to clamp
+      // Math.min to clamp (comment put here for future ticket)
       state.currentHealth = action.payload;
     },
     decreaseOpponentHealth: (state, action: PayloadAction<number>) => {
