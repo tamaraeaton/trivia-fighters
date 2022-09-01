@@ -42,7 +42,7 @@ const Game: React.FunctionComponent = () => {
   const { heroCurrentHealth, heroMaxHealth, heroAttackValue } =
     useHeroSelectors();
   const [, { incrementRound }] = useGameRound();
-  // 2-way binding in addition to dispatch
+  // local useState in addition to dispatch
   const [answerForNext, setAnswerForNext] = useState('');
 
   useEffect(() => {
@@ -115,7 +115,7 @@ const Game: React.FunctionComponent = () => {
             // sending payload to the answered slice to use isCorrect
             setAnswered(theOptionOnTheButton);
             // NOTE: applyHeroAttackValue is being used in useEffect, this will increase attack value
-            // two-way binding to set answer to use on handleClick for Next button
+            // local useState to set answer to use on handleClick for Next button
             setAnswerForNext(theOptionOnTheButton);
           }}
         />
@@ -126,7 +126,7 @@ const Game: React.FunctionComponent = () => {
   // clicking this will end the round, perform all calculations, and set the next round
   const nextButtonHandleClick = () => {
     incrementRound();
-    // two way binding
+    // local useState captures this
     setNextRoundAnswer(answerForNext);
     // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
     applyOpponentAttackValue();
@@ -139,7 +139,7 @@ const Game: React.FunctionComponent = () => {
       <div className="healthBarContainer">
         {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
-          testID="playerHealthBar"
+          testID="player"
           isReversed={false}
           maxHealth={100}
           currentHealth={heroCurrentHealth}
@@ -147,7 +147,7 @@ const Game: React.FunctionComponent = () => {
         <Round currentRound={currentRound} />
         {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
-          testID="opponentHealthBar"
+          testID="opponent"
           isReversed={true}
           maxHealth={150}
           currentHealth={opponentCurrentHealth}
@@ -177,7 +177,6 @@ const Game: React.FunctionComponent = () => {
           )}
         </div>
         <div className="actionIconAndValue">
-          {/* check action value */}
           <Action
             isReversed={true}
             actionState="attack"

@@ -78,14 +78,9 @@ export const gameSlice = createSlice({
       if (isAnswerCorrect && state.dialogStage === 'answered') {
         state.dialogStage = 'attacking';
       }
-      if (isAnswerCorrect && state.action === 'block') {
+      if ((isAnswerCorrect && state.action === 'block') || !isAnswerCorrect) {
         state.dialogStage = 'action';
         state.action = 'none';
-      }
-      // combine into Or later
-      if (!isAnswerCorrect) {
-        state.action = 'none';
-        state.dialogStage = 'action';
       }
       state.isCorrect = undefined;
     },

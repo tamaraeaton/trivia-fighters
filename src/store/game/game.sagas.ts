@@ -11,6 +11,7 @@ import { attackStrength, AttackPowerType, question, block } from './game.slice';
 export function* getQuestionsPerDifficulty(
   action: PayloadAction<AttackPowerType>
 ): any {
+  // yields are steps/pause (like async/await)
   const res = yield call(fetchQuestionsPerDifficulty, action.payload);
   const questionRes = res.results[0];
   const choices = [

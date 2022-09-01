@@ -29,11 +29,9 @@ export const useOpponentActions = () => {
   const action = useAppSelector(actionSelector);
 
   const applyOpponentAttackValue = () => {
-    if (!isCorrect && action === 'block') {
+    if (!isCorrect && (action === 'block' || action === 'attack')) {
       dispatch(decreaseHeroCurrentHealth(opponentAttackValue));
       dispatch(attackValue(0));
-      // change dialog stage to action
-      // dispatch(answered()); ? it needs a payload.
     }
   };
   return { applyOpponentAttackValue };
