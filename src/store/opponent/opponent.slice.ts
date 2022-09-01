@@ -1,30 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DifficultyType } from 'store/game/game.slice';
-
 export interface OpponentState {
   maxHealth: number;
   currentHealth: number;
   attackValue: number;
-  difficulty: DifficultyType;
 }
 
 export const initialState: OpponentState = {
   maxHealth: 100,
   currentHealth: 100,
-  // hardcoded to 5 for now on Attacking story
-  attackValue: 5,
-  difficulty: 'easy',
+  attackValue: 0,
 };
 
 export const opponentSlice = createSlice({
   name: 'opponent',
   initialState,
   reducers: {
-    setMaxHealth: (state, action: PayloadAction<number>) => {
+    maxHealth: (state, action: PayloadAction<number>) => {
       state.maxHealth = action.payload;
     },
 
-    setCurrentHealth: (state, action: PayloadAction<number>) => {
+    currentHealth: (state, action: PayloadAction<number>) => {
       // Math.min to clamp (comment put here for future ticket)
       state.currentHealth = action.payload;
     },
@@ -36,18 +31,10 @@ export const opponentSlice = createSlice({
     attackValue: (state, action: PayloadAction<number>) => {
       state.attackValue = action.payload;
     },
-
-    setDifficulty: (state, action: PayloadAction<DifficultyType>) => {
-      state.difficulty = action.payload;
-    },
   },
 });
 
-export const {
-  setMaxHealth,
-  setCurrentHealth,
-  attackValue,
-  decreaseOpponentHealth,
-} = opponentSlice.actions;
+export const { maxHealth, currentHealth, attackValue, decreaseOpponentHealth } =
+  opponentSlice.actions;
 
 export default opponentSlice.reducer;

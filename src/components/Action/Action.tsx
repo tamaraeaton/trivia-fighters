@@ -22,11 +22,15 @@ const Action: FunctionComponent<ActionProps> = ({
 
   const isAttack = actionState === 'attack';
   const isBlock = actionState === 'block';
-  const iconSource = isAttack ? SwordIcon : isBlock ? ShieldIcon : undefined;
+  const iconSource = isAttack
+    ? SwordIcon
+    : isBlock && !isReversed
+    ? ShieldIcon
+    : SwordIcon;
 
   return (
     <div data-testid={testID}>
-      {isAttack && (
+      {(isAttack || isReversed) && (
         <p data-testid={`${testID}-attackvalue`} className="attackValue">
           {attackValue}
         </p>

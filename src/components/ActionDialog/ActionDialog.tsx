@@ -3,18 +3,27 @@ import './ActionDialog.scss';
 import IconButton from '../Button/IconButton';
 import SwordIcon from '../../assets/images/sword.svg';
 import ShieldIcon from '../../assets/images/shield.svg';
-import { useAppDispatch } from '../../store/hooks';
-import { attack, block } from 'store/game/game.slice';
+import { useGameActions } from '../../store/game/game.hooks';
+import { useOpponentActions } from '../../store/opponent/opponent.hooks';
+import { useGameSelectors } from '../../store/game/game.hooks';
 
 const ActionDialog: FunctionComponent = () => {
-  const dispatch = useAppDispatch();
+  const { setActionToBlock, setActionToAttack } = useGameActions();
+  const { setOpponentAttackValue } = useOpponentActions();
+  const { difficulty } = useGameSelectors();
+
   return (
     <div className="actionDialogWrapper" data-testid="actionDialog">
       <IconButton
         testID="attack"
         icon={<img src={SwordIcon} alt="sword" width="20px" height="20px" />}
         size="xl"
-        onClick={() => dispatch(attack())}
+        onClick={() => {
+          setActionToAttack();
+          if (difficulty !== undefined) {
+            setOpponentAttackValue(difficulty);
+          }
+        }}
       >
         Attack
       </IconButton>
@@ -22,7 +31,12 @@ const ActionDialog: FunctionComponent = () => {
         testID="block"
         icon={<img src={ShieldIcon} alt="shield" width="20px" height="20px" />}
         size="xl"
-        onClick={() => dispatch(block())}
+        onClick={() => {
+          setActionToBlock();
+          if (difficulty !== undefined) {
+            setOpponentAttackValue(difficulty);
+          }
+        }}
       >
         Block
       </IconButton>

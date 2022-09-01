@@ -34,7 +34,8 @@ export const heroSlice = createSlice({
     },
 
     attackValue: (state, action: PayloadAction<number>) => {
-      state.attackValue = state.attackValue + action.payload;
+      state.attackValue =
+        action.payload === 0 ? 0 : state.attackValue + action.payload;
     },
   },
 });
