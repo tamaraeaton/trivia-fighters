@@ -11,9 +11,9 @@ describe('Game Slice reducer', () => {
     expect(gameReducer(undefined, { type: undefined })).toEqual(initialState);
   });
 
-  it('should return the round 2 when previous state is answeredVerify', () => {
-    expect(gameReducer(MOCK_GAME_STATE, { type: setRound(2) })).toEqual({
-      round: 2,
+  it('should return the round 3 when previous state is answeredVerify', () => {
+    expect(gameReducer(MOCK_GAME_STATE, setRound(3))).toEqual({
+      round: 3,
       dialogStage: 'answered',
       action: 'none',
       difficulty: 'easy',
@@ -27,7 +27,7 @@ describe('Game Slice reducer', () => {
   });
 
   it('should return the return the dialogStage attacking when previous state is action', () => {
-    expect(gameReducer(MOCK_GAME_STATE, { type: attack })).toEqual({
+    expect(gameReducer(MOCK_GAME_STATE, attack())).toEqual({
       round: 2,
       dialogStage: 'attacking',
       action: 'attack',
@@ -42,7 +42,7 @@ describe('Game Slice reducer', () => {
   });
 
   it('should return the return the dialogStage answering when previous state is action', () => {
-    expect(gameReducer(MOCK_GAME_STATE, { type: block })).toEqual({
+    expect(gameReducer(MOCK_GAME_STATE, block())).toEqual({
       round: 2,
       dialogStage: 'answering',
       action: 'block',

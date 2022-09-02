@@ -9,12 +9,12 @@ import { MOCK_HERO_STATE } from 'store/mocks/hero.mocks';
 describe('Game Page: render tests', () => {
   it('player health bar should render', () => {
     renderWithProviders(<Game />);
-    expect(screen.getByTestId('player-healthbar')).toBeDefined();
+    expect(screen.getByTestId('player-healthbarContainer')).toBeDefined();
   });
 
   it('opponent health bar should render', () => {
     renderWithProviders(<Game />);
-    expect(screen.getByTestId('opponent-healthbar')).toBeDefined();
+    expect(screen.getByTestId('opponent-healthbarContainer')).toBeDefined();
   });
 
   it('round should render', () => {
@@ -62,7 +62,7 @@ describe('Game Page: render tests', () => {
 });
 
 describe('Game Page: functionality tests', () => {
-  it.only('should render attack value increased', async () => {
+  it('should render attack value increased', async () => {
     renderWithProviders(<Game />, {
       preloadedState: {
         game: {
