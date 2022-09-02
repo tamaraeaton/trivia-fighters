@@ -19,7 +19,19 @@ export const fetchQuestionsPerDifficulty = async (
   );
 
   const json = await res.json();
-  const jsonString = JSON.stringify(json).replace(/&quot;/g, '"');
+  const jsonString = await JSON.stringify(json)
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, '')
+    .replace(/\\n/g, '\\n')
+    .replace(/\\'/g, "\\'")
+    .replace(/\\"/g, '\\"')
+    .replace(/\\&/g, '\\&')
+    .replace(/\\r/g, '\\r')
+    .replace(/\\t/g, '\\t')
+    .replace(/\\b/g, '\\b')
+    .replace(/\\f/g, '\\f')
+    .replace(/\\[A-Z]/g, '\\[A-Z]');
+
   return JSON.parse(jsonString);
 };
 
