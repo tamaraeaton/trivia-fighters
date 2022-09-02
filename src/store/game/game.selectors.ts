@@ -10,7 +10,6 @@ import {
 
 export const gameSelector = (state: RootState) => state.game;
 
-// keeping example for round selecter
 export const gameRoundSelector = createSelector(
   gameSelector,
   (gameState): number => gameState.round

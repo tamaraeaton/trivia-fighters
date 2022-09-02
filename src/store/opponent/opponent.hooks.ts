@@ -1,4 +1,3 @@
-// import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
   opponentMaxHealthSelector,
@@ -60,39 +59,20 @@ export const useOpponentActions = () => {
   };
 
   const setOpponentAttackValue = (option: DifficultyType) => {
-    // dispatch(answered());
-
     let min = Math.ceil(5);
     let max = Math.floor(1);
     const randomOneThruFive = Math.floor(Math.random() * (max - min + 1)) + min;
 
-    // When answered action is triggered
-    // If answer is wrong ***after applying damage*** ?
-    // If state action is equal to block AND answer is correct
-    // if (
-    //   dialogStage === 'difficulty' ||
-    //   (dialogStage === 'answered' && !isCorrect) ||
-    //   (isCorrect && action === 'block')
-    // ) {
-    console.log(isCorrect);
     if (option === 'easy') {
       let easyAttack = 1 + 1 * randomOneThruFive;
       dispatch(attackValue(easyAttack));
-
-      // Minimum attack is 1 plus
-      // -- Additional attack 1 * (1-5 randomly)
     } else if (option === 'medium') {
       let mediumAttack = 5 + 2 * randomOneThruFive;
       dispatch(attackValue(mediumAttack));
-      // Minimum attack is 5 plus
-      // -- Additional attack 2 * (1-5 randomly)
     } else {
       let sethAttack = 10 + 3 * randomOneThruFive;
       dispatch(attackValue(sethAttack));
-      // Minimum attack is 10 plus
-      // -- Additional attack 3 * (1-5 randomly)
     }
-    // }
   };
 
   return {

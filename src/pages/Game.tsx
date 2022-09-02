@@ -38,8 +38,7 @@ const Game: React.FunctionComponent = () => {
   const { applyHeroAttackValue, increaseHeroHealth } = useHeroActions();
   const { opponentCurrentHealth, opponentMaxHealth, opponentAttackValue } =
     useOpponentSelectors();
-  const { applyOpponentAttackValue, setOpponentAttackValue } =
-    useOpponentActions();
+  const { applyOpponentAttackValue } = useOpponentActions();
   const { heroCurrentHealth, heroMaxHealth, heroAttackValue } =
     useHeroSelectors();
   const [, { incrementRound }] = useGameRound();
@@ -89,10 +88,9 @@ const Game: React.FunctionComponent = () => {
     let name = 'Wizard Pig';
     let testID = 'wizardPig';
 
-    // TODO: barbarian bunny did not work
     switch (difficulty) {
       case 'medium':
-        name = 'Barbarbian Bunny';
+        name = 'Barbarian Bunny';
         testID = 'barbarianBunny';
         break;
       case 'seth':
@@ -121,9 +119,6 @@ const Game: React.FunctionComponent = () => {
             // NOTE: applyOpponentAttackValue is being used in useEffect, this will apply the opponent attack value
             // local useState to set answer to use on handleClick for Next button
             setAnswerForNext(theOptionOnTheButton);
-            // if (difficulty !== undefined) {
-            //   setOpponentAttackValue(difficulty);
-            // }
           }}
         />
       );
@@ -139,16 +134,11 @@ const Game: React.FunctionComponent = () => {
     // applyOpponentAttackValue();
     // when I block and I get the anwer correct, it will increase my health
     increaseHeroHealth();
-    // setOpponentAttackValue(difficulty);
-    // if (difficulty !== undefined) {
-    //   setOpponentAttackValue(difficulty);
-    // }
   };
 
   return (
     <>
       <div className="healthBarContainer">
-        {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
           testID="player"
           isReversed={false}
@@ -156,7 +146,6 @@ const Game: React.FunctionComponent = () => {
           currentHealth={heroCurrentHealth}
         />
         <Round currentRound={currentRound} />
-        {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
           testID="opponent"
           isReversed={true}

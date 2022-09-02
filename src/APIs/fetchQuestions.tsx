@@ -1,4 +1,4 @@
-import { ActionType, AttackPowerType } from '../store/game/game.slice';
+import { AttackPowerType } from '../store/game/game.slice';
 
 const getQuestionDifficulty = (difficulty: AttackPowerType) => {
   if (difficulty === 'light') {
@@ -17,17 +17,15 @@ export const fetchQuestionsPerDifficulty = async (
   const res = await fetch(
     `https://opentdb.com/api.php?amount=1&type=multiple&difficulty=${difficultyName}`
   );
+
   const json = await res.json();
-  return json;
+  const jsonString = JSON.stringify(json).replace(/&quot;/g, '"');
+  return JSON.parse(jsonString);
 };
 
 export const fetchRandomQuestions = async () => {
-  const difficultyName = ['easy', 'medium', 'hard'];
+  const difficultyName: AttackPowerType[] = ['light', 'medium', 'heavy'];
   const randomDifficulty =
     difficultyName[Math.floor(Math.random() * difficultyName.length)];
-  const res = await fetch(
-    `https://opentdb.com/api.php?amount=1&type=multiple&difficulty=${randomDifficulty}`
-  );
-  const json = await res.json();
-  return json;
+  return fetchQuestionsPerDifficulty(randomDifficulty);
 };

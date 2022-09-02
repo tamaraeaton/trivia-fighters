@@ -20,7 +20,6 @@ import {
   attack,
   block,
 } from 'store/game/game.slice';
-// import { useOpponentActions } from '../../store/opponent/opponent.hooks';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
@@ -55,7 +54,6 @@ export const useGameSelectors = () => {
 
 export const useGameActions = () => {
   const dispatch = useAppDispatch();
-  // const { setOpponentAttackValue } = useOpponentActions();
 
   const setAnswered = useCallback(
     (option: string) => {
