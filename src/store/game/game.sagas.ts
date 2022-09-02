@@ -14,6 +14,7 @@ export function* getQuestionsPerDifficulty(
   // yields are steps/pause (like async/await)
   const res = yield call(fetchQuestionsPerDifficulty, action.payload);
   const questionRes = res.results[0];
+
   const choices = [
     questionRes.correct_answer,
     ...questionRes.incorrect_answers,
