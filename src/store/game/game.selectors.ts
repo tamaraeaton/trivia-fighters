@@ -45,9 +45,4 @@ export const isCorrectSelector = createSelector(
   (gameState): boolean | undefined => gameState.isCorrect
 );
 
-export const isStartedSelector = createSelector(
-  gameSelector,
-  (gameState): boolean | undefined => gameState.playing
-);
-
 // selectors are variables to get specific pieces of state within redux store

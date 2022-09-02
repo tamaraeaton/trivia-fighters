@@ -9,13 +9,8 @@ import {
   currentHealth,
   attackValue,
 } from 'store/opponent/opponent.slice';
-import {
-  isCorrectSelector,
-  actionSelector,
-  dialogStageSelector,
-  difficultySelector,
-} from 'store/game/game.selectors';
-import { answered, DifficultyType } from 'store/game/game.slice';
+import { isCorrectSelector, actionSelector } from 'store/game/game.selectors';
+import { DifficultyType } from 'store/game/game.slice';
 import { decreaseHeroCurrentHealth } from '../hero/hero.slice';
 
 export const useOpponentSelectors = () => {
@@ -35,8 +30,6 @@ export const useOpponentActions = () => {
   const isCorrect = useAppSelector(isCorrectSelector);
   const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
   const action = useAppSelector(actionSelector);
-  const dialogStage = useAppSelector(dialogStageSelector);
-  let difficulty = useAppSelector(difficultySelector);
 
   const applyOpponentAttackValue = () => {
     if (!isCorrect && (action === 'block' || action === 'attack')) {
