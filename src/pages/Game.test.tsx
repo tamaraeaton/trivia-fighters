@@ -157,7 +157,6 @@ describe('Game Page: functionality tests', () => {
             choices: [],
           },
           difficulty: 'seth',
-          playing: true,
         },
         opponent: {
           maxHealth: 200,

@@ -8,7 +8,6 @@ export interface GameState {
   question: QuestionType;
   selectedOption?: string;
   isCorrect?: boolean;
-  playing?: boolean;
 }
 
 export type DifficultyType = 'easy' | 'medium' | 'seth';
@@ -89,7 +88,6 @@ export const gameSlice = createSlice({
     difficulty: (state, action: PayloadAction<DifficultyType>) => {
       state.difficulty = action.payload;
       state.dialogStage = 'action';
-      state.playing = true;
     },
   },
 });
