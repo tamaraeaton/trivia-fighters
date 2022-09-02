@@ -17,7 +17,7 @@ export const gameRoundSelector = createSelector(
 
 export const dialogStageSelector = createSelector(
   gameSelector,
-  (gameState): DialogStageType => gameState.dialogStage
+  (gameState): DialogStageType | undefined => gameState.dialogStage
 );
 
 export const actionSelector = createSelector(
@@ -43,6 +43,11 @@ export const questionSelector = createSelector(
 export const isCorrectSelector = createSelector(
   gameSelector,
   (gameState): boolean | undefined => gameState.isCorrect
+);
+
+export const isStartedSelector = createSelector(
+  gameSelector,
+  (gameState): boolean | undefined => gameState.playing
 );
 
 // selectors are variables to get specific pieces of state within redux store

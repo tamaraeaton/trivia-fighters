@@ -13,6 +13,19 @@ export const MOCK_GAME_STATE: GameState = {
   },
 };
 
+export const MOCK_GAME_STATE_HOME: GameState = {
+  round: 1,
+  dialogStage: 'answered',
+  action: 'none',
+  difficulty: 'easy',
+  attackStrength: undefined,
+  question: {
+    text: 'How many moons are there?',
+    answer: 'Depends on the planet',
+    choices: ['One', 'Four', 'None', 'Depends on the planet'],
+  },
+};
+
 export const mockQuestionAPIResponse = {
   response_code: 0,
   results: [

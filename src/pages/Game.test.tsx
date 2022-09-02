@@ -22,7 +22,7 @@ describe('Game Page: render tests', () => {
     expect(screen.getByTestId('round')).toBeDefined();
   });
 
-  it('avatar should render', () => {
+  it('avatar should render per difficulty', () => {
     renderWithProviders(<Game />, {
       preloadedState: {
         game: {
@@ -142,5 +142,33 @@ describe('Game Page: functionality tests', () => {
       'player-healthBarLabel'
     );
     expect(heroHealthAfter[0].innerHTML).toEqual('90/100');
+  });
+
+  it('opponent attack value should render when clicking Attack/Block from Action Dialog', async () => {
+    renderWithProviders(<Game />, {
+      preloadedState: {
+        game: {
+          round: 1,
+          dialogStage: 'action',
+          action: 'none',
+          question: {
+            text: '',
+            answer: '',
+            choices: [],
+          },
+          difficulty: 'seth',
+          playing: true,
+        },
+        opponent: {
+          maxHealth: 200,
+          currentHealth: 200,
+          attackValue: 0,
+        },
+      },
+    });
+    const attackButton = screen.getByTestId('attack');
+    expect(screen.queryByTestId('opponent-attackvalue')).toBe(null);
+    userEvent.click(attackButton);
+    expect(screen.getByTestId('opponent-attackvalue')).toBeDefined();
   });
 });
