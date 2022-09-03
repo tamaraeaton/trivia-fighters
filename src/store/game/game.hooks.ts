@@ -8,6 +8,9 @@ import {
   gameRoundSelector,
   isCorrectSelector,
   questionSelector,
+  playingSelector,
+  winSelector,
+  defeatSelector,
 } from 'store/game/game.selectors';
 import {
   answered,
@@ -41,6 +44,9 @@ export const useGameSelectors = () => {
   const attackStrength = useAppSelector(attackStrengthSelector);
   const question = useAppSelector(questionSelector);
   const isCorrect = useAppSelector(isCorrectSelector);
+  const playing = useAppSelector(playingSelector);
+  const win = useAppSelector(winSelector);
+  const defeat = useAppSelector(defeatSelector);
 
   return {
     dialogStage,
@@ -49,6 +55,9 @@ export const useGameSelectors = () => {
     attackStrength,
     question,
     isCorrect,
+    playing,
+    win,
+    defeat,
   };
 };
 

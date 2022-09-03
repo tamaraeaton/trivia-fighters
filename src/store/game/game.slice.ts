@@ -9,6 +9,8 @@ export interface GameState {
   selectedOption?: string;
   isCorrect?: boolean;
   playing?: boolean;
+  win?: boolean;
+  defeat?: boolean;
 }
 
 export type DifficultyType = 'easy' | 'medium' | 'seth';
@@ -36,6 +38,7 @@ export const initialState: GameState = {
   dialogStage: 'action',
   action: 'none',
   question: { text: '', answer: '', choices: [] },
+  playing: true,
 };
 
 export const gameSlice = createSlice({
