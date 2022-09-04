@@ -23,6 +23,7 @@ export const opponentSlice = createSlice({
       // Math.min to clamp (comment put here for future ticket)
       state.currentHealth = action.payload;
     },
+
     decreaseOpponentHealth: (state, action: PayloadAction<number>) => {
       // clamp at 0 to avoid negative
       state.currentHealth = Math.max(state.currentHealth - action.payload, 0);
@@ -31,10 +32,19 @@ export const opponentSlice = createSlice({
     attackValue: (state, action: PayloadAction<number>) => {
       state.attackValue = action.payload;
     },
+
+    resetOpponentState: (state) => {
+      return initialState;
+    },
   },
 });
 
-export const { maxHealth, currentHealth, attackValue, decreaseOpponentHealth } =
-  opponentSlice.actions;
+export const {
+  maxHealth,
+  currentHealth,
+  attackValue,
+  decreaseOpponentHealth,
+  resetOpponentState,
+} = opponentSlice.actions;
 
 export default opponentSlice.reducer;

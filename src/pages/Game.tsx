@@ -24,7 +24,7 @@ import { useHeroSelectors, useHeroActions } from '../store/hero/hero.hooks';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  const { setAnswered, setNextRoundAnswer } = useGameActions();
+  const { setAnswered, setNextRoundAnswer, setGameStatus } = useGameActions();
   const {
     dialogStage,
     action,
@@ -50,6 +50,7 @@ const Game: React.FunctionComponent = () => {
       applyHeroAttackValue();
       applyOpponentAttackValue();
     }
+    setGameStatus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCorrect]);
 
@@ -134,6 +135,7 @@ const Game: React.FunctionComponent = () => {
     // applyOpponentAttackValue();
     // when I block and I get the anwer correct, it will increase my health
     increaseHeroHealth();
+    // NOTE: setGameStatus is on useEffect
   };
 
   return (

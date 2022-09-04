@@ -6,6 +6,7 @@ import {
   ActionType,
   AttackPowerType,
   QuestionType,
+  GameStatusType,
 } from '../game/game.slice';
 
 export const gameSelector = (state: RootState) => state.game;
@@ -45,19 +46,9 @@ export const isCorrectSelector = createSelector(
   (gameState): boolean | undefined => gameState.isCorrect
 );
 
-export const playingSelector = createSelector(
+export const gameStatusSelector = createSelector(
   gameSelector,
-  (gameState): boolean | undefined => gameState.playing
-);
-
-export const winSelector = createSelector(
-  gameSelector,
-  (gameState): boolean | undefined => gameState.win
-);
-
-export const defeatSelector = createSelector(
-  gameSelector,
-  (gameState): boolean | undefined => gameState.defeat
+  (gameState): GameStatusType => gameState.gameStatus
 );
 
 // selectors are variables to get specific pieces of state within redux store

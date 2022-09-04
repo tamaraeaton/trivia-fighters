@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import './Avatar.scss';
-import Shadow from '../../assets/images/shadow-gradient.svg';
+import ShadowGradient from '../../assets/images/shadow-gradient.svg';
 import ShadowBase from '../../assets/images/shadow.svg';
 import { useGetAvatar } from 'hooks/useGetAvatar';
 export interface AvatarProps {
@@ -13,7 +13,7 @@ const Avatar: FunctionComponent<AvatarProps> = ({ name, testID }) => {
   return (
     <div className="avatarWrapper">
       <div className="avatarContainer">
-        <img className="avatarShadow" src={Shadow} alt="" />
+        <img className="avatarShadow" src={ShadowGradient} alt="" />
         <img className="avatarShadowBase" src={ShadowBase} alt="" />
         <img
           data-testid={testID}

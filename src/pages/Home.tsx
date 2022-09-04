@@ -10,8 +10,7 @@ import './Home.scss';
 const Home: React.FunctionComponent = () => {
   const navigate = useNavigate();
   const { setDifficulty } = useGameActions();
-  const { setOpponentsGameHealth, setOpponentAttackValue } =
-    useOpponentActions();
+  const { setOpponentsGameHealth } = useOpponentActions();
   const { setHeroGameHealth } = useHeroActions();
 
   const handleClick = (difficultyStrength: DifficultyType) => {

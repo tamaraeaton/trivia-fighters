@@ -8,9 +8,7 @@ export interface GameState {
   question: QuestionType;
   selectedOption?: string;
   isCorrect?: boolean;
-  playing?: boolean;
-  win?: boolean;
-  defeat?: boolean;
+  gameStatus: GameStatusType;
 }
 
 export type DifficultyType = 'easy' | 'medium' | 'seth';
@@ -33,12 +31,14 @@ export type QuestionType = {
   choices: string[];
 };
 
+export type GameStatusType = 'playing' | 'victory' | 'defeat';
+
 export const initialState: GameState = {
   round: 1,
   dialogStage: 'action',
   action: 'none',
   question: { text: '', answer: '', choices: [] },
-  playing: true,
+  gameStatus: 'playing',
 };
 
 export const gameSlice = createSlice({
@@ -92,7 +92,14 @@ export const gameSlice = createSlice({
     difficulty: (state, action: PayloadAction<DifficultyType>) => {
       state.difficulty = action.payload;
       state.dialogStage = 'action';
-      state.playing = true;
+    },
+
+    gameStatus: (state, action: PayloadAction<GameStatusType>) => {
+      state.gameStatus = action.payload;
+    },
+
+    resetGameState: (state) => {
+      return initialState;
     },
   },
 });
@@ -106,6 +113,8 @@ export const {
   difficulty,
   question,
   answered,
+  gameStatus,
+  resetGameState,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

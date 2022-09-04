@@ -11,6 +11,7 @@ export const MOCK_GAME_STATE: GameState = {
     answer: 'Depends on the planet',
     choices: ['One', 'Four', 'None', 'Depends on the planet'],
   },
+  gameStatus: 'playing',
 };
 
 export const MOCK_GAME_STATE_HOME: GameState = {
@@ -24,6 +25,7 @@ export const MOCK_GAME_STATE_HOME: GameState = {
     answer: 'Depends on the planet',
     choices: ['One', 'Four', 'None', 'Depends on the planet'],
   },
+  gameStatus: 'playing',
 };
 
 export const mockQuestionAPIResponse = {

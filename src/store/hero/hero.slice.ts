@@ -37,6 +37,10 @@ export const heroSlice = createSlice({
       state.attackValue =
         action.payload === 0 ? 0 : state.attackValue + action.payload;
     },
+
+    resetHeroState: (state) => {
+      return initialState;
+    },
   },
 });
 
@@ -46,6 +50,7 @@ export const {
   attackValue,
   decreaseHeroCurrentHealth,
   increaseHeroCurrentHealth,
+  resetHeroState,
 } = heroSlice.actions;
 
 export default heroSlice.reducer;
