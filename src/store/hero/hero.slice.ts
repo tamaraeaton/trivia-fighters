@@ -25,14 +25,17 @@ export const heroSlice = createSlice({
     },
 
     decreaseHeroCurrentHealth: (state, action: PayloadAction<number>) => {
-      state.currentHealth = state.currentHealth - action.payload;
+      // clamp at 0 to avoid negative
+      state.currentHealth = Math.max(state.currentHealth - action.payload, 0);
     },
 
     // when I block, if the answer is correct, I get 10 added to my current health
     increaseHeroCurrentHealth: (state, action: PayloadAction) => {
-      state.currentHealth = state.currentHealth + 10;
+      state.currentHealth = Math.min(state.currentHealth + 10, 100);
     },
 
+    // TODO: the min should be set for the highest attack value to equal the opponents maxHealth (easy, medium, seth)
+    // hard coded 100 for easy temporarily
     attackValue: (state, action: PayloadAction<number>) => {
       state.attackValue =
         action.payload === 0 ? 0 : state.attackValue + action.payload;

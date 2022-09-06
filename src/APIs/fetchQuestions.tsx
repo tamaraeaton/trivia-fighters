@@ -21,7 +21,7 @@ export const fetchQuestionsPerDifficulty = async (
   const json = await res.json();
   const jsonString = await JSON.stringify(json)
     .replace(/&quot;/g, '\\"')
-    .replace(/&#039;/g, '\\"');
+    .replace(/&#039;/g, "'");
   console.log(JSON.parse(jsonString).results[0].correct_answer);
   return JSON.parse(jsonString);
 };

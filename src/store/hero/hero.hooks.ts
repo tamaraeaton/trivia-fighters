@@ -38,6 +38,7 @@ export const useHeroActions = () => {
   const heroAttackValue = useAppSelector(heroAttackValueSelector);
 
   // this is when you are on the question dialog, not clicking Next
+  // TODO: set it to jump to Victory if the hero attack value is = opponent max health
   const applyHeroAttackValue = () => {
     if (action === 'attack' && isCorrect !== undefined) {
       if (isCorrect) {

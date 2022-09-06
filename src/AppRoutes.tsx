@@ -9,12 +9,8 @@ const AppRoutes: React.FunctionComponent = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/game" element={<Game />} />
-      {/* Hard coded opponent name to design pages */}
-      <Route path="/defeat" element={<Defeat opponentName="Dragon Seth" />} />
-      <Route
-        path="/victory"
-        element={<Victory opponentName="Barbarian Bunny" />}
-      />
+      <Route path="/defeat" element={<Defeat />} />
+      <Route path="/victory" element={<Victory />} />
     </Routes>
   );
 };
