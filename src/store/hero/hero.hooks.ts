@@ -16,7 +16,6 @@ import {
   currentHealth,
   maxHealth,
 } from './hero.slice';
-
 import { decreaseOpponentHealth } from 'store/opponent/opponent.slice';
 
 export const useHeroSelectors = () => {
@@ -38,7 +37,6 @@ export const useHeroActions = () => {
   const heroAttackValue = useAppSelector(heroAttackValueSelector);
 
   // this is when you are on the question dialog, not clicking Next
-  // TODO: set it to jump to Victory if the hero attack value is = opponent max health
   const applyHeroAttackValue = () => {
     if (action === 'attack' && isCorrect !== undefined) {
       if (isCorrect) {
@@ -52,18 +50,20 @@ export const useHeroActions = () => {
           dispatch(attackValue(15));
         }
       } else {
-        dispatch(decreaseOpponentHealth(heroAttackValue || 0));
+        dispatch(decreaseOpponentHealth(heroAttackValue));
         dispatch(attackValue(0));
       }
     }
   };
 
+  // the setHeroHealth can be combined (see both below)
   const increaseHeroHealth = () => {
     if (isCorrect && action === 'block') {
       dispatch(increaseHeroCurrentHealth());
     }
   };
 
+  // TODO: pass in initialState
   const setHeroGameHealth = useCallback(() => {
     dispatch(currentHealth(100));
     dispatch(maxHealth(100));

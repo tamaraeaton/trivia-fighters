@@ -47,10 +47,13 @@ const Game: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (isCorrect === true || isCorrect === false) {
+      // when I am attacking and answer is correct, it will increase my attack value OR
+      // I will attack and opponents health will decrease
+      // TODO: then why the if statement above?
       applyHeroAttackValue();
+      // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
       applyOpponentAttackValue();
     }
-    setGameStatus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCorrect]);
 
@@ -131,11 +134,9 @@ const Game: React.FunctionComponent = () => {
     incrementRound();
     // local useState captures this
     setNextRoundAnswer(answerForNext);
-    // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
-    // applyOpponentAttackValue();
-    // when I block and I get the anwer correct, it will increase my health
     increaseHeroHealth();
     // NOTE: setGameStatus is on useEffect
+    setGameStatus();
   };
 
   return (
@@ -187,6 +188,7 @@ const Game: React.FunctionComponent = () => {
           />
         </div>
         <div className="avatarActionGroup group2">
+          {/* render the avatar component here */}
           {opponentAvatarPerDifficulty()}
         </div>
       </div>

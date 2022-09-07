@@ -62,8 +62,8 @@ export const useGameSelectors = () => {
 export const useGameActions = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { opponentCurrentHealth } = useOpponentSelectors();
-  const { heroCurrentHealth } = useHeroSelectors();
+  const { opponentCurrentHealth, opponentAttackValue } = useOpponentSelectors();
+  const { heroCurrentHealth, heroAttackValue } = useHeroSelectors();
 
   const setAnswered = useCallback(
     (option: string) => {
@@ -102,16 +102,26 @@ export const useGameActions = () => {
   }, [dispatch]);
 
   const setGameStatus = useCallback(() => {
-    if (opponentCurrentHealth <= 0) {
+    if (
+      opponentCurrentHealth <= 0 ||
+      heroAttackValue >= opponentCurrentHealth
+    ) {
       dispatch(gameStatus('victory'));
       navigate('/victory');
     }
-    if (heroCurrentHealth <= 0) {
+    if (heroCurrentHealth <= 0 || opponentAttackValue >= heroCurrentHealth) {
       dispatch(gameStatus('defeat'));
       navigate('/defeat');
     }
     return gameStatus;
-  }, [dispatch, navigate, heroCurrentHealth, opponentCurrentHealth]);
+  }, [
+    dispatch,
+    navigate,
+    heroCurrentHealth,
+    opponentCurrentHealth,
+    heroAttackValue,
+    opponentAttackValue,
+  ]);
 
   const setResetGame = () => {
     dispatch(resetHeroState());

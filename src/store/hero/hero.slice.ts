@@ -34,8 +34,6 @@ export const heroSlice = createSlice({
       state.currentHealth = Math.min(state.currentHealth + 10, 100);
     },
 
-    // TODO: the min should be set for the highest attack value to equal the opponents maxHealth (easy, medium, seth)
-    // hard coded 100 for easy temporarily
     attackValue: (state, action: PayloadAction<number>) => {
       state.attackValue =
         action.payload === 0 ? 0 : state.attackValue + action.payload;

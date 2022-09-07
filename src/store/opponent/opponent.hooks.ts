@@ -32,7 +32,7 @@ export const useOpponentActions = () => {
   const action = useAppSelector(actionSelector);
 
   const applyOpponentAttackValue = () => {
-    if (!isCorrect && (action === 'block' || action === 'attack')) {
+    if (!isCorrect && action === 'block') {
       dispatch(decreaseHeroCurrentHealth(opponentAttackValue || 0));
       dispatch(attackValue(0));
     }
