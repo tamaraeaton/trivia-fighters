@@ -9,9 +9,15 @@ import {
   currentHealth,
   attackValue,
 } from 'store/opponent/opponent.slice';
-import { isCorrectSelector, actionSelector } from 'store/game/game.selectors';
+import {
+  isCorrectSelector,
+  actionSelector,
+  difficultySelector,
+} from 'store/game/game.selectors';
 import { DifficultyType } from 'store/game/game.slice';
 import { decreaseHeroCurrentHealth } from '../hero/hero.slice';
+import { OPPONENTS } from 'const/Opponents';
+import { useMemo } from 'react';
 
 export const useOpponentSelectors = () => {
   const opponentMaxHealth = useAppSelector(opponentMaxHealthSelector);
@@ -30,6 +36,14 @@ export const useOpponentActions = () => {
   const isCorrect = useAppSelector(isCorrectSelector);
   const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
   const action = useAppSelector(actionSelector);
+
+  const difficulty = useAppSelector(difficultySelector);
+  const opponentData = useMemo(() => {
+    if (difficulty) {
+      return OPPONENTS[difficulty];
+    }
+    return undefined;
+  }, [difficulty]);
 
   const applyOpponentAttackValue = () => {
     if (!isCorrect && action === 'block') {

@@ -25,3 +25,5 @@ export const OPPONENTS: { [name: string]: OpponentInterface } = {
     maxHealth: 200,
   },
 };
+
+// useGetAvatar can read this
