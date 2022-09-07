@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { FunctionComponent } from 'react';
-import './Avatar.scss';
 import ShadowGradient from '../../assets/images/shadow-gradient.svg';
 import ShadowBase from '../../assets/images/shadow.svg';
-import FoxKnight from '../assets/images/fox-knight.svg';
-import WizardPig from '../assets/images/wizard-pig.svg';
-import BarbarianBunny from '../assets/images/barbarian-bunny.svg';
-import DragonSeth from '../assets/images/dragon-seth.svg';
+import FoxKnight from '../../assets/images/fox-knight.svg';
+import WizardPig from '../../assets/images/wizard-pig.svg';
+import BarbarianBunny from '../../assets/images/barbarian-bunny.svg';
+import DragonSeth from '../../assets/images/dragon-seth.svg';
+import './Avatar.scss';
 export interface AvatarProps {
   name: string;
   testID: string;

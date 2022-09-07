@@ -1,11 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import './Game.scss';
 import { useNavigate } from 'react-router-dom';
-import {
-  useGameActions,
-  useGameRound,
-  useGameSelectors,
-} from 'store/game/game.hooks';
+import { useGameUI } from 'store/game/game.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -16,15 +12,16 @@ import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import Button from '../components/Button/Button';
 import AriaRoundMessage from 'components/AriaScreenReader/AriaRoundMessage';
-import {
-  useOpponentSelectors,
-  useOpponentActions,
-} from '../store/opponent/opponent.hooks';
-import { useHeroSelectors, useHeroActions } from '../store/hero/hero.hooks';
+import { useOpponent } from '../store/opponent/opponent.hooks';
+import { useHero } from '../store/hero/hero.hooks';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  const { setAnswered, setNextRoundAnswer, setGameStatus } = useGameActions();
+
+  const { useGameSelectors, useGameActions } = useGameUI();
+  const { setAnswered, setNextRoundAnswer, setGameStatus, useGameRound } =
+    useGameActions();
+  const [currentRound] = useGameRound();
   const {
     dialogStage,
     action,
@@ -34,22 +31,27 @@ const Game: React.FunctionComponent = () => {
     isCorrect,
   } = useGameSelectors();
 
-  const [currentRound] = useGameRound();
+  const { useHeroSelectors, useHeroActions } = useHero();
+  const { heroCurrentHealth, heroMaxHealth, heroAttackValue } =
+    useHeroSelectors();
   const { applyHeroAttackValue, increaseHeroHealth } = useHeroActions();
+
+  const { useOpponentDetails, useOpponentSelectors, useOpponentActions } =
+    useOpponent();
+  const { opponentName } = useOpponentDetails();
   const { opponentCurrentHealth, opponentMaxHealth, opponentAttackValue } =
     useOpponentSelectors();
   const { applyOpponentAttackValue } = useOpponentActions();
-  const { heroCurrentHealth, heroMaxHealth, heroAttackValue } =
-    useHeroSelectors();
+
   const [, { incrementRound }] = useGameRound();
   // local useState in addition to dispatch
+
   const [answerForNext, setAnswerForNext] = useState('');
 
   useEffect(() => {
     if (isCorrect === true || isCorrect === false) {
       // when I am attacking and answer is correct, it will increase my attack value OR
       // I will attack and opponents health will decrease
-      // TODO: then why the if statement above?
       applyHeroAttackValue();
       // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
       applyOpponentAttackValue();
@@ -87,23 +89,6 @@ const Game: React.FunctionComponent = () => {
       navigate('/');
     }
   }, [difficulty, navigate]);
-
-  const opponentAvatarPerDifficulty = () => {
-    let name = 'Wizard Pig';
-    let testID = 'wizardPig';
-
-    switch (difficulty) {
-      case 'medium':
-        name = 'Barbarian Bunny';
-        testID = 'barbarianBunny';
-        break;
-      case 'seth':
-        name = 'Dragon Seth';
-        testID = 'dragonSeth';
-        break;
-    }
-    return <Avatar name={name} testID={testID} />;
-  };
 
   const dialogStages = () => {
     if (dialogStage === 'action') {
@@ -188,8 +173,9 @@ const Game: React.FunctionComponent = () => {
           />
         </div>
         <div className="avatarActionGroup group2">
-          {/* render the avatar component here */}
-          {opponentAvatarPerDifficulty()}
+          {!!opponentName && (
+            <Avatar name={opponentName} testID="opponentAvatar" />
+          )}
         </div>
       </div>
       <Dialog>{dialogStages()}</Dialog>

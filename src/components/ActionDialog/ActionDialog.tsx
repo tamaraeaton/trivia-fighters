@@ -3,14 +3,15 @@ import './ActionDialog.scss';
 import IconButton from '../Button/IconButton';
 import SwordIcon from '../../assets/images/sword.svg';
 import ShieldIcon from '../../assets/images/shield.svg';
-import { useGameActions } from '../../store/game/game.hooks';
-import { useOpponentActions } from '../../store/opponent/opponent.hooks';
-import { useGameSelectors } from '../../store/game/game.hooks';
+import { useGameUI } from '../../store/game/game.hooks';
+import { useOpponent } from '../../store/opponent/opponent.hooks';
 
 const ActionDialog: FunctionComponent = () => {
-  const { setActionToBlock, setActionToAttack } = useGameActions();
-  const { setOpponentAttackValue } = useOpponentActions();
+  const { useGameSelectors, useGameActions } = useGameUI();
   const { difficulty } = useGameSelectors();
+  const { setActionToBlock, setActionToAttack } = useGameActions();
+  const { useOpponentActions } = useOpponent();
+  const { setOpponentAttackValue } = useOpponentActions();
 
   return (
     <div className="actionDialogWrapper" data-testid="actionDialog">

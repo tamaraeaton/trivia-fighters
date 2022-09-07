@@ -1,10 +1,12 @@
 import { renderHookWithProviders } from 'testHelpers';
-import { useGameRound, useGameActions } from 'store/game/game.hooks';
 import { act } from '@testing-library/react';
 import { MOCK_APP_STATE } from 'store/mocks/app-state.mocks';
-import { useGameSelectors } from './game.hooks';
+import { useGameUI } from './game.hooks';
 
 describe('Game State Hooks', () => {
+  const { useGameSelectors, useGameActions } = useGameUI();
+  const { useGameRound } = useGameActions();
+
   describe('useGameRound', () => {
     it('should return the current round', () => {
       const { result } = renderHookWithProviders(() => useGameRound(), {

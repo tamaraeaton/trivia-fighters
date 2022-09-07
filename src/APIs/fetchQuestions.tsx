@@ -19,8 +19,7 @@ export const fetchQuestionsPerDifficulty = async (
     const res = await fetch(
       `https://opentdb.com/api.php?amount=1&type=multiple&difficulty=${difficultyName}`
     );
-    // TODO: test if try/catch works, as well as decodeURI from material listed below
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURI
+    // Removing special characters from the JSON
     const json = await res.json();
     const jsonString = await JSON.stringify(json)
       .replace(/&quot;/g, '\\"')
