@@ -4,6 +4,7 @@ import { call, put } from 'redux-saga/effects';
 import {
   fetchQuestionsPerDifficulty,
   fetchRandomQuestions,
+  GetQuestionAPIResponseType,
 } from '../../APIs/fetchQuestions';
 import { attackStrength, AttackPowerType, question, block } from './game.slice';
 
@@ -12,7 +13,10 @@ export function* getQuestionsPerDifficulty(
   action: PayloadAction<AttackPowerType>
 ): any {
   // yields are steps/pause (like async/await)
-  const res = yield call(fetchQuestionsPerDifficulty, action.payload);
+  const res: GetQuestionAPIResponseType = yield call(
+    fetchQuestionsPerDifficulty,
+    action.payload
+  );
   const questionRes = res.results[0];
 
   const choices = [
@@ -39,7 +43,7 @@ export function* watchAttackStrength() {
 
 // This is for blocking
 export function* getRandomQuestions(): any {
-  const res = yield call(fetchRandomQuestions);
+  const res: GetQuestionAPIResponseType = yield call(fetchRandomQuestions);
   const questionRes = res.results[0];
   const choices = [
     questionRes.correct_answer,
