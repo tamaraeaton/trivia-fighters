@@ -9,11 +9,10 @@ import { useOpponent } from 'store/opponent/opponent.hooks';
 import './Victory.scss';
 
 const Victory: FunctionComponent<PropsWithChildren> = () => {
-  const { useGameActions } = useGameUI();
-  const { setResetGame } = useGameActions();
+  const { setResetGame } = useGameUI();
+
   const navigate = useNavigate();
-  const { useOpponentDetails } = useOpponent();
-  const { opponentName } = useOpponentDetails();
+  const { opponentName } = useOpponent();
 
   const handleClick = () => {
     setResetGame();

@@ -4,8 +4,7 @@ import { MOCK_APP_STATE } from 'store/mocks/app-state.mocks';
 import { useGameUI } from './game.hooks';
 
 describe('Game State Hooks', () => {
-  const { useGameSelectors, useGameActions } = useGameUI();
-  const { useGameRound } = useGameActions();
+  const { useGameRound } = useGameUI();
 
   describe('useGameRound', () => {
     it('should return the current round', () => {
@@ -32,14 +31,14 @@ describe('Game State Hooks', () => {
     });
 
     it('should return dialog stage of action', () => {
-      const { result } = renderHookWithProviders(() => useGameSelectors());
+      const { result } = renderHookWithProviders(() => useGameUI());
       const { dialogStage } = result.current;
 
       expect(dialogStage).toEqual('action');
     });
 
     it('should set the difficulty to easy', () => {
-      const { result, store } = renderHookWithProviders(() => useGameActions());
+      const { result, store } = renderHookWithProviders(() => useGameUI());
       const { setDifficulty } = result.current;
 
       expect(store.getState().game.difficulty).toEqual(undefined);

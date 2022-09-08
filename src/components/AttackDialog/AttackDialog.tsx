@@ -5,8 +5,7 @@ import { AttackPowerType } from 'store/game/game.slice';
 import { useGameUI } from 'store/game/game.hooks';
 
 const AttackDialog = () => {
-  const { useGameActions } = useGameUI();
-  const { setAttackStrength } = useGameActions();
+  const { setAttackStrength } = useGameUI();
 
   const handleClick = (attackStrength: AttackPowerType) => {
     setAttackStrength(attackStrength);

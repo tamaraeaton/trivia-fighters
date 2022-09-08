@@ -9,10 +9,9 @@ import './Defeat.scss';
 
 const Defeat: FunctionComponent<PropsWithChildren> = () => {
   const navigate = useNavigate();
-  const { useGameActions } = useGameUI();
-  const { setResetGame } = useGameActions();
-  const { useOpponentDetails } = useOpponent();
-  const { opponentName } = useOpponentDetails();
+  const { setResetGame } = useGameUI();
+
+  const { opponentName } = useOpponent();
 
   const handleClick = () => {
     setResetGame();

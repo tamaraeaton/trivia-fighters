@@ -30,126 +30,126 @@ import { resetOpponentState } from '../opponent/opponent.slice';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
-export const useGameUI = () => {
-  const useGameSelectors = () => {
-    const dialogStage = useAppSelector(dialogStageSelector);
-    const action = useAppSelector(actionSelector);
-    const difficulty = useAppSelector(difficultySelector);
-    const attackStrength = useAppSelector(attackStrengthSelector);
-    const question = useAppSelector(questionSelector);
-    const isCorrect = useAppSelector(isCorrectSelector);
+const useGameRound = (): UseGameRoundResult => {
+  const currentRound = useAppSelector(gameRoundSelector);
+  const dispatch = useAppDispatch();
 
-    return {
-      dialogStage,
-      action,
-      difficulty,
-      attackStrength,
-      question,
-      isCorrect,
-    };
+  const incrementRound = useCallback(() => {
+    dispatch(setRound(currentRound + 1));
+  }, [currentRound, dispatch]);
+
+  return [currentRound, { incrementRound }];
+};
+
+const useGameSelectors = () => {
+  const dialogStage = useAppSelector(dialogStageSelector);
+  const action = useAppSelector(actionSelector);
+  const difficulty = useAppSelector(difficultySelector);
+  const attackStrength = useAppSelector(attackStrengthSelector);
+  const question = useAppSelector(questionSelector);
+  const isCorrect = useAppSelector(isCorrectSelector);
+
+  return {
+    dialogStage,
+    action,
+    difficulty,
+    attackStrength,
+    question,
+    isCorrect,
   };
+};
 
-  const useGameActions = () => {
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-    const { useOpponentSelectors } = useOpponent();
-    const { opponentCurrentHealth, opponentAttackValue } =
-      useOpponentSelectors();
-    const { useHeroSelectors } = useHero();
-    const { heroCurrentHealth, heroAttackValue } = useHeroSelectors();
+const useGameActions = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { opponentCurrentHealth, opponentAttackValue } = useOpponent();
+  const { heroCurrentHealth, heroAttackValue } = useHero();
 
-    const useGameRound = (): UseGameRoundResult => {
-      const currentRound = useAppSelector(gameRoundSelector);
-      const dispatch = useAppDispatch();
+  const setAnswered = useCallback(
+    (option: string) => {
+      dispatch(answered(option));
+    },
+    [dispatch]
+  );
 
-      const incrementRound = useCallback(() => {
-        dispatch(setRound(currentRound + 1));
-      }, [currentRound, dispatch]);
+  const setNextRoundAnswer = useCallback(
+    (option: string) => {
+      dispatch(answeredVerify(option));
+    },
+    [dispatch]
+  );
 
-      return [currentRound, { incrementRound }];
-    };
+  const setDifficulty = useCallback(
+    (option: DifficultyType) => {
+      dispatch(difficulty(option));
+    },
+    [dispatch]
+  );
 
-    const setAnswered = useCallback(
-      (option: string) => {
-        dispatch(answered(option));
-      },
-      [dispatch]
-    );
+  const setAttackStrength = useCallback(
+    (option: AttackPowerType) => {
+      dispatch(attackStrength(option));
+    },
+    [dispatch]
+  );
 
-    const setNextRoundAnswer = useCallback(
-      (option: string) => {
-        dispatch(answeredVerify(option));
-      },
-      [dispatch]
-    );
+  const setActionToBlock = useCallback(() => {
+    dispatch(block());
+  }, [dispatch]);
 
-    const setDifficulty = useCallback(
-      (option: DifficultyType) => {
-        dispatch(difficulty(option));
-      },
-      [dispatch]
-    );
+  const setActionToAttack = useCallback(() => {
+    dispatch(attack());
+  }, [dispatch]);
 
-    const setAttackStrength = useCallback(
-      (option: AttackPowerType) => {
-        dispatch(attackStrength(option));
-      },
-      [dispatch]
-    );
+  const setGameStatus = useCallback(() => {
+    if (
+      opponentCurrentHealth <= 0 ||
+      heroAttackValue >= opponentCurrentHealth
+    ) {
+      dispatch(gameStatus('victory'));
+      navigate('/victory');
+    }
+    if (heroCurrentHealth <= 0 || opponentAttackValue >= heroCurrentHealth) {
+      dispatch(gameStatus('defeat'));
+      navigate('/defeat');
+    }
+    return gameStatus;
+  }, [
+    dispatch,
+    navigate,
+    heroCurrentHealth,
+    opponentCurrentHealth,
+    heroAttackValue,
+    opponentAttackValue,
+  ]);
 
-    const setActionToBlock = useCallback(() => {
-      dispatch(block());
-    }, [dispatch]);
-
-    const setActionToAttack = useCallback(() => {
-      dispatch(attack());
-    }, [dispatch]);
-
-    const setGameStatus = useCallback(() => {
-      if (
-        opponentCurrentHealth <= 0 ||
-        heroAttackValue >= opponentCurrentHealth
-      ) {
-        dispatch(gameStatus('victory'));
-        navigate('/victory');
-      }
-      if (heroCurrentHealth <= 0 || opponentAttackValue >= heroCurrentHealth) {
-        dispatch(gameStatus('defeat'));
-        navigate('/defeat');
-      }
-      return gameStatus;
-    }, [
-      dispatch,
-      navigate,
-      heroCurrentHealth,
-      opponentCurrentHealth,
-      heroAttackValue,
-      opponentAttackValue,
-    ]);
-
-    const setResetGame = () => {
-      dispatch(resetHeroState());
-      dispatch(resetOpponentState());
-      dispatch(resetGameState());
-      navigate('/');
-    };
-
-    return {
-      useGameRound,
-      setAnswered,
-      setNextRoundAnswer,
-      setDifficulty,
-      setAttackStrength,
-      setActionToBlock,
-      setActionToAttack,
-      setGameStatus,
-      setResetGame,
-    };
+  const setResetGame = () => {
+    dispatch(resetHeroState());
+    dispatch(resetOpponentState());
+    dispatch(resetGameState());
+    navigate('/');
   };
 
   return {
-    useGameSelectors,
-    useGameActions,
+    useGameRound,
+    setAnswered,
+    setNextRoundAnswer,
+    setDifficulty,
+    setAttackStrength,
+    setActionToBlock,
+    setActionToAttack,
+    setGameStatus,
+    setResetGame,
+  };
+};
+
+export const useGameUI = () => {
+  const data = useGameSelectors();
+  const actions = useGameActions();
+
+  return {
+    ...data,
+    ...actions,
   };
 };
 

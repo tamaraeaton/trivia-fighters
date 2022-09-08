@@ -18,30 +18,36 @@ import AriaRoundMessage from 'components/AriaScreenReader/AriaRoundMessage';
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
 
-  const { useGameSelectors, useGameActions } = useGameUI();
-  const { setAnswered, setNextRoundAnswer, setGameStatus, useGameRound } =
-    useGameActions();
-  const [currentRound] = useGameRound();
   const {
+    setAnswered,
+    setNextRoundAnswer,
+    setGameStatus,
+    useGameRound,
     dialogStage,
     action,
     difficulty,
     attackStrength,
     question,
     isCorrect,
-  } = useGameSelectors();
+  } = useGameUI();
 
-  const { useHeroSelectors, useHeroActions } = useHero();
-  const { heroCurrentHealth, heroMaxHealth, heroAttackValue } =
-    useHeroSelectors();
-  const { applyHeroAttackValue, setHeroCurrentHealth } = useHeroActions();
+  const [currentRound] = useGameRound();
 
-  const { useOpponentDetails, useOpponentSelectors, useOpponentActions } =
-    useOpponent();
-  const { opponentName } = useOpponentDetails();
-  const { opponentCurrentHealth, opponentMaxHealth, opponentAttackValue } =
-    useOpponentSelectors();
-  const { applyOpponentAttackValue } = useOpponentActions();
+  const {
+    heroCurrentHealth,
+    heroMaxHealth,
+    heroAttackValue,
+    applyHeroAttackValue,
+    setHeroCurrentHealth,
+  } = useHero();
+
+  const {
+    opponentName,
+    opponentCurrentHealth,
+    opponentMaxHealth,
+    opponentAttackValue,
+    applyOpponentAttackValue,
+  } = useOpponent();
 
   const [, { incrementRound }] = useGameRound();
   // local useState in addition to dispatch

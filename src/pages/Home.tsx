@@ -9,10 +9,10 @@ import './Home.scss';
 
 const Home: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  const { useGameActions } = useGameUI();
-  const { setDifficulty } = useGameActions();
-  const { useOpponentActions } = useOpponent();
-  const { setOpponentsGameHealth } = useOpponentActions();
+  const { setDifficulty } = useGameUI();
+
+  const { setOpponentsGameHealth } = useOpponent();
+
   // const { useHeroActions } = useHero();
   // can use initial state
   // const { setHeroGameHealth } = useHeroActions();

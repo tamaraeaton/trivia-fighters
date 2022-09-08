@@ -7,11 +7,8 @@ import { useGameUI } from '../../store/game/game.hooks';
 import { useOpponent } from '../../store/opponent/opponent.hooks';
 
 const ActionDialog: FunctionComponent = () => {
-  const { useGameSelectors, useGameActions } = useGameUI();
-  const { difficulty } = useGameSelectors();
-  const { setActionToBlock, setActionToAttack } = useGameActions();
-  const { useOpponentActions } = useOpponent();
-  const { setOpponentAttackValue } = useOpponentActions();
+  const { difficulty, setActionToBlock, setActionToAttack } = useGameUI();
+  const { setOpponentAttackValue } = useOpponent();
 
   return (
     <div className="actionDialogWrapper" data-testid="actionDialog">
