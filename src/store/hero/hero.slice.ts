@@ -30,9 +30,9 @@ export const heroSlice = createSlice({
     },
 
     // when I block, if the answer is correct, I get 10 added to my current health
-    increaseHeroCurrentHealth: (state, action: PayloadAction) => {
-      state.currentHealth = Math.min(state.currentHealth + 10, 100);
-    },
+    // increaseHeroCurrentHealth: (state, action: PayloadAction) => {
+    //   state.currentHealth = Math.min(state.currentHealth + 10, 100);
+    // },
 
     attackValue: (state, action: PayloadAction<number>) => {
       state.attackValue =
@@ -50,7 +50,7 @@ export const {
   currentHealth,
   attackValue,
   decreaseHeroCurrentHealth,
-  increaseHeroCurrentHealth,
+  // increaseHeroCurrentHealth,
   resetHeroState,
 } = heroSlice.actions;
 

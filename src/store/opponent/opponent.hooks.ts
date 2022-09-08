@@ -15,7 +15,7 @@ import {
   difficultySelector,
 } from 'store/game/game.selectors';
 import { DifficultyType } from 'store/game/game.slice';
-import { decreaseHeroCurrentHealth } from '../hero/hero.slice';
+import { useHero } from '../hero/hero.hooks';
 import { OPPONENTS } from 'const/Opponents';
 import { useMemo } from 'react';
 
@@ -51,12 +51,12 @@ export const useOpponent = () => {
     const isCorrect = useAppSelector(isCorrectSelector);
     const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
     const action = useAppSelector(actionSelector);
+    const { useHeroSelectors, useHeroActions } = useHero();
+    const { setHeroCurrentHealth } = useHeroActions();
 
     const applyOpponentAttackValue = () => {
-      if (!isCorrect && action === 'block') {
-        dispatch(decreaseHeroCurrentHealth(opponentAttackValue || 0));
-        dispatch(attackValue(0));
-      }
+      setHeroCurrentHealth();
+      dispatch(attackValue(0));
     };
 
     const setOpponentsGameHealth = (option: DifficultyType) => {

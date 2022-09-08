@@ -12,11 +12,11 @@ import {
 } from './hero.selectors';
 import {
   attackValue,
-  increaseHeroCurrentHealth,
+  // increaseHeroCurrentHealth,
   currentHealth,
   maxHealth,
 } from './hero.slice';
-import { decreaseOpponentHealth } from 'store/opponent/opponent.slice';
+import { useOpponent } from 'store/opponent/opponent.hooks';
 
 export const useHero = () => {
   const useHeroSelectors = () => {
@@ -35,7 +35,10 @@ export const useHero = () => {
     const action = useAppSelector(actionSelector);
     const attackStrengthValue = useAppSelector(attackStrengthSelector);
     const isCorrect = useAppSelector(isCorrectSelector);
-    const heroAttackValue = useAppSelector(heroAttackValueSelector);
+    // const heroAttackValue = useAppSelector(heroAttackValueSelector);
+    const heroCurrentHealth = useAppSelector(currentHealthSelector);
+    const { useOpponentSelectors } = useOpponent();
+    const { opponentAttackValue } = useOpponentSelectors();
 
     // this is when you are on the question dialog, not clicking Next
     const applyHeroAttackValue = () => {
@@ -51,18 +54,27 @@ export const useHero = () => {
             dispatch(attackValue(15));
           }
         } else {
-          dispatch(decreaseOpponentHealth(heroAttackValue));
           dispatch(attackValue(0));
         }
       }
     };
 
-    // the setHeroHealth can be combined (see both below)
-    const increaseHeroHealth = () => {
+    const setHeroCurrentHealth = () => {
       if (isCorrect && action === 'block') {
-        dispatch(increaseHeroCurrentHealth());
+        dispatch(currentHealth(Math.min(heroCurrentHealth + 10, 100)));
+      } else {
+        dispatch(
+          currentHealth(Math.max(heroCurrentHealth - opponentAttackValue, 0))
+        );
       }
     };
+
+    // the setHeroHealth can be combined (see both below)
+    // const increaseHeroHealth = () => {
+    //   if (isCorrect && action === 'block') {
+    //     dispatch(currentHealth(heroCurrentHealth + 10));
+    //   }
+    // };
 
     // TODO: pass in initialState
     const setHeroGameHealth = useCallback(() => {
@@ -70,7 +82,7 @@ export const useHero = () => {
       dispatch(maxHealth(100));
     }, [dispatch]);
 
-    return { applyHeroAttackValue, increaseHeroHealth, setHeroGameHealth };
+    return { applyHeroAttackValue, setHeroCurrentHealth, setHeroGameHealth };
   };
   return {
     useHeroSelectors,

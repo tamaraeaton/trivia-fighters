@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import './Game.scss';
 import { useNavigate } from 'react-router-dom';
 import { useGameUI } from 'store/game/game.hooks';
+import { useOpponent } from '../store/opponent/opponent.hooks';
+import { useHero } from '../store/hero/hero.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -12,8 +14,6 @@ import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import Button from '../components/Button/Button';
 import AriaRoundMessage from 'components/AriaScreenReader/AriaRoundMessage';
-import { useOpponent } from '../store/opponent/opponent.hooks';
-import { useHero } from '../store/hero/hero.hooks';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const Game: React.FunctionComponent = () => {
   const { useHeroSelectors, useHeroActions } = useHero();
   const { heroCurrentHealth, heroMaxHealth, heroAttackValue } =
     useHeroSelectors();
-  const { applyHeroAttackValue, increaseHeroHealth } = useHeroActions();
+  const { applyHeroAttackValue, setHeroCurrentHealth } = useHeroActions();
 
   const { useOpponentDetails, useOpponentSelectors, useOpponentActions } =
     useOpponent();
@@ -119,7 +119,7 @@ const Game: React.FunctionComponent = () => {
     incrementRound();
     // local useState captures this
     setNextRoundAnswer(answerForNext);
-    increaseHeroHealth();
+    setHeroCurrentHealth();
     // NOTE: setGameStatus is on useEffect
     setGameStatus();
   };
