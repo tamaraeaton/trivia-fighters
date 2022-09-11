@@ -10,10 +10,7 @@ describe('Game Page: render tests', () => {
   let randomSpy: jest.SpyInstance;
 
   beforeEach(() => {
-    randomSpy = jest
-      .spyOn(Math, 'random')
-      .spyOne(Math, 'ceil')
-      .mockReturnValue(22);
+    randomSpy = jest.spyOn(Math, 'random').mockReturnValue(22);
   });
 
   afterEach(() => {
