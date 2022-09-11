@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import './Game.scss';
 import { useNavigate } from 'react-router-dom';
 import { useGameUI } from 'store/game/game.hooks';
-import { useOpponent } from '../store/opponent/opponent.hooks';
-import { useHero } from '../store/hero/hero.hooks';
+import { useOpponent } from '../store/players/opponent/opponent.hooks';
+import { useHero } from '../store/players/hero/hero.hooks';
+import { useActions } from '../Hooks/action.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -48,7 +49,6 @@ const Game: React.FunctionComponent = () => {
     opponentAttackValue,
     applyOpponentAttackValue,
   } = useOpponent();
-
   const [, { incrementRound }] = useGameRound();
   // local useState in addition to dispatch
 
@@ -58,10 +58,14 @@ const Game: React.FunctionComponent = () => {
     if (isCorrect === true || isCorrect === false) {
       // when I am attacking and answer is correct, it will increase my attack value OR
       // I will attack and opponents health will decrease
+
       applyHeroAttackValue();
+
       // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
       applyOpponentAttackValue();
+      // setHeroCurrentHealth();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCorrect]);
 
@@ -125,7 +129,7 @@ const Game: React.FunctionComponent = () => {
     incrementRound();
     // local useState captures this
     setNextRoundAnswer(answerForNext);
-    setHeroCurrentHealth();
+    // setHeroCurrentHealth();
     // NOTE: setGameStatus is on useEffect
     setGameStatus();
   };
@@ -170,14 +174,18 @@ const Game: React.FunctionComponent = () => {
             </div>
           )}
         </div>
+
         <div className="actionIconAndValue">
-          <Action
-            isReversed={true}
-            actionState={action}
-            attackValue={opponentAttackValue}
-            testID="opponent"
-          />
+          {action === 'block' && (
+            <Action
+              isReversed={true}
+              actionState={action}
+              attackValue={opponentAttackValue}
+              testID="opponent"
+            />
+          )}
         </div>
+
         <div className="avatarActionGroup group2">
           {!!opponentName && (
             <Avatar name={opponentName} testID="opponentAvatar" />

@@ -4,7 +4,7 @@ import IconButton from '../Button/IconButton';
 import SwordIcon from '../../assets/images/sword.svg';
 import ShieldIcon from '../../assets/images/shield.svg';
 import { useGameUI } from '../../store/game/game.hooks';
-import { useOpponent } from '../../store/opponent/opponent.hooks';
+import { useOpponent } from '../../store/players/opponent/opponent.hooks';
 
 const ActionDialog: FunctionComponent = () => {
   const { difficulty, setActionToBlock, setActionToAttack } = useGameUI();

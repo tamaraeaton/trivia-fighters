@@ -2,7 +2,7 @@ import Button from 'components/Button/Button';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameUI } from 'store/game/game.hooks';
-import { useOpponent } from '../store/opponent/opponent.hooks';
+import { useOpponent } from '../store/players/opponent/opponent.hooks';
 // import { useHero } from '../store/hero/hero.hooks';
 import { DifficultyType } from '../store/game/game.slice';
 import './Home.scss';

@@ -23,10 +23,10 @@ import {
   gameStatus,
   resetGameState,
 } from 'store/game/game.slice';
-import { useOpponent } from '../opponent/opponent.hooks';
-import { useHero } from '../hero/hero.hooks';
-import { resetHeroState } from '../hero/hero.slice';
-import { resetOpponentState } from '../opponent/opponent.slice';
+import { useOpponent } from '../players/opponent/opponent.hooks';
+import { useHero } from '../players/hero/hero.hooks';
+import { resetHeroState } from '../players/hero/hero.slice';
+import { resetOpponentState } from '../players/opponent/opponent.slice';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 

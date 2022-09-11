@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
   maxHealthSelector,
@@ -10,16 +10,21 @@ import {
   currentHealth,
   attackValue,
   decreaseOpponentHealth,
-} from 'store/opponent/opponent.slice';
+} from 'store/players/opponent/opponent.slice';
 import {
   isCorrectSelector,
   actionSelector,
   difficultySelector,
 } from 'store/game/game.selectors';
 import { DifficultyType } from 'store/game/game.slice';
-// import {} from '../hero/hero.slice'
-import { useHero, useHeroSelectors } from '../hero/hero.hooks';
+import {
+  decreaseHeroCurrentHealth,
+  increaseHeroCurrentHealth,
+} from '../hero/hero.slice';
+import { heroAttackValueSelector } from '../hero/hero.selectors';
+// import { useHero, useHeroSelectors } from '../hero/hero.hooks';
 import { OPPONENTS } from 'const/Opponents';
+// import { useHeroSelectors } from '../hero/hero.hooks';
 
 const useOpponentDetails = () => {
   const difficulty = useAppSelector(difficultySelector);
@@ -52,10 +57,12 @@ export const useOpponentActions = () => {
   const isCorrect = useAppSelector(isCorrectSelector);
   const action = useAppSelector(actionSelector);
   // const { action, isCorrect } = useGameSelectors();
-  const { opponentCurrentHealth } = useOpponentSelectors();
-  const { heroAttackValue } = useHeroSelectors();
+  const { opponentCurrentHealth, opponentAttackValue } = useOpponentSelectors();
+  // const { heroCurrentHealth } = useHeroSelectors();
+  const heroAttackValue = useAppSelector(heroAttackValueSelector);
   // const { setHeroCurrentHealth } = useHeroActions();
   // const { heroAttackValue } = useHero();
+  // const {heroAttackValue} = useHeroSelectors()
 
   const setOpponentsGameHealth = (option: DifficultyType) => {
     if (option === 'easy') {
@@ -88,10 +95,19 @@ export const useOpponentActions = () => {
   };
 
   const applyOpponentAttackValue = () => {
-    decreaseOpponentHealth(heroAttackValue);
+    if ((action === 'block' || action === 'attack') && isCorrect === false) {
+      dispatch(decreaseHeroCurrentHealth(opponentAttackValue));
+    }
+
     dispatch(attackValue(0));
   };
 
+  // const setOpponentCurrentHealth = useCallback(
+  //   (value: number) => {
+  //     dispatch(currentHealth(value));
+  //   },
+  //   [dispatch]
+  // );
   const setOpponentCurrentHealth = () => {
     if (action === 'attack' && isCorrect !== undefined) {
       dispatch(

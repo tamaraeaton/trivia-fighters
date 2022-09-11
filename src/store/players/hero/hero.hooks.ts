@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
 import {
   actionSelector,
@@ -9,12 +10,20 @@ import {
   maxHealthSelector,
   currentHealthSelector,
 } from './hero.selectors';
-import { attackValue, currentHealth } from './hero.slice';
+import {
+  attackValue,
+  currentHealth,
+  decreaseHeroCurrentHealth,
+  increaseHeroCurrentHealth,
+} from './hero.slice';
 import {
   useOpponent,
   useOpponentActions,
   useOpponentSelectors,
-} from 'store/opponent/opponent.hooks';
+} from 'store/players/opponent/opponent.hooks';
+import { useActions } from '../../../Hooks/action.hooks';
+import { decreaseOpponentHealth } from '../opponent/opponent.slice';
+
 export const useHeroSelectors = () => {
   const heroMaxHealth = useAppSelector(maxHealthSelector);
   const heroCurrentHealth = useAppSelector(currentHealthSelector);
@@ -34,7 +43,8 @@ const useHeroActions = () => {
   const isCorrect = useAppSelector(isCorrectSelector);
   const heroCurrentHealth = useAppSelector(currentHealthSelector);
   const { opponentAttackValue } = useOpponentSelectors();
-  const { setOpponentCurrentHealth } = useOpponentActions();
+  const heroAttackValue = useAppSelector(heroAttackValueSelector);
+  // const { setOpponentCurrentHealth } = useOpponentActions();
 
   const applyHeroAttackValue = () => {
     if (action === 'attack' && isCorrect !== undefined) {
@@ -49,19 +59,27 @@ const useHeroActions = () => {
           dispatch(attackValue(15));
         }
       } else {
-        setOpponentCurrentHealth();
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        // setOpponentCurrentHealth();
+        dispatch(decreaseOpponentHealth(heroAttackValue));
+        console.log(heroAttackValue);
         dispatch(attackValue(0));
       }
     }
   };
 
+  // const setHeroAttackValue = useCallback(
+  //   (value: number) => {
+  //     dispatch(currentHealth(value));
+  //   },
+  //   [dispatch]
+  // );
+
   const setHeroCurrentHealth = () => {
-    if (isCorrect && action === 'block') {
-      dispatch(currentHealth(Math.min(heroCurrentHealth + 10, 100)));
+    if (!!isCorrect && action === 'block') {
+      dispatch(increaseHeroCurrentHealth());
     } else {
-      dispatch(
-        currentHealth(Math.max(heroCurrentHealth - opponentAttackValue, 0))
-      );
+      dispatch(decreaseHeroCurrentHealth(opponentAttackValue));
     }
   };
 

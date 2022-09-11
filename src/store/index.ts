@@ -1,7 +1,7 @@
 import { configureStore, combineReducers, Middleware } from '@reduxjs/toolkit';
 import gameReducer from 'store/game/game.slice';
-import heroReducer from 'store/hero/hero.slice';
-import opponentReducer from 'store/opponent/opponent.slice';
+import heroReducer from 'store/players/hero/hero.slice';
+import opponentReducer from 'store/players/opponent/opponent.slice';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { watchAttackStrength, watchBlockAction } from './game/game.sagas';
 import { all } from 'redux-saga/effects';

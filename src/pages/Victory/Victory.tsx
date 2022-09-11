@@ -5,7 +5,7 @@ import ShadowBase from '../../assets/images/shadow.svg';
 import ShadowGradient from '../../assets/images/shadow-gradient.svg';
 import Button from 'components/Button/Button';
 import { useGameUI } from '../../store/game/game.hooks';
-import { useOpponent } from 'store/opponent/opponent.hooks';
+import { useOpponent } from 'store/players/opponent/opponent.hooks';
 import './Victory.scss';
 
 const Victory: FunctionComponent<PropsWithChildren> = () => {

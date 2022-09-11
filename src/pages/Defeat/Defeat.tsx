@@ -4,7 +4,7 @@ import DefeatAvatar from '../../assets/images/fox-knight_defeated.svg';
 import ShadowBase from '../../assets/images/shadow.svg';
 import Button from 'components/Button/Button';
 import { useGameUI } from '../../store/game/game.hooks';
-import { useOpponent } from 'store/opponent/opponent.hooks';
+import { useOpponent } from 'store/players/opponent/opponent.hooks';
 import './Defeat.scss';
 
 const Defeat: FunctionComponent<PropsWithChildren> = () => {
