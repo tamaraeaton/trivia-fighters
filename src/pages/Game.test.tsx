@@ -7,6 +7,19 @@ import { MOCK_APP_STATE } from 'store/mocks/app-state.mocks';
 import { MOCK_HERO_STATE } from 'store/mocks/hero.mocks';
 
 describe('Game Page: render tests', () => {
+  let randomSpy: jest.SpyInstance;
+
+  beforeEach(() => {
+    randomSpy = jest
+      .spyOn(Math, 'random')
+      .spyOne(Math, 'ceil')
+      .mockReturnValue(22);
+  });
+
+  afterEach(() => {
+    randomSpy.mockRestore();
+  });
+
   it('player health bar should render', () => {
     renderWithProviders(<Game />);
     expect(screen.getByTestId('player-healthbarContainer')).toBeDefined();
@@ -144,7 +157,7 @@ describe('Game Page: functionality tests', () => {
     expect(heroHealthAfter[0].innerHTML).toEqual('90/100');
   });
 
-  it('opponent attack value should render when clicking Attack/Block from Action Dialog', async () => {
+  it.only('opponent attack value should render when clicking Attack/Block from Action Dialog', async () => {
     renderWithProviders(<Game />, {
       preloadedState: {
         game: {
@@ -168,6 +181,6 @@ describe('Game Page: functionality tests', () => {
     const attackButton = screen.getByTestId('attack');
     expect(screen.queryByTestId('opponent-attackvalue')).toBe(null);
     userEvent.click(attackButton);
-    expect(screen.getByTestId('opponent-attackvalue')).toBeDefined();
+    expect(screen.getByTestId('opponent-attackvalue').innerHTML).toEqual('16');
   });
 });
