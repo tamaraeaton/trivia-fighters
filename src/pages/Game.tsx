@@ -5,6 +5,7 @@ import { useGameUI } from 'store/game/game.hooks';
 import { useOpponent } from '../store/players/opponent/opponent.hooks';
 import { useHero } from '../store/players/hero/hero.hooks';
 import { useActions } from '../Hooks/action.hooks';
+import { increaseHeroCurrentHealth } from '../store/players/hero/hero.slice';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -48,6 +49,7 @@ const Game: React.FunctionComponent = () => {
     opponentMaxHealth,
     opponentAttackValue,
     applyOpponentAttackValue,
+    setOpponentAttackValue,
   } = useOpponent();
   const [, { incrementRound }] = useGameRound();
   // local useState in addition to dispatch
@@ -63,7 +65,10 @@ const Game: React.FunctionComponent = () => {
 
       // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
       applyOpponentAttackValue();
-      // setHeroCurrentHealth();
+      if (action === 'block' && isCorrect === true) {
+        // increaseHeroCurrentHealth();
+        setHeroCurrentHealth();
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -132,6 +137,9 @@ const Game: React.FunctionComponent = () => {
     // setHeroCurrentHealth();
     // NOTE: setGameStatus is on useEffect
     setGameStatus();
+    if (difficulty !== undefined) {
+      setOpponentAttackValue(difficulty);
+    }
   };
 
   return (

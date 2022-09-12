@@ -22,8 +22,8 @@ export const fetchQuestionsPerDifficulty = async (
     // Removing special characters from the JSON
     const json = await res.json();
     const jsonString = await JSON.stringify(json)
-      .replace(/&quot;/g, '\\"')
-      .replace(/&#039;/g, "\\'")
+      // .replace(/&quot;/g, '\\"')
+      // .replace(/&#039;/g, "\\'")
       .replace(/&rsquo;/g, '\\’')
       .replace(/&amp;/gi, '&')
       .replace(/&lrm;/g, '')
