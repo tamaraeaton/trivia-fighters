@@ -176,14 +176,12 @@ const Game: React.FunctionComponent = () => {
         </div>
 
         <div className="actionIconAndValue">
-          {action === 'block' && (
-            <Action
-              isReversed={true}
-              actionState={action}
-              attackValue={opponentAttackValue}
-              testID="opponent"
-            />
-          )}
+          <Action
+            isReversed={true}
+            actionState={action}
+            attackValue={opponentAttackValue}
+            testID="opponent"
+          />
         </div>
 
         <div className="avatarActionGroup group2">

@@ -23,10 +23,10 @@ export const fetchQuestionsPerDifficulty = async (
     const json = await res.json();
     const jsonString = await JSON.stringify(json)
       .replace(/&quot;/g, '\\"')
-      // .replace(/&#039;/g, "\\'")
+      .replace(/&#039;/g, "\\'")
+      .replace(/&rsquo;/g, '\\’')
       .replace(/&amp;/gi, '&')
       .replace(/&lrm;/g, '')
-      .replace(/&rsquo;/g, '\\’')
       .replace(/&eacute;/g, 'é')
       .replace(/&oacute;/g, 'ó')
       .replace(/&sup2;/g, '²')
