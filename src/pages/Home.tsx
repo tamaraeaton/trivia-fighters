@@ -1,5 +1,5 @@
 import Button from 'components/Button/Button';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameUI } from 'store/game/game.hooks';
 import { useOpponent } from '../store/players/opponent/opponent.hooks';
@@ -53,6 +53,7 @@ const Home: React.FunctionComponent = () => {
       >
         Seth
       </Button>
+      <div className="helpButton"></div>
     </div>
   );
 };

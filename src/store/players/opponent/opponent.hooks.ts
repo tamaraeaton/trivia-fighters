@@ -40,6 +40,7 @@ const useOpponentDetails = () => {
     opponentName: opponentData?.displayName,
   };
 };
+
 export const useOpponentSelectors = () => {
   const opponentMaxHealth = useAppSelector(maxHealthSelector);
   const opponentCurrentHealth = useAppSelector(currentHealthSelector);

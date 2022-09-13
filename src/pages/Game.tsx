@@ -16,6 +16,7 @@ import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import Button from '../components/Button/Button';
 import AriaRoundMessage from 'components/AriaScreenReader/AriaRoundMessage';
+import { attack } from 'store/game/game.slice';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
@@ -55,14 +56,13 @@ const Game: React.FunctionComponent = () => {
   // local useState in addition to dispatch
 
   const [answerForNext, setAnswerForNext] = useState('');
+  const [showHelpBubble, setShowHelpBubble] = useState(false);
 
   useEffect(() => {
     if (isCorrect === true || isCorrect === false) {
       // when I am attacking and answer is correct, it will increase my attack value OR
       // I will attack and opponents health will decrease
-
       applyHeroAttackValue();
-
       // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
       applyOpponentAttackValue();
       if (action === 'block' && isCorrect === true) {
@@ -70,7 +70,9 @@ const Game: React.FunctionComponent = () => {
         setHeroCurrentHealth();
       }
     }
-
+    // if (dialogStage === 'answered' && isCorrect) {
+    //   setShowHelpBubble(false);
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCorrect]);
 
@@ -98,6 +100,29 @@ const Game: React.FunctionComponent = () => {
     }
     return '';
   }, [attackStrength, isCorrect, dialogStage, action]);
+
+  // TODO:
+  const helpMessage = useMemo(() => {
+    if (dialogStage === 'action') {
+      return `The opponent's health is based on the selection you chose.*** Now what action do you wish to take?
+      `;
+    }
+    if (dialogStage === 'attacking') {
+      return "A higher level of attack will give you more attack value *** The opponent's attack value is randomly generated per the difficulty you chose";
+    }
+    if (dialogStage === 'answering') {
+      if (action === 'attack') {
+        return 'Pick the correct answer and gain more attack strength.  *** An incorrect answer will trigger the attack.';
+      }
+      if (action === 'block') {
+        return "Pick the correct answer and you will gain 10 health points.  *** An incorrect answer will trigger the opponent's attack.";
+      }
+    }
+    if (dialogStage === 'answered' && isCorrect) {
+      return 'Yay, you got the answer correct, notice that your attack value is increased. *** Keep up the good work! *** Click Next to continue your attack.';
+    }
+    // TODO: add message for 'about to win' or 'about to lose'
+  }, [dialogStage, action, isCorrect]);
 
   useEffect(() => {
     if (!difficulty) {
@@ -171,6 +196,11 @@ const Game: React.FunctionComponent = () => {
           />
         </div>
         <div className="nextButtonDialogMessageWrapper">
+          {showHelpBubble && (
+            <div className="helpBubbleGame">
+              <p>{helpMessage}</p>
+            </div>
+          )}
           <div className="dialogMessage" data-testid="dialogMessage">
             {actionMessage}
           </div>
@@ -199,6 +229,15 @@ const Game: React.FunctionComponent = () => {
         </div>
       </div>
       <Dialog>{dialogStages()}</Dialog>
+      <div className="helpButtonGame">
+        <Button
+          size="xs"
+          onClick={() => setShowHelpBubble((prev) => !prev)}
+          selected={showHelpBubble ? true : false}
+        >
+          ?
+        </Button>
+      </div>
       <AriaRoundMessage
         heroCurrentHealth={heroCurrentHealth}
         heroMaxHealth={heroMaxHealth}

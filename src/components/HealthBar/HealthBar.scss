@@ -14,14 +14,13 @@
   color: white;
   font-weight: bold;
 }
-
+.fillerReversed {
+  justify-content: end;
+}
 .filler {
   height: 100%;
   border-radius: inherit;
-}
-
-.fillerReversed {
-  justify-content: end;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .healthAndScoreFont {
