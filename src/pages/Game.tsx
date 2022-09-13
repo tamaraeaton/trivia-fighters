@@ -119,10 +119,15 @@ const Game: React.FunctionComponent = () => {
       }
     }
     if (dialogStage === 'answered' && isCorrect) {
-      return 'Yay, you got the answer correct, notice that your attack value is increased. *** Keep up the good work! *** Click Next to continue your attack.';
+      return 'Yay, you got the answer correct. *** Notice that your attack value is increased. *** Keep up the good work! *** Click Next to continue your attack.';
     }
-    // TODO: add message for 'about to win' or 'about to lose'
-  }, [dialogStage, action, isCorrect]);
+    if (dialogStage === 'answered' && !isCorrect) {
+      return 'Your answer is incorrect.  *** Notice that you have attacked each-other.  *** Click Next to choose your next action. ';
+    }
+    if (heroCurrentHealth <= 0 || opponentAttackValue >= heroCurrentHealth) {
+      return 'Someone has lost all of their health.  *** Click to conclude the game.';
+    }
+  }, [dialogStage, action, isCorrect, heroCurrentHealth, opponentAttackValue]);
 
   useEffect(() => {
     if (!difficulty) {
