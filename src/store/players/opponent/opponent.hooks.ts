@@ -1,4 +1,4 @@
-import { useMemo, useCallback } from 'react';
+import { useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
   maxHealthSelector,
@@ -9,7 +9,6 @@ import {
   maxHealth,
   currentHealth,
   attackValue,
-  decreaseOpponentHealth,
 } from 'store/players/opponent/opponent.slice';
 import {
   isCorrectSelector,
@@ -17,18 +16,12 @@ import {
   difficultySelector,
 } from 'store/game/game.selectors';
 import { DifficultyType } from 'store/game/game.slice';
-import {
-  decreaseHeroCurrentHealth,
-  increaseHeroCurrentHealth,
-} from '../hero/hero.slice';
+import { decreaseHeroCurrentHealth } from '../hero/hero.slice';
 import { heroAttackValueSelector } from '../hero/hero.selectors';
-// import { useHero, useHeroSelectors } from '../hero/hero.hooks';
 import { OPPONENTS } from 'const/Opponents';
-// import { useHeroSelectors } from '../hero/hero.hooks';
 
 const useOpponentDetails = () => {
   const difficulty = useAppSelector(difficultySelector);
-  // const { difficulty } = useGameSelectors();
 
   const opponentData = useMemo(() => {
     if (difficulty) {
@@ -56,13 +49,8 @@ export const useOpponentActions = () => {
   const dispatch = useAppDispatch();
   const isCorrect = useAppSelector(isCorrectSelector);
   const action = useAppSelector(actionSelector);
-  // const { action, isCorrect } = useGameSelectors();
   const { opponentCurrentHealth, opponentAttackValue } = useOpponentSelectors();
-  // const { heroCurrentHealth } = useHeroSelectors();
   const heroAttackValue = useAppSelector(heroAttackValueSelector);
-  // const { setHeroCurrentHealth } = useHeroActions();
-  // const { heroAttackValue } = useHero();
-  // const {heroAttackValue} = useHeroSelectors()
 
   const setOpponentsGameHealth = (option: DifficultyType) => {
     if (option === 'easy') {
@@ -102,12 +90,6 @@ export const useOpponentActions = () => {
     dispatch(attackValue(0));
   };
 
-  // const setOpponentCurrentHealth = useCallback(
-  //   (value: number) => {
-  //     dispatch(currentHealth(value));
-  //   },
-  //   [dispatch]
-  // );
   const setOpponentCurrentHealth = () => {
     if (action === 'attack' && isCorrect !== undefined) {
       dispatch(
@@ -124,7 +106,6 @@ export const useOpponentActions = () => {
   };
 };
 export const useOpponent = () => {
-  // const { useGameSelectors } = useGameUI();
   const data = useOpponentSelectors();
   const details = useOpponentDetails();
   const actions = useOpponentActions();

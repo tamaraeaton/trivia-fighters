@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useGameUI } from 'store/game/game.hooks';
 import { useOpponent } from '../store/players/opponent/opponent.hooks';
 import { useHero } from '../store/players/hero/hero.hooks';
-import { useActions } from '../Hooks/action.hooks';
-import { increaseHeroCurrentHealth } from '../store/players/hero/hero.slice';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -52,25 +50,21 @@ const Game: React.FunctionComponent = () => {
     setOpponentAttackValue,
   } = useOpponent();
   const [, { incrementRound }] = useGameRound();
-  // local useState in addition to dispatch
 
+  // local useState in addition to dispatch
   const [answerForNext, setAnswerForNext] = useState('');
 
   useEffect(() => {
     if (isCorrect === true || isCorrect === false) {
       // when I am attacking and answer is correct, it will increase my attack value OR
       // I will attack and opponents health will decrease
-
       applyHeroAttackValue();
-
       // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
       applyOpponentAttackValue();
       if (action === 'block' && isCorrect === true) {
-        // increaseHeroCurrentHealth();
         setHeroCurrentHealth();
       }
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCorrect]);
 
@@ -134,7 +128,6 @@ const Game: React.FunctionComponent = () => {
     incrementRound();
     // local useState captures this
     setNextRoundAnswer(answerForNext);
-    // setHeroCurrentHealth();
     // NOTE: setGameStatus is on useEffect
     setGameStatus();
     if (difficulty !== undefined) {
