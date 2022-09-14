@@ -8,4 +8,7 @@
 #question {
   padding-left: 2.5rem;
   padding-bottom: 0;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 800px;
 }

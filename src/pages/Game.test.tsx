@@ -1,19 +1,20 @@
 import { screen } from '@testing-library/react';
-import { MOCK_APP_STATE } from 'store/mocks/app-state.mocks';
-import { MOCK_HERO_STATE } from 'store/mocks/hero.mocks';
 import { renderWithProviders } from 'testHelpers';
 import Game from './Game';
 import userEvent from '@testing-library/user-event';
+import { MOCK_OPPONENT_STATE } from 'store/mocks/opponent.mocks';
+import { MOCK_APP_STATE } from 'store/mocks/app-state.mocks';
+import { MOCK_HERO_STATE } from 'store/mocks/hero.mocks';
 
-describe('Game Page', () => {
+describe('Game Page: render tests', () => {
   it('player health bar should render', () => {
     renderWithProviders(<Game />);
-    expect(screen.getByTestId('playerHealthBar')).toBeDefined();
+    expect(screen.getByTestId('player-healthbarContainer')).toBeDefined();
   });
 
   it('opponent health bar should render', () => {
     renderWithProviders(<Game />);
-    expect(screen.getByTestId('opponentHealthBar')).toBeDefined();
+    expect(screen.getByTestId('opponent-healthbarContainer')).toBeDefined();
   });
 
   it('round should render', () => {
@@ -58,7 +59,9 @@ describe('Game Page', () => {
     });
     expect(screen.getAllByTestId('dialogMessage')).toBeDefined();
   });
+});
 
+describe('Game Page: functionality tests', () => {
   it('should render attack value increased', async () => {
     renderWithProviders(<Game />, {
       preloadedState: {
@@ -67,15 +70,77 @@ describe('Game Page', () => {
           action: 'attack',
           dialogStage: 'answering',
           attackStrength: 'light',
-          isCorrect: true,
         },
-        hero: MOCK_HERO_STATE,
+        hero: {
+          ...MOCK_HERO_STATE,
+          currentHealth: 80,
+        },
       },
     });
 
+    const attackValueBefore = await screen.findAllByTestId(
+      'player-attackvalue'
+    );
+    expect(attackValueBefore[0].innerHTML).toEqual('5');
     const correctAnswerButton = screen.getByText('Depends on the planet');
     await userEvent.click(correctAnswerButton);
-    const attackValue = await screen.findAllByTestId('attackvalue');
-    expect(attackValue[0].innerHTML).toEqual('5');
+    const attackValueAfter = await screen.findAllByTestId('player-attackvalue');
+    expect(attackValueAfter[0].innerHTML).toEqual('10');
+  });
+
+  it('should decrease hero health by 5 from opponent attackValue when attacking and answer is not correct', async () => {
+    renderWithProviders(<Game />, {
+      preloadedState: {
+        game: {
+          ...MOCK_APP_STATE.game,
+          action: 'attack',
+          dialogStage: 'answering',
+          attackStrength: 'light',
+        },
+        hero: MOCK_HERO_STATE,
+        opponent: MOCK_OPPONENT_STATE,
+      },
+    });
+    const incorrectAnswerButton = screen.getByText('Four');
+    const heroHealthBefore = await screen.findAllByTestId(
+      'player-healthBarLabel'
+    );
+    expect(heroHealthBefore[0].innerHTML).toEqual('100/100');
+    userEvent.click(incorrectAnswerButton);
+    const nextButton = screen.getByText(/Next/);
+    userEvent.click(nextButton);
+    const heroHealthAfter = await screen.findAllByTestId(
+      'player-healthBarLabel'
+    );
+    expect(heroHealthAfter[0].innerHTML).toEqual('95/100');
+  });
+
+  it('should increase hero health by 10 if blocking and answer is correct', async () => {
+    renderWithProviders(<Game />, {
+      preloadedState: {
+        game: {
+          ...MOCK_APP_STATE.game,
+          action: 'block',
+          dialogStage: 'answering',
+          attackStrength: 'light',
+        },
+        hero: {
+          ...MOCK_HERO_STATE,
+          currentHealth: 80,
+        },
+      },
+    });
+    const heroHealthBefore = await screen.findAllByTestId(
+      'player-healthBarLabel'
+    );
+    expect(heroHealthBefore[0].innerHTML).toEqual('80/100');
+    const correctAnswerButton = screen.getByText('Depends on the planet');
+    userEvent.click(correctAnswerButton);
+    const nextButton = screen.getByText(/Next/);
+    userEvent.click(nextButton);
+    const heroHealthAfter = await screen.findAllByTestId(
+      'player-healthBarLabel'
+    );
+    expect(heroHealthAfter[0].innerHTML).toEqual('90/100');
   });
 });

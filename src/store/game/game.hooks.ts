@@ -11,6 +11,7 @@ import {
 } from 'store/game/game.selectors';
 import {
   answered,
+  answeredVerify,
   difficulty,
   DifficultyType,
   setRound,
@@ -52,9 +53,16 @@ export const useGameSelectors = () => {
 export const useGameActions = () => {
   const dispatch = useAppDispatch();
 
-  const submitAnswer = useCallback(
+  const setAnswered = useCallback(
     (option: string) => {
       dispatch(answered(option));
+    },
+    [dispatch]
+  );
+
+  const setNextRoundAnswer = useCallback(
+    (option: string) => {
+      dispatch(answeredVerify(option));
     },
     [dispatch]
   );
@@ -74,7 +82,8 @@ export const useGameActions = () => {
   );
 
   return {
-    submitAnswer,
+    setAnswered,
+    setNextRoundAnswer,
     setDifficulty,
     setAttackStrength,
   };

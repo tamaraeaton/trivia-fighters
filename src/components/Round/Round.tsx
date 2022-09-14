@@ -1,9 +1,13 @@
-import { FunctionComponent } from 'react';
-import { useGameRound } from 'store/game/game.hooks';
+import { FunctionComponent, PropsWithChildren } from 'react';
 import './Round.scss';
 
-const Round: FunctionComponent = () => {
-  const [currentRound] = useGameRound();
+interface RoundPropTypes {
+  currentRound: number;
+}
+
+const Round: FunctionComponent<PropsWithChildren<RoundPropTypes>> = ({
+  currentRound,
+}) => {
   return (
     <h1 data-testid="round" className="roundCountDisplay">
       ROUND {currentRound}

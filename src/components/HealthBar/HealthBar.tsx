@@ -20,13 +20,13 @@ const HealthBar: FunctionComponent<HealthBarProps> = ({
 
   return (
     <div
-      data-testid={testID}
+      data-testid={`${testID}-healthbarContainer`}
       className={`healthbarContainer ${
         isReversed ? 'fillerReversed' : undefined
       }`}
     >
       <div
-        data-testid="healthBarFill"
+        data-testid={`${testID}-healthBarFill`}
         className="filler"
         style={{
           width: `${healthPercentage}%`,
@@ -43,20 +43,20 @@ const HealthBar: FunctionComponent<HealthBarProps> = ({
       >
         {healthPercentage < 50 ? (
           <img
-            data-testid="healthLowIcon"
+            data-testid={`${testID}-healthLowIcon`}
             src={HealthLow}
             alt="health low icon"
           />
         ) : (
           <img
-            data-testid="healthFullIcon"
+            data-testid={`${testID}-healthFullIcon`}
             src={HealthFull}
             alt="health full icon"
           />
         )}
 
         <span
-          data-testid="healthBarLabel"
+          data-testid={`${testID}-healthBarLabel`}
           className="label"
         >{`${currentHealth}/${maxHealth}`}</span>
       </div>

@@ -1,7 +1,8 @@
 import { renderHookWithProviders } from 'testHelpers';
-import { useGameRound } from 'store/game/game.hooks';
+import { useGameRound, useGameActions } from 'store/game/game.hooks';
 import { act } from '@testing-library/react';
 import { MOCK_APP_STATE } from 'store/mocks/app-state.mocks';
+import { useGameSelectors } from './game.hooks';
 
 describe('Game State Hooks', () => {
   describe('useGameRound', () => {
@@ -26,6 +27,26 @@ describe('Game State Hooks', () => {
 
       [currentRound] = result.current;
       expect(currentRound).toEqual(2);
+    });
+
+    it('should return dialog stage of action', () => {
+      const { result } = renderHookWithProviders(() => useGameSelectors());
+      const { dialogStage } = result.current;
+
+      expect(dialogStage).toEqual('action');
+    });
+
+    it('should set the difficulty to easy', () => {
+      const { result, store } = renderHookWithProviders(() => useGameActions());
+      const { setDifficulty } = result.current;
+
+      expect(store.getState().game.difficulty).toEqual(undefined);
+
+      act(() => {
+        setDifficulty('easy');
+      });
+
+      expect(store.getState().game.difficulty).toEqual('easy');
     });
   });
 });

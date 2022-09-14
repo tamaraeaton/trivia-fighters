@@ -1,6 +1,11 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './Game.scss';
-import { useGameActions, useGameSelectors } from 'store/game/game.hooks';
+import { useNavigate } from 'react-router-dom';
+import {
+  useGameActions,
+  useGameRound,
+  useGameSelectors,
+} from 'store/game/game.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -9,14 +14,17 @@ import Dialog from 'components/Dialog/Dialog';
 import AttackDialog from 'components/AttackDialog/AttackDialog';
 import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
-import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button/Button';
-import { useHeroActions, useHeroSelectors } from 'store/hero/hero.hooks';
-import { useOpponentSelectors } from '../store/opponent/opponent.hooks';
+import AriaRoundMessage from 'components/AriaScreenReader/AriaRoundMessage';
+import {
+  useOpponentSelectors,
+  useOpponentActions,
+} from '../store/opponent/opponent.hooks';
+import { useHeroSelectors, useHeroActions } from '../store/hero/hero.hooks';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  const { submitAnswer } = useGameActions();
+  const { setAnswered, setNextRoundAnswer } = useGameActions();
   const {
     dialogStage,
     action,
@@ -26,16 +34,24 @@ const Game: React.FunctionComponent = () => {
     isCorrect,
   } = useGameSelectors();
 
-  const { applyAttackValue } = useHeroActions();
-  const { heroAttackValue } = useHeroSelectors();
-  const { opponentCurrentHealth } = useOpponentSelectors();
+  const [currentRound] = useGameRound();
+  const { applyHeroAttackValue, increaseHeroHealth } = useHeroActions();
+  const { opponentCurrentHealth, opponentMaxHealth, opponentAttackValue } =
+    useOpponentSelectors();
+  const { applyOpponentAttackValue } = useOpponentActions();
+  const { heroCurrentHealth, heroMaxHealth, heroAttackValue } =
+    useHeroSelectors();
+  const [, { incrementRound }] = useGameRound();
+  // local useState in addition to dispatch
+  const [answerForNext, setAnswerForNext] = useState('');
 
   useEffect(() => {
     if (isCorrect === true || isCorrect === false) {
-      applyAttackValue();
+      applyHeroAttackValue();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCorrect]);
+
   const actionMessage = useMemo(() => {
     if (dialogStage === 'attacking') {
       return 'Choose an attack';
@@ -96,11 +112,26 @@ const Game: React.FunctionComponent = () => {
           options={question.choices}
           answer={question.answer}
           onAnswer={(theOptionOnTheButton) => {
-            submitAnswer(theOptionOnTheButton);
+            // sending payload to the answered slice to use isCorrect
+            setAnswered(theOptionOnTheButton);
+            // NOTE: applyHeroAttackValue is being used in useEffect, this will increase attack value
+            // local useState to set answer to use on handleClick for Next button
+            setAnswerForNext(theOptionOnTheButton);
           }}
         />
       );
     }
+  };
+
+  // clicking this will end the round, perform all calculations, and set the next round
+  const nextButtonHandleClick = () => {
+    incrementRound();
+    // local useState captures this
+    setNextRoundAnswer(answerForNext);
+    // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
+    applyOpponentAttackValue();
+    // when I block and I get the anwer correct, it will increase my health
+    increaseHeroHealth();
   };
 
   return (
@@ -108,15 +139,15 @@ const Game: React.FunctionComponent = () => {
       <div className="healthBarContainer">
         {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
-          testID="playerHealthBar"
+          testID="player"
           isReversed={false}
           maxHealth={100}
-          currentHealth={100}
+          currentHealth={heroCurrentHealth}
         />
-        <Round />
+        <Round currentRound={currentRound} />
         {/* constant value hard-coded until additonal functionality is complete*/}
         <HealthBar
-          testID="opponentHealthBar"
+          testID="opponent"
           isReversed={true}
           maxHealth={150}
           currentHealth={opponentCurrentHealth}
@@ -139,15 +170,17 @@ const Game: React.FunctionComponent = () => {
           </div>
           {dialogStage === 'answered' && (
             <div className="nextButtonDiv">
-              <Button size="xs">Next</Button>
+              <Button size="xs" onClick={nextButtonHandleClick}>
+                Next
+              </Button>
             </div>
           )}
         </div>
-        <div className="action">
+        <div className="actionIconAndValue">
           <Action
             isReversed={true}
             actionState="attack"
-            attackValue={10}
+            attackValue={opponentAttackValue}
             testID="opponent"
           />
         </div>
@@ -156,6 +189,13 @@ const Game: React.FunctionComponent = () => {
         </div>
       </div>
       <Dialog>{dialogStages()}</Dialog>
+      <AriaRoundMessage
+        heroCurrentHealth={heroCurrentHealth}
+        heroMaxHealth={heroMaxHealth}
+        opponentCurrentHealth={opponentCurrentHealth}
+        opponentMaxHealth={opponentMaxHealth}
+        currentRound={currentRound}
+      />
     </>
   );
 };

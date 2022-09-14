@@ -9,7 +9,7 @@ import {
   maxHealthSelector,
   currentHealthSelector,
 } from './hero.selectors';
-import { attackValue } from './hero.slice';
+import { attackValue, increaseHeroCurrentHealth } from './hero.slice';
 
 import { decreaseOpponentHealth } from 'store/opponent/opponent.slice';
 
@@ -31,8 +31,9 @@ export const useHeroActions = () => {
   const isCorrect = useAppSelector(isCorrectSelector);
   const heroAttackValue = useAppSelector(heroAttackValueSelector);
 
-  const applyAttackValue = () => {
-    if (action === 'attack') {
+  // this is when you are on the question dialog, not clicking Next
+  const applyHeroAttackValue = () => {
+    if (action === 'attack' && isCorrect !== undefined) {
       if (isCorrect) {
         if (attackStrengthValue === 'light') {
           dispatch(attackValue(5));
@@ -50,5 +51,11 @@ export const useHeroActions = () => {
     }
   };
 
-  return { applyAttackValue };
+  const increaseHeroHealth = () => {
+    if (isCorrect && action === 'block') {
+      dispatch(increaseHeroCurrentHealth());
+    }
+  };
+
+  return { applyHeroAttackValue, increaseHeroHealth };
 };
