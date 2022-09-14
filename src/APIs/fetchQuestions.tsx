@@ -28,39 +28,16 @@ export const fetchQuestionsPerDifficulty = async (
   difficulty: AttackPowerType
 ): Promise<GetQuestionAPIResponseType> => {
   const difficultyName = getQuestionDifficulty(difficulty);
+  const res = await fetch(
+    `https://opentdb.com/api.php?amount=1&type=multiple&difficulty=${difficultyName}`
+  );
 
-  try {
-    const res = await fetch(
-      `https://opentdb.com/api.php?amount=1&type=multiple&difficulty=${difficultyName}`
-    );
-    // Removing special characters from the JSON
-    const json = await res.json();
-    const jsonString = await JSON.stringify(json)
-      .replace(/&quot;/g, '\\"')
-      // .replace(/&#039;/g, "\\'")
-      .replace(/&#039;/g, '’')
-      .replace(/&rsquo;/g, '’')
-      .replace(/&amp;/gi, '&')
-      .replace(/&lrm;/g, '')
-      .replace(/&eacute;/g, 'é')
-      .replace(/&oacute;/g, 'ó')
-      .replace(/&ocirc;/g, 'ô')
-      .replace(/&sup2;/g, '²')
-      .replace(/&Nu;/g, 'Ν')
-      .replace(/&Sigma;/g, 'Σ')
-      .replace(/&Pi;/g, 'Π')
-      .replace(/&Omicron;/g, 'Ο')
-      .replace(/&ocirc;/g, 'ô')
-      .replace(/&aacute;/, 'á')
-      .replace(/&Uuml;/g, 'Ü')
-      .replace(/&ndash;/g, '–')
-      .replace(/&euml;/g, 'ë');
-    const formattedJSON = decodeURI(jsonString);
-    console.log(JSON.parse(jsonString).results[0].correct_answer);
-    return JSON.parse(formattedJSON);
-  } catch (error) {
-    console.log(error, 'There is a problem getting your questions');
-  }
+  const json = await res.json();
+  const jsonString = await JSON.stringify(json)
+    .replace(/&quot;/g, '\\"')
+    .replace(/&#039;/g, '\\"');
+
+  return JSON.parse(jsonString);
 };
 
 export const fetchRandomQuestions = async () => {
