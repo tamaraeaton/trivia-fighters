@@ -211,7 +211,7 @@ const Game: React.FunctionComponent = () => {
           </div>
           {dialogStage === 'answered' && (
             <div className="nextButtonDiv">
-              <Button size="xs" onClick={() => nextButtonHandleClick()}>
+              <Button size="xs" onClick={nextButtonHandleClick}>
                 Next
               </Button>
             </div>

@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-
 interface AriaRoundMessageProps {
   heroCurrentHealth: number;
   heroMaxHealth: number;
@@ -16,9 +15,9 @@ const AriaRoundMessage: FunctionComponent<AriaRoundMessageProps> = ({
   currentRound,
 }) => {
   return (
-    <p aria-live="polite" className="sr-only">
-      “You are at {heroCurrentHealth} of {heroMaxHealth} health. Your opponent
-      is at {opponentCurrentHealth} of {opponentMaxHealth}, starting Round
+    <p aria-live="polite" className="sr-only" data-testid="aria message">
+      You are at {heroCurrentHealth} of {heroMaxHealth} health. Your opponent is
+      at {opponentCurrentHealth} of {opponentMaxHealth}, starting Round
       {currentRound}
     </p>
   );
