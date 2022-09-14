@@ -32,9 +32,11 @@ const Game: React.FunctionComponent = () => {
     attackStrength,
     question,
     isCorrect,
+    dialogMessage,
+    helpMessage,
   } = useGameUI();
 
-  const [currentRound] = useGameRound();
+  const [currentRound, { incrementRound }] = useGameRound();
 
   const {
     heroCurrentHealth,
@@ -52,7 +54,6 @@ const Game: React.FunctionComponent = () => {
     applyOpponentAttackValue,
     setOpponentAttackValue,
   } = useOpponent();
-  const [, { incrementRound }] = useGameRound();
   // local useState in addition to dispatch
 
   const [answerForNext, setAnswerForNext] = useState('');
@@ -75,59 +76,6 @@ const Game: React.FunctionComponent = () => {
     // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCorrect]);
-
-  const actionMessage = useMemo(() => {
-    if (dialogStage === 'attacking') {
-      return 'Choose an attack';
-    }
-    if (dialogStage === 'action') {
-      return 'Choose an action';
-    }
-    if (dialogStage === 'answered') {
-      return isCorrect === undefined ? '' : isCorrect ? 'Correct' : 'Incorrect';
-    }
-    if (dialogStage === 'answering') {
-      if (action === 'block') {
-        return 'Blocking';
-      }
-      if (attackStrength === 'light') {
-        return 'Light Attack';
-      }
-      if (attackStrength === 'medium') {
-        return 'Medium Attack';
-      }
-      return 'Heavy Attack';
-    }
-    return '';
-  }, [attackStrength, isCorrect, dialogStage, action]);
-
-  // TODO:
-  const helpMessage = useMemo(() => {
-    if (dialogStage === 'action') {
-      return `The opponent's health is based on the selection you chose.*** Now what action do you wish to take?
-      `;
-    }
-    if (dialogStage === 'attacking') {
-      return "A higher level of attack will give you more attack value *** The opponent's attack value is randomly generated per the difficulty you chose";
-    }
-    if (dialogStage === 'answering') {
-      if (action === 'attack') {
-        return 'Pick the correct answer and gain more attack strength.  *** An incorrect answer will trigger the attack.';
-      }
-      if (action === 'block') {
-        return "Pick the correct answer and you will gain 10 health points.  *** An incorrect answer will trigger the opponent's attack.";
-      }
-    }
-    if (dialogStage === 'answered' && isCorrect) {
-      return 'Yay, you got the answer correct. *** Notice that your attack value is increased. *** Keep up the good work! *** Click Next to continue your attack.';
-    }
-    if (dialogStage === 'answered' && !isCorrect) {
-      return 'Your answer is incorrect.  *** Notice that you have attacked each-other.  *** Click Next to choose your next action. ';
-    }
-    if (heroCurrentHealth <= 0 || opponentAttackValue >= heroCurrentHealth) {
-      return 'Someone has lost all of their health.  *** Click to conclude the game.';
-    }
-  }, [dialogStage, action, isCorrect, heroCurrentHealth, opponentAttackValue]);
 
   useEffect(() => {
     if (!difficulty) {
@@ -160,6 +108,8 @@ const Game: React.FunctionComponent = () => {
   };
 
   // clicking this will end the round, perform all calculations, and set the next round
+  // this would get passed to inner component
+  // NextButtonComponent
   const nextButtonHandleClick = () => {
     incrementRound();
     // local useState captures this
@@ -207,7 +157,7 @@ const Game: React.FunctionComponent = () => {
             </div>
           )}
           <div className="dialogMessage" data-testid="dialogMessage">
-            {actionMessage}
+            {dialogMessage}
           </div>
           {dialogStage === 'answered' && (
             <div className="nextButtonDiv">

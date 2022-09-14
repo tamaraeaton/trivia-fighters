@@ -11,6 +11,9 @@ interface QuestionDialogProps {
   onAnswer: (option: string) => void;
 }
 
+// anytime a function is being  called by another function
+// in React a component is a function
+
 const QuestionDialog: FunctionComponent<
   PropsWithChildren<QuestionDialogProps>
 > = ({ question, answer, onAnswer, options }) => {
@@ -18,6 +21,8 @@ const QuestionDialog: FunctionComponent<
 
   const handleClick = (option: string) => {
     setSelectedOption(option);
+    // function prop that is being passed back into my component
+    // the function is created in in the Game
     onAnswer(option);
   };
 

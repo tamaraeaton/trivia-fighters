@@ -11,6 +11,9 @@ export interface GameState {
   gameStatus: GameStatusType;
 }
 
+// I combined attackStrength and attackPowerType
+// What is the question difficulty based off of?
+
 export type DifficultyType = 'easy' | 'medium' | 'seth';
 
 export type DialogStageType =
@@ -22,6 +25,7 @@ export type DialogStageType =
 
 export type ActionType = 'none' | 'attack' | 'block';
 
+// user picks this for light medium heavy attack
 export type AttackPowerType = 'light' | 'medium' | 'heavy';
 
 export type QuestionType = {
