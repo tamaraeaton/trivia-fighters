@@ -23,15 +23,12 @@
   @keyframes gradientScale {
     0% {
       transform: scaleY(1);
-      opacity: 1;
     }
     50% {
-      transform: scaleY(0.8);
-      opacity: 0;
+      transform: scaleY(0.9);
     }
     100% {
       transform: scaleY(1);
-      opacity: 1;
     }
   }
 }

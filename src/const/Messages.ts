@@ -13,13 +13,19 @@ export const MESSAGES = {
     answered: {
       correct: {
         dialogMessage: 'Correct',
-        helpMessage:
-          'Yay, you got the answer correct. *** Notice that your attack value is increased. *** Keep up the good work! *** Click Next to continue your attack.',
+        attack: {
+          helpMessage:
+            'Yay, you got the answer correct. *** Notice that your attack value is increased. *** Keep up the good work! *** Click Next to continue your attack.',
+        },
+        block: {
+          helpMessage:
+            'Yay, you got the answer correct. *** Notice that your current health is increased. *** Keep up the good work! *** Click Next to take your next move.',
+        },
       },
       incorrect: {
         dialogMessage: 'Incorrect',
         helpMessage:
-          'Your answer is incorrect.  *** Notice that you have attacked each-other.  *** Click Next to choose your next action.',
+          'Your answer is incorrect.  *** Notice that you have attacked each-other.  *** Click Next to take your next move.',
       },
     },
     answering: {

@@ -3,7 +3,6 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameUI } from 'store/game/game.hooks';
 import { useOpponent } from '../store/players/opponent/opponent.hooks';
-// import { useHero } from '../store/hero/hero.hooks';
 import { DifficultyType } from '../store/game/game.slice';
 import './Home.scss';
 
@@ -14,18 +13,13 @@ const Home: React.FunctionComponent = () => {
   const { setOpponentsGameHealth } = useOpponent();
   const [showHelpBubble, setShowHelpBubble] = useState(false);
 
-  // const { useHeroActions } = useHero();
-  // can use initial state
-  // const { setHeroGameHealth } = useHeroActions();
-
   const helpMessage = useMemo(() => {
-    return 'Select the difficulty of the questions you would like to receive.';
+    return 'Seth has more health, so it will take longer to have victory over him.  Easy will not take as long.';
   }, []);
 
   const handleClick = (difficultyStrength: DifficultyType) => {
     setDifficulty(difficultyStrength);
     setOpponentsGameHealth(difficultyStrength);
-    // setHeroGameHealth();
     navigate('game');
   };
 

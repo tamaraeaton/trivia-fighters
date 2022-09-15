@@ -84,11 +84,15 @@ const useGameDetails = () => {
       return messageStage.action;
     }
     if (dialogStage === 'attacking') {
-      return messageStage.action;
+      return messageStage.attacking;
     }
     if (dialogStage === 'answered') {
       if (isCorrect) {
-        return messageStage.answered.correct;
+        if (action === 'attack') {
+          return messageStage.answered.correct.attack;
+        } else {
+          return messageStage.answered.correct.block;
+        }
       } else {
         return messageStage.answered.incorrect;
       }
