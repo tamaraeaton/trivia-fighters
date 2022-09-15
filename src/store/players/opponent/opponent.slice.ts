@@ -25,9 +25,7 @@ export const opponentSlice = createSlice({
 
     decreaseOpponentHealth: (state, action: PayloadAction<number>) => {
       // clamp at 0 to avoid negative
-
       state.currentHealth = Math.max(state.currentHealth - action.payload, 0);
-      // opponentCurrentHealth - heroAttackValue, 0
     },
 
     attackValue: (state, action: PayloadAction<number>) => {

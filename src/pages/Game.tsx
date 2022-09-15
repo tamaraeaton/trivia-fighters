@@ -1,11 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Game.scss';
 import { useNavigate } from 'react-router-dom';
-import { useGameUI } from 'store/game/game.hooks';
+import { useGameRound, useGameUI } from 'store/game/game.hooks';
 import { useOpponent } from '../store/players/opponent/opponent.hooks';
 import { useHero } from '../store/players/hero/hero.hooks';
-import { useActions } from '../Hooks/action.hooks';
-import { increaseHeroCurrentHealth } from '../store/players/hero/hero.slice';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -16,7 +14,6 @@ import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import Button from '../components/Button/Button';
 import AriaRoundMessage from 'components/AriaScreenReader/AriaRoundMessage';
-import { attack } from 'store/game/game.slice';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
@@ -25,11 +22,9 @@ const Game: React.FunctionComponent = () => {
     setAnswered,
     setNextRoundAnswer,
     setGameStatus,
-    useGameRound,
     dialogStage,
     action,
     difficulty,
-    attackStrength,
     question,
     isCorrect,
     dialogMessage,
@@ -54,8 +49,8 @@ const Game: React.FunctionComponent = () => {
     applyOpponentAttackValue,
     setOpponentAttackValue,
   } = useOpponent();
-  // local useState in addition to dispatch
 
+  // local useState in addition to dispatch
   const [answerForNext, setAnswerForNext] = useState('');
   const [showHelpBubble, setShowHelpBubble] = useState(false);
 
@@ -71,9 +66,6 @@ const Game: React.FunctionComponent = () => {
         setHeroCurrentHealth();
       }
     }
-    // if (dialogStage === 'answered' && isCorrect) {
-    //   setShowHelpBubble(false);
-    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCorrect]);
 
@@ -108,8 +100,6 @@ const Game: React.FunctionComponent = () => {
   };
 
   // clicking this will end the round, perform all calculations, and set the next round
-  // this would get passed to inner component
-  // NextButtonComponent
   const nextButtonHandleClick = () => {
     incrementRound();
     // local useState captures this

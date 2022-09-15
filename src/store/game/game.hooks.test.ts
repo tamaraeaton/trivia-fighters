@@ -1,11 +1,16 @@
 import { renderHookWithProviders } from 'testHelpers';
 import { act } from '@testing-library/react';
 import { MOCK_APP_STATE } from 'store/mocks/app-state.mocks';
-import { useGameUI } from './game.hooks';
+import { useGameUI, useGameRound } from './game.hooks';
+
+const mockedUsedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...(jest.requireActual('react-router-dom') as any),
+  useNavigate: () => mockedUsedNavigate,
+}));
 
 describe('Game State Hooks', () => {
-  const { useGameRound } = useGameUI();
-
   describe('useGameRound', () => {
     it('should return the current round', () => {
       const { result } = renderHookWithProviders(() => useGameRound(), {
@@ -51,7 +56,3 @@ describe('Game State Hooks', () => {
     });
   });
 });
-
-// somewhere the game hook test is looking for something that is defined that isn't here yet
-// added the useMemo
-// cannot use useContext of null

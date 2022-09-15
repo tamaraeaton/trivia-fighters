@@ -31,7 +31,7 @@ import { MESSAGES } from 'const/Messages';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
-const useGameRound = (): UseGameRoundResult => {
+export const useGameRound = (): UseGameRoundResult => {
   const currentRound = useAppSelector(gameRoundSelector);
   const dispatch = useAppDispatch();
 
@@ -198,7 +198,6 @@ const useGameActions = () => {
   };
 
   return {
-    useGameRound,
     setAnswered,
     setNextRoundAnswer,
     setDifficulty,
@@ -214,11 +213,12 @@ export const useGameUI = () => {
   const data = useGameSelectors();
   const actions = useGameActions();
   const details = useGameDetails();
-
+  const gameRoundData = useGameRound();
   return {
     ...data,
     ...actions,
     ...details,
+    round: gameRoundData,
   };
 };
 

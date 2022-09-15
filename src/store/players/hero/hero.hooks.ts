@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
 import {
   actionSelector,
@@ -12,16 +11,10 @@ import {
 } from './hero.selectors';
 import {
   attackValue,
-  currentHealth,
   decreaseHeroCurrentHealth,
   increaseHeroCurrentHealth,
 } from './hero.slice';
-import {
-  useOpponent,
-  useOpponentActions,
-  useOpponentSelectors,
-} from 'store/players/opponent/opponent.hooks';
-import { useActions } from '../../../Hooks/action.hooks';
+import { useOpponentSelectors } from 'store/players/opponent/opponent.hooks';
 import { decreaseOpponentHealth } from '../opponent/opponent.slice';
 
 export const useHeroSelectors = () => {
@@ -41,10 +34,8 @@ const useHeroActions = () => {
   const action = useAppSelector(actionSelector);
   const attackStrengthValue = useAppSelector(attackStrengthSelector);
   const isCorrect = useAppSelector(isCorrectSelector);
-  const heroCurrentHealth = useAppSelector(currentHealthSelector);
   const { opponentAttackValue } = useOpponentSelectors();
   const heroAttackValue = useAppSelector(heroAttackValueSelector);
-  // const { setOpponentCurrentHealth } = useOpponentActions();
 
   const applyHeroAttackValue = () => {
     if (action === 'attack' && isCorrect !== undefined) {
@@ -60,20 +51,11 @@ const useHeroActions = () => {
         }
       } else {
         // eslint-disable-next-line react-hooks/rules-of-hooks
-        // setOpponentCurrentHealth();
         dispatch(decreaseOpponentHealth(heroAttackValue));
-        console.log(heroAttackValue);
         dispatch(attackValue(0));
       }
     }
   };
-
-  // const setHeroAttackValue = useCallback(
-  //   (value: number) => {
-  //     dispatch(currentHealth(value));
-  //   },
-  //   [dispatch]
-  // );
 
   const setHeroCurrentHealth = () => {
     if (!!isCorrect && action === 'block') {
