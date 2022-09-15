@@ -18,6 +18,7 @@ export function* getQuestionsPerDifficulty(
     action.payload
   );
   const questionRes = res.results[0];
+
   const choices = [
     questionRes.correct_answer,
     ...questionRes.incorrect_answers,

@@ -16,37 +16,11 @@ describe('Home Page', () => {
   });
 
   it('will update opponent max/current health per difficulty and hero max/current health to 100 always, when clicking Easy, Medium, or Seth from Home page', async () => {
-    renderWithProviders(<Home />, {
-      preloadedState: {
-        game: {
-          ...MOCK_APP_STATE.game,
-          round: 1,
-          dialogStage: 'action',
-          action: 'none',
-          question: {
-            text: '',
-            answer: '',
-            choices: [],
-          },
-        },
-        hero: {
-          ...MOCK_HERO_STATE,
-          maxHealth: 100,
-          currentHealth: 100,
-          attackValue: 0,
-        },
-        opponent: {
-          ...MOCK_OPPONENT_STATE,
-          maxHealth: 0,
-          currentHealth: 0,
-          attackValue: 0,
-        },
-      },
-    });
+    const { store } = renderWithProviders(<Home />);
     const sethButton = screen.getByTestId('seth');
     userEvent.click(sethButton);
 
-    expect({
+    expect(store!.getState()).toEqual({
       game: {
         round: 1,
         dialogStage: 'action',
@@ -57,7 +31,6 @@ describe('Home Page', () => {
           choices: [],
         },
         difficulty: 'seth',
-        playing: true,
       },
       hero: {
         maxHealth: 100,
@@ -69,6 +42,6 @@ describe('Home Page', () => {
         currentHealth: 200,
         attackValue: 0,
       },
-    }).toBeDefined();
+    });
   });
 });

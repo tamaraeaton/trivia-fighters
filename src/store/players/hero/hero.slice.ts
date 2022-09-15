@@ -7,8 +7,8 @@ export interface HeroState {
 }
 
 export const initialState: HeroState = {
-  maxHealth: 100,
-  currentHealth: 100,
+  maxHealth: 0,
+  currentHealth: 0,
   attackValue: 0,
 };
 
