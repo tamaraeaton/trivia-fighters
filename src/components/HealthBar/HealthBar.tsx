@@ -36,8 +36,8 @@ const HealthBar: FunctionComponent<HealthBarProps> = ({
             healthPercentage < 50
               ? `${
                   !isReversed
-                    ? 'linear-gradient(60deg, #ff0000 0%, #960000 100%)'
-                    : 'linear-gradient(60deg, #960000 0%, #ff0000 100%)'
+                    ? 'linear-gradient(60deg, #960000 0%, #ff0000 100%)'
+                    : 'linear-gradient(60deg, #ff0000 0%, #960000 100%)'
                 }`
               : `${
                   !isReversed

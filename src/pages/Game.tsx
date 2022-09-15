@@ -101,7 +101,7 @@ const Game: React.FunctionComponent = () => {
   // clicking this will end the round, perform all calculations, and set the next round
   const nextButtonHandleClick = () => {
     incrementRound();
-    // local useState captures this
+    // this goes to GameUI
     setNextRoundAnswer(answerForNext);
     // NOTE: setGameStatus is on useEffect
     setGameStatus();
