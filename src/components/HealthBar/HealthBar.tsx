@@ -23,7 +23,9 @@ const HealthBar: FunctionComponent<HealthBarProps> = ({
       data-testid={`${testID}-healthbarContainer`}
       className={`healthbarContainer ${
         isReversed ? 'fillerReversed' : undefined
-      }`}
+      } 
+      ${healthPercentage < 50 ? 'healthBarContainerGrow' : undefined}  
+      `}
     >
       <div
         data-testid={`${testID}-healthBarFill`}

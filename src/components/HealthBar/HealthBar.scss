@@ -9,6 +9,23 @@
   border: 4px solid white;
 }
 
+.healthBarContainerGrow {
+  display: flex;
+  position: relative;
+  height: 25px;
+  min-width: 330px;
+  background-color: #e0e0de;
+  border-radius: 10px;
+  margin: 50px 0;
+  border: 4px solid white;
+  animation: healthBarGrow 2s ease-in-out forwards;
+  @keyframes healthBarGrow {
+    25% {
+      transform: scale(1.2);
+    }
+  }
+}
+
 .label {
   padding: 5px;
   color: white;
@@ -20,7 +37,7 @@
 .filler {
   height: 100%;
   border-radius: inherit;
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .healthAndScoreFont {
