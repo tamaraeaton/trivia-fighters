@@ -30,7 +30,7 @@ import { resetOpponentState } from '../players/opponent/opponent.slice';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
-const useGameRound = (): UseGameRoundResult => {
+export const useGameRound = (): UseGameRoundResult => {
   const currentRound = useAppSelector(gameRoundSelector);
   const dispatch = useAppDispatch();
 
@@ -131,7 +131,6 @@ const useGameActions = () => {
   };
 
   return {
-    useGameRound,
     setAnswered,
     setNextRoundAnswer,
     setDifficulty,
@@ -146,10 +145,12 @@ const useGameActions = () => {
 export const useGameUI = () => {
   const data = useGameSelectors();
   const actions = useGameActions();
+  const gameRoundData = useGameRound();
 
   return {
     ...data,
     ...actions,
+    round: gameRoundData,
   };
 };
 

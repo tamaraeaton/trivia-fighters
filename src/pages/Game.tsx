@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import './Game.scss';
 import { useNavigate } from 'react-router-dom';
-import { useGameUI } from 'store/game/game.hooks';
+import { useGameRound, useGameUI } from 'store/game/game.hooks';
 import { useOpponent } from '../store/players/opponent/opponent.hooks';
 import { useHero } from '../store/players/hero/hero.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
@@ -22,7 +22,6 @@ const Game: React.FunctionComponent = () => {
     setAnswered,
     setNextRoundAnswer,
     setGameStatus,
-    useGameRound,
     dialogStage,
     action,
     difficulty,
@@ -31,7 +30,7 @@ const Game: React.FunctionComponent = () => {
     isCorrect,
   } = useGameUI();
 
-  const [currentRound] = useGameRound();
+  const [currentRound, { incrementRound }] = useGameRound();
 
   const {
     heroCurrentHealth,
@@ -49,7 +48,6 @@ const Game: React.FunctionComponent = () => {
     applyOpponentAttackValue,
     setOpponentAttackValue,
   } = useOpponent();
-  const [, { incrementRound }] = useGameRound();
 
   // local useState in addition to dispatch
   const [answerForNext, setAnswerForNext] = useState('');
