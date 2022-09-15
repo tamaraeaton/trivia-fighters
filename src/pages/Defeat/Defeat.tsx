@@ -26,7 +26,12 @@ const Defeat: FunctionComponent<PropsWithChildren> = () => {
         Play Again
       </Button>
       <div id="avatarContainer">
-        <img id="avatar" src={DefeatAvatar} alt="defeated" />
+        <img
+          data-testid="defeatAvatar"
+          id="avatar"
+          src={DefeatAvatar}
+          alt="defeated"
+        />
         <img id="shadowBase" src={ShadowBase} alt="shadowBase" />
       </div>
     </div>

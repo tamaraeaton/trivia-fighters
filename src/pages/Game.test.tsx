@@ -65,6 +65,15 @@ describe('Game Page: render tests', () => {
 });
 
 describe('Game Page: functionality tests', () => {
+  let randomSpy: jest.SpyInstance;
+
+  beforeEach(() => {
+    randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.5);
+  });
+
+  afterEach(() => {
+    randomSpy.mockRestore();
+  });
   it('should render attack value increased', async () => {
     renderWithProviders(<Game />, {
       preloadedState: {
@@ -172,6 +181,6 @@ describe('Game Page: functionality tests', () => {
     const attackButton = screen.getByTestId('attack');
     expect(screen.queryByTestId('opponent-attackvalue')).toBe(null);
     userEvent.click(attackButton);
-    expect(screen.getByTestId('opponent-attackvalue')).toBeDefined();
+    expect(screen.getByTestId('opponent-attackvalue').innerHTML).toEqual('19');
   });
 });

@@ -29,7 +29,7 @@ export const useHeroSelectors = () => {
   };
 };
 
-const useHeroActions = () => {
+export const useHeroActions = () => {
   const dispatch = useAppDispatch();
   const action = useAppSelector(actionSelector);
   const attackStrengthValue = useAppSelector(attackStrengthSelector);

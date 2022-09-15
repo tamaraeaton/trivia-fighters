@@ -30,10 +30,9 @@ describe('Button Component', () => {
   });
 
   it('should render if disabled', () => {
-    const wrapper = render(<Button disabled={true}>Test</Button>);
-    const button = wrapper.getByText('Test');
-    expect(button).toBeDisabled();
-    expect(button).toHaveStyle(
+    render(<Button testID="disabledButton" disabled={true}></Button>);
+    expect(screen.getByTestId('disabledButton')).toBeDisabled();
+    expect(screen.getByTestId('disabledButton')).toHaveStyle(
       'background: linear-gradient(0deg, #9f9f9f 0%, #d7d7d7 100%);'
     );
   });

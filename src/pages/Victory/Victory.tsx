@@ -29,7 +29,12 @@ const Victory: FunctionComponent<PropsWithChildren> = () => {
       <div id="avatarContainer">
         <img id="shadowGradient" src={ShadowGradient} alt="shadowGradient" />
         <img id="shadowBase" src={ShadowBase} alt="shadowBase" />
-        <img id="victoryAvatar" src={VictoryAvatar} alt="victory"></img>
+        <img
+          data-testid="victoryAvatar"
+          id="victoryAvatar"
+          src={VictoryAvatar}
+          alt="victory"
+        ></img>
       </div>
     </div>
   );
