@@ -31,7 +31,10 @@ describe('Game Page: render tests', () => {
         },
       },
     });
-    expect(screen.getAllByTestId('barbarianBunny')).toBeDefined();
+    expect(screen.getByTestId('opponentAvatar')).toHaveAttribute(
+      'src',
+      'barbarian-bunny.svg'
+    );
   });
 
   it('should render a message for dialog box', () => {

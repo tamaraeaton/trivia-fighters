@@ -51,3 +51,7 @@ describe('Game State Hooks', () => {
     });
   });
 });
+
+// somewhere the game hook test is looking for something that is defined that isn't here yet
+// added the useMemo
+// cannot use useContext of null
