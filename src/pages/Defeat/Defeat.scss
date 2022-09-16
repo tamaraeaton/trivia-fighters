@@ -1,46 +1,12 @@
-.defeatContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-#gameOver {
-  font-family: Impact;
-  font-size: 100px;
-  letter-spacing: 0;
-  line-height: 122px;
-  margin-bottom: 0;
-  margin-top: 2rem;
-}
-
-#youLost {
-  font-family: Lato;
-  font-size: 30px;
-  font-weight: lighter;
-  letter-spacing: -1.07px;
-  line-height: 36px;
-  //   margin-top: 0.5rem;
-}
-
-#avatarContainer {
-  width: 700px;
-  overflow: visible;
-  position: relative;
-}
-
-#avatar {
+#defeatAvatar {
   position: absolute;
   top: 100px;
   right: 5px;
   z-index: 1;
 }
 
-// need to make this wider
 #shadowBase {
   position: absolute;
-  //   top: 20px;
-  //   right: 0;
   height: 50px;
   width: 600px;
-  //   background-color: rgb(40, 33, 107);
 }

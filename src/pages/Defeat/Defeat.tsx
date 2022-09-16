@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithChildren } from 'react';
+import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DefeatAvatar from '../../assets/images/fox-knight_defeated.svg';
 import ShadowBase from '../../assets/images/shadow.svg';
@@ -7,10 +7,9 @@ import { useGameUI } from '../../store/game/game.hooks';
 import { useOpponent } from 'store/players/opponent/opponent.hooks';
 import './Defeat.scss';
 
-const Defeat: FunctionComponent<PropsWithChildren> = () => {
+const Defeat: FunctionComponent = () => {
   const navigate = useNavigate();
   const { setResetGame } = useGameUI();
-
   const { opponentName } = useOpponent();
 
   const handleClick = () => {
@@ -19,16 +18,16 @@ const Defeat: FunctionComponent<PropsWithChildren> = () => {
   };
 
   return (
-    <div className="defeatContainer">
-      <h1 id="gameOver">GAME OVER</h1>
-      <h2 id="youLost">You lost to {opponentName}!</h2>
-      <Button size="s" selected={false} disabled={false} onClick={handleClick}>
+    <div className="pageContainer">
+      <h1 className="pageTitle">GAME OVER</h1>
+      <h2 className="pagePreface">You lost to {opponentName}!</h2>
+      <Button size="s" onClick={handleClick}>
         Play Again
       </Button>
-      <div id="avatarContainer">
+      <div className="victoryDefeatAvatarContainer">
         <img
           data-testid="defeatAvatar"
-          id="avatar"
+          id="defeatAvatar"
           src={DefeatAvatar}
           alt="defeated"
         />

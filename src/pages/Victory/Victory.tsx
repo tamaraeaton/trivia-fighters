@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithChildren } from 'react';
+import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import VictoryAvatar from '../../assets/images/fox-knight_victory.svg';
 import ShadowBase from '../../assets/images/shadow.svg';
@@ -8,10 +8,9 @@ import { useGameUI } from '../../store/game/game.hooks';
 import { useOpponent } from 'store/players/opponent/opponent.hooks';
 import './Victory.scss';
 
-const Victory: FunctionComponent<PropsWithChildren> = () => {
-  const { setResetGame } = useGameUI();
-
+const Victory: FunctionComponent = () => {
   const navigate = useNavigate();
+  const { setResetGame } = useGameUI();
   const { opponentName } = useOpponent();
 
   const handleClick = () => {
@@ -20,13 +19,13 @@ const Victory: FunctionComponent<PropsWithChildren> = () => {
   };
 
   return (
-    <div className="victoryContainer">
-      <h1 id="victory">VICTORY</h1>
-      <h2 id="youBeat">You beat the {opponentName}!</h2>
-      <Button size="s" selected={false} disabled={false} onClick={handleClick}>
+    <div className="pageContainer">
+      <h1 className="pageTitle">VICTORY</h1>
+      <h2 className="pagePreface">You beat the {opponentName}!</h2>
+      <Button size="s" onClick={handleClick}>
         Play Again
       </Button>
-      <div id="avatarContainer">
+      <div className="victoryDefeatAvatarContainer">
         <img id="shadowGradient" src={ShadowGradient} alt="shadowGradient" />
         <img id="shadowBase" src={ShadowBase} alt="shadowBase" />
         <img

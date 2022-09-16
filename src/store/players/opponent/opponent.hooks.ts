@@ -29,6 +29,7 @@ const useOpponentDetails = () => {
     }
     return undefined;
   }, [difficulty]);
+  // TODO: victory/defeat will not have a difficulty and still needs the name displayed
   return {
     opponentName: opponentData?.displayName,
   };

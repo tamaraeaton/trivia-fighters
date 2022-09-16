@@ -36,7 +36,7 @@ const QuestionDialog: FunctionComponent<
             selectedOption && option === selectedOption && option !== answer;
 
           return (
-            <div key={option} id="option">
+            <div key={option} className="option">
               <Button
                 testID="button"
                 classType={
