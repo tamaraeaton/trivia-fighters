@@ -3,7 +3,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameUI } from 'store/game/game.hooks';
 import { useOpponent } from '../store/players/opponent/opponent.hooks';
-// import { useHero } from '../store/hero/hero.hooks';
 import { DifficultyType } from '../store/game/game.slice';
 import './Home.scss';
 
@@ -13,14 +12,9 @@ const Home: React.FunctionComponent = () => {
 
   const { setOpponentsGameHealth } = useOpponent();
 
-  // const { useHeroActions } = useHero();
-  // can use initial state
-  // const { setHeroGameHealth } = useHeroActions();
-
   const handleClick = (difficultyStrength: DifficultyType) => {
     setDifficulty(difficultyStrength);
     setOpponentsGameHealth(difficultyStrength);
-    // setHeroGameHealth();
     navigate('game');
   };
 

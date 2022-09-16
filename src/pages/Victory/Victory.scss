@@ -1,34 +1,3 @@
-.victoryContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-#victory {
-  font-family: Impact;
-  font-size: 100px;
-  letter-spacing: 0;
-  line-height: 122px;
-  margin-bottom: 0;
-  margin-top: 2rem;
-}
-
-#youBeat {
-  font-family: Lato;
-  font-size: 30px;
-  font-weight: lighter;
-  letter-spacing: -1.07px;
-  line-height: 36px;
-  //   margin-top: 0.5rem;
-}
-
-#avatarContainer {
-  width: 600px;
-  overflow: visible;
-  position: relative;
-}
-
 #shadowGradient {
   position: absolute;
   top: 13rem;
