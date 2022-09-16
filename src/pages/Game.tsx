@@ -131,7 +131,6 @@ const Game: React.FunctionComponent = () => {
     // local useState captures this
     setNextRoundAnswer(answerForNext);
     // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
-    // applyOpponentAttackValue();
     // when I block and I get the anwer correct, it will increase my health
     increaseHeroHealth();
   };
