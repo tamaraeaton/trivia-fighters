@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import VictoryAvatar from '../../assets/images/fox-knight_victory.svg';
 import ShadowBase from '../../assets/images/shadow.svg';
@@ -10,8 +10,14 @@ import './Victory.scss';
 
 const Victory: FunctionComponent = () => {
   const navigate = useNavigate();
-  const { setResetGame } = useGameUI();
+  const { setResetGame, difficulty } = useGameUI();
   const { opponentName } = useOpponent();
+
+  useEffect(() => {
+    if (!difficulty) {
+      navigate('/');
+    }
+  }, [difficulty, navigate]);
 
   const handleClick = () => {
     setResetGame();
@@ -26,7 +32,12 @@ const Victory: FunctionComponent = () => {
         Play Again
       </Button>
       <div className="victoryDefeatAvatarContainer">
-        <img id="shadowGradient" src={ShadowGradient} alt="shadowGradient" />
+        <img
+          id="shadowGradient"
+          className="avatarShadowScale"
+          src={ShadowGradient}
+          alt="shadowGradient"
+        />
         <img id="shadowBase" src={ShadowBase} alt="shadowBase" />
         <img
           data-testid="victoryAvatar"

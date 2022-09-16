@@ -18,19 +18,6 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  transform-origin: bottom;
-  animation: gradientScale 600ms ease-in-out infinite;
-  @keyframes gradientScale {
-    0% {
-      transform: scaleY(1);
-    }
-    50% {
-      transform: scaleY(0.9);
-    }
-    100% {
-      transform: scaleY(1);
-    }
-  }
 }
 
 .avatarShadowBase {
