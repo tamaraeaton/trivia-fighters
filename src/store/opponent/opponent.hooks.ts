@@ -1,24 +1,27 @@
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
   opponentMaxHealthSelector,
   opponentCurrentHealthSelector,
   opponentAttackValueSelector,
-  opponentSetDifficultySelector,
 } from './opponent.selectors';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
+import {
+  maxHealth,
+  currentHealth,
+  attackValue,
+} from 'store/opponent/opponent.slice';
 import { isCorrectSelector, actionSelector } from 'store/game/game.selectors';
-import { decreaseHeroCurrentHealth, attackValue } from '../hero/hero.slice';
+import { DifficultyType } from 'store/game/game.slice';
+import { decreaseHeroCurrentHealth } from '../hero/hero.slice';
 
 export const useOpponentSelectors = () => {
   const opponentMaxHealth = useAppSelector(opponentMaxHealthSelector);
   const opponentCurrentHealth = useAppSelector(opponentCurrentHealthSelector);
   const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
-  const opponentSetDifficulty = useAppSelector(opponentSetDifficultySelector);
 
   return {
     opponentMaxHealth,
     opponentCurrentHealth,
     opponentAttackValue,
-    opponentSetDifficulty,
   };
 };
 
@@ -34,5 +37,40 @@ export const useOpponentActions = () => {
       dispatch(attackValue(0));
     }
   };
-  return { applyOpponentAttackValue };
+
+  const setOpponentsGameHealth = (option: DifficultyType) => {
+    if (option === 'easy') {
+      dispatch(maxHealth(100));
+      dispatch(currentHealth(100));
+    } else if (option === 'medium') {
+      dispatch(maxHealth(150));
+      dispatch(currentHealth(150));
+    } else {
+      dispatch(maxHealth(200));
+      dispatch(currentHealth(200));
+    }
+  };
+
+  const setOpponentAttackValue = (option: DifficultyType) => {
+    let min = Math.ceil(5);
+    let max = Math.floor(1);
+    const randomOneThruFive = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    if (option === 'easy') {
+      let easyAttack = 1 + 1 * randomOneThruFive;
+      dispatch(attackValue(easyAttack));
+    } else if (option === 'medium') {
+      let mediumAttack = 5 + 2 * randomOneThruFive;
+      dispatch(attackValue(mediumAttack));
+    } else {
+      let sethAttack = 10 + 3 * randomOneThruFive;
+      dispatch(attackValue(sethAttack));
+    }
+  };
+
+  return {
+    applyOpponentAttackValue,
+    setOpponentsGameHealth,
+    setOpponentAttackValue,
+  };
 };

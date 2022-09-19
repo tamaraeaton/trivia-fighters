@@ -17,6 +17,8 @@ import {
   setRound,
   attackStrength,
   AttackPowerType,
+  attack,
+  block,
 } from 'store/game/game.slice';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
@@ -81,11 +83,21 @@ export const useGameActions = () => {
     [dispatch]
   );
 
+  const setActionToBlock = useCallback(() => {
+    dispatch(block());
+  }, [dispatch]);
+
+  const setActionToAttack = useCallback(() => {
+    dispatch(attack());
+  }, [dispatch]);
+
   return {
     setAnswered,
     setNextRoundAnswer,
     setDifficulty,
     setAttackStrength,
+    setActionToBlock,
+    setActionToAttack,
   };
 };
 

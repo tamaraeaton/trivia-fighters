@@ -10,7 +10,6 @@ import {
 
 export const gameSelector = (state: RootState) => state.game;
 
-// keeping example for round selecter
 export const gameRoundSelector = createSelector(
   gameSelector,
   (gameState): number => gameState.round
@@ -18,7 +17,7 @@ export const gameRoundSelector = createSelector(
 
 export const dialogStageSelector = createSelector(
   gameSelector,
-  (gameState): DialogStageType => gameState.dialogStage
+  (gameState): DialogStageType | undefined => gameState.dialogStage
 );
 
 export const actionSelector = createSelector(

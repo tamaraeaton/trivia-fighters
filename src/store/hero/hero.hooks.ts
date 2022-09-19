@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import {
   actionSelector,
   attackStrengthSelector,
@@ -9,7 +10,12 @@ import {
   maxHealthSelector,
   currentHealthSelector,
 } from './hero.selectors';
-import { attackValue, increaseHeroCurrentHealth } from './hero.slice';
+import {
+  attackValue,
+  increaseHeroCurrentHealth,
+  currentHealth,
+  maxHealth,
+} from './hero.slice';
 
 import { decreaseOpponentHealth } from 'store/opponent/opponent.slice';
 
@@ -57,5 +63,10 @@ export const useHeroActions = () => {
     }
   };
 
-  return { applyHeroAttackValue, increaseHeroHealth };
+  const setHeroGameHealth = useCallback(() => {
+    dispatch(currentHealth(100));
+    dispatch(maxHealth(100));
+  }, [dispatch]);
+
+  return { applyHeroAttackValue, increaseHeroHealth, setHeroGameHealth };
 };

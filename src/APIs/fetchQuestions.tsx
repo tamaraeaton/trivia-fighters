@@ -31,18 +31,18 @@ export const fetchQuestionsPerDifficulty = async (
   const res = await fetch(
     `https://opentdb.com/api.php?amount=1&type=multiple&difficulty=${difficultyName}`
   );
+
   const json = await res.json();
-  return json;
+  const jsonString = await JSON.stringify(json)
+    .replace(/&quot;/g, '\\"')
+    .replace(/&#039;/g, '\\"');
+
+  return JSON.parse(jsonString);
 };
 
-export const fetchRandomQuestions =
-  async (): Promise<GetQuestionAPIResponseType> => {
-    const difficultyName = ['easy', 'medium', 'hard'];
-    const randomDifficulty =
-      difficultyName[Math.floor(Math.random() * difficultyName.length)];
-    const res = await fetch(
-      `https://opentdb.com/api.php?amount=1&type=multiple&difficulty=${randomDifficulty}`
-    );
-    const json = await res.json();
-    return json;
-  };
+export const fetchRandomQuestions = async () => {
+  const difficultyName: AttackPowerType[] = ['light', 'medium', 'heavy'];
+  const randomDifficulty =
+    difficultyName[Math.floor(Math.random() * difficultyName.length)];
+  return fetchQuestionsPerDifficulty(randomDifficulty);
+};

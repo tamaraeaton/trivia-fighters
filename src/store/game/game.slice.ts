@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface GameState {
   round: number;
   difficulty?: DifficultyType;
-  dialogStage: DialogStageType;
+  dialogStage?: DialogStageType;
   action: ActionType;
   attackStrength?: AttackPowerType;
   question: QuestionType;
