@@ -15,7 +15,7 @@ import {
   actionSelector,
   difficultySelector,
 } from 'store/game/game.selectors';
-import { DifficultyType } from 'store/game/game.slice';
+import { difficulty, DifficultyType } from 'store/game/game.slice';
 import { decreaseHeroCurrentHealth } from '../hero/hero.slice';
 import { heroAttackValueSelector } from '../hero/hero.selectors';
 import { OPPONENTS } from 'const/Opponents';
@@ -29,7 +29,6 @@ const useOpponentDetails = () => {
     }
     return undefined;
   }, [difficulty]);
-  // TODO: victory/defeat will not have a difficulty and still needs the name displayed
   return {
     opponentName: opponentData?.displayName,
   };
@@ -55,33 +54,19 @@ export const useOpponentActions = () => {
   const heroAttackValue = useAppSelector(heroAttackValueSelector);
 
   const setOpponentsGameHealth = (option: DifficultyType) => {
-    if (option === 'easy') {
-      dispatch(maxHealth(100));
-      dispatch(currentHealth(100));
-    } else if (option === 'medium') {
-      dispatch(maxHealth(150));
-      dispatch(currentHealth(150));
-    } else {
-      dispatch(maxHealth(200));
-      dispatch(currentHealth(200));
-    }
+    const data = OPPONENTS[option];
+    dispatch(maxHealth(data.maxHealth));
+    dispatch(currentHealth(data.maxHealth));
   };
 
   const setOpponentAttackValue = (option: DifficultyType) => {
-    let min = Math.ceil(5);
-    let max = Math.floor(1);
-    const randomOneThruFive = Math.floor(Math.random() * (max - min + 1)) + min;
+    const randomOneThruFive = Math.floor(Math.random() * (5 - 1)) + 1;
+    const data = OPPONENTS[option];
 
-    if (option === 'easy') {
-      let easyAttack = 1 + 1 * randomOneThruFive;
-      dispatch(attackValue(easyAttack));
-    } else if (option === 'medium') {
-      let mediumAttack = 5 + 2 * randomOneThruFive;
-      dispatch(attackValue(mediumAttack));
-    } else {
-      let sethAttack = 10 + 3 * randomOneThruFive;
-      dispatch(attackValue(sethAttack));
-    }
+    let attackTotal =
+      data.attackBase + data.attackMultiplier * randomOneThruFive;
+
+    dispatch(attackValue(attackTotal));
   };
 
   const applyOpponentAttackValue = () => {

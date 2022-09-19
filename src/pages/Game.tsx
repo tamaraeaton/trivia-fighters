@@ -103,7 +103,6 @@ const Game: React.FunctionComponent = () => {
     incrementRound();
     // this goes to GameUI
     setNextRoundAnswer(answerForNext);
-    // NOTE: setGameStatus is on useEffect
     setGameStatus();
     if (difficulty !== undefined) {
       setOpponentAttackValue(difficulty);
