@@ -126,7 +126,6 @@ const Game: React.FunctionComponent = () => {
     incrementRound();
     // local useState captures this
     setNextRoundAnswer(answerForNext);
-    // NOTE: setGameStatus is on useEffect
     setGameStatus();
     if (difficulty !== undefined) {
       setOpponentAttackValue(difficulty);
