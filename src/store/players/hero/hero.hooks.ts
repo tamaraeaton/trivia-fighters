@@ -50,7 +50,6 @@ export const useHeroActions = () => {
           dispatch(attackValue(15));
         }
       } else {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         dispatch(decreaseOpponentHealth(heroAttackValue));
         console.log(heroAttackValue);
         dispatch(attackValue(0));
