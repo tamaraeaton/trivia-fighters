@@ -15,7 +15,7 @@ import {
   actionSelector,
   difficultySelector,
 } from 'store/game/game.selectors';
-import { difficulty, DifficultyType } from 'store/game/game.slice';
+import { DifficultyType } from 'store/game/game.slice';
 import { decreaseHeroCurrentHealth } from '../hero/hero.slice';
 import { heroAttackValueSelector } from '../hero/hero.selectors';
 import { OPPONENTS } from 'const/Opponents';
