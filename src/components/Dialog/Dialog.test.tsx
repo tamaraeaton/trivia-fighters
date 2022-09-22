@@ -12,7 +12,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('Dialog Tests', () => {
   it('should render a dialog box', () => {
-    renderWithProviders(<Dialog></Dialog>);
+    renderWithProviders(<Dialog />);
     expect(screen.getByTestId('dialogWrapper')).toBeDefined();
   });
 
