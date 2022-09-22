@@ -1,0 +1,23 @@
+#shadowGradient {
+  position: absolute;
+  top: 13rem;
+  left: 8rem;
+  width: 320px;
+}
+
+#shadowBase {
+  position: absolute;
+  top: 14rem;
+  left: 5rem;
+  transform: translate(-50%, 50%);
+  width: 240px;
+  left: 50%;
+  z-index: 0;
+}
+
+#victoryAvatar {
+  position: absolute;
+  top: 30px;
+  right: 80px;
+  z-index: 1;
+}

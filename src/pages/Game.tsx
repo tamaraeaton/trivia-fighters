@@ -1,11 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import './Game.scss';
 import { useNavigate } from 'react-router-dom';
-import {
-  useGameActions,
-  useGameRound,
-  useGameSelectors,
-} from 'store/game/game.hooks';
+import { useGameRound, useGameUI } from 'store/game/game.hooks';
+import { useOpponent } from '../store/players/opponent/opponent.hooks';
+import { useHero } from '../store/players/hero/hero.hooks';
 import HealthBar from 'components/HealthBar/HealthBar';
 import Round from '../components/Round/Round';
 import Action from '../components/Action/Action';
@@ -16,39 +14,54 @@ import ActionDialog from 'components/ActionDialog/ActionDialog';
 import QuestionDialog from 'components/QuestionDialog/QuestionDialog';
 import Button from '../components/Button/Button';
 import AriaRoundMessage from 'components/AriaScreenReader/AriaRoundMessage';
-import {
-  useOpponentSelectors,
-  useOpponentActions,
-} from '../store/opponent/opponent.hooks';
-import { useHeroSelectors, useHeroActions } from '../store/hero/hero.hooks';
 
 const Game: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  const { setAnswered, setNextRoundAnswer } = useGameActions();
+
   const {
+    setAnswered,
+    setNextRoundAnswer,
+    setGameStatus,
     dialogStage,
     action,
     difficulty,
     attackStrength,
     question,
     isCorrect,
-  } = useGameSelectors();
+  } = useGameUI();
 
-  const [currentRound] = useGameRound();
-  const { applyHeroAttackValue, increaseHeroHealth } = useHeroActions();
-  const { opponentCurrentHealth, opponentMaxHealth, opponentAttackValue } =
-    useOpponentSelectors();
-  const { applyOpponentAttackValue } = useOpponentActions();
-  const { heroCurrentHealth, heroMaxHealth, heroAttackValue } =
-    useHeroSelectors();
-  const [, { incrementRound }] = useGameRound();
+  const [currentRound, { incrementRound }] = useGameRound();
+
+  const {
+    heroCurrentHealth,
+    heroMaxHealth,
+    heroAttackValue,
+    applyHeroAttackValue,
+    setHeroCurrentHealth,
+  } = useHero();
+
+  const {
+    opponentName,
+    opponentCurrentHealth,
+    opponentMaxHealth,
+    opponentAttackValue,
+    applyOpponentAttackValue,
+    setOpponentAttackValue,
+  } = useOpponent();
+
   // local useState in addition to dispatch
   const [answerForNext, setAnswerForNext] = useState('');
 
   useEffect(() => {
     if (isCorrect === true || isCorrect === false) {
+      // when I am attacking and answer is correct, it will increase my attack value OR
+      // I will attack and opponents health will decrease
       applyHeroAttackValue();
+      // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
       applyOpponentAttackValue();
+      if (action === 'block' && isCorrect === true) {
+        setHeroCurrentHealth();
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCorrect]);
@@ -84,23 +97,6 @@ const Game: React.FunctionComponent = () => {
     }
   }, [difficulty, navigate]);
 
-  const opponentAvatarPerDifficulty = () => {
-    let name = 'Wizard Pig';
-    let testID = 'wizardPig';
-
-    switch (difficulty) {
-      case 'medium':
-        name = 'Barbarian Bunny';
-        testID = 'barbarianBunny';
-        break;
-      case 'seth':
-        name = 'Dragon Seth';
-        testID = 'dragonSeth';
-        break;
-    }
-    return <Avatar name={name} testID={testID} />;
-  };
-
   const dialogStages = () => {
     if (dialogStage === 'action') {
       return <ActionDialog />;
@@ -130,9 +126,10 @@ const Game: React.FunctionComponent = () => {
     incrementRound();
     // local useState captures this
     setNextRoundAnswer(answerForNext);
-    // when I block or attack, if answer is incorrect, opponent will attack and my health will decrease
-    // when I block and I get the anwer correct, it will increase my health
-    increaseHeroHealth();
+    setGameStatus();
+    if (difficulty !== undefined) {
+      setOpponentAttackValue(difficulty);
+    }
   };
 
   return (
@@ -175,6 +172,7 @@ const Game: React.FunctionComponent = () => {
             </div>
           )}
         </div>
+
         <div className="actionIconAndValue">
           <Action
             isReversed={true}
@@ -183,8 +181,11 @@ const Game: React.FunctionComponent = () => {
             testID="opponent"
           />
         </div>
+
         <div className="avatarActionGroup group2">
-          {opponentAvatarPerDifficulty()}
+          {!!opponentName && (
+            <Avatar name={opponentName} testID="opponentAvatar" />
+          )}
         </div>
       </div>
       <Dialog>{dialogStages()}</Dialog>

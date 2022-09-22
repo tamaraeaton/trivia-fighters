@@ -1,9 +1,6 @@
 import { screen } from '@testing-library/react';
 import Home from 'pages/Home';
 import { renderWithProviders } from 'testHelpers';
-import { MOCK_OPPONENT_STATE } from 'store/mocks/opponent.mocks';
-import { MOCK_APP_STATE } from 'store/mocks/app-state.mocks';
-import { MOCK_HERO_STATE } from 'store/mocks/hero.mocks';
 import userEvent from '@testing-library/user-event';
 
 describe('Home Page', () => {
@@ -19,7 +16,6 @@ describe('Home Page', () => {
     const { store } = renderWithProviders(<Home />);
     const sethButton = screen.getByTestId('seth');
     userEvent.click(sethButton);
-
     expect(store!.getState()).toEqual({
       game: {
         round: 1,
@@ -31,6 +27,7 @@ describe('Home Page', () => {
           choices: [],
         },
         difficulty: 'seth',
+        gameStatus: 'playing',
       },
       hero: {
         maxHealth: 100,

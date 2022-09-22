@@ -31,7 +31,7 @@ describe('Game Page: render tests', () => {
         },
       },
     });
-    expect(screen.getAllByTestId('barbarianBunny')).toBeDefined();
+    expect(screen.getAllByText('Barbarian Bunny')).toBeDefined();
   });
 
   it('should render a message for dialog box', () => {
@@ -166,6 +166,7 @@ describe('Game Page: functionality tests', () => {
             choices: [],
           },
           difficulty: 'seth',
+          gameStatus: 'playing',
         },
         opponent: {
           maxHealth: 200,

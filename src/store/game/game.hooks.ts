@@ -1,11 +1,12 @@
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
 import {
+  gameRoundSelector,
   actionSelector,
   attackStrengthSelector,
   dialogStageSelector,
   difficultySelector,
-  gameRoundSelector,
   isCorrectSelector,
   questionSelector,
 } from 'store/game/game.selectors';
@@ -19,7 +20,13 @@ import {
   AttackPowerType,
   attack,
   block,
+  gameStatus,
+  resetGameState,
 } from 'store/game/game.slice';
+import { useOpponent } from '../players/opponent/opponent.hooks';
+import { useHero } from '../players/hero/hero.hooks';
+import { resetHeroState } from '../players/hero/hero.slice';
+import { resetOpponentState } from '../players/opponent/opponent.slice';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
@@ -34,7 +41,7 @@ export const useGameRound = (): UseGameRoundResult => {
   return [currentRound, { incrementRound }];
 };
 
-export const useGameSelectors = () => {
+const useGameSelectors = () => {
   const dialogStage = useAppSelector(dialogStageSelector);
   const action = useAppSelector(actionSelector);
   const difficulty = useAppSelector(difficultySelector);
@@ -52,8 +59,11 @@ export const useGameSelectors = () => {
   };
 };
 
-export const useGameActions = () => {
+const useGameActions = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { opponentCurrentHealth, opponentAttackValue } = useOpponent();
+  const { heroCurrentHealth, heroAttackValue } = useHero();
 
   const setAnswered = useCallback(
     (option: string) => {
@@ -91,6 +101,35 @@ export const useGameActions = () => {
     dispatch(attack());
   }, [dispatch]);
 
+  const setGameStatus = useCallback(() => {
+    if (
+      opponentCurrentHealth <= 0 ||
+      heroAttackValue >= opponentCurrentHealth
+    ) {
+      dispatch(gameStatus('victory'));
+      navigate('/victory');
+    }
+    if (heroCurrentHealth <= 0 || opponentAttackValue >= heroCurrentHealth) {
+      dispatch(gameStatus('defeat'));
+      navigate('/defeat');
+    }
+    return gameStatus;
+  }, [
+    dispatch,
+    navigate,
+    heroCurrentHealth,
+    opponentCurrentHealth,
+    heroAttackValue,
+    opponentAttackValue,
+  ]);
+
+  const setResetGame = () => {
+    dispatch(resetHeroState());
+    dispatch(resetOpponentState());
+    dispatch(resetGameState());
+    navigate('/');
+  };
+
   return {
     setAnswered,
     setNextRoundAnswer,
@@ -98,6 +137,20 @@ export const useGameActions = () => {
     setAttackStrength,
     setActionToBlock,
     setActionToAttack,
+    setGameStatus,
+    setResetGame,
+  };
+};
+
+export const useGameUI = () => {
+  const data = useGameSelectors();
+  const actions = useGameActions();
+  const gameRoundData = useGameRound();
+
+  return {
+    ...data,
+    ...actions,
+    round: gameRoundData,
   };
 };
 

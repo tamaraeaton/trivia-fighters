@@ -7,8 +7,8 @@ export interface HeroState {
 }
 
 export const initialState: HeroState = {
-  maxHealth: 0,
-  currentHealth: 0,
+  maxHealth: 100,
+  currentHealth: 100,
   attackValue: 0,
 };
 
@@ -24,18 +24,22 @@ export const heroSlice = createSlice({
       state.currentHealth = action.payload;
     },
 
-    decreaseHeroCurrentHealth: (state, action: PayloadAction<number>) => {
-      state.currentHealth = state.currentHealth - action.payload;
+    increaseHeroCurrentHealth: (state) => {
+      state.currentHealth = Math.min(state.currentHealth + 10, 100);
     },
 
-    // when I block, if the answer is correct, I get 10 added to my current health
-    increaseHeroCurrentHealth: (state, action: PayloadAction) => {
-      state.currentHealth = state.currentHealth + 10;
+    decreaseHeroCurrentHealth: (state, action: PayloadAction<number>) => {
+      // clamp at 0 to avoid negative
+      state.currentHealth = Math.max(state.currentHealth - action.payload, 0);
     },
 
     attackValue: (state, action: PayloadAction<number>) => {
       state.attackValue =
         action.payload === 0 ? 0 : state.attackValue + action.payload;
+    },
+
+    resetHeroState: (state) => {
+      return initialState;
     },
   },
 });
@@ -44,6 +48,7 @@ export const {
   maxHealth,
   currentHealth,
   attackValue,
+  resetHeroState,
   decreaseHeroCurrentHealth,
   increaseHeroCurrentHealth,
 } = heroSlice.actions;

@@ -11,48 +11,24 @@ describe('Game Slice reducer', () => {
     expect(gameReducer(undefined, { type: undefined })).toEqual(initialState);
   });
 
-  it('should return the round 3 when previous state is answeredVerify', () => {
-    expect(gameReducer(MOCK_GAME_STATE, setRound(3))).toEqual({
-      round: 3,
-      dialogStage: 'answered',
-      action: 'none',
-      difficulty: 'easy',
-      attackStrength: undefined,
-      question: {
-        text: 'How many moons are there?',
-        answer: 'Depends on the planet',
-        choices: ['One', 'Four', 'None', 'Depends on the planet'],
-      },
-    });
+  it('should set round correctly', () => {
+    expect(MOCK_GAME_STATE.round).toEqual(2);
+    expect(gameReducer(MOCK_GAME_STATE, setRound(3)).round).toEqual(3);
   });
 
-  it('should return the return the dialogStage attacking when previous state is action', () => {
-    expect(gameReducer(MOCK_GAME_STATE, attack())).toEqual({
-      round: 2,
-      dialogStage: 'attacking',
-      action: 'attack',
-      difficulty: 'easy',
-      attackStrength: undefined,
-      question: {
-        text: 'How many moons are there?',
-        answer: 'Depends on the planet',
-        choices: ['One', 'Four', 'None', 'Depends on the planet'],
-      },
-    });
+  it('should set action to attack and dialogState to attacking when attack is called', () => {
+    expect(MOCK_GAME_STATE.action).toEqual('none');
+    expect(MOCK_GAME_STATE.dialogStage).toEqual('answered');
+    const newMockGameState = gameReducer(MOCK_GAME_STATE, attack());
+    expect(newMockGameState.action).toEqual('attack');
+    expect(newMockGameState.dialogStage).toEqual('attacking');
   });
 
-  it('should return the return the dialogStage answering when previous state is action', () => {
-    expect(gameReducer(MOCK_GAME_STATE, block())).toEqual({
-      round: 2,
-      dialogStage: 'answering',
-      action: 'block',
-      difficulty: 'easy',
-      attackStrength: undefined,
-      question: {
-        text: 'How many moons are there?',
-        answer: 'Depends on the planet',
-        choices: ['One', 'Four', 'None', 'Depends on the planet'],
-      },
-    });
+  it('should set action to block and dialogStage to anwering when block is called', () => {
+    expect(MOCK_GAME_STATE.action).toEqual('none');
+    expect(MOCK_GAME_STATE.dialogStage).toEqual('answered');
+    const newMockGameState = gameReducer(MOCK_GAME_STATE, block());
+    expect(newMockGameState.action).toEqual('block');
+    expect(newMockGameState.dialogStage).toEqual('answering');
   });
 });

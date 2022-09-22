@@ -28,18 +28,19 @@
 
 /* Abstract
    ========================================================================== */
-@import "./abstract/variables.scss";
-@import "./abstract/functions.scss";
-@import "./abstract/mixins.scss";
+@import './abstract/variables.scss';
+@import './abstract/functions.scss';
+@import './abstract/mixins.scss';
 
 /* Vendor
    ========================================================================== */
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap');
 
 /* Base
    ========================================================================== */
-@import "./base/vertical-rhythm";
-@import "./base/a11y";
-@import "./base/base";
-@import "./base/buttons";
-@import "./base/typography";
+@import './base/vertical-rhythm';
+@import './base/a11y';
+@import './base/base';
+@import './base/buttons';
+@import './base/typography';
+@import './base//pages.scss';

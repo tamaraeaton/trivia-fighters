@@ -1,4 +1,4 @@
-import { OpponentState } from 'store/opponent/opponent.slice';
+import { OpponentState } from 'store/players/opponent/opponent.slice';
 
 export const MOCK_OPPONENT_STATE: OpponentState = {
   maxHealth: 100,

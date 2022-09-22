@@ -2,10 +2,10 @@ import SwordIcon from '../../assets/images/sword.svg';
 import IconButton from 'components/Button/IconButton';
 import './AttackDialog.scss';
 import { AttackPowerType } from 'store/game/game.slice';
-import { useGameActions } from 'store/game/game.hooks';
+import { useGameUI } from 'store/game/game.hooks';
 
 const AttackDialog = () => {
-  const { setAttackStrength } = useGameActions();
+  const { setAttackStrength } = useGameUI();
 
   const handleClick = (attackStrength: AttackPowerType) => {
     setAttackStrength(attackStrength);

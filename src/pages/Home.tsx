@@ -1,22 +1,20 @@
 import Button from 'components/Button/Button';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGameActions } from 'store/game/game.hooks';
-import { useOpponentActions } from '../store/opponent/opponent.hooks';
-import { useHeroActions } from '../store/hero/hero.hooks';
+import { useGameUI } from 'store/game/game.hooks';
+import { useOpponent } from '../store/players/opponent/opponent.hooks';
 import { DifficultyType } from '../store/game/game.slice';
 import './Home.scss';
 
 const Home: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  const { setDifficulty } = useGameActions();
-  const { setOpponentsGameHealth } = useOpponentActions();
-  const { setHeroGameHealth } = useHeroActions();
+  const { setDifficulty } = useGameUI();
+
+  const { setOpponentsGameHealth } = useOpponent();
 
   const handleClick = (difficultyStrength: DifficultyType) => {
     setDifficulty(difficultyStrength);
     setOpponentsGameHealth(difficultyStrength);
-    setHeroGameHealth();
     navigate('game');
   };
 

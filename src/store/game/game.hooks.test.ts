@@ -1,8 +1,15 @@
 import { renderHookWithProviders } from 'testHelpers';
-import { useGameRound, useGameActions } from 'store/game/game.hooks';
 import { act } from '@testing-library/react';
 import { MOCK_APP_STATE } from 'store/mocks/app-state.mocks';
-import { useGameSelectors } from './game.hooks';
+import { useGameUI, useGameRound } from './game.hooks';
+
+const mockedUsedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...(jest.requireActual('react-router-dom') as any),
+
+  useNavigate: () => mockedUsedNavigate,
+}));
 
 describe('Game State Hooks', () => {
   describe('useGameRound', () => {
@@ -30,14 +37,14 @@ describe('Game State Hooks', () => {
     });
 
     it('should return dialog stage of action', () => {
-      const { result } = renderHookWithProviders(() => useGameSelectors());
+      const { result } = renderHookWithProviders(() => useGameUI());
       const { dialogStage } = result.current;
 
       expect(dialogStage).toEqual('action');
     });
 
     it('should set the difficulty to easy', () => {
-      const { result, store } = renderHookWithProviders(() => useGameActions());
+      const { result, store } = renderHookWithProviders(() => useGameUI());
       const { setDifficulty } = result.current;
 
       expect(store.getState().game.difficulty).toEqual(undefined);
