@@ -5,7 +5,7 @@ import { renderWithProviders } from 'testHelpers';
 
 describe('Dialog Tests', () => {
   it('should render a dialog box', () => {
-    renderWithProviders(<Dialog></Dialog>);
+    renderWithProviders(<Dialog />);
     expect(screen.getByTestId('dialogWrapper')).toBeDefined();
   });
 

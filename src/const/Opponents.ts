@@ -33,5 +33,3 @@ export const OPPONENTS: { [name: string]: OpponentInterface } = {
     attackBase: 10,
   },
 };
-
-// useGetAvatar can read this
