@@ -13,7 +13,6 @@ describe('Question Dialog tests', () => {
         answer={MOCK_GAME_STATE.question.answer}
         options={MOCK_GAME_STATE.question.choices}
         onAnswer={mockOnAnswer}
-        selectedOption={MOCK_GAME_STATE.question.answer}
       />
     );
     // ensure question dialog box appears with wrapper
