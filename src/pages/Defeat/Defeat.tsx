@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DefeatAvatar from '../../assets/images/fox-knight_defeated.svg';
 import ShadowBase from '../../assets/images/shadow.svg';
@@ -9,8 +9,14 @@ import './Defeat.scss';
 
 const Defeat: FunctionComponent = () => {
   const navigate = useNavigate();
-  const { setResetGame } = useGameUI();
+  const { setResetGame, difficulty } = useGameUI();
   const { opponentName } = useOpponent();
+
+  useEffect(() => {
+    if (!difficulty) {
+      navigate('/');
+    }
+  }, [difficulty, navigate]);
 
   const handleClick = () => {
     setResetGame();

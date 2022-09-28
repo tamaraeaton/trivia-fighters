@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Game.scss';
 import { useNavigate } from 'react-router-dom';
 import { useGameRound, useGameUI } from 'store/game/game.hooks';
@@ -25,9 +25,10 @@ const Game: React.FunctionComponent = () => {
     dialogStage,
     action,
     difficulty,
-    attackStrength,
     question,
     isCorrect,
+    dialogMessage,
+    helpMessage,
   } = useGameUI();
 
   const [currentRound, { incrementRound }] = useGameRound();
@@ -51,6 +52,7 @@ const Game: React.FunctionComponent = () => {
 
   // local useState in addition to dispatch
   const [answerForNext, setAnswerForNext] = useState('');
+  const [showHelpBubble, setShowHelpBubble] = useState(false);
 
   useEffect(() => {
     if (isCorrect === true || isCorrect === false) {
@@ -65,31 +67,6 @@ const Game: React.FunctionComponent = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCorrect]);
-
-  const actionMessage = useMemo(() => {
-    if (dialogStage === 'attacking') {
-      return 'Choose an attack';
-    }
-    if (dialogStage === 'action') {
-      return 'Choose an action';
-    }
-    if (dialogStage === 'answered') {
-      return isCorrect === undefined ? '' : isCorrect ? 'Correct' : 'Incorrect';
-    }
-    if (dialogStage === 'answering') {
-      if (action === 'block') {
-        return 'Blocking';
-      }
-      if (attackStrength === 'light') {
-        return 'Light Attack';
-      }
-      if (attackStrength === 'medium') {
-        return 'Medium Attack';
-      }
-      return 'Heavy Attack';
-    }
-    return '';
-  }, [attackStrength, isCorrect, dialogStage, action]);
 
   useEffect(() => {
     if (!difficulty) {
@@ -124,7 +101,7 @@ const Game: React.FunctionComponent = () => {
   // clicking this will end the round, perform all calculations, and set the next round
   const nextButtonHandleClick = () => {
     incrementRound();
-    // local useState captures this
+    // this goes to GameUI
     setNextRoundAnswer(answerForNext);
     setGameStatus();
     if (difficulty !== undefined) {
@@ -161,8 +138,13 @@ const Game: React.FunctionComponent = () => {
           />
         </div>
         <div className="nextButtonDialogMessageWrapper">
+          {showHelpBubble && (
+            <div className="helpBubbleGame">
+              <p>{helpMessage}</p>
+            </div>
+          )}
           <div className="dialogMessage" data-testid="dialogMessage">
-            {actionMessage}
+            {dialogMessage}
           </div>
           {dialogStage === 'answered' && (
             <div className="nextButtonDiv">
@@ -189,6 +171,15 @@ const Game: React.FunctionComponent = () => {
         </div>
       </div>
       <Dialog>{dialogStages()}</Dialog>
+      <div className="helpButtonGame">
+        <Button
+          size="xs"
+          onClick={() => setShowHelpBubble((prev) => !prev)}
+          selected={showHelpBubble ? true : false}
+        >
+          ?
+        </Button>
+      </div>
       <AriaRoundMessage
         heroCurrentHealth={heroCurrentHealth}
         heroMaxHealth={heroMaxHealth}

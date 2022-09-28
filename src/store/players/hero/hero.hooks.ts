@@ -51,7 +51,6 @@ export const useHeroActions = () => {
         }
       } else {
         dispatch(decreaseOpponentHealth(heroAttackValue));
-        console.log(heroAttackValue);
         dispatch(attackValue(0));
       }
     }

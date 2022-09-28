@@ -24,7 +24,11 @@ const Avatar: FunctionComponent<AvatarProps> = ({ name, testID }) => {
   return (
     <div className="avatarWrapper">
       <div className="avatarContainer">
-        <img className="avatarShadow" src={ShadowGradient} alt="" />
+        <img
+          className="avatarShadow  avatarShadowScale"
+          src={ShadowGradient}
+          alt=""
+        />
         <img className="avatarShadowBase" src={ShadowBase} alt="" />
         <img
           data-testid={testID}

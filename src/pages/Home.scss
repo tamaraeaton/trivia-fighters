@@ -1,3 +1,7 @@
+.homePageContainerWrapper {
+  width: 100%;
+}
+
 .homePageContainer {
   display: flex;
   flex-direction: column;
@@ -7,4 +11,33 @@
 
 .headline1 {
   font-size: 99px;
+}
+
+.helpContainerHome {
+  display: flex;
+  margin: 5rem 0 0 0;
+  width: 100%;
+  max-width: 500px;
+}
+
+.helpButtonHome {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.helpBubbleHome {
+  font-family: Lato;
+  font-size: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 250px;
+  min-height: 50px;
+  padding: 0 5px;
+  background-color: #ffffff;
+  opacity: 70%;
+  border-radius: 15px;
+  margin: 0 0 0 15rem;
+  p {
+    color: black;
+  }
 }
