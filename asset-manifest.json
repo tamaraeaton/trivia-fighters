@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/trivia-fighters/static/css/main.f4b8ff52.css",
-    "main.js": "/trivia-fighters/static/js/main.5b2a55f2.js",
+    "main.js": "/trivia-fighters/static/js/main.0e68a569.js",
     "static/js/787.d7abf9d2.chunk.js": "/trivia-fighters/static/js/787.d7abf9d2.chunk.js",
     "static/media/dragon-seth.svg": "/trivia-fighters/static/media/dragon-seth.cca3b58daf684447180da3a37bfb451b.svg",
     "static/media/barbarian-bunny.svg": "/trivia-fighters/static/media/barbarian-bunny.a49b9d58030c78f4e07ca7d90c5b20ba.svg",
@@ -19,11 +19,11 @@
     "static/media/shadow-gradient.svg": "/trivia-fighters/static/media/shadow-gradient.142bd2041e47d66b8764e3c2093e4097.svg",
     "static/media/shadow.svg": "/trivia-fighters/static/media/shadow.32e3ea957327572626461f6934b8a4a1.svg",
     "main.f4b8ff52.css.map": "/trivia-fighters/static/css/main.f4b8ff52.css.map",
-    "main.5b2a55f2.js.map": "/trivia-fighters/static/js/main.5b2a55f2.js.map",
+    "main.0e68a569.js.map": "/trivia-fighters/static/js/main.0e68a569.js.map",
     "787.d7abf9d2.chunk.js.map": "/trivia-fighters/static/js/787.d7abf9d2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f4b8ff52.css",
-    "static/js/main.5b2a55f2.js"
+    "static/js/main.0e68a569.js"
   ]
 }
