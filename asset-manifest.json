@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/trivia-fighters/static/css/main.f4b8ff52.css",
+    "main.js": "/trivia-fighters/static/js/main.5b2a55f2.js",
+    "static/js/787.d7abf9d2.chunk.js": "/trivia-fighters/static/js/787.d7abf9d2.chunk.js",
+    "static/media/dragon-seth.svg": "/trivia-fighters/static/media/dragon-seth.cca3b58daf684447180da3a37bfb451b.svg",
+    "static/media/barbarian-bunny.svg": "/trivia-fighters/static/media/barbarian-bunny.a49b9d58030c78f4e07ca7d90c5b20ba.svg",
+    "static/media/fox-knight.svg": "/trivia-fighters/static/media/fox-knight.6a0183c04729946e502233f84cf7cc7c.svg",
+    "static/media/fox-knight_defeated.svg": "/trivia-fighters/static/media/fox-knight_defeated.cbc53d0f8aa9ad43082990debd22216c.svg",
+    "static/media/fox-knight_victory.svg": "/trivia-fighters/static/media/fox-knight_victory.070573232edf0978a078b4936e9b1b46.svg",
+    "static/media/wizard-pig.svg": "/trivia-fighters/static/media/wizard-pig.049826a6487bf88d8215dd3a2411e9d9.svg",
+    "static/media/health-low.svg": "/trivia-fighters/static/media/health-low.1a44fd71b3fefb933e5842dd340940e6.svg",
+    "static/media/health-full.svg": "/trivia-fighters/static/media/health-full.8bdedab3e5b48e17a8044ecf6d1858c6.svg",
+    "index.html": "/trivia-fighters/index.html",
+    "static/media/incorrect.svg": "/trivia-fighters/static/media/incorrect.2eb59dc2207f986e042477d7712ef2cf.svg",
+    "static/media/shield.svg": "/trivia-fighters/static/media/shield.68a95229284695eb0ed9fae179b7066b.svg",
+    "static/media/sword.svg": "/trivia-fighters/static/media/sword.76d919019ed48b3f26fdc75f077b4e68.svg",
+    "static/media/correct.svg": "/trivia-fighters/static/media/correct.569e38b44b3a7dc9e01b3a0566dbf157.svg",
+    "static/media/shadow-gradient.svg": "/trivia-fighters/static/media/shadow-gradient.142bd2041e47d66b8764e3c2093e4097.svg",
+    "static/media/shadow.svg": "/trivia-fighters/static/media/shadow.32e3ea957327572626461f6934b8a4a1.svg",
+    "main.f4b8ff52.css.map": "/trivia-fighters/static/css/main.f4b8ff52.css.map",
+    "main.5b2a55f2.js.map": "/trivia-fighters/static/js/main.5b2a55f2.js.map",
+    "787.d7abf9d2.chunk.js.map": "/trivia-fighters/static/js/787.d7abf9d2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f4b8ff52.css",
+    "static/js/main.5b2a55f2.js"
+  ]
+}
